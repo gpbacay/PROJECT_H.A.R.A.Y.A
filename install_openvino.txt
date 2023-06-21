@@ -1,0 +1,10 @@
+openvino_env\Scripts\activate
+python haraya.py
+
+#Run Command: python haraya.py
+
+#Run on openvino environment:
+#____________________________Get-ExecutionPolicy;
+#____________________________Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;
+#____________________________python -m venv openvino_env
+#____________________________openvino_env\Scripts\activate
