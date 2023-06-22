@@ -30,14 +30,14 @@ print(Header)
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
 #Run Command: python haraya.py
 listener = sr.Recognizer()
-haraya_engine = pyttsx3.init()
-voices = haraya_engine.getProperty('voices')
-haraya_engine.setProperty('voice', voices[0].id)
+engine = pyttsx3.init()
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)
 
 
 def speak(text):
-    haraya_engine.say(text)
-    haraya_engine.runAndWait()
+    engine.say(text)
+    engine.runAndWait()
 
 
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
@@ -218,7 +218,6 @@ def Add_command_MainFunction(command):
             response = "Is there anything else I could do for you?"
             print(response)
             speak(response)
-            Play_Listening_Sound()
         else:
             response = ''
             print(response)
@@ -557,7 +556,7 @@ def run_haraya():
                             "run face rec again",
                             "recognize my face again",
                             "face recognition again",
-                            "run face recognition system",
+                            "run face recognition system again",
                             "run face recognition",
                             "run the face recognition system",
                             "run the video face recognition system",
@@ -575,6 +574,7 @@ def run_haraya():
     InitializeFaceRecog_KeyWords = ["initialize face recognition system",
                             "initialize face recognition",
                             "initialize the face recognition system",
+                            "initialize face recognition system again",
                             "initialize the video face recognition system",
                             "initialize video face recognition system",
                             "initialize the video face recognition system",
@@ -593,6 +593,7 @@ def run_haraya():
                             "activate the video face recognition system",
                             "activate video face recognition system",
                             "activate the video face recognition system",
+                            "activate face recognition system again",
                             "activate video face recognition system",
                             "activate the live face recognition system",
                             "activate live face recognition system",
@@ -1256,7 +1257,7 @@ def run_haraya():
         speak(info)
         Confirmation_SubFunction(command)
 
-    elif "temperature in santa cruz davao del sur" in command:
+    elif "temperature in santa cruz davao del sur" in command or "weather in santa cruz" in command:
         search = "temperature in Santa Cruz, Davao del Sur"
         url = f"https://www.google.com/search?q={search}"
         request = requests.get(url)
