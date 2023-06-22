@@ -1,17 +1,23 @@
 #Import Libraries/Modules
-import time
 import speech_recognition as sr
 import pyttsx3
 import pywhatkit
 import datetime
-import wikipedia
-import subprocess
+
 from facerec import Face_Recognition_System
 from poserec import Pose_Recognition_System
+import time
 import os
 import calendar
 import requests
+import subprocess
+
+import wikipedia
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
 from bs4 import BeautifulSoup as bs
 import random
 import re
@@ -1214,7 +1220,7 @@ def run_haraya():
             speak(response)
             for i in range(1):
                 search = information.replace(' ', '+')
-                browser = webdriver.Chrome('chromedriver.exe')
+                browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
                 browser.get("https://www.google.com/search?q=" + search + "&start" + str(i))
             speak("Here's what I've found.")
             Confirmation_SubFunction(command)
@@ -1480,41 +1486,6 @@ def run_haraya():
         print(response)
         speak(response)
         Confirmation_SubFunction(command)
-
-    elif "what is the meaning of life" in command or "what is life" in command or "what do you think about life" in command:
-        command = Auto_Replacement_Subfunction(command)
-        response = """
-        It is difficult for me to define or describe life, 
-        As I am a semi-autonomous A.I. virtual assistant and do not have personal experiences or beliefs. 
-        However, I can tell you that life is a characteristic that distinguishes physical entities with biological processes, 
-        such as growth, reproduction, and response to stimuli, from those without such processes. 
-        Life is a characteristic that is exhibited by living organisms, 
-        and it is often associated with functions such as metabolism, growth, reproduction, and response to stimuli. 
-        The term "life" can also be used more broadly to refer to the existence or experience of living beings in general, 
-        including humans, animals, and plants.
-        """
-        print(response)
-        speak(response)
-        Confirmation_SubFunction(command)
-        
-
-    elif "what do you think about technology" in command:
-        command = Auto_Replacement_Subfunction(command)
-        print(command + " do you think about technology?")
-        response = """
-        As a semi-autonomous A.I. virtual assistant trained by Gianne Bacay, I don't have personal opinions or feelings. 
-        However, I can tell you that technology has had a significant impact on society 
-        And has changed the way we live and work in many ways. 
-        Technology has made it possible to communicate and access information more easily and quickly, 
-        And it has also led to the development of new industries and job opportunities. 
-        It has also brought about many new and useful products and services that have improved people's lives. 
-        At the same time, however, technology can also have negative consequences, 
-        such as when it is used to spread misinformation or when it leads to the automation of certain jobs, 
-        potentially leading to unemployment. Overall, the impact of technology on society is complex and multifaceted.
-        """
-        print(response)
-        speak(response)
-        Confirmation_SubFunction(command)
         
     elif "can I type my question" in command:
         response = "Certainly!"
@@ -1536,8 +1507,6 @@ def run_haraya():
         prompt = PromptTemplate(template=template, input_variables=["question"])
         llm_chain = LLMChain(prompt=prompt, llm=falcon_llm)
 
-        #if __name__ == '__main__':
-        #    while True:
         question = input("\ninput: ")
         response = llm_chain.run(question)
         wrapped_text = textwrap.fill(response, width=100, break_long_words=False, replace_whitespace=False)
@@ -1655,7 +1624,7 @@ def run_haraya():
 
     elif command in WhoAreYou_Key:
         response = """
-        Hi, allow me to introduce myself.
+        Allow me to introduce myself.
         My name is Haraya, it is an acronym for High-funtioning Autonomous Responsive and Yielding Assistant.
         Additionally, in Filipino, "haraya" means "hope" or "aspiration."
         
