@@ -13,11 +13,10 @@ def run_falcon(command):
     falcon_llm = HuggingFaceHub(repo_id=repo_id, model_kwargs={"temperature": 0.1, "max_new_tokens": 500})
 
     
-    template = """Role: Your name is HARAYA, it means High-functioning Autonomous Responsive and Yielding Assistant;
-    You are a Personal Virtual Assistant Artificial Intelligence  created and trained by Gianne P. Bacay;
-    You are a helpful AI assistant and provide the answer for the question asked politely;
+    template = """
+    You are a helpful AI assistant and provide the answer for the question asked politely.
     
-    Question: {question}"""
+    {question}"""
 
     prompt = PromptTemplate(template=template, input_variables=["question"])
     llm_chain = LLMChain(prompt=prompt, llm=falcon_llm)
