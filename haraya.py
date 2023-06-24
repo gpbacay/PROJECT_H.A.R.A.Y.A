@@ -24,7 +24,7 @@ import falconLLM
 import textwrap
 
 
-Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive and Yielding Assistant)\n"
+Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
 print(Header)
 
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
@@ -122,21 +122,6 @@ def Locate_NameHA():
     Name_Honorific_Address.append(Honorific_Address)
 Locate_NameHA()
 
-
-def Unlock_Computer():
-    try:
-        if "Gianne Bacay" in Name[-1]:
-            #from passlogin import Pass_Login
-            #Pass_Login()
-            pass
-        else:
-            #response = "Unauthorized person detected!"
-            #print(response)
-            #speak(response)
-            #ctypes.windll.user32.LockWorkStation()
-            pass
-    except:
-        pass
 #_____________________________________________INITIALIZE_FACE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
 #Run Command: python haraya.py
 def Initialize_Face_Recognition_System():
@@ -144,12 +129,6 @@ def Initialize_Face_Recognition_System():
     print(response)
     speak(response)
     Face_Recognition_System()
-    if len(count) == 0:
-        Unlock_Computer()
-        add_count = 1
-        count.append(add_count)
-    elif len(count) >= 1:
-        pass
     Play_Prompt_Sound()
     Locate_MyFullName()
     Locate_NameHA()
@@ -184,7 +163,6 @@ def Start_Up_command_MainFunction():
 def Listen_command_MainFunction():
     global command
     command = ''
-    
     try:
         with sr.Microphone() as source:
             print("Listening...")
@@ -218,7 +196,6 @@ def Add_command_MainFunction(command):
             response = "Is there anything else I could do for you?"
             print(response)
             speak(response)
-            Play_Listening_Sound()
         else:
             response = ''
             print(response)
