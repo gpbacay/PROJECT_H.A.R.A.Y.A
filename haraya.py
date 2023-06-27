@@ -35,7 +35,7 @@ print(Header)
 
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
 #Run Command: python haraya.py
-listener = sr.Recognizer()
+recognizer = sr.Recognizer()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
@@ -173,10 +173,9 @@ def Listen_command_MainFunction():
         with sr.Microphone() as source:
             print("Listening...")
             Play_Listening_Sound()
-            listener.adjust_for_ambient_noise(source, duration = 0.5)
-            listener.pause_threshold = 1
-            voice = listener.listen(source)
-            command = listener.recognize_google(voice)
+            recognizer.pause_threshold = 1.5
+            voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
+            command = recognizer.recognize_google(voice)
             command = command.lower()
     except:
         pass
@@ -207,11 +206,11 @@ def Add_command_MainFunction(command):
             print(response)
             speak(response)
         with sr.Microphone() as source:
+            print("Listening...")
             Play_Listening_Sound()
-            listener.adjust_for_ambient_noise(source, duration = 0.5)
-            listener.pause_threshold = 1
-            voice = listener.listen(source)
-            command = listener.recognize_google(voice)
+            recognizer.pause_threshold = 1.5
+            voice = recognizer.listen(source, timeout = 10, phrase_time_limit=10)
+            command = recognizer.recognize_google(voice)
             command = command.lower()
     except:
         pass
@@ -227,10 +226,9 @@ def Wait_command_MainFunction():
     try:
         with sr.Microphone() as source:
             print("Waiting...")
-            listener.adjust_for_ambient_noise(source, duration = 0.5)
-            listener.pause_threshold = 1
-            voice = listener.listen(source)
-            command = listener.recognize_google(voice)
+            recognizer.pause_threshold = 1.5
+            voice = recognizer.listen(source, timeout = 10, phrase_time_limit=10)
+            command = recognizer.recognize_google(voice)
             command = command.lower()
     except:
         pass
@@ -717,10 +715,10 @@ def run_haraya():
                 response = "Understood, I'm listening..."
                 print(response)
                 speak(response)
-                listener.adjust_for_ambient_noise(source, duration = 0.5)
-                listener.pause_threshold = 1
-                voice = listener.listen(source)
-                command = listener.recognize_google(voice)
+                Play_Listening_Sound()
+                recognizer.pause_threshold = 1.5
+                voice = recognizer.listen(source, timeout = 10, phrase_time_limit=10)
+                command = recognizer.recognize_google(voice)
                 command = command.lower()
         except:
             pass
@@ -1025,10 +1023,10 @@ def run_haraya():
                         response = "Pick a number between 1 to 6."
                         print(response)
                         speak(response)
-                        listener.adjust_for_ambient_noise(source, duration = 0.5)
-                        listener.pause_threshold = 1
-                        voice = listener.listen(source)
-                        number = listener.recognize_google(voice)
+                        Play_Listening_Sound()
+                        recognizer.pause_threshold = 1.5
+                        voice = recognizer.listen(source, timeout = 10, phrase_time_limit=10)
+                        number = recognizer.recognize_google(voice)
                         number = number.lower()
                         number = number.replace("number", '')
                         number = number.replace("i choose", '')
@@ -1109,10 +1107,9 @@ def run_haraya():
                     response = "Would you like to try again?"
                     print(response)
                     speak(response)
-                    listener.adjust_for_ambient_noise(source, duration = 0.5)
-                    listener.pause_threshold = 1
-                    voice = listener.listen(source)
-                    confirmation = listener.recognize_google(voice)
+                    recognizer.pause_threshold = 1.5
+                    voice = recognizer.listen(source, timeout = 10, phrase_time_limit=10)
+                    confirmation = recognizer.recognize_google(voice)
                     confirmation = confirmation.lower()
                     if "yes" in confirmation or "again" in confirmation:
                         confirmation = confirmation.replace(confirmation, 'yes')
@@ -1534,10 +1531,6 @@ def run_haraya():
         Play_Prompt_Sound()
         Confirmation_SubFunction(command)
         
-    elif "unlock my computer" in command or "sign in my computer" in command:
-        Unlock_Computer()
-        Confirmation_SubFunction(command)
-        
     elif "increase" in command and "volume" in command or "volume up" in command:
         response = "Increasing volume..."
         print(response)
@@ -1751,8 +1744,8 @@ def run_haraya():
                     response = "Choose a starting number in seconds"
                     print(response)
                     speak(response)
-                    voice = listener.listen(source)
-                    number = listener.recognize_google(voice)
+                    voice = recognizer.listen(source)
+                    number = recognizer.recognize_google(voice)
                     number_input = number.lower()
                     number = NonSpelledNumber_Converter(number_input)
                     if number:
