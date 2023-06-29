@@ -1807,7 +1807,6 @@ def run_haraya():
         response = falconLLM.run_falcon(command)
         wrapped_text = textwrap.fill(response, width=200, break_long_words=False, replace_whitespace=False)
         print("HARAYA: " + wrapped_text)
-        print(response)
         speak(response)
         exit(run_haraya())
 
