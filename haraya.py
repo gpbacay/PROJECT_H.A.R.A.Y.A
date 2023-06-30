@@ -174,7 +174,7 @@ def Listen_command_MainFunction():
             print("Listening...")
             Play_Listening_Sound()
             recognizer.pause_threshold = 1.5
-            voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
+            voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
             command = recognizer.recognize_google(voice)
             command = command.lower()
     except:
@@ -208,8 +208,8 @@ def Add_command_MainFunction(command):
         with sr.Microphone() as source:
             print("Listening...")
             Play_Listening_Sound()
-            recognizer.pause_threshold = 1.5
-            voice = recognizer.listen(source, timeout = 10, phrase_time_limit=10)
+            recognizer.pause_threshold = 2.0
+            voice = recognizer.listen(source, timeout=10, phrase_time_limit=20)
             command = recognizer.recognize_google(voice)
             command = command.lower()
     except:
@@ -227,7 +227,7 @@ def Wait_command_MainFunction():
         with sr.Microphone() as source:
             print("Waiting...")
             recognizer.pause_threshold = 1.5
-            voice = recognizer.listen(source, timeout = 10, phrase_time_limit=10)
+            voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
             command = recognizer.recognize_google(voice)
             command = command.lower()
     except:
@@ -482,8 +482,11 @@ def run_haraya():
                             "the current time is",
                             "tell me the time now",
                             "what is the time now",
+                            "what is the time today",
                             "check the current time",
                             "tell me the current time",
+                            "what is the current time",
+                            "what is the current time today",
                             "can you tell me the time",
                             "can you tell me the time now",
                             "can you check the current time",
@@ -717,7 +720,7 @@ def run_haraya():
                 speak(response)
                 Play_Listening_Sound()
                 recognizer.pause_threshold = 1.5
-                voice = recognizer.listen(source, timeout = 10, phrase_time_limit=10)
+                voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
                 command = recognizer.recognize_google(voice)
                 command = command.lower()
         except:
@@ -1025,7 +1028,7 @@ def run_haraya():
                         speak(response)
                         Play_Listening_Sound()
                         recognizer.pause_threshold = 1.5
-                        voice = recognizer.listen(source, timeout = 10, phrase_time_limit=10)
+                        voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
                         number = recognizer.recognize_google(voice)
                         number = number.lower()
                         number = number.replace("number", '')
@@ -1108,7 +1111,7 @@ def run_haraya():
                     print(response)
                     speak(response)
                     recognizer.pause_threshold = 1.5
-                    voice = recognizer.listen(source, timeout = 10, phrase_time_limit=10)
+                    voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
                     confirmation = recognizer.recognize_google(voice)
                     confirmation = confirmation.lower()
                     if "yes" in confirmation or "again" in confirmation:
@@ -1550,7 +1553,7 @@ def run_haraya():
         
     #_________________________________________________________________CONVERSATIONAL_BLOCK
     #Run Command: python haraya.py
-    elif command in Hello_Hi_KeyWords:
+    elif command in Hello_Hi_KeyWords or "hello" in command or "hi" in command:
         if "hello" in command:
             try:
                 if Name[-1] in Name:
