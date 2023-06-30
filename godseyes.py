@@ -184,6 +184,7 @@ def Face_Pose_Recognition_System():
     cap.release()
     cv2.destroyAllWindows()
 
-Face_Pose_Recognition_System()
-Play_Prompt_Sound()
+if __name__ == '__main__':
+    Face_Pose_Recognition_System()
+    Play_Prompt_Sound()
 #______________________________python godseyes.py

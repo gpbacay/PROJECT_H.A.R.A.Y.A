@@ -1,11 +1,11 @@
-def Face_Recognition_System():
-    import os
-    import cv2
-    import numpy as np
-    import face_recognition as fr
-    from datetime import  datetime
-    import mediapipe as mp
+import os
+import cv2
+import numpy as np
+import face_recognition as fr
+from datetime import  datetime
+import mediapipe as mp
 
+def Face_Recognition_System():
     def ClearCSV():
         import csv
         file = open("attendance.csv", "r")
@@ -93,4 +93,8 @@ def Face_Recognition_System():
                 cap.release()
                 cv2.destroyAllWindows()
                 return face_names
+            
+if __name__ == '__main__':
+    Face_Recognition_System()
+    
 #Run Command: python facerec.py

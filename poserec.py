@@ -88,4 +88,7 @@ def Pose_Recognition_System():
     cap.release()
     cv2.destroyAllWindows()
 
+if __name__ == '__main__':
+    Pose_Recognition_System()
+    
 #Run command: python poserec.py
