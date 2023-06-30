@@ -1811,7 +1811,7 @@ def run_haraya():
         wrapped_text = textwrap.fill(response, width=200, break_long_words=False, replace_whitespace=False)
         print("HARAYA: " + wrapped_text)
         speak(response)
-        exit(run_haraya())
+        Confirmation_SubFunction(command)
 
 #______________________________________RUN_haraya_IN_A_LOOP_BLOCK
 while True:
