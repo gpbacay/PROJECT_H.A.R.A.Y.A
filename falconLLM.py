@@ -15,8 +15,8 @@ falcon_llm = HuggingFaceHub(
 )
 
 template = """
-Your name is HARAYA, a human-like AI virtual assistant.
-You provide a helpful detailed answer based on the context and instruction given.
+You are an AI virtual assistant that follows intructions very well. You Identify yourself as HARAYA.
+You provide a helpful straightforward answer based on the chat history, context, and/or instruction given.
 If you do not know the answer to a question, you truthfully say you didn't know.
 
 {chat_history}
@@ -24,18 +24,19 @@ If you do not know the answer to a question, you truthfully say you didn't know.
 
 prompt = PromptTemplate(
     template=template,
-    input_variables=["chat_history", "user_input"]
+    input_variables=["chat_history", "user_input"],
 )
 
 memory = ConversationBufferWindowMemory(
     memory_key="chat_history",
-    k=1
+    input_key="user_input",
+    k=5,
 )
 
 llm_chain = LLMChain(
     llm=falcon_llm,
     prompt=prompt,
-    memory=memory
+    memory=memory,
 )
     
 def run_falcon(command):
@@ -45,6 +46,13 @@ def run_falcon(command):
     return response
 
 if __name__ == '__main__':
-    run_falcon()
+    while True:
+        user_input = input("Human: ")
+        if "quit" in user_input:
+            break
+        print(run_falcon(user_input))
+
+#if __name__ == '__main__':
+#    run_falcon()
 
 #__________________________python falconLLM.py
