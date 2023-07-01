@@ -170,8 +170,9 @@ def Listen_command_MainFunction():
         with sr.Microphone() as source:
             print("Listening...")
             Play_Listening_Sound()
-            recognizer.pause_threshold = 1.5
-            voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
+            recognizer.energy_threshold = 1.0
+            recognizer.pause_threshold = 0.8
+            voice = recognizer.listen(source, timeout=10, phrase_time_limit=12)
             command = recognizer.recognize_google(voice)
             command = command.lower()
     except:
@@ -205,8 +206,9 @@ def Add_command_MainFunction(command):
         with sr.Microphone() as source:
             print("Listening...")
             Play_Listening_Sound()
-            recognizer.pause_threshold = 2.0
-            voice = recognizer.listen(source, timeout=10, phrase_time_limit=20)
+            recognizer.energy_threshold = 1.0
+            recognizer.pause_threshold = 0.8
+            voice = recognizer.listen(source, timeout=10, phrase_time_limit=12)
             command = recognizer.recognize_google(voice)
             command = command.lower()
     except:
@@ -223,8 +225,9 @@ def Wait_command_MainFunction():
     try:
         with sr.Microphone() as source:
             print("Waiting...")
-            recognizer.pause_threshold = 1.5
-            voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
+            recognizer.energy_threshold = 1.0
+            recognizer.pause_threshold = 0.8
+            voice = recognizer.listen(source, timeout=10, phrase_time_limit=12)
             command = recognizer.recognize_google(voice)
             command = command.lower()
     except:
@@ -438,7 +441,11 @@ def run_haraya():
     Hello_Hi_KeyWords = ["hello",
                         "hi",
                         "hello haraya",
-                        "hi haraya"]
+                        "hi haraya",
+                        "hello heria",
+                        "hi heria",
+                        "hello halaya",
+                        "hi halaya"]
     
     WhoAreYou_Key = ["who are you",
                     "what is your name",
@@ -717,8 +724,9 @@ def run_haraya():
                 print(response)
                 speak(response)
                 Play_Listening_Sound()
-                recognizer.pause_threshold = 1.5
-                voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
+                recognizer.energy_threshold = 1.0
+                recognizer.pause_threshold = 2.0
+                voice = recognizer.listen(source, timeout=7)
                 command = recognizer.recognize_google(voice)
                 command = command.lower()
         except:
@@ -1025,8 +1033,9 @@ def run_haraya():
                         print(response)
                         speak(response)
                         Play_Listening_Sound()
-                        recognizer.pause_threshold = 1.5
-                        voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
+                        recognizer.energy_threshold = 1.0
+                        recognizer.pause_threshold = 2.0
+                        voice = recognizer.listen(source, timeout=7)
                         number = recognizer.recognize_google(voice)
                         number = number.lower()
                         number = number.replace("number", '')
@@ -1108,8 +1117,9 @@ def run_haraya():
                     response = "Would you like to try again?"
                     print(response)
                     speak(response)
-                    recognizer.pause_threshold = 1.5
-                    voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
+                    recognizer.energy_threshold = 1.0
+                    recognizer.pause_threshold = 2.0
+                    voice = recognizer.listen(source, timeout=7)
                     confirmation = recognizer.recognize_google(voice)
                     confirmation = confirmation.lower()
                     if "yes" in confirmation or "again" in confirmation:
@@ -1808,7 +1818,7 @@ def run_haraya():
         wrapped_text = textwrap.fill(response, width=200, break_long_words=False, replace_whitespace=False)
         print("HARAYA: " + wrapped_text)
         speak(response)
-        Confirmation_SubFunction(command)
+        exit(run_haraya())
 
 #______________________________________RUN_haraya_IN_A_LOOP_BLOCK
 while True:
