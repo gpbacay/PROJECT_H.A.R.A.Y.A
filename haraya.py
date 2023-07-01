@@ -92,9 +92,6 @@ Locate MyFullName from the Face Recognition System
 and append it into the Name list in the memory banks.
 """
 
-
-
-
 #_______________________________________Binary-Gendered_Honorifics_Selector_BLOCK/FUNCTION
 #Run Command: python haraya.py
 def Locate_NameHA():
@@ -243,6 +240,7 @@ def run_haraya():
     global NameHA
     NameHA = Name_Honorific_Address[-1]
     MyName = Name[-1]
+
 
     #________________________________________________LISTS_OF_COMMAND_KEY_WORDS
     #Run Command: python haraya.py
@@ -1553,7 +1551,7 @@ def run_haraya():
         
     #_________________________________________________________________CONVERSATIONAL_BLOCK
     #Run Command: python haraya.py
-    elif command in Hello_Hi_KeyWords or "hello" in command or "hi" in command:
+    elif command in Hello_Hi_KeyWords:
         if "hello" in command:
             try:
                 if Name[-1] in Name:
@@ -1671,7 +1669,7 @@ def run_haraya():
         speak(response)
         exit(run_haraya())
 
-    elif "my name is" in command or "is my name" in command or "i am" in command:
+    elif "my name is" in command:
         if "my name is haraya" in command:
             command = command.replace("hi", '')
             command = command.replace("i am", '')
@@ -1680,7 +1678,7 @@ def run_haraya():
             name = command.replace("my name is", '')
             command = name
             Name.append(name)
-            response = "What a coincidence, my name is Haraya too. Nice meeting you Haraya!"
+            response = "What a lovely name, my name is Haraya too. Nice meeting you Haraya!"
             print(response)
             speak(response)
             exit(run_haraya())
@@ -1688,7 +1686,6 @@ def run_haraya():
             command = command.replace("hi", '')
             command = command.replace("i am", '')
             command = command.replace("hello", '')
-            command = command.replace("is my name", '')
             name = command.replace("my name is", '')
             if name != '':
                 Name.append(name)
