@@ -45,14 +45,14 @@ def run_falcon(command):
         response = response.replace("User", "") 
     return response
 
-if __name__ == '__main__':
-    while True:
-        user_input = input("Human: ")
-        if "quit" in user_input:
-            break
-        print(run_falcon(user_input))
-
 #if __name__ == '__main__':
-#    run_falcon()
+#    while True:
+#        user_input = input("Human: ")
+#        if "quit" in user_input:
+#            break
+#        print(run_falcon(user_input))
+
+if __name__ == '__main__':
+    run_falcon()
 
 #__________________________python falconLLM.py
