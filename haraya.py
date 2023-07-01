@@ -23,9 +23,6 @@ import random
 import re
 import pyautogui
 
-from dotenv import load_dotenv, find_dotenv
-from langchain import HuggingFaceHub
-from langchain import PromptTemplate, LLMChain
 import falconLLM
 import textwrap
 
@@ -1473,32 +1470,6 @@ def run_haraya():
         speak(response)
         Confirmation_SubFunction(command)
         
-    elif "can I type my question" in command:
-        response = "Certainly!"
-        speak(response)
-        
-        load_dotenv(find_dotenv())
-        HUGGINGFACEHUB_API_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"]
-        
-        repo_id = "tiiuae/falcon-7b-instruct"
-        falcon_llm = HuggingFaceHub(
-            repo_id=repo_id, model_kwargs={"temperature": 0.1, "max_new_tokens": 500}
-        )
-
-        template = """
-        Persona: AI Virtual assistant named HARAYA. 
-        Question: {question}
-        Answer:"""
-
-        prompt = PromptTemplate(template=template, input_variables=["question"])
-        llm_chain = LLMChain(prompt=prompt, llm=falcon_llm)
-
-        question = input("\ninput: ")
-        response = llm_chain.run(question)
-        wrapped_text = textwrap.fill(response, width=100, break_long_words=False, replace_whitespace=False)
-        print("output: " + wrapped_text)
-        speak(wrapped_text)
-        Confirmation_SubFunction(command)
         
     #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
     #Run Command: python haraya.py
