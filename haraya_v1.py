@@ -27,7 +27,7 @@ import falconLLM
 import textwrap
 
 
-Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
+Header = "Main H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
 print(Header)
 
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
