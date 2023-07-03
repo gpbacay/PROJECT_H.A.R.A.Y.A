@@ -11,7 +11,7 @@ HUGGINGFACEHUB_API_TOKEN = os.environ["HUGGINGFACEHUB_API_TOKEN"]
 repo_id = "tiiuae/falcon-7b-instruct"
 falcon_llm = HuggingFaceHub(
     repo_id=repo_id,
-    model_kwargs={"temperature": 0.99, "max_new_tokens": 512}
+    model_kwargs={"temperature": 0.1, "max_new_tokens": 512}
 )
 
 template = """
@@ -19,7 +19,7 @@ context:
 -You are an AI virtual assistant that follows intructions very well.
 -You Identify yourself as HARAYA.
 -You are having a conversation with a human.
--You provide a helpful straightforward answer based on the previous chat history, context, and/or instruction given.
+-You provide a helpful straightforward answer based on the chat history, context, and/or instruction given.
 
 take note:
 -If the given question is unfinished then DO NOT complete the question and just answer directly.

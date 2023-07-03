@@ -19,3 +19,4 @@ print(output.strip().replace("Assistant:", ""))
 
 #_______________pip install llama
 #________________python test3.py
+#________________Remarks: Fail
