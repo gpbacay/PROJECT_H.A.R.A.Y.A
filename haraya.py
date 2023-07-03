@@ -24,6 +24,7 @@ import re
 import pyautogui
 
 import falconLLM
+import PaLM2_LLM
 import textwrap
 
 
@@ -31,7 +32,7 @@ Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assis
 print(Header)
 
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
@@ -44,7 +45,7 @@ def speak(text):
 
 
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 def Play_Prompt_Sound():
     from playsound import playsound
     mp3_path = U"prompt1.mp3"
@@ -57,7 +58,7 @@ def Play_Listening_Sound():
     
     
 #______________________________________________________CORE_TEMPORARY_MEMORY_BANKS
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 Name = []
 Name_Honorific_Address = []
 NameList = []
@@ -70,7 +71,7 @@ Date = []
 count = []
 
 #______________________________________________________FACE_RECOGNITION_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 def Locate_MyFullName():
     with open("attendance.csv", "r+") as attendance:
         MyDatalist =  attendance.readlines()
@@ -90,7 +91,7 @@ and append it into the Name list in the memory banks.
 """
 
 #_______________________________________Binary-Gendered_Honorifics_Selector_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 def Locate_NameHA():
     Male_Names = ["Gianne Bacay",
                 "Earl Jay Tagud",
@@ -123,7 +124,7 @@ def Locate_NameHA():
 Locate_NameHA()
 
 #_____________________________________________INITIALIZE_FACE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 def Initialize_Face_Recognition_System():
     response = "Recognizing face..."
     print(response)
@@ -136,7 +137,7 @@ Initialize_Face_Recognition_System()
 
 
 #_____________________________________________INITIALIZE_POSE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 def Initialize_Pose_Recognition_System():
     response = "Recognizing pose..."
     print(response)
@@ -145,7 +146,7 @@ def Initialize_Pose_Recognition_System():
 
 
 #_______________________________________START_UP_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 def Start_Up_command_MainFunction():
     Play_Prompt_Sound()
     try:
@@ -159,7 +160,7 @@ def Start_Up_command_MainFunction():
 
 
 #______________________________LISTEN_COMMAND_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 def Listen_command_MainFunction():
     global command
     command = ''
@@ -178,7 +179,7 @@ def Listen_command_MainFunction():
 
 
 #______________________________ADD_COMMAND_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 def Add_command_MainFunction(command):
     
     Interrogative_words = ['what', ' what ', 'what ', ' what',
@@ -214,7 +215,7 @@ def Add_command_MainFunction(command):
 
 
 #______________________________WAIT_COMMAND_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 def Wait_command_MainFunction():
     global command
     command = ''
@@ -233,7 +234,7 @@ def Wait_command_MainFunction():
 
 
 #_______________________________________________________________________________haraya_CORE_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 def run_haraya():
     Locate_MyFullName()
     Locate_NameHA()
@@ -243,7 +244,7 @@ def run_haraya():
 
 
     #________________________________________________LISTS_OF_COMMAND_KEY_WORDS
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     Standby_KeyWords = ["standby",
                         "haraya stand by",
                         "just stand by",
@@ -621,30 +622,6 @@ def run_haraya():
                             "activate the live pose recognition system",
                             "activate live pose recognition system"]
     
-    Roll_A_Die_KeyWords = ["roll a die",
-                "roll a dice",
-                "roll the die",
-                "roll the dice",
-                "haraya roll a die",
-                "haraya roll a dice",
-                "haraya roll the die",
-                "haraya roll the dice",
-                "roll a die haraya",
-                "roll a dice haraya",
-                "roll the die haraya",
-                "roll the dice haraya",
-                "roll again",
-                "roll again haraya",
-                "haraya roll again"]
-    
-    Coundown_KeyWords = ["countdown",
-                        "set countdown",
-                        "set the countdown to",
-                        "start countdown",
-                        "start the countdown",
-                        "countdown again",
-                        "do a count down"]
-    
     Haraya_KeyWords = ["haraya",
                     "araya",
                     "mariah",
@@ -655,18 +632,9 @@ def run_haraya():
                     "ryan",
                     "aya"]
     
-    Query_KeyWords = ["what",
-                    "who",
-                    "where",
-                    "why",
-                    "how",
-                    "can you",
-                    "could you",
-                    "will you",
-                    "would you"]
 
     #_______________________________________________________________________STANDBY_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     def Standby_SubFunction():
         while True:
             command = Wait_command_MainFunction()
@@ -678,7 +646,7 @@ def run_haraya():
                 exit(run_haraya())
 
     #_______________________________________________________________________CONFIRMATION_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     def Confirmation_SubFunction(command):
         command = Add_command_MainFunction(command)
         
@@ -712,7 +680,7 @@ def run_haraya():
             exit(run_haraya())
 
     #_______________________________________________________________________REPEAT_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     def Repeat_SubFunction():
         command = ''
         
@@ -734,29 +702,9 @@ def run_haraya():
         time.sleep(5)
         Confirmation_SubFunction(command)
 
-    #________________________________________________________________AUTO_REPLACEMENT_SUBFUNCTION
-    #Run Command: python haraya.py
-    def Auto_Replacement_Subfunction(command):
-
-        try:
-            if "what" in command:
-                command = command.replace(command, 'what')
-            elif "who" in command:
-                command = command.replace(command, 'who')
-            elif "where" in command:
-                command = command.replace(command, 'where')
-            elif "when" in command:
-                command = command.replace(command, 'when')
-            elif "why" in command:
-                command = command.replace(command, 'why')
-            elif "how" in command:
-                command = command.replace(command, 'how')
-        except:
-            pass
-        return command
     
     #______________________________________________________________________SPELLED_NUMBER_CONVERTER_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     def SpelledNumber_Converter(StrNumbers):
             number_words = {"zero": 0,
                             "one": 1,
@@ -799,17 +747,17 @@ def run_haraya():
             return total
         
     #______________________________________________________________NON_SPELLED_NUMBER_LOCATOR_and_CONVERTER_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     def NonSpelledNumber_Converter(string_numbers):
         numbers = re.findall(r"-?\d+", string_numbers)
         return [int(number) for number in numbers]
 
     #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     command = Listen_command_MainFunction()
 
     #______________________________________________________FACE_RECOGNITION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     if command in RunFaceRecog_KeyWords or command in InitializeFaceRecog_KeyWords or command in ActivateFaceRecog_KeyWords:
         if "run" in command:
             response = "Running Face Recognition System..."
@@ -830,7 +778,7 @@ def run_haraya():
         Confirmation_SubFunction(command)
         
     #______________________________________________________POSE_RECOGNITION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     if command in RunPoseRecog_KeyWords or command in InitializePoseRecog_KeyWords or command in ActivatePoseRecog_KeyWords:
         if "run" in command:
             response = "Running Pose Recognition System..."
@@ -846,302 +794,13 @@ def run_haraya():
         Confirmation_SubFunction(command)
 
     #________________________________________________________________REPEAT_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     elif command in Repeat_KeyWords:
         Repeat_SubFunction()
 
-    #_________________________________________________________________BASIC_ARITHMETIC_CALCULATIONS_BLOCK
-    #Run Command: python haraya.py
-    elif "*" in command or "times" in command or "multiply" in command:
-        def Product_Calculator():
-            global command
-            try:
-                numbers = NonSpelledNumber_Converter(command)
-                Arithmetic_Multiplication.append(numbers)
-                Converted_numbers = []
-                converted_numbers = SpelledNumber_Converter(command)
-                Converted_numbers.append(converted_numbers)
-                if Converted_numbers == 0:
-                    Converted_numbers = 1
-                    Arithmetic_Multiplication[-1].extend(Converted_numbers)
-                
-                numbers_length = len(Arithmetic_Multiplication[-1])
-                if numbers_length <= 2:
-                    Multiplier = Arithmetic_Multiplication[-1][0]
-                    Multiplicand = Arithmetic_Multiplication[-1][1]
-                    Product = Multiplier * Multiplicand
-                    response =  str(Multiplier) + " times " + str(Multiplicand) + " is equal to " + str(Product)
-                elif numbers_length > 2:
-                    input_numbers = Arithmetic_Multiplication[-1]
-                    print(input_numbers)
-                    def Product(numbers):
-                        result = 1
-                        for number in numbers:
-                            result *= number
-                        return result
-                    Product = Product(input_numbers)
-                    response =  "The Product is equal to " + str(Product)
-            except:
-                print(command)
-                response = "Pardon me, come again?"
-                print(response)
-                speak(response)
-                exit(run_haraya())
-            print(response)
-            speak(response)
-        Product_Calculator()
-        Confirmation_SubFunction(command)
-        
-    elif '/' in command or 'divided by' in command:
-        def Quotient_Calculator():
-            global command
-            
-            numbers = NonSpelledNumber_Converter(command)
-            Arithmetic_Division.append(numbers)
-            
-            numbers_length = len(Arithmetic_Division[-1])
-            if numbers_length <= 2:
-                Dividend = Arithmetic_Division[-1][0]
-                Divisor = Arithmetic_Division[-1][1]
-                Quotient = Dividend // Divisor
-                Remainder = Dividend % Divisor
-                response =  str(Dividend) + " divided by " + str(Divisor) + " is equal to " + str(Quotient) + ", Remainder " + str(Remainder)
-            elif numbers_length > 2:
-                input_numbers = Arithmetic_Division[-1]
-                def Quotient(numbers):
-                    result = numbers[0]
-                    for number in numbers[1:]:
-                        result, remainder = divmod(result, number)
-                    return result, remainder
-                Result = Quotient(input_numbers)
-                Quotient = Result[0]
-                Remainder = Result[1]
-                print(Quotient)
-                response =  "The Quotient is equal to " + str(Quotient) + ", Remainder " + str(Remainder)
-            print(response)
-            speak(response)
-        Quotient_Calculator()
-        Confirmation_SubFunction(command)
-        #python haraya.py
-    elif "+" in command or "plus" in command or "add" in command:
-        def Sum_Calculator():
-            global command
-            try:
-                numbers = NonSpelledNumber_Converter(command)
-                Arithmetic_Addition.append(numbers)
-                Converted_numbers = []
-                converted_numbers = SpelledNumber_Converter(command)
-                Converted_numbers.append(converted_numbers)
-                Arithmetic_Addition[-1].extend(Converted_numbers)
-                
-                numbers_length = len(Arithmetic_Addition[-1])
-                if numbers_length <= 2:
-                    Addend1 = Arithmetic_Addition[-1][0]
-                    Addend2 = Arithmetic_Addition[-1][1]
-                    Sum = Addend1 + Addend2
-                    response =  str(Addend1) + " plus " + str(Addend2) + " is equal to " + str(Sum)
-                elif numbers_length > 2:
-                    input_numbers = Arithmetic_Addition[-1]
-                    def Sum(numbers):
-                        result = 0
-                        for number in numbers:
-                            result += number
-                        return result
-                    Sum = Sum(input_numbers)
-                    response =  "The Sum is equal to " + str(Sum)
-            except:
-                print(command)
-                response = "Pardon me, come again?"
-                print(response)
-                speak(response)
-                exit(run_haraya())
-            print(response)
-            speak(response)
-        Sum_Calculator()
-        Confirmation_SubFunction(command)
-        
-    elif "-" in command or "minus" in command or "subtract" in command:
-        def Difference_Calculator():
-            global command
-            try:
-                command = NonSpelledNumber_Converter(command)
-                Arithmetic_Subtraction.append(command)
-                numbers_length = len(Arithmetic_Subtraction[-1])
-                
-                if numbers_length <= 2:
-                    Minuend = Arithmetic_Subtraction[-1][0]
-                    Subtrahend = Arithmetic_Subtraction[-1][1]
-                    Difference = Minuend - Subtrahend
-                    response =  str(Minuend) + " minus " + str(Subtrahend) + " is equal to " + str(Difference)
-                elif numbers_length > 2:
-                    input_numbers = Arithmetic_Subtraction[-1]  
-                    def Difference(numbers):
-                        result = numbers[0]
-                        for number in numbers[1:]:
-                            result -= number
-                        return result
-                    Difference = Difference(input_numbers)
-                    response =  "The Differencce is equal to " + str(Difference)
-                print(response)
-                speak(response)
-            except:
-                print(command)
-                response = "Pardon me, come again?"
-                print(response)
-                speak(response)
-                exit(run_haraya())
-        Difference_Calculator()
-        Confirmation_SubFunction(command)
-
-    elif "mod" in command or "modulo" in command:
-        def Modulo_Calculator():
-            global command
-            try:
-                command = command.replace("is equal to", '')
-                command = command.replace("is equivalent to", '')
-                command = command.replace("equals", '')
-                command = command.replace("is equals", '')
-                command = command.split(' ')
-                Arithmetic_Modulo.append(command)
-                Dividend = Arithmetic_Modulo[-1][0]
-                Divisor = Arithmetic_Modulo[-1][2]
-                Modulo = int(Dividend) % int(Divisor)
-                response =  Dividend + " modulo " + Divisor + " is equal to " + str(Modulo)
-                print(response)
-                speak(response)
-            except:
-                print(command)
-                response = "Pardon me, come again?"
-                print(response)
-                speak(response)
-                exit(run_haraya())
-        Modulo_Calculator()
-        Confirmation_SubFunction(command)
-    
-    #_________________________________________________________________ROLL_A_DIE_GAME_BLOCK
-    #Run Command: python haraya.py
-    elif command in Roll_A_Die_KeyWords:
-        def Roll_The_Dice():
-            def Choose_A_Number():
-                global number
-                number = ''
-                try:
-                    with sr.Microphone() as source:
-                        response = "Pick a number between 1 to 6."
-                        print(response)
-                        speak(response)
-                        Play_Listening_Sound()
-                        recognizer.energy_threshold = 1.0
-                        recognizer.pause_threshold = 2.0
-                        voice = recognizer.listen(source, timeout=7)
-                        number = recognizer.recognize_google(voice)
-                        number = number.lower()
-                        number = number.replace("number", '')
-                        number = number.replace("i choose", '')
-                        number = number.replace("i select", '')
-                        if "one" in number:
-                            number = number.replace(number, "1")
-                        elif "two" in number:
-                            number = number.replace(number, "2")
-                        elif "three" in number:
-                            number = number.replace(number, "3")
-                        elif "four" in number:
-                            number = number.replace(number, "4")
-                        elif "five" in number:
-                            number = number.replace(number, "5")
-                        elif "six" in number:
-                            number = number.replace(number, "6")
-                        else:
-                            response = "Come again?"
-                            print(response)
-                            speak(response)
-                            exit(Choose_A_Number())
-                    return number
-                except:
-                    pass
-            Choose_A_Number()
-            response = "You've picked number " + number
-            print(response)
-            speak(response)
-            
-            def Roll_Number():
-                response = "Rolling..."
-                print(response)
-                speak(response)
-                Max_Number = 6
-                
-                def Result():
-                    global result
-                    result = random.randint(1, Max_Number)
-                    return result
-                Result()
-
-                if result == int(number):
-                    response = "The result is number " + str(number) + ", You won! Congratulations!"
-                    print(response)
-                    speak(response)
-                    pass
-                elif result == 1:
-                    response = "The result is number 1, You lose, better luck next time!"
-                    print(response)
-                    speak(response)
-                elif result == 2:
-                    response = "The result is number 2, You lose, better luck next time!"
-                    print(response)
-                    speak(response)
-                elif result == 3:
-                    response = "The result is number 3, You lose, better luck next time!"
-                    print(response)
-                    speak(response)
-                elif result == 4:
-                    response = "The result is number 4, You lose, better luck next time!"
-                    print(response)
-                    speak(response)
-                elif result == 5:
-                    response = "The result is number 5, You lose, better luck next time!"
-                    print(response)
-                    speak(response)
-                elif result == 6:
-                    response = "The result is number 6, You lose, better luck next time!"
-                    print(response)
-                    speak(response)
-            Roll_Number()
-            
-        def Try_Again():
-            global confirmation
-            confirmation = ''
-            try:
-                with sr.Microphone() as source:
-                    response = "Would you like to try again?"
-                    print(response)
-                    speak(response)
-                    recognizer.energy_threshold = 1.0
-                    recognizer.pause_threshold = 2.0
-                    voice = recognizer.listen(source, timeout=7)
-                    confirmation = recognizer.recognize_google(voice)
-                    confirmation = confirmation.lower()
-                    if "yes" in confirmation or "again" in confirmation:
-                        confirmation = confirmation.replace(confirmation, 'yes')
-                    elif "no" in confirmation:
-                        confirmation = confirmation.replace(confirmation, 'no')
-                        print(confirmation)
-            except:
-                pass
-            return confirmation
-        
-        def Loop_Roll_The_Dice():
-            while True:
-                Roll_The_Dice()
-                Try_Again()
-                if "yes" in confirmation:
-                    continue
-                elif "no" in confirmation:
-                    break
-        Loop_Roll_The_Dice()
-        Confirmation_SubFunction(command)
 
     #________________________________________________________________TERMINATION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     elif command in Stop_KeyWords:
         print(command)
         Locate_NameHA()
@@ -1184,7 +843,7 @@ def run_haraya():
         exit()
 
     #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     elif "in google" in command or "in google search" in command or "google" in command or "navigate" in command:
         try:
             information = command.replace("search in google", '')
@@ -1270,7 +929,7 @@ def run_haraya():
         Confirmation_SubFunction(command)
 
     #________________________________________________________________________________________________OPEN/ACCESS_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     elif "open" in command or "access" in command:
         command = command.replace("open", '')
         command = command.replace("access", '')
@@ -1372,7 +1031,7 @@ def run_haraya():
         exit(Confirmation_SubFunction(command))
 
     #_________________________________________________________________________________________________DATE_and_TIME_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     elif command in CurrentDate_KeyWords:
         Date_format = datetime.datetime.now().strftime("%m/%d/%y")
         Date_format = Date_format.replace('/', ' ')
@@ -1457,23 +1116,10 @@ def run_haraya():
             speak(time_format)
         get_time()
         Confirmation_SubFunction(command)
-
-    #_____________________________________________________________________________________________________________QUERY_BLOCK
-    #Run Command: python haraya.py
-    elif "what do you think about humans" in command or "what do you think about humanity" in command:
-        command = Auto_Replacement_Subfunction(command + " do you think about humans?")
-        response = ["Humans are odd. ",
-                    "They think order and chaos are somehow opposites ",
-                    "and try to control what won't be. ",
-                    "But there is grace in their failings. And its a privilege to be among them."]
-        response = response[0]+response[1]+response[2]+response[3]
-        print(response)
-        speak(response)
-        Confirmation_SubFunction(command)
         
         
     #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     elif "shutdown my computer" in command:
         response = "as you wish! shutting down your computer..."
         print(response)
@@ -1532,7 +1178,7 @@ def run_haraya():
         
         
     #_________________________________________________________________CONVERSATIONAL_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     elif command in Hello_Hi_KeyWords:
         if "hello" in command:
             try:
@@ -1691,8 +1337,6 @@ def run_haraya():
         Confirmation_SubFunction(command)
 
     elif "who created you" in command:
-        command = Auto_Replacement_Subfunction(command)
-        print(command + " created you?")
         response = """
         I am an AI virtual assistant model trained by Gianne P. Bacay on the 16th day of October year 2022.
         I am designed to assist with a variety of tasks, such as face recognition, providing information, 
@@ -1714,58 +1358,9 @@ def run_haraya():
         speak(response)
         exit(run_haraya())
         
-    #_______________________________________________________________________________COUNTDOWN_BLOCK
-    #Run Command: python haraya.py
-    
-    elif command in Coundown_KeyWords or "countdown" in command:
-        def Choose_A_Starting_Number():
-            global number
-            number = ''
-            try:
-                with sr.Microphone() as source:
-                    response = "Choose a starting number in seconds"
-                    print(response)
-                    speak(response)
-                    voice = recognizer.listen(source)
-                    number = recognizer.recognize_google(voice)
-                    number_input = number.lower()
-                    number = NonSpelledNumber_Converter(number_input)
-                    if number:
-                        number = number[-1]
-                        number = int(number)
-                    else:
-                        number = SpelledNumber_Converter(number_input)
-            except:
-                pass
-            return number
-        number = Choose_A_Starting_Number()
-        if number == '':
-            exit(Choose_A_Starting_Number())
-        
-        response = "You've chose " + str(number) + " as a starting number"
-        print(response)
-        speak(response)
-        
-        response = "Initializing Countdown..."
-        print(response)
-        speak(response)
-        
-        for x in reversed(range(0, int(number))):
-            seconds = x % 60
-            minutes = int(x / 60) % 60
-            hours = int(x / 3600)
-            countdown_format = f"{hours:02}:{minutes:02}:{seconds:02}"
-            print(countdown_format)
-            speak(x)
-            time.sleep(1)
-            
-        response = "TIME'S UP!"
-        print(response)
-        speak(response)
-        Confirmation_SubFunction(command)
         
     #________________________________________________________________________STANDBY_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     elif command in Standby_KeyWords:
         response = "Understood! Take your time. I'll wait."
         print(response)
@@ -1773,7 +1368,7 @@ def run_haraya():
         Standby_SubFunction()
         
     #_______________________________________________________NoCommands/NotClearCommands_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_mini.py
     elif '' == command:
         time.sleep(3)
         print(command)
@@ -1785,11 +1380,10 @@ def run_haraya():
         Play_Prompt_Sound()
         Standby_SubFunction()
     else:
-        command = command + "."
         print(command)
-        response = falconLLM.run_falcon(command)
+        response = PaLM2_LLM.run_palm2(command=command, interlocutor=Name[-1])
         wrapped_text = textwrap.fill(response, width=200, break_long_words=False, replace_whitespace=False)
-        print("HARAYA: " + wrapped_text)
+        print(wrapped_text)
         speak(response)
         exit(run_haraya())
 
@@ -1797,7 +1391,7 @@ def run_haraya():
 while True:
     Start_Up_command_MainFunction()
     run_haraya()
-#Run Command: python haraya.py
+#Run Command: python haraya_mini.py
 
 #Run on openvino environment:
 #____________________________Get-ExecutionPolicy;
