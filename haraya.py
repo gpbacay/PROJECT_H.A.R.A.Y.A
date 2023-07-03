@@ -14,7 +14,6 @@ import subprocess
 
 import wikipedia
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -23,7 +22,6 @@ import random
 import re
 import pyautogui
 
-import falconLLM
 import PaLM2_LLM
 import textwrap
 
