@@ -6,7 +6,7 @@ load_dotenv(find_dotenv())
 GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
 
 
-def run_palm2(command = str, template = str, context = str, interlocutor = str):
+def run_palm2(command=str, template=str, context=str, interlocutor=str,previous_activity=str):
     interlocutor = "Gianne Bacay"
     previous_activity = "System (HARAYA) Turned Online"
     template = """

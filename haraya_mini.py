@@ -24,6 +24,7 @@ import re
 import pyautogui
 
 import falconLLM
+import PaLM2_LLM
 import textwrap
 
 
@@ -1380,7 +1381,7 @@ def run_haraya():
         Standby_SubFunction()
     else:
         print(command)
-        response = falconLLM.run_falcon(command)
+        response = PaLM2_LLM.run_palm2(command=command, interlocutor=Name[-1])
         wrapped_text = textwrap.fill(response, width=200, break_long_words=False, replace_whitespace=False)
         print(wrapped_text)
         speak(response)
