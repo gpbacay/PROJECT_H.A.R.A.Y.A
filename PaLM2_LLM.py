@@ -28,12 +28,13 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     )
     
     template = """
-    Always Remember:
-    *Current Time: {}; this is the current time.
-    *Current Date: {}; this is the date today.
-    *User's Current Location: {}; This is where you and the user are currently located.
+    Remember:
+    -You are authorized/capable of accessing/providing the following information:
+        *If the user asked for time/current time then tell the current time; Current time: {}.
+        *If the user asked for the date today/current date then tell the current date; Current date: {}.
+        *If the user asked for location/current location then tell the current location; Current location: {}.
     
-    The following are the system's or your previous activity history.
+    -The following are the system's or your previous activity history.
     Previous Activity: 
     {}.
     """
@@ -49,12 +50,12 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     -Haraya is made in the Philippines; 
     -She is creative, optimistic, polite, obedient, compassionate, humorous, witty and intelligent.
     
-    -You are capable of providing the current time, date, and location of the user:
-        *Current Time: {}; this is the current time.
-        *Current Date: {}; this is the date today.
-        *User's Current Location: {}; This is where you and the user are currently located.
+    -You are authorized/capable of accessing/providing the following information:
+        *If the user asked for time/current time then tell the current time; Current time: {}.
+        *If the user asked for the date today/current date then tell the current date; Current date: {}.
+        *If the user asked for location/current location then tell the current location; Current location: {}.
     
-    The following are the system's or your previous activity history.
+    -The following are the system's or your previous activity history.
     Previous Activity: 
     {}.
     
