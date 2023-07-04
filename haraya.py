@@ -22,7 +22,7 @@ import random
 import re
 import pyautogui
 
-import PaLM2_LLM
+from PaLM2_LLM import run_Bison
 import textwrap
 
 
@@ -36,11 +36,9 @@ engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 
-
 def speak(text):
     engine.say(text)
     engine.runAndWait()
-
 
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
 #Run Command: python haraya.py
@@ -53,7 +51,6 @@ def Play_Listening_Sound():
     from playsound import playsound
     mp3_path = u"Listening.mp3"
     playsound(mp3_path)
-    
     
 #______________________________________________________CORE_TEMPORARY_MEMORY_BANKS
 #Run Command: python haraya.py
@@ -1379,7 +1376,7 @@ def run_haraya():
         Standby_SubFunction()
     else:
         print(command)
-        response = PaLM2_LLM.run_palm2(command=command, interlocutor=Name[-1])
+        response = run_Bison(command=command, user_name=MyName)
         wrapped_text = textwrap.fill(response, width=200, break_long_words=False, replace_whitespace=False)
         print(wrapped_text)
         speak(response)

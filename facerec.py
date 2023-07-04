@@ -18,7 +18,6 @@ def Face_Recognition_System():
         csvr = csv.writer(file)
         csvr.writerows(namelist)
         file.close()
-
     def get_encoded_faces():
         encoded = {}
         for dirpath, dnames, fnames in os.walk("./faces"):
@@ -28,7 +27,6 @@ def Face_Recognition_System():
                     encoding = fr.face_encodings(face)[0]
                     encoded[f.split(".")[0]] = encoding
         return encoded
-
     def MarkAttendance(name):
         with open("attendance.csv", 'r+') as attendance:
             MyDatalist =  attendance.readlines()
@@ -40,16 +38,13 @@ def Face_Recognition_System():
                 now = datetime.now()
                 Time = now.strftime('%H:%M')
                 attendance.writelines(f'\n{name}, {Time}')
-
     faces = get_encoded_faces()
     faces_encoded = list(faces.values())
     known_face_names = list(faces.keys())
     mp_holistic = mp.solutions.holistic
     mp_drawing = mp.solutions.drawing_utils
     cap = cv2.VideoCapture(0)
-
     ClearCSV()
-
     with mp_holistic.Holistic(static_image_mode = True, min_detection_confidence = 0.5, min_tracking_confidence = 0.5) as holistic:
         while True:
             success, frame = cap.read()
@@ -93,7 +88,7 @@ def Face_Recognition_System():
                 cap.release()
                 cv2.destroyAllWindows()
                 return face_names
-            
+
 if __name__ == '__main__':
     Face_Recognition_System()
     

@@ -13,9 +13,9 @@ response = palm.chat(messages=["Hello."])
 print(response.last) #  'Hello! What can I help you with?'
 response.reply("Can you tell me a joke?") """
 
-""" #____Text-Generation
+#____Text-Generation
 model = "models/text-bison-001"
-prompt = "how to cook pizza?"
+prompt = "hello?"
 
 palm2_llm = palm.generate_text(
     model=model,
@@ -24,7 +24,7 @@ palm2_llm = palm.generate_text(
     max_output_tokens=512,
     candidate_count=1,
 )
-print(palm2_llm.result) """
+print(palm2_llm.result)
 
 #_______ChatBot
 examples = [
@@ -36,13 +36,13 @@ prompt = """Your name is HARAYA, a Virtual Assistant AI created by Gianne Bacay.
 
 context = """" Speak like you are a Virtual Assistant AI"""
 
-response = palm.chat(
+""" response = palm.chat(
     messages=prompt,
     temperature=0.99,
     context=context
     #examples=examples,
     
-)
+) """
 
 while True:
     try:

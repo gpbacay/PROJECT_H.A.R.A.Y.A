@@ -47,3 +47,4 @@ print(generate_text(system, instruction))
 
 #pip install pip install git+https://github.com/huggingface/transformers
 #______________python test4.py
+#______________Remarks: Fail
