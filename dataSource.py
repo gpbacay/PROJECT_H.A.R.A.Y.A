@@ -1,7 +1,11 @@
 import datetime
 import calendar
-
-class timeStamp():
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+    
+class dataSource():
     def GetCurrentDate():
         Dates = []
         Date_format = datetime.datetime.now().strftime("%m/%d/%y")
@@ -52,8 +56,15 @@ class timeStamp():
         current_time = f"The current time is {Hours}:{Minutes} {time_of_day}"
         return current_time
 
+    def GetCurrentLocation():
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        driver.get("https://www.google.com/search?q=my+current+location")
+        element = driver.find_element(By.CLASS_NAME, "aiAXrc")
+        text = element.text
+        return text, driver.quit()
+    
 if __name__ == '__main__':
-    timeStamp()
+    dataSource()
     #print(timeStamp.GetCurrentTime())
     #print(timeStamp.GetCurrentDate())
-#______________python timeStamp.py
+#______________python dataSource.py

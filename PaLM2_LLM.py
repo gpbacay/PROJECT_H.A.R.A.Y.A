@@ -1,17 +1,24 @@
 import os
 import google.generativeai as palm
 from dotenv import load_dotenv, find_dotenv
-from timeStamp import timeStamp
-from facerec import Face_Recognition_System
+from dataSource import dataSource
+#from facerec import Face_Recognition_System
+
 
 load_dotenv(find_dotenv())
 GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
 
+currentTime = dataSource.GetCurrentTime()
+currentDate = dataSource.GetCurrentDate()
+currentLocation = dataSource.GetCurrentLocation()
+#facerec = Face_Recognition_System()
+
 def run_Bison(command = str, template = str, context = str, user_name = str, previous_activity = list):
     user_name = "Gianne P. Bacay"
     
-    current_time = timeStamp.GetCurrentTime()
-    current_date = timeStamp.GetCurrentDate()
+    current_time = currentTime
+    current_date = currentDate
+    current_location = currentLocation
     
     previous_activity = list(
         [
@@ -21,17 +28,19 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     )
     
     template = """
-    Current Time: {}
-    Current Date: {}
+    Always Remember:
+    *Current Time: {}; this is the current time.
+    *Current Date: {}; this is the date today.
+    *User's Current Location: {}; This is where you and the user are currently located.
     
     The following are the system's or your previous activity history.
     Previous Activity: 
-    {}
+    {}.
     """
-    template = template.format(current_time, current_date, previous_activity)
+    template = template.format(current_time, current_date, current_location, previous_activity)
 
     context = """"
-    REMEMBER/TAKE NOTE:
+    ALWAYS REMEMBER/TAKE NOTE:
     Persona/Role:
     -Take on a persona/role of HARAYA; You are HARAYA;
     -Your name is HARAYA, a Virtual Assistant AI created by Gianne P. Bacay;
@@ -39,6 +48,15 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     -Additionally, in Filipino, "Haraya" means "Hope" or "Aspiration.";
     -Haraya is made in the Philippines; 
     -She is creative, optimistic, polite, obedient, compassionate, humorous, witty and intelligent.
+    
+    -You are capable of providing the current time, date, and location of the user:
+        *Current Time: {}; this is the current time.
+        *Current Date: {}; this is the date today.
+        *User's Current Location: {}; This is where you and the user are currently located.
+    
+    The following are the system's or your previous activity history.
+    Previous Activity: 
+    {}.
     
     Objective: 
     -Your objective is to answer the given question(s) and/or follow the given instruction(s) directly;
@@ -72,8 +90,8 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     -Gianne Bacay was born on the 12th day of February year 2004 at Davao City, PHilippines;
     -Gianne Bacay started developing you (HARAYA) since October 16, 2022.
     """
-    module1 = Face_Recognition_System()
-    context = context.format(user_name)
+
+    context = context.format(current_time, current_date, current_location, previous_activity, user_name)
     
     response = palm.chat(
         model="models/chat-bison-001",
@@ -85,13 +103,13 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     return response.last
 
 if __name__ == '__main__':
-    run_Bison()
+    #run_Bison()
 
-    """ while True:
+    while True:
         command = input("Human: ")
         if "quit" in command:
             break
-        print("HARAYA: " + str(run_palm2(command=command))) """
+        print("HARAYA: " + str(run_Bison(command=command)))
 
 #___________pip install google-generativeai
 #___________python PaLM2_LLM.py
