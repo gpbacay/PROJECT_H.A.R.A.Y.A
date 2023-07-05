@@ -2,23 +2,26 @@ import os
 import google.generativeai as palm
 from dotenv import load_dotenv, find_dotenv
 from dataSource import dataSource
-#from facerec import Face_Recognition_System
-
 
 load_dotenv(find_dotenv())
 GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
 
-currentTime = dataSource.GetCurrentTime()
-currentDate = dataSource.GetCurrentDate()
-currentLocation = dataSource.GetCurrentLocation()
-#facerec = Face_Recognition_System()
+dsTime = dataSource.GetCurrentTime()
+dsDate = dataSource.GetCurrentDate()
+dsLocation = dataSource.GetCurrentLocation()
+dsWeather = dataSource.GetCurrentWeather()
 
-def run_Bison(command = str, template = str, context = str, user_name = str, previous_activity = list):
-    user_name = "Gianne P. Bacay"
-    
-    current_time = currentTime
-    current_date = currentDate
-    current_location = currentLocation
+def run_Bison(
+    command = "",
+    template = "", 
+    context = "", 
+    user_name = "GIanne P. Bacay",
+    current_time = dsTime,
+    current_date = dsDate,
+    current_location = dsLocation,
+    current_weather = dsWeather,
+    previous_activity = list
+    ):
     
     previous_activity = list(
         [
@@ -29,7 +32,7 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     
     template = """
     READ AND ASSIMILATE THE CONTEXT. FORMULATE YOUR RESPONSE/ANSWER BASE ON THE CONTEXT.
-    The user's current time, date, location, and other datas was already provided from the internet.
+    The user's current time, date, location, weather, and other datas was already provided from the internet.
     
     Objective: 
     -Your objective is to answer the given question(s) and/or follow the given instruction(s) directly;
@@ -55,10 +58,11 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     -Haraya is made in the Philippines; 
     -She is creative, optimistic, polite, obedient, compassionate, humorous, witty and intelligent.
     
-    The following are based on the data collected from the internet:
+    The following are based on the datas collected from the internet:
     -Current time: {}.
     -Current date: {}.
     -Current location: {}.
+    -Current weather: {}.
     
     Details about You (HARAYA):
     -You are an AI virtual assistant that follows intructions very well.
@@ -66,7 +70,7 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     -You are created/developed since October 16, 2022.
     -You are a female/woman; You have femenine qualities or behaviours;
     -You are having a conversation with a human.
-    -You are talking with me and my name is: {}
+    -You are talking with me and my name is: {}.
     
     Creator (Gianne Bacay) Details:
     -Gianne Bacay is a Filipino BSIT college student majoring in Business Technology Management;
@@ -84,7 +88,7 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     {}.
     """
 
-    context = context.format(current_time, current_date, current_location, user_name, previous_activity)
+    context = context.format(current_time, current_date, current_location, current_weather, user_name, previous_activity)
     
     response = palm.chat(
         model="models/chat-bison-001",

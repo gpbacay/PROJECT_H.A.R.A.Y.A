@@ -68,6 +68,18 @@ class dataSource():
         driver.quit()
         return current_location
     
+    def GetCurrentWeather():
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service)
+        driver.get("https://www.google.com/search?q=current+location+weather")
+        element1 = driver.find_element("id", "wob_dc")
+        element2 = driver.find_element("id", "wob_tm")
+        text1 = element1.text
+        text2 = element2.text
+        current_weather = "It is currently " + text1 + ", " + "Temperature: " + text2 + "°C"
+        driver.quit()
+        return current_weather
+    
 if __name__ == '__main__':
     dataSource()
     #print(timeStamp.GetCurrentTime())
