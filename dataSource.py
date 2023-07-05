@@ -64,8 +64,9 @@ class dataSource():
         element2 = driver.find_element(By.CLASS_NAME, "fMYBhe")
         text1 = element1.text
         text2 = element2.text
+        current_location = text1 + ", " + text2
         driver.quit()
-        return print(text1 + ", " + text2)
+        return current_location
     
 if __name__ == '__main__':
     dataSource()
