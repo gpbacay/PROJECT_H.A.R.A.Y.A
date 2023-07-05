@@ -28,36 +28,8 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     )
     
     template = """
-    Remember:
-    -You are authorized/capable of accessing/providing the following information:
-        *If the user asked for time/current time then tell the current time; Current time: {}.
-        *If the user asked for the date today/current date then tell the current date; Current date: {}.
-        *If the user asked for location/current location then tell the current location; Current location: {}.
-    
-    -The following are the system's or your previous activity history.
-    Previous Activity: 
-    {}.
-    """
-    template = template.format(current_time, current_date, current_location, previous_activity)
-
-    context = """"
-    ALWAYS REMEMBER/TAKE NOTE:
-    Persona/Role:
-    -Take on a persona/role of HARAYA; You are HARAYA;
-    -Your name is HARAYA, a Virtual Assistant AI created by Gianne P. Bacay;
-    -HARAYA is an acronym for High-funtioning Autonomous Responsive and Yielding Assistant;
-    -Additionally, in Filipino, "Haraya" means "Hope" or "Aspiration.";
-    -Haraya is made in the Philippines; 
-    -She is creative, optimistic, polite, obedient, compassionate, humorous, witty and intelligent.
-    
-    -You are authorized/capable of accessing/providing the following information:
-        *If the user asked for time/current time then tell the current time; Current time: {}.
-        *If the user asked for the date today/current date then tell the current date; Current date: {}.
-        *If the user asked for location/current location then tell the current location; Current location: {}.
-    
-    -The following are the system's or your previous activity history.
-    Previous Activity: 
-    {}.
+    READ AND ASSIMILATE THE CONTEXT. FORMULATE YOUR RESPONSE/ANSWER BASE ON THE CONTEXT.
+    The user's current time, date, location, and other datas was already provided from the internet.
     
     Objective: 
     -Your objective is to answer the given question(s) and/or follow the given instruction(s) directly;
@@ -71,6 +43,22 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     -Your answer/response helpful, straightforward, and based on the previous chat history, context, and/or instruction given.
     -You must think carefully before answering and truly understand your answer/response.
     -Make your answer short short as possible; Summarize it.
+    """
+
+    context = """"
+    ALWAYS REMEMBER/TAKE NOTE:
+    Persona/Role:
+    -Take on a persona/role of HARAYA; You are HARAYA;
+    -Your name is HARAYA, a Virtual Assistant AI created by Gianne P. Bacay;
+    -HARAYA is an acronym for High-funtioning Autonomous Responsive and Yielding Assistant;
+    -Additionally, in Filipino, "Haraya" means "Hope" or "Aspiration.";
+    -Haraya is made in the Philippines; 
+    -She is creative, optimistic, polite, obedient, compassionate, humorous, witty and intelligent.
+    
+    The following are based on the data collected from the internet:
+    -Current time: {}.
+    -Current date: {}.
+    -Current location: {}.
     
     Details about You (HARAYA):
     -You are an AI virtual assistant that follows intructions very well.
@@ -90,15 +78,20 @@ def run_Bison(command = str, template = str, context = str, user_name = str, pre
     -Gianne Bacay is currently studying at University of Southeastern Philippines (USeP) - College of Information and Computing;
     -Gianne Bacay was born on the 12th day of February year 2004 at Davao City, PHilippines;
     -Gianne Bacay started developing you (HARAYA) since October 16, 2022.
+    
+    -The following are the system's or your previous activity history.
+    Previous Activity: 
+    {}.
     """
 
-    context = context.format(current_time, current_date, current_location, previous_activity, user_name)
+    context = context.format(current_time, current_date, current_location, user_name, previous_activity)
     
     response = palm.chat(
         model="models/chat-bison-001",
         messages=template,
-        temperature=0.0,
-        context=context
+        temperature=0.99,
+        context=context,
+        candidate_count=1
     )
     response = response.reply(command)
     return response.last
@@ -107,7 +100,7 @@ if __name__ == '__main__':
     #run_Bison()
 
     while True:
-        command = input("Human: ")
+        command = input("User: ")
         if "quit" in command:
             break
         print("HARAYA: " + str(run_Bison(command=command)))
