@@ -4,12 +4,15 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
 def main():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
     driver.get("https://www.google.com/search?q=my+current+location")
-    element = driver.find_element(By.CLASS_NAME, "aiAXrc")
-    text = element.text
+    element1 = driver.find_element(By.CLASS_NAME, "aiAXrc")
+    element2 = driver.find_element(By.CLASS_NAME, "fMYBhe")
+    text1 = element1.text
+    text2 = element2.text
     driver.quit()
-    return print(text)
+    return print(text1 + ", " + text2)
     
 if __name__ == "__main__":
     main()
