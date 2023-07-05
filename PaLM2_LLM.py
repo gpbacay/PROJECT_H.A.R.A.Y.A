@@ -3,6 +3,7 @@ import google.generativeai as palm
 from dotenv import load_dotenv, find_dotenv
 from dataSource import dataSource
 
+
 load_dotenv(find_dotenv())
 GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
 
@@ -20,7 +21,7 @@ def run_Bison(
     current_date = dsDate,
     current_location = dsLocation,
     current_weather = dsWeather,
-    previous_activity = list
+    previous_activity = ""
     ):
     
     previous_activity = list(
@@ -97,6 +98,7 @@ def run_Bison(
         context=context,
         candidate_count=1
     )
+    response = response.chat()
     response = response.reply(command)
     return response.last
 
@@ -110,4 +112,5 @@ if __name__ == '__main__':
         print("HARAYA: " + str(run_Bison(command=command)))
 
 #___________pip install google-generativeai
+#___________pip install vertexai
 #___________python PaLM2_LLM.py
