@@ -19,11 +19,12 @@ falcon_llm = HuggingFaceHub(
 
 embeddings = HuggingFaceEmbeddings()
 #loader = TextLoader("news/summary.txt")
-loader = DirectoryLoader("news", glob="**/*.txt")
+loader = DirectoryLoader("articles", glob="**/*.pdf")
 documents = loader.load()
 
 text_splitter = CharacterTextSplitter(chunk_size=2500, chunk_overlap=0)
 texts = text_splitter.split_documents(documents)
+print(texts)
 
 #Chroma vector store
 vecstore = Chroma.from_documents(texts, embeddings)
@@ -37,7 +38,7 @@ def query(q):
     print("Query: ", q)
     print("Answer: ", qa.run(q))
     
-query("What are the effects of legislations surrounding emissions on the Australian coal market?")
+query("What is the title of the reviewer?")
 
 #pip install sentence_transformers
 #pip install transformers

@@ -66,9 +66,6 @@ while True:
     if "quit" in command:
         break
     print(run_palm2(command=command))
-
-if __name__ == '__main__':
-    run_palm2()
     
 #___________pip install google-generativeai
 #___________python test7.py

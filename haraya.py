@@ -1289,7 +1289,7 @@ def run_haraya():
         Standby_SubFunction()
     else:
         print(command)
-        response = run_Bison(command=command, user_name=MyName)
+        response = run_Bison(reply=command, user_name=MyName)
         wrapped_text = textwrap.fill(response, width=200, break_long_words=False, replace_whitespace=False)
         print(wrapped_text)
         speak(response)
