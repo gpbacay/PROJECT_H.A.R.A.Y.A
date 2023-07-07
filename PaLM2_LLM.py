@@ -65,8 +65,8 @@ context = """"
     
 user_name = "Gianne P. Bacay"
 ai_name = "HARAYA"
-dsLocation = ""#dataSource.GetCurrentLocation()
-dsWeather = ""#""dataSource.GetCurrentWeather()
+dsLocation = dataSource.GetCurrentLocation()
+dsWeather = dataSource.GetCurrentWeather()
 
 previous_activity_list = [
         "System (HARAYA) Turned Online",
