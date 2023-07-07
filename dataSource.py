@@ -54,6 +54,29 @@ class dataSource():
             Minutes = f"0{Minutes}"
         
         current_time = f"The current time is {Hours}:{Minutes} {time_of_day}"
+        time_format = ""
+        
+        if int(Minutes) == 00:
+            time_format = f"It's {Hours} o'clock."
+        elif int(Minutes) < 15 and int(Minutes) != 00:
+            time_format = f"It's {Minutes} past {Hours}."
+        elif int(Minutes) == 15:
+            time_format = f"It's quarter past {Hours}."
+        elif int(Minutes) > 15 and int(Minutes) < 30:
+            time_format = f"It's {Minutes} past {Hours}."
+        elif int(Minutes) == 30:
+            time_format = f"It's half past {Hours}."
+        elif int(Minutes) > 30 and int(Minutes) < 45:
+            time_difference = 60 - int(Minutes)
+            Minutes = str(time_difference)
+            time_format = f"It's {Minutes} to {Hours}."
+        elif int(Minutes) == 45:
+            time_format = f"It's quarter to {Hours}."
+        elif int(Minutes) > 45:
+            time_difference = 60 - int(Minutes)
+            Minutes = str(time_difference)
+            time_format = f"It's {Minutes} to {Hours}."
+        current_time = current_time + " or should I say, " + time_format
         return current_time
 
     def GetCurrentLocation():
