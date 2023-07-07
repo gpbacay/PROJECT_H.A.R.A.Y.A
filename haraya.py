@@ -22,7 +22,6 @@ import pyautogui
 
 from PaLM2_LLM import run_Bison
 import textwrap
-import mimic
 
 
 Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
@@ -696,60 +695,9 @@ def run_haraya():
         time.sleep(5)
         Confirmation_SubFunction(command)
 
-    
-    #______________________________________________________________________SPELLED_NUMBER_CONVERTER_SUBFUNCTION
-    #Run Command: python haraya.py
-    def SpelledNumber_Converter(StrNumbers):
-            number_words = {"zero": 0,
-                            "one": 1,
-                            "two": 2,
-                            "three": 3,
-                            "four": 4,
-                            "five": 5,
-                            "six": 6,
-                            "seven": 7,
-                            "eight": 8,
-                            "nine": 9,
-                            "ten": 10,
-                            "eleven": 11,
-                            "twelve": 12,
-                            "thirteen": 13,
-                            "fourteen": 14,
-                            "fifteen": 15,
-                            "sixteen": 16,
-                            "seventeen": 17,
-                            "eighteen": 18,
-                            "nineteen": 19,
-                            "twenty": 20,
-                            "thirty": 30,
-                            "forty": 40,
-                            "fifty": 50,
-                            "sixty": 60,
-                            "seventy": 70,
-                            "eighty": 80,
-                            "ninety": 90,
-                            "hundred": 100,
-                            "thousand": 1000,
-                            "million": 1000000}
-            
-            words = StrNumbers.split()
-            total = 0
-            
-            for word in words:
-                if word in number_words:
-                    total += number_words[word]
-            return total
-        
-    #______________________________________________________________NON_SPELLED_NUMBER_LOCATOR_and_CONVERTER_SUBFUNCTION
-    #Run Command: python haraya.py
-    def NonSpelledNumber_Converter(string_numbers):
-        numbers = re.findall(r"-?\d+", string_numbers)
-        return [int(number) for number in numbers]
-
     #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
     #Run Command: python haraya.py
     command = Listen_command_MainFunction()
-    command = mimic.run_mimic(reply=command)
 
     #______________________________________________________FACE_RECOGNITION_BLOCK
     #Run Command: python haraya.py
