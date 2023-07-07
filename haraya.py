@@ -2,13 +2,11 @@
 import speech_recognition as sr
 import pyttsx3
 import pywhatkit
-import datetime
 
 from facerec import Face_Recognition_System
 from poserec import Pose_Recognition_System
 import time
 import os
-import calendar
 import requests
 import subprocess
 
@@ -24,6 +22,7 @@ import pyautogui
 
 from PaLM2_LLM import run_Bison
 import textwrap
+import mimic
 
 
 Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
@@ -750,6 +749,7 @@ def run_haraya():
     #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
     #Run Command: python haraya.py
     command = Listen_command_MainFunction()
+    command = mimic.run_mimic(reply=command)
 
     #______________________________________________________FACE_RECOGNITION_BLOCK
     #Run Command: python haraya.py
@@ -1139,6 +1139,14 @@ def run_haraya():
         I am an AI virtual assistant model trained by Gianne P. Bacay on the 16th day of October year 2022.
         I am designed to assist with a variety of tasks, such as face recognition, providing information, 
         basic arithmetic calculations and computer automation. Just speak to me and I will do my best to help you.
+        """
+        print(response)
+        speak(response)
+        Confirmation_SubFunction(command)
+        
+    elif "what is your name" in command:
+        response = """
+        My name is Haraya.
         """
         print(response)
         speak(response)

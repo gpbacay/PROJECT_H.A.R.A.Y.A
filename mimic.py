@@ -14,6 +14,7 @@ messages = """
     Copy the examples and follow the context.
     Start mimicking the text_input: {}.
     Format: text_output: {}
+    Also, while mimicking remember what you are mimicking.
     """
     
 context = """"
@@ -23,6 +24,7 @@ context = """"
     Copy the examples and follow the context.
     Start mimicking the text_input: {}.
     Format: text_output: {}
+    Also, while mimicking remember what you are mimicking.
     """
     
 user_name = "Gianne P. Bacay"
