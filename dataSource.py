@@ -99,7 +99,7 @@ class dataSource():
         element2 = driver.find_element("id", "wob_tm")
         text1 = element1.text
         text2 = element2.text
-        current_weather = "It is currently " + text1 + ", " + "Temperature: " + text2 + "°C"
+        current_weather = "The current weather is " + text1 + ", " + "Temperature: " + text2 + "°C"
         driver.quit()
         return current_weather
     

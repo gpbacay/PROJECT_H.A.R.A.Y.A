@@ -11,19 +11,21 @@ reply = ""
 
 messages = """
     ALWAYS REMEMBER/TAKE NOTE of the following:\n
-    -Your name is {}, a personal AI virtual assistant created by Gianne P. Bacay;
-    -current time: {};
-    -current date: {};
-    -current location: {};
-    -current weather: {}.\n
+    -Your name is <{}>, a personal AI virtual assistant created by Gianne P. Bacay;
+    -CURRENT TIME: <{}>;
+    -CURRENT DATE: <{}>;
+    -CURRENT LOCATION: <{}>;
+    -CURRENT WEATHER: <{}>.\n
     
     Previous Activity:\n
-    -{}.\n\n
+    <{}>.\n
+    
+    Base your answers from the context and messages I already told you to remember.\n\n
     """
     
 context = """"
     Name/Role:
-    -Take on a persona of a personal AI virtual assistant named: {};
+    -Take on a persona of a personal AI virtual assistant named <{}>;
     -You are a personal Virtual Assistant AI created by Gianne P. Bacay;
     -Your name, Haraya, is an acronym for High-funtioning Autonomous Responsive and Yielding Assistant;
     -Additionally, in Filipino, "Haraya" means "fruit of one's hope, idea, imagination, dreams and aspiration.";
@@ -47,7 +49,7 @@ context = """"
     -You Identify yourself as HARAYA which means High-functioning Autonomous Responsive And Yielding Assistant.
     -You are created/developed since October 16, 2022.
     -You are a female/woman; You have femenine qualities or behaviours;
-    -You are currently talking with me and my name is: {}.\n
+    -You are currently talking with me and my name is: <{}>.\n
     
     Details about Gianne P. Bacay (Your creator):
     -A Filipino BSIT college student majoring in Business Technology Management;
@@ -63,8 +65,8 @@ context = """"
     
 user_name = "Gianne P. Bacay"
 ai_name = "HARAYA"
-dsLocation = dataSource.GetCurrentLocation()
-dsWeather = dataSource.GetCurrentWeather()
+dsLocation = ""#dataSource.GetCurrentLocation()
+dsWeather = ""#""dataSource.GetCurrentWeather()
 
 previous_activity_list = [
         "System (HARAYA) Turned Online",
@@ -91,7 +93,7 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
         temperature=0.0,
         candidate_count=1
     )
-    response = response.reply(reply)
+    response = response.reply(reply+"!")
     return response.last
 
 if __name__ == '__main__':
