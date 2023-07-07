@@ -34,7 +34,7 @@ examples = [
     ("what is your name?", "what is your name?")
 ]
 
-def run_mimic(reply = reply):
+def run_mimic(reply = reply, messages = messages, context = context):
     
     messages = messages.format(reply, reply, reply)
     
