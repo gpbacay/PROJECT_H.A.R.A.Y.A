@@ -34,7 +34,7 @@ examples = [
     ("what is your name?", "what is your name?")
 ]
 
-def run_Bison(reply = reply, messages = messages, context = context):
+def run_mimic(reply = reply):
     
     messages = messages.format(reply, reply, reply)
     
@@ -68,7 +68,7 @@ if __name__ == '__main__':
         command = "text_input: " + str(input())
         if "quit" in command:
             break
-        print(run_Bison(reply=command))
+        print(run_mimic(reply=command))
 
 #___________pip install google-generativeai
 #___________pip install vertexai
