@@ -129,12 +129,18 @@ class dataSource():
     def GetCurrentWeather():
         return current_weather
     
-    Thread(target=SetCurrentDate).start()
-    Thread(target=SetCurrentTime).start()
-    Thread(target=SetCurrentLocation).start()
+    t1 = Thread(target=SetCurrentDate)
+    t1.start()
+    t2 = Thread(target=SetCurrentTime)
+    t2.start()
+    t3 = Thread(target=SetCurrentLocation)
+    t3.start()
+    t4 = Thread(target=SetCurrentWeather)
+    t4.start()
     RunLoadingBar(seconds=8, loading_tag="Acquiring location data", end_tag="Location acquired")
-    Thread(target=SetCurrentWeather).start()
     RunLoadingBar(seconds=8, loading_tag="Acquiring weathear data", end_tag="Weather acquired")
+    t3.join()
+    t4.join()
     
 if __name__ == '__main__':
     date = dataSource.GetCurrentDate()
@@ -145,6 +151,4 @@ if __name__ == '__main__':
     print(location)
     weather = dataSource.GetCurrentWeather()
     print(weather)
-    #print(timeStamp.GetCurrentTime())
-    #print(timeStamp.GetCurrentDate())
 #______________python dataSource.py
