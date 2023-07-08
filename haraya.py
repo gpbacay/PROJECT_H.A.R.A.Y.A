@@ -17,11 +17,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from bs4 import BeautifulSoup as bs
 import random
-import re
 import pyautogui
 
 from PaLM2_LLM import run_Bison
 import textwrap
+from LoadingBar import RunLoadingBar
+from threading import Thread
 
 
 Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
@@ -119,10 +120,10 @@ Locate_NameHA()
 #_____________________________________________INITIALIZE_FACE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
 #Run Command: python haraya.py
 def Initialize_Face_Recognition_System():
-    response = "Recognizing face..."
-    print(response)
+    response = "Recognizing Face"
     speak(response)
-    Face_Recognition_System()
+    Thread(target=Face_Recognition_System).start()
+    RunLoadingBar(seconds=15, loading_tag="Recognizing Face", end_tag="Face Recognized")
     Play_Prompt_Sound()
     Locate_MyFullName()
     Locate_NameHA()

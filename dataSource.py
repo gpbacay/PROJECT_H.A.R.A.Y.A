@@ -127,11 +127,12 @@ class dataSource():
     def GetCurrentWeather():
         return current_weather
     
-    t1 = Thread(target=SetCurrentDate).start()
-    t2 = Thread(target=SetCurrentTime).start()
-    t3 = Thread(target=SetCurrentLocation).start()
-    t4 = Thread(target=SetCurrentWeather).start()
-    RunLoadingBar(15)
+    Thread(target=SetCurrentDate).start()
+    Thread(target=SetCurrentTime).start()
+    Thread(target=SetCurrentLocation).start()
+    Thread(target=RunLoadingBar(seconds=8, loading_tag="Acquiring Location Data", end_tag="Location Acquired")).start()
+    Thread(target=SetCurrentWeather).start()
+    Thread(target=RunLoadingBar(seconds=8, loading_tag="Acquiring Weather Data", end_tag="Weather Acquired")).start()
     
 if __name__ == '__main__':
     date = dataSource.GetCurrentDate()
