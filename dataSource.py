@@ -9,41 +9,10 @@ from LoadingBar import RunLoadingBar
     
 class dataSource():
     global current_date, current_time, current_location, current_weather
-    current_date = ""
     current_time = ""
+    current_date = ""
     current_location = ""
     current_weather = ""
-        
-    def SetCurrentDate():
-        Dates = []
-        Date_format = datetime.datetime.now().strftime("%m/%d/%y")
-        Date_format = Date_format.replace('/', ' ')
-        Date_format = Date_format.split(' ')
-        Dates.append(Date_format)
-        
-        Year_number = Dates[-1][2]
-        Year_number = int(Year_number) + 2000
-        
-        Month_number = Dates[-1][0][-1]
-        Month_number = int(Month_number)
-        
-        Day_number = Dates[-1][1]
-        Day_number = int(Day_number)
-        
-        def determine_weekday_name(Year_number, Month_number, Day_number):
-            day_of_week = calendar.weekday(Year_number, Month_number, Day_number)
-            weekday_name = calendar.day_name[day_of_week]
-            return weekday_name
-        WeekDay_Name = determine_weekday_name(Year_number, Month_number, Day_number)
-        
-        def determine_month_name(Month_number):
-            month_name = calendar.month_name[Month_number]
-            return month_name
-        Month_Name = determine_month_name(Month_number)
-        
-        result = "Today is " + WeekDay_Name + ", " + Month_Name + " " + str(Day_number) + ", " + str(Year_number)
-        global current_date
-        current_date = result
 
     def SetCurrentTime():
         currentTime = datetime.datetime.now().time()
@@ -88,6 +57,37 @@ class dataSource():
         result = exact_time + " or should I say, " + time_format
         global current_time
         current_time = result
+    
+    def SetCurrentDate():
+        Dates = []
+        Date_format = datetime.datetime.now().strftime("%m/%d/%y")
+        Date_format = Date_format.replace('/', ' ')
+        Date_format = Date_format.split(' ')
+        Dates.append(Date_format)
+        
+        Year_number = Dates[-1][2]
+        Year_number = int(Year_number) + 2000
+        
+        Month_number = Dates[-1][0][-1]
+        Month_number = int(Month_number)
+        
+        Day_number = Dates[-1][1]
+        Day_number = int(Day_number)
+        
+        def determine_weekday_name(Year_number, Month_number, Day_number):
+            day_of_week = calendar.weekday(Year_number, Month_number, Day_number)
+            weekday_name = calendar.day_name[day_of_week]
+            return weekday_name
+        WeekDay_Name = determine_weekday_name(Year_number, Month_number, Day_number)
+        
+        def determine_month_name(Month_number):
+            month_name = calendar.month_name[Month_number]
+            return month_name
+        Month_Name = determine_month_name(Month_number)
+        
+        result = "Today is " + WeekDay_Name + ", " + Month_Name + " " + str(Day_number) + ", " + str(Year_number)
+        global current_date
+        current_date = result
 
     def SetCurrentLocation():
         service = Service(ChromeDriverManager().install())
@@ -115,11 +115,11 @@ class dataSource():
         current_weather = result
         driver.quit()
     
-    def GetCurrentDate():
-        return current_date
-    
     def GetCurrentTime():
         return current_time
+    
+    def GetCurrentDate():
+        return current_date
     
     def GetCurrentLocation():
         return current_location
