@@ -5,9 +5,9 @@ def RunLoadingBar(seconds = 15, loading_tag = "Loading", end_tag = "Loaded Succe
         percent = 100 * (progress / float(total))
         bar = '█' * int(percent) + '-' * (100 - int(percent))
         if percent != 100:
-            print(f"\r {loading_tag}:|{bar}| {percent:.2f}%              ", end="\r")
+            print(f"\r {loading_tag}...|{bar}| {percent:.2f}%              ", end="\r")
         else:
-            print(f"\r {end_tag}:|{bar}| {percent:.2f}%              ", end="\r")
+            print(f"\r {end_tag}...|{bar}| {percent:.2f}%              ", end="\r")
     
     if finish_loading == True:
         seconds = 0.5
