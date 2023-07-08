@@ -3,7 +3,7 @@ import math
 def RunLoadingBar(seconds = 15, loading_tag = "Loading", end_tag = "Loaded Successfully", finish_loading = False):
     def progressBar(progress, total):
         percent = 100 * (progress / float(total))
-        bar = '█' * int(percent) + '-' * (100 - int(percent))
+        bar = '█' * int(percent) + '·' * (100 - int(percent))
         if percent != 100:
             print(f"\r {loading_tag}...|{bar}| {percent:.2f}%              ", end="\r")
         else:
