@@ -4,8 +4,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from threading import Thread
-from LoadingBar import RunLoadingBar
+import concurrent.futures
     
 class dataSource():
     global current_date, current_time, current_location, current_weather
@@ -127,21 +126,21 @@ class dataSource():
     def GetCurrentWeather():
         return current_weather
     
-    t1 = Thread(target=SetCurrentDate).start()
-    t2 = Thread(target=SetCurrentTime).start()
-    t3 = Thread(target=SetCurrentLocation).start()
-    t4 = Thread(target=SetCurrentWeather).start()
-    RunLoadingBar(15)
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        t1 = executor.submit(SetCurrentDate).result()
+        t2 = executor.submit(SetCurrentTime).result()
+        t3 = executor.submit(SetCurrentLocation).result()
+        t4 = executor.submit(SetCurrentWeather).result()
     
 if __name__ == '__main__':
     date = dataSource.GetCurrentDate()
     print(date)
-    curTime = dataSource.GetCurrentTime()
-    print(curTime)
+    time = dataSource.GetCurrentTime()
+    print(time)
     location = dataSource.GetCurrentLocation()
     print(location)
     weather = dataSource.GetCurrentWeather()
     print(weather)
     #print(timeStamp.GetCurrentTime())
     #print(timeStamp.GetCurrentDate())
-#______________python dataSource.py
+#______________python test13.py

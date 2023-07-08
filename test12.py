@@ -74,4 +74,4 @@ if __name__ == '__main__':
 
 #___________pip install google-generativeai
 #___________pip install vertexai
-#___________python mimic.py
+#___________python test12.py

@@ -65,8 +65,9 @@ context = """"
     
 user_name = "Gianne P. Bacay"
 ai_name = "HARAYA"
-dsLocation = dataSource.GetCurrentLocation()
-dsWeather = dataSource.GetCurrentWeather()
+
+getLocation = dataSource.GetCurrentLocation()
+getWeather = dataSource.GetCurrentWeather()
 
 previous_activity_list = [
         "System (HARAYA) Turned Online",
@@ -74,7 +75,7 @@ previous_activity_list = [
 ]
 
 def run_Bison(reply = reply, messages = messages, context = context, user_name = user_name, ai_name = ai_name, 
-    current_time = "", current_date = "", current_location = dsLocation, current_weather = dsWeather, 
+    current_time = "", current_date = "", current_location = getLocation, current_weather = getWeather, 
     previous_activity = previous_activity_list):
     
     current_time = dataSource.GetCurrentTime()
