@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from threading import Thread
 from LoadingBar import RunLoadingBar
+import time
     
 class dataSource():
     global current_date, current_time, current_location, current_weather
@@ -88,6 +89,7 @@ class dataSource():
         result = "Today is " + WeekDay_Name + ", " + Month_Name + " " + str(Day_number) + ", " + str(Year_number)
         global current_date
         current_date = result
+        time.sleep(0.5)
 
     def SetCurrentLocation():
         service = Service(ChromeDriverManager().install())
@@ -130,9 +132,9 @@ class dataSource():
     Thread(target=SetCurrentDate).start()
     Thread(target=SetCurrentTime).start()
     Thread(target=SetCurrentLocation).start()
-    Thread(target=RunLoadingBar(seconds=8, loading_tag="Acquiring Location Data", end_tag="Location Acquired")).start()
+    RunLoadingBar(seconds=8, loading_tag="Acquiring location data", end_tag="Location acquired")
     Thread(target=SetCurrentWeather).start()
-    Thread(target=RunLoadingBar(seconds=8, loading_tag="Acquiring Weather Data", end_tag="Weather Acquired")).start()
+    RunLoadingBar(seconds=8, loading_tag="Acquiring weathear data", end_tag="Weather acquired")
     
 if __name__ == '__main__':
     date = dataSource.GetCurrentDate()
