@@ -269,28 +269,6 @@ def run_haraya():
                         "i'll be back",
                         "be right back"]
 
-    ThankYou_KeyWords = ["thank you",
-                        " thank you ",
-                        "thank you ",
-                        " thank you",
-                        "haraya thank you",
-                        "thank you haraya",
-                        "you've done enough",
-                        "that would be all",
-                        "thanks",
-                        " thanks ",
-                        "thanks ",
-                        " thanks",
-                        "I said thanks",
-                        "I said thank you",
-                        "you've done great",
-                        "you've done great haraya",
-                        "no thank you",
-                        "im good thank you haraya",
-                        "i'm good thank you",
-                        "no i'm good thanks",
-                        "thank you for your service"]
-
     GoodBye_KeyWords = ["goodbye",
                         " goodbye ",
                         "goodbye ",
@@ -329,51 +307,8 @@ def run_haraya():
                     "didn't i told you to go to sleep",
                     "didn't i told you to sleep",
                     "i told you to stop",
-                    "didn't i told you to stop"]
-
-    No_KeyWords = ["no",
-                    "nah",
-                    "none",
-                    "none so far",
-                    "none at my end",
-                    "none at all"
-                    "I'm fine",
-                    "I'm good",
-                    "this is enough",
-                    "I'm good with this",
-                    "this is enough",
-                    "it is enough",
-                    "you've done enough",
-                    "I only need this",
-                    "not really",
-                    "no I don't",
-                    "no thanks",
-                    "no thank you",
-                    "that's a no",
-                    "this would suffice",
-                    "it would suffice",
-                    "I'm not sure",
-                    "I'm satisfied",
-                    "I said no",
-                    "not really",
-                    "absolutely not",
-                    "absolutely no",
-                    "definitely no",
-                    "nothing",
-                    "nothing at all",
-                    "there's nothing",
-                    "there's none",
-                    "you've done great",
-                    "you've done great haraya",
-                    "you're good to go",
-                    "you can go now",
-                    "you're good to go now",
-                    "i'm good",
-                    "im good thank you haraya",
-                    "i'm good thank you",
-                    "no that's all",
-                    "no i'm good thanks",
-                    "no that's enough"]
+                    "didn't i told you to stop",
+                    "turn off"]
 
     Yes_KeyWords = ["yes",
                     "yup",
@@ -461,40 +396,6 @@ def run_haraya():
     DoYouKnowMe_KeyWords = ["do you know me",
                             "do you know who am i",
                             "do you know who i am"]
-    
-    CurrentDate_KeyWords = ["today is",
-                            "date check",
-                            "current date",
-                            "what day is today",
-                            "the current date is",
-                            "check the current date",
-                            "tell me the current date",
-                            "can you check the current date",
-                            "please tell me the current date",
-                            "tell me the date for today",
-                            "tell me the date today",
-                            "what is the date today"]
-    
-    CurrentTime_Keywords = ["time check",
-                            "current time",
-                            "current time is",
-                            "what time is it",
-                            "the time now is",
-                            "tell me the time",
-                            "what's the time now",
-                            "the current time is",
-                            "tell me the time now",
-                            "what is the time now",
-                            "what is the time today",
-                            "check the current time",
-                            "tell me the current time",
-                            "what is the current time",
-                            "what is the current time today",
-                            "can you tell me the time",
-                            "can you tell me the time now",
-                            "can you check the current time",
-                            "please tell me the current time",
-                            "can you tell me what time is it"]
     
     HowAreYou_KeyWords = ["how are you",
                         "what's up",
@@ -656,13 +557,7 @@ def run_haraya():
             print(response)
             speak(response)
             exit(run_haraya())
-        elif command in No_KeyWords:
-            command = command.replace(command, '')
-            response = "Is that so? All right then. Signing off."
-            print(response)
-            speak(response)
-            Play_Prompt_Sound()
-            exit()
+
         elif '' == command:
             print(command)
             response = """
@@ -759,22 +654,6 @@ def run_haraya():
         Play_Prompt_Sound()
         exit()
 
-    elif command in ThankYou_KeyWords or "thank you" in command:
-        print(command)
-        response = "It's my pleasure " + NameHA + ". Signing off..."
-        print(response)
-        speak(response)
-        Play_Prompt_Sound()
-        exit()
-
-    elif command in No_KeyWords:
-        print(command)
-        response = "Is that so? all right then. Signing off..."
-        print(response)
-        speak(response)
-        Play_Prompt_Sound()
-        exit()
-
     elif command in GoodBye_KeyWords:
         print(command)
         response = "Goodbye " + NameHA + "! Have a great day!"
@@ -783,7 +662,7 @@ def run_haraya():
         Play_Prompt_Sound()
         exit()
         
-    elif "turn off" in command:
+    elif "turn off my computer" in command:
         print(command)
         response = "As you wish " + NameHA + ". Turning off..."
         print(response)
