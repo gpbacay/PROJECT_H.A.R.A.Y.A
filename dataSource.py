@@ -111,11 +111,25 @@ class dataSource():
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service)
         driver.get("https://www.google.com/search?q=current+location+weather")
-        element1 = driver.find_element("id", "wob_dc")
-        element2 = driver.find_element("id", "wob_tm")
-        weather_condition = element1.text
-        weather_temperature = element2.text
-        result = "The current weather is " + weather_condition + ", " + "Temperature: " + weather_temperature + "°C"
+        
+        dayAndTime_element = driver.find_element("id", "wob_dts")
+        condition_element = driver.find_element("id", "wob_dc")
+        temperature_element = driver.find_element("id", "wob_tm")
+        precipitation_element = driver.find_element("id", "wob_pp")
+        humidity_element = driver.find_element("id", "wob_hm")
+        wind_element = driver.find_element("id", "wob_ws")
+        
+        weather_dayAndTime = dayAndTime_element.text
+        weather_condition = condition_element.text
+        weather_temperature = temperature_element.text
+        weather_precipitation = precipitation_element.text
+        weather_humidity = humidity_element.text
+        weather_wind = wind_element.text
+        
+        result = f"""As of {weather_dayAndTime}, the current weather condition is {weather_condition}, with
+            Temperature: {weather_temperature}°C, {weather_precipitation} of precipitation, {weather_humidity} of humidity, 
+            and a wind blowing {weather_wind}.
+        """
         global current_weather
         current_weather = result
         driver.quit()
