@@ -3,6 +3,7 @@ from playsound import playsound
 from threading import Thread, Event
 import time
 import colorama
+colorama.init(autoreset=True)
 
 class LoadingBar():
     def RunLoadingBar(seconds=15, loading_tag="Loading", end_tag="Loaded successfully", finish_loading=False):
@@ -16,8 +17,7 @@ class LoadingBar():
             if percent != 100:
                 print(color + f"\r {loading_tag}...|{bar}| {percent:.2f}%              ", end="\r")
             else:
-                print(color + f"\r {end_tag}:|{bar}| {percent:.2f}%              ", end="\r")
-                print(colorama.Fore.RESET)
+                print(colorama.Fore.LIGHTGREEN_EX + f"\r {end_tag}:|{bar}| {percent:.2f}%              ", end="\r")
                 print("\n")
                 playsound(U"loadcomplete.mp3")
 

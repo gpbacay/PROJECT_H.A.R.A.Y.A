@@ -148,14 +148,14 @@ class dataSource():
     tLoadBar2.join()
     
     #Acquire Location
-    tSetLocation = Thread(target=SetCurrentLocation)
+    tSetLocation = Thread(target=SetCurrentLocation, daemon=True)
     tSetLocation.start()
     tLoadBar3 = Thread(target=runLoadingBar, args=(8, "Acquiring Location Data", "Location Acquired"),)
     tLoadBar3.start()
     tLoadBar3.join()
     
     #Acquire Weather
-    tSetWeather = Thread(target=SetCurrentWeather)
+    tSetWeather = Thread(target=SetCurrentWeather,daemon=True)
     tSetWeather.start()
     tLoadBar4 = Thread(target=runLoadingBar, args=(8, "Acquiring Weather Data", "Weather Acquired"),)
     tLoadBar4.start()
