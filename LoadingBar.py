@@ -16,7 +16,7 @@ def LoadingBar(seconds=15, loading_tag="Loading", end_tag="Loaded successfully",
                 print(f"\r {end_tag}:|{bar}| {percent:.2f}%              ", end="\r")
                 print("\n")
                 playsound(U"loadcomplete.mp3")
-                sys.exit()
+                return
 
         if finish_loading:
             seconds = 0.5
@@ -26,6 +26,7 @@ def LoadingBar(seconds=15, loading_tag="Loading", end_tag="Loaded successfully",
         for i, x in enumerate(numbers):
             results.append(math.factorial(x))
             progressBar(i + 1, len(numbers))
+        return
     
     t1 = Thread(target=playsound, args=(U"loadbar.mp3",), daemon=True)
     t1.start()
@@ -34,6 +35,7 @@ def LoadingBar(seconds=15, loading_tag="Loading", end_tag="Loaded successfully",
     t2 = Thread(target=RunLoadingBar, args=(seconds,loading_tag,end_tag,finish_loading))
     t2.start()
     t2.join()
+    return
     
 if __name__ == '__main__':
     LoadingBar()

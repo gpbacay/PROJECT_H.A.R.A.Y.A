@@ -129,6 +129,7 @@ class dataSource():
     def GetCurrentWeather():
         return current_weather
     
+    #Start Gathering Datas (Initialization Process)
     #Acquire Time
     t1 = Thread(target=SetCurrentTime)
     t1.start()
@@ -140,17 +141,11 @@ class dataSource():
     #Acquire Location
     tSetLocation = Thread(target=SetCurrentLocation)
     tSetLocation.start()
-    tLoadLocation = Thread(target=LoadingBar, args=(8, "Acquiring location data", "Location acquired",))
-    tLoadLocation.start()
-    tLoadLocation.join()
-    
-    time.sleep(1)
     #Acquire Weather
     tSetWeather = Thread(target=SetCurrentWeather)
     tSetWeather.start()
-    tLoadWeather = Thread(target=LoadingBar, args=(8, "Acquiring weather data", "Weather acquired",))
-    tLoadWeather.start()
-    tSetWeather.join()
+    
+    LoadingBar(loading_tag="Initializing", end_tag="Successfully Initialized")
     
 if __name__ == '__main__':
     date = dataSource.GetCurrentDate()
