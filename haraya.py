@@ -119,12 +119,12 @@ Locate_NameHA()
 #_____________________________________________INITIALIZE_FACE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
 #Run Command: python haraya.py
 def Initialize_Face_Recognition_System():
-    response = "Recognizing Face"
-    speak(response)
     tFRS = Thread(target=Face_Recognition_System)
     tFRS.start()
     tLoadBar1 = Thread(target=runLoadingBar, args=(10, "Initializing FRS", "FRS Initialized"),)
     tLoadBar1.start()
+    response = "Initializing Face Recognition System"
+    speak(response)
     tLoadBar1.join()
     tFRS.join()
     Play_Prompt_Sound()

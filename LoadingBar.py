@@ -10,16 +10,16 @@ class LoadingBar():
         t1 = Thread(target=playsound, args=(U"loadbar.mp3",), daemon=True)
         t1.start()
         time.sleep(0.5)
-        def progressBar(progress, total, color=colorama.Fore.YELLOW):
+        def progressBar(progress, total, color=colorama.Fore.GREEN):
             percent = 100 * (progress / float(total))
             bar = '█' * int(percent) + '·' * (100 - int(percent))
             if percent != 100:
                 print(color + f"\r {loading_tag}...|{bar}| {percent:.2f}%              ", end="\r")
             else:
                 print(color + f"\r {end_tag}:|{bar}| {percent:.2f}%              ", end="\r")
+                print(colorama.Fore.RESET)
                 print("\n")
                 playsound(U"loadcomplete.mp3")
-            print(colorama.Fore.RESET)
 
         if finish_loading:
             seconds = 0.5
