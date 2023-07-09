@@ -26,7 +26,7 @@ from threading import Thread
 from LoadingBar import LoadingBar 
 runLoadingBar = LoadingBar.RunLoadingBar
 import colorama
-color = colorama.Fore.YELLOW
+colorama.init(autoreset=True)
 
 Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
 print(Header)

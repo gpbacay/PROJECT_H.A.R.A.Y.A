@@ -3,7 +3,6 @@ from playsound import playsound
 from threading import Thread, Event
 import time
 import colorama
-colorama.init(autoreset=True)
 
 class LoadingBar():
     def RunLoadingBar(seconds=15, loading_tag="Loading", end_tag="Loaded successfully", finish_loading=False):
@@ -29,6 +28,7 @@ class LoadingBar():
         for i, x in enumerate(numbers):
             results.append(math.factorial(x))
             progressBar(i + 1, len(numbers))
+        print(colorama.Fore.RESET)
     
 if __name__ == '__main__':
     LoadingBar.RunLoadingBar(10)
