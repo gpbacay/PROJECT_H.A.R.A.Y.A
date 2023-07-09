@@ -22,8 +22,6 @@ import pyautogui
 
 from PaLM2_LLM import run_Bison
 import textwrap
-from LoadingBar import LoadingBar
-runLoadingBar = LoadingBar.RunLoadingBar
 from threading import Thread
 
 
@@ -124,7 +122,6 @@ def Initialize_Face_Recognition_System():
     speak(response)
     t1 = Thread(target=Face_Recognition_System)
     t1.start()
-    runLoadingBar(seconds=15, loading_tag="Recognizing Face", end_tag="Face Recognized")
     t1.join()
     Play_Prompt_Sound()
     Locate_MyFullName()

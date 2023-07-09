@@ -1,14 +1,10 @@
 import math
 from playsound import playsound
-from threading import Thread, Event
-
-exit_thread = Event()
+from threading import Thread
+import time
 
 class test15():
-    def Play_Loading_Sound(mp3_path = U""):
-        playsound(mp3_path)
-        
-    def RunLoadingBar(seconds = 15, loading_tag = "Loading", end_tag = "Loaded successfully", finish_loading = False):
+    def Runtest15(seconds=15, loading_tag="Loading", end_tag="Loaded successfully", finish_loading=False):
         print("\n")
         def progressBar(progress, total):
             percent = 100 * (progress / float(total))
@@ -20,23 +16,26 @@ class test15():
                 print("\n")
                 playsound(U"loadcomplete.mp3")
                 exit()
-        
-        if finish_loading == True:
+
+        if finish_loading:
             seconds = 0.5
-        numbers = [x * int(seconds*2.3) for x in range(1000)]
+        numbers = [x * int(seconds * 2.3) for x in range(1000)]
         results = []
         progressBar(0, len(numbers))
         for i, x in enumerate(numbers):
             results.append(math.factorial(x))
-            progressBar(i+1, len(numbers))
-        
-    t1 = Thread(target=Play_Loading_Sound, args=(U"loadbar.mp3",))
+            progressBar(i + 1, len(numbers))
+    
+    t1 = Thread(target=playsound, args=(U"loadbar.mp3",))
     t1.daemon = True
     t1.start()
-    RunLoadingBar()
-    t1.join()
-
+    
+    time.sleep(1)
+    t2 = Thread(target=Runtest15, args=(1,"Loading", "Loading completed"))
+    t2.start()
+    t2.join()
+    
 if __name__ == '__main__':
     test15()
-    
+        
 #____________python test15.py
