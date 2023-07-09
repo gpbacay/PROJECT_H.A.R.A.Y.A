@@ -7,13 +7,16 @@ from selenium.webdriver.common.by import By
 from threading import Thread
 from LoadingBar import LoadingBar
 import time
-    
+
+
 class dataSource():
     global current_date, current_time, current_location, current_weather
     current_time = ""
     current_date = ""
     current_location = ""
     current_weather = ""
+    
+    runLoadingBar = LoadingBar.RunLoadingBar
 
     def SetCurrentTime():
         currentTime = datetime.datetime.now().time()
@@ -133,19 +136,30 @@ class dataSource():
     #Acquire Time
     t1 = Thread(target=SetCurrentTime)
     t1.start()
+    tLoadBar1 = Thread(target=runLoadingBar, args=(1, "Acquiring Time Data", "Time Acquired"),)
+    tLoadBar1.start()
+    tLoadBar1.join()
     
     #Acquire Date
     t2 = Thread(target=SetCurrentDate)
     t2.start()
+    tLoadBar2 = Thread(target=runLoadingBar, args=(1, "Acquiring Date Data", "Date Acquired"),)
+    tLoadBar2.start()
+    tLoadBar2.join()
     
     #Acquire Location
     tSetLocation = Thread(target=SetCurrentLocation)
     tSetLocation.start()
+    tLoadBar3 = Thread(target=runLoadingBar, args=(8, "Acquiring Location Data", "Location Acquired"),)
+    tLoadBar3.start()
+    tLoadBar3.join()
+    
     #Acquire Weather
     tSetWeather = Thread(target=SetCurrentWeather)
     tSetWeather.start()
-    
-    LoadingBar(loading_tag="Initializing", end_tag="Successfully Initialized")
+    tLoadBar4 = Thread(target=runLoadingBar, args=(8, "Acquiring Weather Data", "Weather Acquired"),)
+    tLoadBar4.start()
+    tLoadBar4.join()
     
 if __name__ == '__main__':
     date = dataSource.GetCurrentDate()

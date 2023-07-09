@@ -1,8 +1,9 @@
 import math
 from playsound import playsound
-from threading import Thread
+from threading import Thread, Event
 import time
 
+event = Event()
 class test15():
     def Runtest15(seconds=15, loading_tag="Loading", end_tag="Loaded successfully", finish_loading=False):
         print("\n")
@@ -15,7 +16,7 @@ class test15():
                 print(f"\r {end_tag}:|{bar}| {percent:.2f}%              ", end="\r")
                 print("\n")
                 playsound(U"loadcomplete.mp3")
-                exit()
+                event.set()
 
         if finish_loading:
             seconds = 0.5
@@ -26,16 +27,15 @@ class test15():
             results.append(math.factorial(x))
             progressBar(i + 1, len(numbers))
     
-    t1 = Thread(target=playsound, args=(U"loadbar.mp3",))
-    t1.daemon = True
+    def PlayLoadingSound(mp3Path = U""):
+        playsound(mp3Path)
+
+    t1 = Thread(target=PlayLoadingSound, args=(U"loadbar.mp3",), daemon=True)
     t1.start()
     
-    time.sleep(1)
-    t2 = Thread(target=Runtest15, args=(1,"Loading", "Loading completed"))
-    t2.start()
-    t2.join()
+    time.sleep(0.5)
     
 if __name__ == '__main__':
-    test15()
+    test15.Runtest15(1)
         
 #____________python test15.py

@@ -23,7 +23,8 @@ import pyautogui
 from PaLM2_LLM import run_Bison
 import textwrap
 from threading import Thread
-
+from LoadingBar import LoadingBar 
+runLoadingBar = LoadingBar.RunLoadingBar
 
 Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
 print(Header)
@@ -120,9 +121,12 @@ Locate_NameHA()
 def Initialize_Face_Recognition_System():
     response = "Recognizing Face"
     speak(response)
-    t1 = Thread(target=Face_Recognition_System)
-    t1.start()
-    t1.join()
+    tFRS = Thread(target=Face_Recognition_System)
+    tFRS.start()
+    tLoadBar1 = Thread(target=runLoadingBar, args=(10, "Initializing FRS", "FRS Initialized"),)
+    tLoadBar1.start()
+    tLoadBar1.join()
+    tFRS.join()
     Play_Prompt_Sound()
     Locate_MyFullName()
     Locate_NameHA()
