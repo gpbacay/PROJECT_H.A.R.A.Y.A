@@ -2,6 +2,7 @@
 import speech_recognition as sr
 import pyttsx3
 import pywhatkit
+from playsound import playsound
 
 from facerec import Face_Recognition_System
 from poserec import Pose_Recognition_System
@@ -21,7 +22,8 @@ import pyautogui
 
 from PaLM2_LLM import run_Bison
 import textwrap
-from LoadingBar import RunLoadingBar
+from LoadingBar import LoadingBar
+runLoadingBar = LoadingBar.RunLoadingBar
 from threading import Thread
 
 
@@ -42,12 +44,10 @@ def speak(text):
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
 #Run Command: python haraya.py
 def Play_Prompt_Sound():
-    from playsound import playsound
     mp3_path = U"prompt1.mp3"
     playsound(mp3_path)
     
 def Play_Listening_Sound():
-    from playsound import playsound
     mp3_path = u"Listening.mp3"
     playsound(mp3_path)
     
@@ -124,7 +124,7 @@ def Initialize_Face_Recognition_System():
     speak(response)
     t1 = Thread(target=Face_Recognition_System)
     t1.start()
-    RunLoadingBar(seconds=15, loading_tag="Recognizing Face", end_tag="Face Recognized")
+    runLoadingBar(seconds=15, loading_tag="Recognizing Face", end_tag="Face Recognized")
     t1.join()
     Play_Prompt_Sound()
     Locate_MyFullName()

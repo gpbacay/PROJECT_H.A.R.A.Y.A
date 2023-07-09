@@ -5,8 +5,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from threading import Thread
-from LoadingBar import RunLoadingBar
+from LoadingBar import LoadingBar
 import time
+from playsound import playsound
     
 class dataSource():
     global current_date, current_time, current_location, current_weather
@@ -14,6 +15,11 @@ class dataSource():
     current_date = ""
     current_location = ""
     current_weather = ""
+    
+    runLoadingBar = LoadingBar.RunLoadingBar
+    
+    def Play_Loading_Sound(mp3_path = U""):
+        playsound(mp3_path)
 
     def SetCurrentTime():
         currentTime = datetime.datetime.now().time()
@@ -131,16 +137,25 @@ class dataSource():
     
     t1 = Thread(target=SetCurrentDate)
     t1.start()
+    
     t2 = Thread(target=SetCurrentTime)
     t2.start()
-    t3 = Thread(target=SetCurrentLocation)
-    t3.start()
-    t4 = Thread(target=SetCurrentWeather)
-    t4.start()
-    RunLoadingBar(seconds=8, loading_tag="Acquiring location data", end_tag="Location acquired")
-    RunLoadingBar(seconds=8, loading_tag="Acquiring weathear data", end_tag="Weather acquired")
-    t3.join()
-    t4.join()
+    
+    tSound = Thread(target=Play_Loading_Sound, args=(U"loadbar.mp3",))
+    tSound.daemon = True
+    
+    tSound.start()
+    tSetLocation = Thread(target=SetCurrentLocation)
+    tLoadLocation = Thread(target=runLoadingBar, args=(8, "Acquiring location data", "Location acquired",))
+    tSetLocation.start()
+    tLoadLocation.start()
+    
+    tSetWeather = Thread(target=SetCurrentWeather)
+    tLoadWeather = Thread(target=runLoadingBar, args=(8, "Acquiring weathear data", "Weather acquired",))
+    tSetWeather.start()
+    tLoadWeather.start()
+    
+    tLoadWeather.join()
     
 if __name__ == '__main__':
     date = dataSource.GetCurrentDate()
