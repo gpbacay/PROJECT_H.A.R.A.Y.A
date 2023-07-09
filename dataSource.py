@@ -127,8 +127,8 @@ class dataSource():
         weather_wind = wind_element.text
         
         result = f"""As of {weather_dayAndTime}, the current weather condition is {weather_condition}, with
-            Temperature: {weather_temperature}°C, {weather_precipitation} of precipitation, {weather_humidity} of humidity, 
-            and a wind blowing {weather_wind}.
+        Temperature: {weather_temperature}°C, {weather_precipitation} of precipitation, {weather_humidity} of humidity, 
+        and a wind blowing {weather_wind}.
         """
         global current_weather
         current_weather = result
@@ -150,28 +150,27 @@ class dataSource():
     #Acquire Time
     t1 = Thread(target=SetCurrentTime)
     t1.start()
-    tLoadBar1 = Thread(target=runLoadingBar, args=(1, "Acquiring Time Data", "Time Acquired"),)
+    tLoadBar1 = Thread(target=runLoadingBar, args=(1, "ACQUIRING TIME DATA", "TIME ACQUIRED!"),)
     tLoadBar1.start()
     tLoadBar1.join()
-    
     #Acquire Date
     t2 = Thread(target=SetCurrentDate)
     t2.start()
-    tLoadBar2 = Thread(target=runLoadingBar, args=(1, "Acquiring Date Data", "Date Acquired"),)
+    tLoadBar2 = Thread(target=runLoadingBar, args=(1, "ACQUIRING DATE DATA", "DATE ACQUIRED!"),)
     tLoadBar2.start()
     tLoadBar2.join()
     
     #Acquire Location
     tSetLocation = Thread(target=SetCurrentLocation, daemon=True)
     tSetLocation.start()
-    tLoadBar3 = Thread(target=runLoadingBar, args=(8, "Acquiring Location Data", "Location Acquired"),)
+    tLoadBar3 = Thread(target=runLoadingBar, args=(8, "ACQUIRING LOCATION DATA", "LOCATION ACQUIRED"),)
     tLoadBar3.start()
     tLoadBar3.join()
     
     #Acquire Weather
     tSetWeather = Thread(target=SetCurrentWeather,daemon=True)
     tSetWeather.start()
-    tLoadBar4 = Thread(target=runLoadingBar, args=(8, "Acquiring Weather Data", "Weather Acquired"),)
+    tLoadBar4 = Thread(target=runLoadingBar, args=(8, "ACQUIRING WEATHER DATA", "WEATHER ACQUIRED!"),)
     tLoadBar4.start()
     tLoadBar4.join()
     
