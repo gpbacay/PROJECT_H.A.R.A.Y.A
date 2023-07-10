@@ -131,7 +131,7 @@ def Initialize_Face_Recognition_System():
     response = "Initializing Face Recognition System"
     speak(response)
     tFRS.join()
-    Play_Prompt_Sound()
+    runLoadingBar(1, "RECOGNIZING FACE", "FACE RECOCNIZED!")
     Locate_MyFullName()
     Locate_NameHA()
 Initialize_Face_Recognition_System()
