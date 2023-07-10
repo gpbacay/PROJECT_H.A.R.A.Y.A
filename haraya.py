@@ -1,18 +1,14 @@
-import colorama
-colorama.init(autoreset=True)
-Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
-print(colorama.Back.LIGHTGREEN_EX + colorama.Fore.BLACK + Header)
 #Import Libraries/Modules
+from threading import Thread
+import time
+from playsound import playsound
 import speech_recognition as sr
 import pyttsx3
 import pywhatkit
-from playsound import playsound
 
 from facerec import Face_Recognition_System
 from poserec import Pose_Recognition_System
-import time
 import os
-import requests
 import subprocess
 
 import wikipedia
@@ -20,16 +16,20 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-from bs4 import BeautifulSoup as bs
-import random
 import pyautogui
 
-from PaLM2_LLM import run_Bison
 import textwrap
-from threading import Thread
 from LoadingBar import LoadingBar 
 runLoadingBar = LoadingBar.RunLoadingBar
-
+tStartUp = Thread(target=playsound, args=(U"startUp.mp3",))
+tStartUp.start()
+time.sleep(1)
+import colorama
+colorama.init(autoreset=True)
+Header = "                                          " + colorama.Style.BRIGHT + colorama.Fore.GREEN + "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
+tHeader = Thread(target=print, args=(Header,))
+tHeader.start()
+from PaLM2_LLM import run_Bison
 
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
 #Run Command: python haraya.py
@@ -52,6 +52,9 @@ def Play_Listening_Sound():
     mp3_path = u"Listening.mp3"
     playsound(mp3_path)
     
+def Play_Shutdown_Sound():
+    mp3_path = u"shutdown.mp3"
+    playsound(mp3_path)
 #______________________________________________________CORE_TEMPORARY_MEMORY_BANKS
 #Run Command: python haraya.py
 Name = []
@@ -127,13 +130,11 @@ def Initialize_Face_Recognition_System():
     tLoadBar1.start()
     response = "Initializing Face Recognition System"
     speak(response)
-    tLoadBar1.join()
     tFRS.join()
     Play_Prompt_Sound()
     Locate_MyFullName()
     Locate_NameHA()
 Initialize_Face_Recognition_System()
-
 
 #_____________________________________________INITIALIZE_POSE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
 #Run Command: python haraya.py
@@ -552,7 +553,7 @@ def run_haraya():
         response = "As you wish " + NameHA + ". Signing off..."
         print(colorama.Fore.GREEN + response)
         speak(response)
-        Play_Prompt_Sound()
+        Play_Shutdown_Sound()
         exit()
 
     elif command in GoodBye_KeyWords:
@@ -560,7 +561,7 @@ def run_haraya():
         response = "Goodbye " + NameHA + "! Have a great day!"
         print(colorama.Fore.GREEN + response)
         speak(response)
-        Play_Prompt_Sound()
+        Play_Shutdown_Sound()
         exit()
         
     elif "turn off my computer" in command:
@@ -568,7 +569,7 @@ def run_haraya():
         response = "As you wish " + NameHA + ". Turning off..."
         print(colorama.Fore.GREEN + response)
         speak(response)
-        Play_Prompt_Sound()
+        Play_Shutdown_Sound()
         exit()
 
     #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK

@@ -6,7 +6,7 @@ import colorama
 
 class LoadingBar():
     def RunLoadingBar(seconds=15, loading_tag="LOADING", end_tag="LOADED SUCCESSFULLY!", finish_loading=False):
-        t1 = Thread(target=playsound, args=(U"loadbar.mp3",), daemon=True)
+        t1 = Thread(target=playsound, args=(U"loadingbar.mp3",), daemon=True)
         t1.start()
         time.sleep(0.5)
         def progressBar(progress, total, color=colorama.Fore.GREEN):

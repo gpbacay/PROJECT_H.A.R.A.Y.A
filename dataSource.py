@@ -7,9 +7,12 @@ from selenium.webdriver.common.by import By
 from threading import Thread
 from LoadingBar import LoadingBar
 import time
+import colorama
+colorama.init(autoreset=True)
 
 
 class dataSource():
+    print(colorama.Fore.GREEN + "Scraping Data from the Internet: ")
     global current_date, current_time, current_location, current_weather
     current_time = ""
     current_date = ""
