@@ -1,0 +1,11 @@
+[console_scripts]
+accuracy_check = openvino.tools.accuracy_checker.main:main
+benchmark_app = openvino.tools.benchmark.main:main
+convert_annotation = openvino.tools.accuracy_checker.annotation_converters.convert:main
+mo = openvino.tools.mo.__main__:main
+omz_converter = openvino.model_zoo.omz_converter:main
+omz_data_downloader = openvino.model_zoo.omz_data_downloader:main
+omz_downloader = openvino.model_zoo.omz_downloader:main
+omz_info_dumper = openvino.model_zoo.omz_info_dumper:main
+omz_quantizer = openvino.model_zoo.omz_quantizer:main
+pot = openvino.tools.pot.app.run:main

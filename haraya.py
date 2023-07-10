@@ -311,7 +311,8 @@ def run_haraya():
                     "didn't i told you to sleep",
                     "i told you to stop",
                     "didn't i told you to stop",
-                    "turn off"]
+                    "turn off",
+                    "shutdown"]
 
     Yes_KeyWords = ["yes",
                     "yup",
@@ -880,5 +881,9 @@ while True:
 #Run on openvino environment:
 #____________________________Get-ExecutionPolicy;
 #____________________________Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force;
+
+#Download openvino:
 #____________________________python -m venv openvino_env
 #____________________________openvino_env\Scripts\activate
+#____________________________python -m pip install --upgrade pip
+#____________________________pip install openvino-dev==2023.0.1

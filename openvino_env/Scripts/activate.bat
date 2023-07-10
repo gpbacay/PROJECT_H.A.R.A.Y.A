@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Gianne Bacay\Desktop\VIRTUAL_ASSISTANT_PROJECT\VIRTUAL-ASSISTANT-AI-PROJECT\Virtual_Assistant_AI_Project\openvino_env
+set VIRTUAL_ENV=C:\Users\Gianne Bacay\Desktop\PROJECT_H.A.R.A.Y.A\openvino_env
 
 if not defined PROMPT set PROMPT=$P$G
 

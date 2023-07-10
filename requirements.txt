@@ -15,6 +15,7 @@ datetime
 wikipedia
 subprocess.run
 chromedriver
+webdriver_manager
 browser
 python-time
 requests
@@ -31,17 +32,15 @@ cvzone
 pywinauto
 keyboard
 pyinstaller
-
 sentence_transformers
 transformers
 InstructorEmbedding
 chromadb
-
 google-generativeai
-
 einops
 accelerate
 langchain
 bitsandbytes
+colorama
 
 
