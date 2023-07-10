@@ -1,7 +1,7 @@
 import os
 import google.generativeai as palm
 from dotenv import load_dotenv, find_dotenv
-from dataSource import dataSource
+from webDataScrapingSystem import DataScrapper
 
 
 load_dotenv(find_dotenv())
@@ -67,8 +67,8 @@ context = """"
 user_name = "Gianne P. Bacay"
 ai_name = "HARAYA"
 
-getLocation = dataSource.GetCurrentLocation()
-getWeather = dataSource.GetCurrentWeather()
+getLocation = DataScrapper.GetCurrentLocation()
+getWeather = DataScrapper.GetCurrentWeather()
 
 previous_activity_list = [
         "System (HARAYA) Turned Online"
@@ -78,10 +78,10 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
     current_time = "", current_date = "", current_location = getLocation, current_weather = getWeather, 
     previous_activity = previous_activity_list):
     
-    dataSource.SetCurrentTime()
-    dataSource.SetCurrentDate()
-    current_time = dataSource.GetCurrentTime()
-    current_date = dataSource.GetCurrentDate()
+    DataScrapper.SetCurrentTime()
+    DataScrapper.SetCurrentDate()
+    current_time = DataScrapper.GetCurrentTime()
+    current_date = DataScrapper.GetCurrentDate()
 
     previous_activity_list.append(previous_activity)
     

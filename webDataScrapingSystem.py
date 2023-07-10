@@ -11,7 +11,7 @@ import colorama
 colorama.init(autoreset=True)
 
 
-class dataSource():
+class DataScrapper():
     print(colorama.Fore.GREEN + "Scraping Data from the Internet: ")
     global current_date, current_time, current_location, current_weather
     current_time = ""
@@ -178,12 +178,12 @@ class dataSource():
     tLoadBar4.join()
     
 if __name__ == '__main__':
-    date = dataSource.GetCurrentDate()
+    date = DataScrapper.GetCurrentDate()
     print(date)
-    curTime = dataSource.GetCurrentTime()
+    curTime = DataScrapper.GetCurrentTime()
     print(curTime)
-    location = dataSource.GetCurrentLocation()
+    location = DataScrapper.GetCurrentLocation()
     print(location)
-    weather = dataSource.GetCurrentWeather()
+    weather = DataScrapper.GetCurrentWeather()
     print(weather)
-#______________python dataSource.py
+#______________python DataScrapper.py
