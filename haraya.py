@@ -650,8 +650,8 @@ def run_haraya():
                 speak(response)
                 program = "C:\Program Files\Google\Chrome\Application\chrome.exe"
                 subprocess.Popen([program])
-                response = "Opening " + colorama.Fore.RED + "Chrome"
-                response1 = "Opening " + "Chrome"
+                response = "Opening " + colorama.Fore.RED + "Chrome..."
+                response1 = "Opening " + "Chrome..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
@@ -661,8 +661,8 @@ def run_haraya():
                 speak(response)
                 program = "C:\Program Files\Artix Game Launcher\Artix Game Launcher.exe"
                 subprocess.Popen([program])
-                response = "Opening " + colorama.Fore.RED + "Artix game launcher"
-                response1 = "Opening " + "Artix game launcher"
+                response = "Opening " + colorama.Fore.RED + "Artix game launcher..."
+                response1 = "Opening " + "Artix game launcher..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
@@ -672,8 +672,8 @@ def run_haraya():
                 speak(response)
                 program = "C:\Program Files\Genshin Impact\launcher.exe"
                 subprocess.Popen(f'start /b /wait /min /high "Running Genhin Impact as Administrator" "{program}"', shell=True)
-                response = "Opening " + colorama.Fore.RED + "Genshin Impact"
-                response1 = "Opening " + "Genshin Impact"
+                response = "Opening " + colorama.Fore.RED + "Genshin Impact..."
+                response1 = "Opening " + "Genshin Impact..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
@@ -683,8 +683,8 @@ def run_haraya():
                 speak(response)
                 program = "cmd.exe"
                 subprocess.Popen([program])
-                response = "Opening " + colorama.Fore.RED + "Command Prompt"
-                response1 = "Opening " + "Command Prompt"
+                response = "Opening " + colorama.Fore.RED + "Command Prompt..."
+                response1 = "Opening " + "Command Prompt..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
@@ -694,8 +694,8 @@ def run_haraya():
                 speak(response)
                 program = "notepad.exe"
                 subprocess.Popen([program])
-                response = "Opening " + colorama.Fore.RED + "Notepad"
-                response1 = "Opening " + "Notepad"
+                response = "Opening " + colorama.Fore.RED + "Notepad..."
+                response1 = "Opening " + "Notepad..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
@@ -705,8 +705,8 @@ def run_haraya():
                 speak(response)
                 program = "calc.exe"
                 subprocess.Popen([program])
-                response = "Opening " + colorama.Fore.RED + "Calculator"
-                response1 = "Opening " + "Calculator"
+                response = "Opening " + colorama.Fore.RED + "Calculator..."
+                response1 = "Opening " + "Calculator..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
@@ -716,8 +716,8 @@ def run_haraya():
                 speak(response)
                 program = "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"
                 subprocess.Popen([program])
-                response = "Opening " + colorama.Fore.RED + "VLC Media Player"
-                response1 = "Opening " + "VLC Media Player"
+                response = "Opening " + colorama.Fore.RED + "VLC Media Player..."
+                response1 = "Opening " + "VLC Media Player..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
@@ -727,8 +727,8 @@ def run_haraya():
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
                 subprocess.Popen([program])
-                response = "Opening " + colorama.Fore.RED + "Visual Studio Code"
-                response1 = "Opening " + "Visual Studio Code"
+                response = "Opening " + colorama.Fore.RED + "Visual Studio Code..."
+                response1 = "Opening " + "Visual Studio Code..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
@@ -738,8 +738,8 @@ def run_haraya():
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Messenger.exe.lnk"
                 subprocess.Popen(f'start /b /wait /min /high "Running Messenger as Administrator" "{program}"', shell=True)
-                response = "Opening " + colorama.Fore.RED + "Messenger"
-                response1 = "Opening " + "Messenger"
+                response = "Opening " + colorama.Fore.RED + "Messenger..."
+                response1 = "Opening " + "Messenger..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
@@ -749,8 +749,8 @@ def run_haraya():
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Downloads.lnk"
                 subprocess.Popen(f'start /b /wait /min /high "Running Downloads as Administrator" "{program}"', shell=True)
-                response = "Opening " + colorama.Fore.RED + "Downloads"
-                response1 = "Opening " + "Downloads"
+                response = "Opening " + colorama.Fore.RED + "Downloads..."
+                response1 = "Opening " + "Downloads..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
@@ -760,8 +760,8 @@ def run_haraya():
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Videos.lnk"
                 subprocess.Popen(f'start /b /wait /min /high "Running Videos as Administrator" "{program}"', shell=True)
-                response = "Opening " + colorama.Fore.RED + "Videos"
-                response1 = "Opening " + "Videos"
+                response = "Opening " + colorama.Fore.RED + "Videos..."
+                response1 = "Opening " + "Videos..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
