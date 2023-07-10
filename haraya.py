@@ -151,11 +151,12 @@ def Start_Up_command_MainFunction():
     try:
         NameHA = Name_Honorific_Address[-1]
         MyName = Name[-1]
-        response = "Hi " + NameHA + " " + MyName + "! How can I help you?"
+        response = "Hi " + NameHA + " " + colorama.Fore.CYAN + MyName + "! How can I help you?"
+        response1 = "Hi " + NameHA + " " + MyName + "! How can I help you?"
     except:
         response = "Hi! How can I help you?"
     print(colorama.Fore.GREEN + response)
-    speak(response)
+    speak(response1)
 
 
 #______________________________LISTEN_COMMAND_MAIN_FUNCTION
@@ -418,8 +419,19 @@ def run_haraya():
                     "heraya",
                     "area",
                     "ryan",
-                    "aya"]
+                    "aya",
+                    "heria",
+                    "herya",
+                    "halaya"]
     
+    Repeat_KeyWords = ["repeat after me",
+                    "haraya repeat after me",
+                    "repeat after me haraya",
+                    "say what i'm going to say",
+                    "haraya say what i'm going to say",
+                    "speak after me",
+                    "mimic me",
+                    "copy what I say"]
 
     #_______________________________________________________________________STANDBY_SUBFUNCTION
     #Run Command: python haraya.py
@@ -469,7 +481,7 @@ def run_haraya():
         try:
             with sr.Microphone() as source:
                 response = "Understood, I'm listening..."
-                print(response)
+                print(colorama.Fore.GREEN + response)
                 speak(response)
                 Play_Listening_Sound()
                 recognizer.energy_threshold = 1.0
@@ -486,6 +498,7 @@ def run_haraya():
 
     #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
     #Run Command: python haraya.py
+
     command = Listen_command_MainFunction()
 
     #______________________________________________________FACE_RECOGNITION_BLOCK
@@ -504,9 +517,10 @@ def run_haraya():
         Initialize_Face_Recognition_System()
         NameHA = Name_Honorific_Address[-1]
         MyName = Name[-1]
-        response = "Hello " + NameHA + " " + MyName + "!"
+        response = "Hello " + NameHA + " " + colorama.Fore.CYAN + MyName + "!"
+        response1 = "Hello " + NameHA + " " + MyName + "!"
         print(colorama.Fore.GREEN + response)
-        speak(response)
+        speak(response1)
         Confirmation_SubFunction(command)
         
     #______________________________________________________POSE_RECOGNITION_BLOCK
@@ -529,7 +543,6 @@ def run_haraya():
     #Run Command: python haraya.py
     elif command in Repeat_KeyWords:
         Repeat_SubFunction()
-
 
     #________________________________________________________________TERMINATION_BLOCK
     #Run Command: python haraya.py
@@ -574,8 +587,9 @@ def run_haraya():
             search_list.append(information)
             information = search_list[-1]
             response = "Searching" + colorama.Fore.RED + information
+            response1 = "Searching" + information
             print(colorama.Fore.GREEN + response)
-            speak(response)
+            speak(response1)
             for i in range(1):
                 search = information.replace(' ', '+')
                 browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -604,8 +618,9 @@ def run_haraya():
         song_title = song_list[-1]
         pywhatkit.playonyt(song_title)
         response = "Now Playing" + colorama.Fore.RED + song_title
+        response1 = "Now Playing" + song_title
         print(colorama.Fore.GREEN + response)
-        speak(response)
+        speak(response1)
         Confirmation_SubFunction(command)
 
     elif "search in wikipedia" in command or "in wikipedia search" in command:
@@ -635,8 +650,9 @@ def run_haraya():
                 program = "C:\Program Files\Google\Chrome\Application\chrome.exe"
                 subprocess.Popen([program])
                 response = "Opening " + colorama.Fore.RED + "Chrome"
+                response1 = "Opening " + "Chrome"
                 print(colorama.Fore.GREEN + response)
-                speak(response)
+                speak(response1)
                 
             elif "aqw game launcher" in command or "aqw" in command:
                 response = "As you wish!"
@@ -645,8 +661,9 @@ def run_haraya():
                 program = "C:\Program Files\Artix Game Launcher\Artix Game Launcher.exe"
                 subprocess.Popen([program])
                 response = "Opening " + colorama.Fore.RED + "Artix game launcher"
+                response1 = "Opening " + "Artix game launcher"
                 print(colorama.Fore.GREEN + response)
-                speak(response)
+                speak(response1)
                 
             elif "genshin impact" in command:
                 response = "As you wish!"
@@ -655,8 +672,9 @@ def run_haraya():
                 program = "C:\Program Files\Genshin Impact\launcher.exe"
                 subprocess.Popen(f'start /b /wait /min /high "Running Genhin Impact as Administrator" "{program}"', shell=True)
                 response = "Opening " + colorama.Fore.RED + "Genshin Impact"
+                response1 = "Opening " + "Genshin Impact"
                 print(colorama.Fore.GREEN + response)
-                speak(response)
+                speak(response1)
                 
             elif "command prompt" in command or "cmd" in command:
                 response = "As you wish!"
@@ -665,8 +683,9 @@ def run_haraya():
                 program = "cmd.exe"
                 subprocess.Popen([program])
                 response = "Opening " + colorama.Fore.RED + "Command Prompt"
+                response1 = "Opening " + "Command Prompt"
                 print(colorama.Fore.GREEN + response)
-                speak(response)
+                speak(response1)
                 
             elif "notepad" in command:
                 response = "As you wish!"
@@ -675,8 +694,9 @@ def run_haraya():
                 program = "notepad.exe"
                 subprocess.Popen([program])
                 response = "Opening " + colorama.Fore.RED + "Notepad"
+                response1 = "Opening " + "Notepad"
                 print(colorama.Fore.GREEN + response)
-                speak(response)
+                speak(response1)
                 
             elif "calculator" in command:
                 response = "As you wish!"
@@ -685,8 +705,9 @@ def run_haraya():
                 program = "calc.exe"
                 subprocess.Popen([program])
                 response = "Opening " + colorama.Fore.RED + "Calculator"
+                response1 = "Opening " + "Calculator"
                 print(colorama.Fore.GREEN + response)
-                speak(response)
+                speak(response1)
                 
             elif "vlc" in command:
                 response = "As you wish!"
@@ -695,8 +716,9 @@ def run_haraya():
                 program = "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"
                 subprocess.Popen([program])
                 response = "Opening " + colorama.Fore.RED + "VLC Media Player"
+                response1 = "Opening " + "VLC Media Player"
                 print(colorama.Fore.GREEN + response)
-                speak(response)
+                speak(response1)
                 
             elif "visual studio code" in command:
                 response = "As you wish!"
@@ -705,8 +727,9 @@ def run_haraya():
                 program = "C:\\Users\\Gianne Bacay\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
                 subprocess.Popen([program])
                 response = "Opening " + colorama.Fore.RED + "Visual Studio Code"
+                response1 = "Opening " + "Visual Studio Code"
                 print(colorama.Fore.GREEN + response)
-                speak(response)
+                speak(response1)
                 
             elif "messenger" in command:
                 response = "As you wish!"
@@ -715,8 +738,9 @@ def run_haraya():
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Messenger.exe.lnk"
                 subprocess.Popen(f'start /b /wait /min /high "Running Messenger as Administrator" "{program}"', shell=True)
                 response = "Opening " + colorama.Fore.RED + "Messenger"
+                response1 = "Opening " + "Messenger"
                 print(colorama.Fore.GREEN + response)
-                speak(response)
+                speak(response1)
                 
             elif "downloads" in command or "download" in command:
                 response = "As you wish!"
@@ -725,11 +749,23 @@ def run_haraya():
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Downloads.lnk"
                 subprocess.Popen(f'start /b /wait /min /high "Running Downloads as Administrator" "{program}"', shell=True)
                 response = "Opening " + colorama.Fore.RED + "Downloads"
+                response1 = "Opening " + "Downloads"
+                print(colorama.Fore.GREEN + response)
+                speak(response1)
+                
+            elif "videos" in command or "video" in command:
+                response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
+                program = "C:\\Users\\Gianne Bacay\\Desktop\\Videos.lnk"
+                subprocess.Popen(f'start /b /wait /min /high "Running Videos as Administrator" "{program}"', shell=True)
+                response = "Opening " + colorama.Fore.RED + "Videos"
+                response1 = "Opening " + "Videos"
+                print(colorama.Fore.GREEN + response)
+                speak(response1)
                 
         except:
-            response = """Access denied! It looks like I cannot access or open the said program."""
+            response = """Access denied! An error occured while accessing."""
             print(colorama.Fore.LIGHTRED_EX + response)
             speak(response)
         exit(Confirmation_SubFunction(command))
@@ -802,7 +838,7 @@ def run_haraya():
         """
         print(colorama.Fore.GREEN + response)
         speak(response)
-        run_Bison(reply="remember, your name is Haraya!")
+        run_Bison(reply="remember, your name is Haraya")
         Confirmation_SubFunction(command)
         
     #________________________________________________________________________STANDBY_BLOCK
