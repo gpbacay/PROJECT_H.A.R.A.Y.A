@@ -151,7 +151,7 @@ def Start_Up_command_MainFunction():
     try:
         NameHA = Name_Honorific_Address[-1]
         MyName = Name[-1]
-        response = "Hi " + NameHA + " " + colorama.Fore.CYAN + MyName + "! How can I help you?"
+        response = "Hi " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "! How can I help you?"
         response1 = "Hi " + NameHA + " " + MyName + "! How can I help you?"
     except:
         response = "Hi! How can I help you?"
@@ -517,7 +517,7 @@ def run_haraya():
         Initialize_Face_Recognition_System()
         NameHA = Name_Honorific_Address[-1]
         MyName = Name[-1]
-        response = "Hello " + NameHA + " " + colorama.Fore.CYAN + MyName + "!"
+        response = "Hello " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "!"
         response1 = "Hello " + NameHA + " " + MyName + "!"
         print(colorama.Fore.GREEN + response)
         speak(response1)
