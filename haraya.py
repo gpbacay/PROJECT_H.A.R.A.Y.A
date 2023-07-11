@@ -131,7 +131,7 @@ def Initialize_Face_Recognition_System():
     response = "Initializing Face Recognition System"
     speak(response)
     tFRS.join()
-    runLoadingBar(1, "RECOGNIZING FACE", "FACE RECOGNIZED!")
+    runLoadingBar(0.5, "RECOGNIZING FACE", "FACE RECOGNIZED!")
     Locate_MyFullName()
     Locate_NameHA()
 Initialize_Face_Recognition_System()
@@ -462,10 +462,7 @@ def run_haraya():
 
         elif '' == command:
             print(colorama.Fore.RED + command)
-            response = """
-            My apologies, I can't hear anything. 
-            Just call me if you need me. I'll wait.
-            """
+            response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
             speak(response)
             Standby_SubFunction()
@@ -856,10 +853,7 @@ def run_haraya():
     elif '' == command:
         time.sleep(3)
         print(colorama.Fore.RED + command)
-        response = """
-        I can't hear anything. Just call me if you need me. 
-        I'll wait.
-        """
+        response = "Hello? Are you still there?"
         print(colorama.Fore.GREEN + response)
         speak(response)
         Play_Prompt_Sound()

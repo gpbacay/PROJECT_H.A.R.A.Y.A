@@ -12,7 +12,7 @@ colorama.init(autoreset=True)
 
 
 class DataScrapper():
-    print(colorama.Fore.GREEN + "Scraping Data from the Internet: ")
+    print(colorama.Fore.GREEN + "Scraping Data out from the Internet...")
     global current_date, current_time, current_location, current_weather
     current_time = ""
     current_date = ""
@@ -153,27 +153,33 @@ class DataScrapper():
     #Acquire Time
     t1 = Thread(target=SetCurrentTime)
     t1.start()
-    tLoadBar1 = Thread(target=runLoadingBar, args=(1, "ACQUIRING TIME DATA", "TIME ACQUIRED!"),)
-    tLoadBar1.start()
-    tLoadBar1.join()
+    
     #Acquire Date
     t2 = Thread(target=SetCurrentDate)
     t2.start()
-    tLoadBar2 = Thread(target=runLoadingBar, args=(1, "ACQUIRING DATE DATA", "DATE ACQUIRED!"),)
-    tLoadBar2.start()
-    tLoadBar2.join()
     
     #Acquire Location
     tSetLocation = Thread(target=SetCurrentLocation, daemon=True)
     tSetLocation.start()
-    tLoadBar3 = Thread(target=runLoadingBar, args=(8, "ACQUIRING LOCATION DATA", "LOCATION ACQUIRED"),)
-    tLoadBar3.start()
-    tLoadBar3.join()
     
     #Acquire Weather
     tSetWeather = Thread(target=SetCurrentWeather,daemon=True)
     tSetWeather.start()
-    tLoadBar4 = Thread(target=runLoadingBar, args=(8, "ACQUIRING WEATHER DATA", "WEATHER ACQUIRED!"),)
+    
+    #LoadingBars
+    tLoadBar1 = Thread(target=runLoadingBar, args=(0.5, "ACQUIRING TIME DATA", "TIME ACQUIRED!"),)
+    tLoadBar1.start()
+    tLoadBar1.join()
+    
+    tLoadBar2 = Thread(target=runLoadingBar, args=(0.5, "ACQUIRING DATE DATA", "DATE ACQUIRED!"),)
+    tLoadBar2.start()
+    tLoadBar2.join()
+    
+    tLoadBar3 = Thread(target=runLoadingBar, args=(0.5, "ACQUIRING LOCATION DATA", "LOCATION ACQUIRED"),)
+    tLoadBar3.start()
+    tLoadBar3.join()
+    
+    tLoadBar4 = Thread(target=runLoadingBar, args=(0.5, "ACQUIRING WEATHER DATA", "WEATHER ACQUIRED!"),)
     tLoadBar4.start()
     tLoadBar4.join()
     
