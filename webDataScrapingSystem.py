@@ -110,10 +110,11 @@ class DataScrapper():
         current_location = result
         driver.quit()
     
-    def SetCurrentWeather():
+    def SetCurrentWeather(location = current_location):
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service)
-        driver.get("https://www.google.com/search?q=current+location+weather")
+        location = location.replace(" ", "+")
+        driver.get("https://www.google.com/search?q=current+weather+in+" + location)
         
         dayAndTime_element = driver.find_element("id", "wob_dts")
         condition_element = driver.find_element("id", "wob_dc")
@@ -129,9 +130,12 @@ class DataScrapper():
         weather_humidity = humidity_element.text
         weather_wind = wind_element.text
         
-        result = f"""As of {weather_dayAndTime}, the current weather condition is {weather_condition}, with
+        result = f"""
+        As of {weather_dayAndTime}, the current weather condition is {weather_condition}, with
         Temperature: {weather_temperature}°C, {weather_precipitation} of precipitation, {weather_humidity} of humidity, 
         and a wind blowing {weather_wind}.
+        
+        Suggestion for the day:
         """
         global current_weather
         current_weather = result
