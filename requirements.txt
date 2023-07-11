@@ -43,5 +43,6 @@ langchain
 bitsandbytes
 colorama
 pygame
+imageio
 
 
