@@ -16,9 +16,7 @@ def Pose_Recognition_System():
     total_frames = 0
 
     # Initialize MediaPipe Holistic
-    with mp_holistic.Holistic(static_image_mode=True,
-                             min_detection_confidence=0.5,
-                             min_tracking_confidence=0.5) as holistic:
+    with mp_holistic.Holistic(static_image_mode=True, min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
 
         while True:
             success, frame = cap.read()
@@ -35,6 +33,7 @@ def Pose_Recognition_System():
             if results.pose_landmarks:
                 nose_x = results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].x * image_width
                 nose_y = results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].y * image_height
+                
                 print(f'Nose Coordinates: ({round(nose_x)}, {round(nose_y)})')
 
             # Draw Landmarks
