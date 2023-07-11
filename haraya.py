@@ -75,11 +75,7 @@ def Locate_MyFullName():
         MyDatalist =  attendance.readlines()
         NameList.append(MyDatalist[-1])
         
-        MyName = NameList[-1]
-        MyName = MyName.replace("'", '')
-        MyName = MyName.split(",")
-        
-        MyFullName = MyName[0]
+        MyFullName = NameList[-1].replace("'", '').split(",")[0]
         Name.append(MyFullName)
         
         
