@@ -105,7 +105,7 @@ class DataScrapper():
         element2 = driver.find_element(By.CLASS_NAME, "fMYBhe")
         city = element1.text
         province = element2.text
-        result = city + ", " + province
+        result = "You are currently located at " + city + ", " + province
         global current_location
         current_location = result
         driver.quit()
@@ -134,8 +134,6 @@ class DataScrapper():
         As of {weather_dayAndTime}, the current weather condition is {weather_condition}, with
         Temperature: {weather_temperature}°C, {weather_precipitation} of precipitation, {weather_humidity} of humidity, 
         and a wind blowing {weather_wind}.
-        
-        Suggestion for the day:
         """
         global current_weather
         current_weather = result
@@ -196,4 +194,4 @@ if __name__ == '__main__':
     print(location)
     weather = DataScrapper.GetCurrentWeather()
     print(weather)
-#______________python DataScrapper.py
+#______________python webDataScrapingSystem.py

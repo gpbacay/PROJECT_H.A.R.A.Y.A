@@ -15,7 +15,7 @@ messages = """
     -CURRENT TIME: <{}>;
     -CURRENT DATE: <{}>;
     -CURRENT LOCATION: <{}>;
-    -CURRENT WEATHER: <{}>.\n
+    -CURRENT WEATHER FORECAST: <{}>.\n
     
     Previous Activity:\n
     <{}>.\n
