@@ -44,5 +44,6 @@ bitsandbytes
 colorama
 pygame
 imageio
+pydub
 
 

@@ -16,11 +16,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-import pyautogui
-
 import textwrap
 from LoadingBar import LoadingBar 
 runLoadingBar = LoadingBar.RunLoadingBar
+import pyautogui
+
 tStartUp = Thread(target=playsound, args=(U"startUp.mp3",))
 tStartUp.start()
 time.sleep(1)
@@ -29,8 +29,10 @@ colorama.init(autoreset=True)
 Header = "                                          " + colorama.Style.BRIGHT + colorama.Fore.GREEN + "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
 tHeader = Thread(target=print, args=(Header,))
 tHeader.start()
+from harayaGUI import runGUI
+tGUI = Thread(target=runGUI, daemon=True)
+tGUI.start()
 from PaLM2_LLM import run_Bison
-
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
 #Run Command: python haraya.py
 recognizer = sr.Recognizer()
@@ -41,7 +43,7 @@ engine.setProperty('voice', voices[0].id)
 def speak(text):
     engine.say(text)
     engine.runAndWait()
-
+    
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
 #Run Command: python haraya.py
 def Play_Prompt_Sound():
@@ -131,7 +133,7 @@ def Initialize_Face_Recognition_System():
     Locate_MyFullName()
     Locate_NameHA()
 Initialize_Face_Recognition_System()
-
+    
 #_____________________________________________INITIALIZE_POSE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
 #Run Command: python haraya.py
 def Initialize_Pose_Recognition_System():
