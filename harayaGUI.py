@@ -67,7 +67,7 @@ class harayaGUI():
                     pygame.display.flip()
 
                     # Adjust the playback speed randomly
-                    playback_speed = random.randint(2000, 2500)
+                    playback_speed = random.randint(99500, 100000)
 
                     selector = random.randint(0,is_random)
                     if selector == 0:
@@ -96,6 +96,5 @@ if __name__ == '__main__':
     setIsRandom = harayaGUI.setIsRandom
     tRandomize = Thread(target=runGUI)
     tRandomize.start()
-    print(str(is_random))
     
 #_____________________python harayaGUI.py
