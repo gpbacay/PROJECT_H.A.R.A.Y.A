@@ -10,7 +10,7 @@ class harayaGUI():
     os.environ['SDL_VIDEO_WINDOW_POS'] = '1060,70'
 
     global is_random
-    is_random = 0
+    is_random = 1
     
     def setIsRandom(num=0):
         global is_random
@@ -97,7 +97,5 @@ if __name__ == '__main__':
     tRandomize = Thread(target=runGUI)
     tRandomize.start()
     print(str(is_random))
-    setIsRandom(1)
-    setIsRandom()
     
 #_____________________python harayaGUI.py

@@ -46,9 +46,10 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 
 def speak(text):
-    setIsRandom(1)
+    setIsRandom(0)
     engine.say(text)
     engine.runAndWait()
+    setIsRandom(1)
     
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
 #Run Command: python haraya.py
@@ -860,7 +861,7 @@ def run_haraya():
         response = "Hello? Are you still there?"
         print(colorama.Fore.GREEN + response)
         speak(response)
-        Play_Prompt_Sound()
+        Play_Listening_Sound()
         Standby_SubFunction()
     else:
         print(colorama.Fore.RED + command)
