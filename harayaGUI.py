@@ -21,7 +21,7 @@ class harayaGUI():
         pygame.init()
 
         # Load the GIF frames using imageio
-        gif_path = "orbai1.gif"
+        gif_path = "orbai5.gif"
         gif_reader = imageio.get_reader(gif_path)
 
         # Set up the display
@@ -67,7 +67,7 @@ class harayaGUI():
                     pygame.display.flip()
 
                     # Adjust the playback speed randomly
-                    playback_speed = random.randint(500, 100000)
+                    playback_speed = random.randint(95000, 100000)
 
                     selector = random.randint(0,is_random)
                     if selector == 0:
@@ -96,5 +96,6 @@ if __name__ == '__main__':
     setIsRandom = harayaGUI.setIsRandom
     tRandomize = Thread(target=runGUI)
     tRandomize.start()
+    setIsRandom(1)
     
 #_____________________python harayaGUI.py
