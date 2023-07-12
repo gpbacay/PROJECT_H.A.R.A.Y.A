@@ -8,7 +8,14 @@ import os
 
 os.environ['SDL_VIDEO_WINDOW_POS'] = '1000,70'
 
-def runGUI():
+is_random = 0
+
+def isRandom(num=0):
+    is_random = num
+    return is_random
+is_random = isRandom()
+    
+def runGUI(randomNum=is_random):
     # Initialize Pygame
     pygame.init()
 
@@ -61,7 +68,7 @@ def runGUI():
                 # Adjust the playback speed randomly
                 playback_speed = random.randint(2000, 2500)
 
-                selector = random.randint(0,1)
+                selector = random.randint(0,randomNum)
                 if selector == 0:
                     current_frame += 1
                     clock.tick(playback_speed)
