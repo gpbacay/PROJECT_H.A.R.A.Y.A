@@ -29,10 +29,15 @@ colorama.init(autoreset=True)
 Header = "                                          " + colorama.Style.BRIGHT + colorama.Fore.GREEN + "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
 tHeader = Thread(target=print, args=(Header,))
 tHeader.start()
-from harayaGUI import runGUI
+from harayaGUI import harayaGUI
+runGUI = harayaGUI.runGUI
+setIsRandom = harayaGUI.setIsRandom
 tGUI = Thread(target=runGUI, daemon=True)
 tGUI.start()
 from PaLM2_LLM import run_Bison
+
+
+
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
 #Run Command: python haraya.py
 recognizer = sr.Recognizer()
@@ -41,6 +46,7 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 
 def speak(text):
+    setIsRandom(1)
     engine.say(text)
     engine.runAndWait()
     
@@ -868,6 +874,7 @@ def run_haraya():
 while True:
     Start_Up_command_MainFunction()
     run_haraya()
+    
 #Run Command: python haraya.py
 
 #Run on openvino environment:
