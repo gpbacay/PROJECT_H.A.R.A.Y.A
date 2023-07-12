@@ -59,9 +59,9 @@ def runGUI():
                 pygame.display.flip()
 
                 # Adjust the playback speed randomly
-                playback_speed = random.randint(500, 2000)
+                playback_speed = random.randint(2000, 2500)
 
-                selector = random.randint(0,2)
+                selector = random.randint(0,1)
                 if selector == 0:
                     current_frame += 1
                     clock.tick(playback_speed)
@@ -72,7 +72,7 @@ def runGUI():
                     elif current_frame >= len(gif_reader):
                         current_frame = -1000
                     clock.tick(playback_speed)
-
+                    
             except EOFError:
                 # Reached the end of the GIF, restart from the beginning
                 gif_reader.close()
