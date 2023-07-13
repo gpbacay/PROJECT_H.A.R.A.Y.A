@@ -41,7 +41,7 @@ class harayaHUD():
         # Play the GIF
         current_frame = 0
         play_gif = True
-
+                    
         # Main loop
         clock = pygame.time.Clock()
         running = True
@@ -75,12 +75,10 @@ class harayaHUD():
                     # Update the display
                     pygame.display.flip()
 
-                    # Adjust the playback speed randomly
-                    playback_speed = random.randint(14, 15)
-
                     selector = random.randint(0,is_random)
                     if selector == 0:
                         current_frame += 1
+                        playback_speed = random.randint(14, 15)
                         clock.tick(playback_speed)
                     elif selector == 1:
                         current_frame -= 1
@@ -88,8 +86,8 @@ class harayaHUD():
                             current_frame = len(gif_reader) - 1
                         elif current_frame >= len(gif_reader):
                             current_frame = -1000
+                        playback_speed = 999999
                         clock.tick(playback_speed)
-                        
                 except EOFError:
                     # Reached the end of the GIF, restart from the beginning
                     gif_reader.close()
