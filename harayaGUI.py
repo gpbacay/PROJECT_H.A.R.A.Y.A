@@ -22,7 +22,7 @@ class harayaGUI():
         pygame.init()
 
         # Load the GIF frames using imageio
-        gif_path = "orbai8.gif"
+        gif_path = "orbai4.gif"
         gif_reader = imageio.get_reader(gif_path)
 
         # Set up the display
@@ -61,8 +61,6 @@ class harayaGUI():
                         gif_path = "orbai6.gif"
                     elif event.key == K_7:
                         gif_path = "orbai7.gif"
-                    elif event.key == K_8:
-                        gif_path = "orbai8.gif"
 
             if play_gif:
                 try:
