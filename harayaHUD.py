@@ -76,7 +76,7 @@ class harayaHUD():
                     pygame.display.flip()
 
                     # Adjust the playback speed randomly
-                    playback_speed = random.randint(19, 20)
+                    playback_speed = random.randint(14, 15)
 
                     selector = random.randint(0,is_random)
                     if selector == 0:
