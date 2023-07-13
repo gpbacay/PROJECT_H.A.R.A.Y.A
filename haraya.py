@@ -29,10 +29,10 @@ colorama.init(autoreset=True)
 Header = "                                          " + colorama.Style.BRIGHT + colorama.Fore.GREEN + "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
 tHeader = Thread(target=print, args=(Header,))
 tHeader.start()
-from harayaGUI import harayaGUI
-runGUI = harayaGUI.runGUI
-setIsRandom = harayaGUI.setIsRandom
-tGUI = Thread(target=runGUI, daemon=True)
+from harayaHUD import harayaHUD
+runHUD = harayaHUD.runHUD
+setIsRandom = harayaHUD.setIsRandom
+tGUI = Thread(target=runHUD, daemon=True)
 tGUI.start()
 from PaLM2_LLM import run_Bison
 

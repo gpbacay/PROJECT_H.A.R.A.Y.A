@@ -6,12 +6,12 @@ import random
 import os
 from threading import Thread
 
-class harayaGUI():
-    os.environ['SDL_VIDEO_WINDOW_POS'] = '1060,70'
+class harayaHUD():
+    os.environ['SDL_VIDEO_WINDOW_POS'] = '1240,520'
 
     global is_random, gif_path
     is_random = 0
-    gif_path = "orbai7.gif"
+    gif_path = "harayasorb.gif"
     
     def setIsRandom(num=0):
         global is_random
@@ -21,7 +21,7 @@ class harayaGUI():
         global gif_path
         gif_path = new_gif_path
 
-    def runGUI():
+    def runHUD():
         # Initialize Pygame
         pygame.init()
 
@@ -101,10 +101,10 @@ class harayaGUI():
         pygame.quit()
 
 if __name__ == '__main__':
-    runGUI = harayaGUI.runGUI
-    setIsRandom = harayaGUI.setIsRandom
-    tRandomize = Thread(target=runGUI)
+    runHUD = harayaHUD.runHUD
+    setIsRandom = harayaHUD.setIsRandom
+    tRandomize = Thread(target=runHUD)
     tRandomize.start()
     #setIsRandom(1)
     
-#_____________________python harayaGUI.py
+#_____________________python harayaHUD.py
