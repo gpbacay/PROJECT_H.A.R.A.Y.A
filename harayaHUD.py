@@ -7,11 +7,11 @@ import os
 from threading import Thread
 
 class harayaHUD():
-    os.environ['SDL_VIDEO_WINDOW_POS'] = '1240,520'
+    os.environ['SDL_VIDEO_WINDOW_POS'] = '1140,420'
 
     global is_random, gif_path
     is_random = 0
-    gif_path = "harayasorb.gif"
+    gif_path = "harayasorb1.gif"
     
     def setIsRandom(num=0):
         global is_random
