@@ -46,10 +46,10 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 
 def speak(text):
-    setIsRandom(0)
+    setIsRandom(1)
     engine.say(text)
     engine.runAndWait()
-    setIsRandom(1)
+    setIsRandom(0)
     
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
 #Run Command: python haraya.py

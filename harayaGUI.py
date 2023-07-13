@@ -9,20 +9,23 @@ from threading import Thread
 class harayaGUI():
     os.environ['SDL_VIDEO_WINDOW_POS'] = '1060,70'
 
-    global is_random
-    is_random = 1
+    global is_random, gif_path
+    is_random = 0
+    gif_path = "orbai7.gif"
     
     def setIsRandom(num=0):
         global is_random
         is_random = num
+    
+    def setGIF(new_gif_path = ""):
+        global gif_path
+        gif_path = new_gif_path
 
     def runGUI():
-        global gif_path
         # Initialize Pygame
         pygame.init()
 
         # Load the GIF frames using imageio
-        gif_path = "orbai6.gif"
         gif_reader = imageio.get_reader(gif_path)
 
         # Set up the display
@@ -47,21 +50,7 @@ class harayaGUI():
                 if event.type == QUIT:
                     running = False
                 if event.type == KEYDOWN:
-                    if event.key == K_1:
-                        gif_path = "orbai1.gif"
-                    elif event.key == K_2:
-                        gif_path = "orbai2.gif"
-                    elif event.key == K_3:
-                        gif_path = "orbai3.gif"
-                    elif event.key == K_4:
-                        gif_path = "orbai4.gif"
-                    elif event.key == K_5:
-                        gif_path = "orbai5.gif"
-                    elif event.key == K_6:
-                        gif_path = "orbai6.gif"
-                    elif event.key == K_7:
-                        gif_path = "orbai7.gif"
-                    elif event.key == K_UP:
+                    if event.key == K_UP:
                         setIsRandom(0)
                     elif event.key == K_DOWN:
                         setIsRandom(1)
@@ -87,7 +76,7 @@ class harayaGUI():
                     pygame.display.flip()
 
                     # Adjust the playback speed randomly
-                    playback_speed = random.randint(95000, 100000)
+                    playback_speed = random.randint(19, 20)
 
                     selector = random.randint(0,is_random)
                     if selector == 0:
@@ -116,6 +105,6 @@ if __name__ == '__main__':
     setIsRandom = harayaGUI.setIsRandom
     tRandomize = Thread(target=runGUI)
     tRandomize.start()
-    setIsRandom(1)
+    #setIsRandom(1)
     
 #_____________________python harayaGUI.py
