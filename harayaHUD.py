@@ -7,7 +7,7 @@ import os
 from threading import Thread
 
 class harayaHUD():
-    os.environ['SDL_VIDEO_WINDOW_POS'] = '1140,420'
+    #os.environ['SDL_VIDEO_WINDOW_POS'] = '1140,420'
     
     # Initialize Pygame
     pygame.init()
@@ -26,7 +26,7 @@ class harayaHUD():
         gif_path = new_gif_path
 
     def runHUD():
-        global running
+        global running, gif_path
         # Load the GIF frames using imageio
         gif_reader = imageio.get_reader(gif_path)
         
@@ -80,10 +80,14 @@ class harayaHUD():
 
                     selector = random.randint(0,is_random)
                     if selector == 0:
+                        gif_path = "harayasorb1.gif"
+                        gif_reader = imageio.get_reader(gif_path)
                         current_frame += 1
                         playback_speed = random.randint(14, 15)
                         clock.tick(playback_speed)
                     elif selector == 1:
+                        gif_path = "harayasorb.gif"
+                        gif_reader = imageio.get_reader(gif_path)
                         current_frame -= 1
                         if current_frame < -1000:
                             current_frame = len(gif_reader) - 1
