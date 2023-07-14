@@ -48,8 +48,6 @@ class harayaHUD():
         clock = pygame.time.Clock()
         while running:
             for event in pygame.event.get():
-                if event.type == QUIT:
-                    running = False
                 if event.type == KEYDOWN:
                     if event.key == K_UP:
                         setIsRandom(0)
