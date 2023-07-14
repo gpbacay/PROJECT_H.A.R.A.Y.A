@@ -29,9 +29,12 @@ colorama.init(autoreset=True)
 Header = "                                          " + colorama.Style.BRIGHT + colorama.Fore.GREEN + "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
 tHeader = Thread(target=print, args=(Header,))
 tHeader.start()
+
 from harayaHUD import harayaHUD
 runHUD = harayaHUD.runHUD
 setIsRandom = harayaHUD.setIsRandom
+exitHUD = harayaHUD.exitHUD
+
 tGUI = Thread(target=runHUD, daemon=True)
 tGUI.start()
 from PaLM2_LLM import run_Bison
@@ -557,6 +560,7 @@ def run_haraya():
         print(colorama.Fore.GREEN + response)
         speak(response)
         Play_Shutdown_Sound()
+        exitHUD()
         exit()
 
     elif command in GoodBye_KeyWords:
@@ -565,6 +569,7 @@ def run_haraya():
         print(colorama.Fore.GREEN + response)
         speak(response)
         Play_Shutdown_Sound()
+        exitHUD()
         exit()
         
     elif "turn off my computer" in command:
@@ -573,6 +578,7 @@ def run_haraya():
         print(colorama.Fore.GREEN + response)
         speak(response)
         Play_Shutdown_Sound()
+        exitHUD()
         exit()
 
     #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
@@ -602,6 +608,7 @@ def run_haraya():
             Confirmation_SubFunction(command)
         except:
             Play_Prompt_Sound()
+            exitHUD()
             exit()
 
     elif "in youtube" in command or "play" in command:
@@ -783,6 +790,7 @@ def run_haraya():
         speak(response)
         os.system("shutdown /s /t 0")
         Play_Prompt_Sound()
+        exitHUD()
         exit()
 
     elif "restart my computer" in command:
@@ -791,6 +799,7 @@ def run_haraya():
         speak(response)
         os.system("shutdown /r")
         Play_Prompt_Sound()
+        exitHUD()
         exit()
 
     elif "sign off my computer" in command or "signoff my computer" in command:
@@ -870,6 +879,8 @@ def run_haraya():
         print(colorama.Fore.YELLOW + wrapped_text)
         speak(response)
         exit(run_haraya())
+    exitHUD()
+    exit()
 
 #______________________________________RUN_haraya_IN_A_LOOP_BLOCK
 while True:

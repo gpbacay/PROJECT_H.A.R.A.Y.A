@@ -8,6 +8,9 @@ from threading import Thread
 
 class harayaHUD():
     os.environ['SDL_VIDEO_WINDOW_POS'] = '1140,420'
+    
+    # Initialize Pygame
+    pygame.init()
 
     global is_random, gif_path
     is_random = 0
@@ -22,12 +25,9 @@ class harayaHUD():
         gif_path = new_gif_path
 
     def runHUD():
-        # Initialize Pygame
-        pygame.init()
-
         # Load the GIF frames using imageio
         gif_reader = imageio.get_reader(gif_path)
-
+        
         # Set up the display
         first_frame = gif_reader.get_data(0)
         screen = pygame.display.set_mode(first_frame.shape[:2])
@@ -86,7 +86,7 @@ class harayaHUD():
                             current_frame = len(gif_reader) - 1
                         elif current_frame >= len(gif_reader):
                             current_frame = -1000
-                        playback_speed = 999999
+                        playback_speed = 9999999999
                         clock.tick(playback_speed)
                 except EOFError:
                     # Reached the end of the GIF, restart from the beginning
@@ -97,12 +97,15 @@ class harayaHUD():
         # Clean up
         gif_reader.close()
         pygame.quit()
+        
+    def exitHUD():
+        pygame.quit()
+        exit()
 
 if __name__ == '__main__':
     runHUD = harayaHUD.runHUD
     setIsRandom = harayaHUD.setIsRandom
     tRandomize = Thread(target=runHUD)
     tRandomize.start()
-    #setIsRandom(1)
     
 #_____________________python harayaHUD.py
