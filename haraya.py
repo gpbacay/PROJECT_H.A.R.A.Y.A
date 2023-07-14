@@ -559,8 +559,8 @@ def run_haraya():
         response = "As you wish " + NameHA + ". Signing off..."
         print(colorama.Fore.GREEN + response)
         speak(response)
-        Play_Shutdown_Sound()
         exitHUD()
+        Play_Shutdown_Sound()
         exit()
 
     elif command in GoodBye_KeyWords:
@@ -568,8 +568,8 @@ def run_haraya():
         response = "Goodbye " + NameHA + "! Have a great day!"
         print(colorama.Fore.GREEN + response)
         speak(response)
-        Play_Shutdown_Sound()
         exitHUD()
+        Play_Shutdown_Sound()
         exit()
         
     elif "turn off my computer" in command:
@@ -577,8 +577,8 @@ def run_haraya():
         response = "As you wish " + NameHA + ". Turning off..."
         print(colorama.Fore.GREEN + response)
         speak(response)
-        Play_Shutdown_Sound()
         exitHUD()
+        Play_Shutdown_Sound()
         exit()
 
     #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
@@ -880,6 +880,7 @@ def run_haraya():
         speak(response)
         exit(run_haraya())
     exitHUD()
+    Play_Shutdown_Sound()
     exit()
 
 #______________________________________RUN_haraya_IN_A_LOOP_BLOCK

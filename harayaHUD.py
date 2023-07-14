@@ -12,9 +12,10 @@ class harayaHUD():
     # Initialize Pygame
     pygame.init()
 
-    global is_random, gif_path
+    global is_random, gif_path, running
     is_random = 0
     gif_path = "harayasorb1.gif"
+    running = True
     
     def setIsRandom(num=0):
         global is_random
@@ -25,6 +26,7 @@ class harayaHUD():
         gif_path = new_gif_path
 
     def runHUD():
+        global running
         # Load the GIF frames using imageio
         gif_reader = imageio.get_reader(gif_path)
         
@@ -44,7 +46,6 @@ class harayaHUD():
                     
         # Main loop
         clock = pygame.time.Clock()
-        running = True
         while running:
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -54,6 +55,8 @@ class harayaHUD():
                         setIsRandom(0)
                     elif event.key == K_DOWN:
                         setIsRandom(1)
+                    elif event.key == K_ESCAPE:
+                        running = False
 
             if play_gif:
                 try:
@@ -99,7 +102,8 @@ class harayaHUD():
         pygame.quit()
         
     def exitHUD():
-        pygame.quit()
+        global running
+        running = False
         exit()
 
 if __name__ == '__main__':
