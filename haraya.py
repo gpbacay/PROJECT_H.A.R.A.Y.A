@@ -26,7 +26,7 @@ tStartUp.start()
 time.sleep(1)
 import colorama
 colorama.init(autoreset=True)
-Header = "                                          " + colorama.Style.BRIGHT + colorama.Fore.GREEN + "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assistant)\n"
+Header = "                                          " + colorama.Style.BRIGHT + colorama.Fore.GREEN + "H.A.R.A.Y.A (High-functioning Autonomous Responsive Anthromorphic Yielding Assistant)\n"
 tHeader = Thread(target=print, args=(Header,))
 tHeader.start()
 
