@@ -81,8 +81,10 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
         model="models/chat-bison-001",
         context=context,
         messages=messages,
-        temperature=0.0,
-        candidate_count=1,
+        temperature=0.2,
+        candidate_count=8,
+        top_k=1,
+        top_p=0.8
     )
     response = response.reply(reply+".")
     return response.last
