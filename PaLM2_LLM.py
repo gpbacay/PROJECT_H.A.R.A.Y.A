@@ -82,7 +82,7 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
         context=context,
         messages=messages,
         temperature=0.0,
-        candidate_count=2,
+        candidate_count=1,
     )
     response = response.reply(reply+".")
     return response.last
