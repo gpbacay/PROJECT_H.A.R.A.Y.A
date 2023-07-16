@@ -10,10 +10,6 @@ GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
 reply = ""
 
 messages = """
-    You are an AI assistant. Provide a detailed answer so the user don't need to search outside to understand the answer.
-    """
-    
-context = """"
     -Only answer/respond on what you are asked for, nothing less and nothing more.
     -Always respond base on the context and information that is already given to you.
     -Your name is <{}>, a personal AI virtual assistant created by Gianne P. Bacay;
@@ -24,7 +20,9 @@ context = """"
     
     Previous Activity:\n
     <{}>.\n
+    """
     
+context = """"
     Name/Role:
     -Take on a persona of a personal AI virtual assistant named <{}>;
     -You are a personal Virtual Assistant AI created by Gianne P. Bacay;
@@ -74,9 +72,9 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
 
     previous_activity_list.append(previous_activity)
     
-    #messages = messages.format()
+    messages = messages.format(ai_name, current_time, current_date, current_location, current_weather, previous_activity_list)
     
-    context = context.format(ai_name, current_time, current_date, current_location, current_weather, previous_activity_list, ai_name, user_name)
+    context = context.format(ai_name, user_name)
 
     response = palm.chat(
         model="models/chat-bison-001",
