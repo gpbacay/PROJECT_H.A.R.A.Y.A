@@ -83,7 +83,7 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
         temperature=0.0,
         candidate_count=2,
     )
-    response = response.reply(reply+"!")
+    response = response.reply(reply+".")
     return response.last
 
 if __name__ == '__main__':
