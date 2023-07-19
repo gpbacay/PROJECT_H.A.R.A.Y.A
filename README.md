@@ -64,11 +64,11 @@ To use the face recognition system, please follow these steps:
 
 4. HARAYA will utilize your system's default camera for face detection and pose estimation.
 
-5. When HARAYA detects a known face, it will log the time and the name of the person in a CSV file named `database.csv`.
+5. When HARAYA detects a known face, it will log the time and the name of the person in a CSV file named [database.csv](database.csv).
 
 6. After recognizing your face, HARAYA will greet you and ask how she can assist you.
 
-Please note that the successful operation of the face recognition system relies on appropriate lighting conditions and clear images of the faces in the `./faces` directory.
+Please note that the successful operation of the face recognition system relies on appropriate lighting conditions and clear images of the faces in the [faces](./faces) directory.
 
 
 ## Contributing
