@@ -31,22 +31,26 @@ To get started with HARAYA, follow the instructions below:
 ### Installation
 
 1. Clone or download the HARAYA repository to your local machine:
-$ git clone https://github.com/gpbacay/PROJECT_H.A.R.A.Y.A.git
+
+        $ git clone https://github.com/gpbacay/PROJECT_H.A.R.A.Y.A.git
 
 Alternatively, you can download the repository as a ZIP file and extract it to a directory of your choice.
 
 2. Navigate to the project directory:
-- $ cd PROJECT_H.A.R.A.Y.A
+
+        $ cd PROJECT_H.A.R.A.Y.A
 
 3. Install the required dependencies using `pip`, the Python package manager. Execute the following command:
-- $ pip install -r requirements.txt
+
+        $ pip install -r requirements.txt
 
 This will install all the necessary packages and dependencies required by the HARAYA program.
 
 ### Usage
 
 1. Run the `haraya.py` script in your preferred Python environment, such as the terminal, command prompt, or IDE:
-- $ python haraya.py
+
+        $ python haraya.py
 
 Alternatively, if you are using Windows, you can double-click the `H.A.R.A.Y.A.exe` executable file located in the project directory.
 
