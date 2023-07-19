@@ -48,15 +48,28 @@ This will install all the necessary packages and dependencies required by the HA
 
 ### Usage
 
-1. Run the `haraya.py` script in your preferred Python environment, such as the terminal, command prompt, or IDE:
+Upon running HARAYA, the program will first use the web data scraping system to gather data such as the current time, date, location, and weather through the internet. After collecting this information, HARAYA will initialize the face recognition system to recognize the person she is interacting with.
+
+To use the face recognition system, please follow these steps:
+
+1. Ensure that your system has a default camera configured.
+
+2. Place the images of people you want HARAYA to recognize in the [faces](./faces) directory. Each image file should correspond to a person's face, and the name of the file (excluding the extension) will be used as the person's name.
+
+3. Run the `haraya.py` script in your preferred Python environment, such as the terminal, command prompt, or IDE:
 
         $ python haraya.py
 
-Alternatively, if you are using Windows, you can double-click the [H.A.R.A.Y.A.exe](H.A.R.A.Y.A.exe) executable file located in the project directory.
+   Alternatively, if you are using Windows, you can double-click the [H.A.R.A.Y.A.exe](H.A.R.A.Y.A.exe) executable file located in the project directory.
 
-2. HARAYA will launch and provide a welcome message. You can interact with HARAYA using voice commands.
+4. HARAYA will utilize your system's default camera for face detection and pose estimation.
 
-3. HARAYA will respond to your voice commands and provide assistance based on its capabilities.
+5. When HARAYA detects a known face, it will log the time and the name of the person in a CSV file named `database.csv`.
+
+6. After recognizing your face, HARAYA will greet you and ask how she can assist you.
+
+Please note that the successful operation of the face recognition system relies on appropriate lighting conditions and clear images of the faces in the `./faces` directory.
+
 
 ## Contributing
 
