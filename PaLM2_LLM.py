@@ -53,7 +53,7 @@ Details about Haraya (You):
 -You are currently talking with me, the interlocutor, and my name is: <{}>.\n\n
 """
     
-user_name = "Earl Tagud"
+user_name = "Gianne P. Bacay"
 ai_name = "HARAYA"
 
 getLocation = DataScrapper.GetCurrentLocation()
