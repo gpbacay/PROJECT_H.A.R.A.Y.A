@@ -12,19 +12,19 @@ Moreover, HARAYA's yielding nature allows it to dynamically generate personalize
 
 ## Features
 
-- Speech Recognition: HARAYA can understand voice commands, allowing for seamless and intuitive user interactions.
+- **Speech Recognition**: HARAYA can understand voice commands, allowing for seamless and intuitive user interactions.
 
-- Face and Pose Recognition: HARAYA is equipped with the ability to recognize faces and poses through computer vision, enabling applications in image analysis and identification.
+- **Face and Pose Recognition**: HARAYA is equipped with the ability to recognize faces and poses through computer vision, enabling applications in image analysis and identification.
 
-- Computer Automation: HARAYA can automate various computer tasks, streamlining workflows and enhancing productivity.
+- **Computer Automation**: HARAYA can automate various computer tasks, streamlining workflows and enhancing productivity.
 
-- Question Answering: HARAYA utilizes Google's advanced Large language model PaLM2 chat-bison foundation model to provide accurate answers to a diverse array of questions and engage in informative discussions. This large language model (LLM) is renowned for its outstanding proficiency in language understanding, generation, and conversational skills. Specifically fine-tuned for natural multi-turn dialogues, the model proves to be an excellent option for text-based tasks related to code, where interactive back-and-forth conversations are essential.
+- **Question Answering**: HARAYA utilizes Google's advanced Large language model PaLM2 chat-bison foundation model to provide accurate answers to a diverse array of questions and engage in informative discussions. This large language model (LLM) is renowned for its outstanding proficiency in language understanding, generation, and conversational skills. Specifically fine-tuned for natural multi-turn dialogues, the model proves to be an excellent option for text-based tasks related to code, where interactive back-and-forth conversations are essential.
 
-- Web Data Scraping: HARAYA has the capability to scrape data from the internet, facilitating automated data extraction and analysis.
+- **Web Data Scraping**: HARAYA has the capability to scrape data from the internet, facilitating automated data extraction and analysis.
 
-- Web Search: HARAYA can perform searches on the internet, providing relevant information and assisting users in finding desired content.
+- **Web Search**: HARAYA can perform searches on the internet, providing relevant information and assisting users in finding desired content.
 
-- Information Provision: HARAYA is a valuable source of information, leveraging AI capabilities and online resources to provide insights on various topics.
+- **Information Provision**: HARAYA is a valuable source of information, leveraging AI capabilities and online resources to provide insights on various topics.
 
 ## Getting Started
 
