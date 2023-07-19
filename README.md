@@ -46,7 +46,7 @@ To get started with HARAYA, follow the instructions below:
 
         https://github.com/gpbacay/PROJECT_H.A.R.A.Y.A.git
 
-Alternatively, you can download the repository as a ZIP file and extract it to a directory of your choice.
+   Alternatively, you can download the repository as a ZIP file and extract it to a directory of your choice.
 
 2. Navigate to the project directory:
 
@@ -74,11 +74,7 @@ To fully utilize the face recognition system, please follow these steps:
 
 2. Place the images of people you want HARAYA to recognize in the [faces](./faces) directory. Each image file should correspond to a person's face, and the name of the file (excluding the extension) will be used as the person's name.
 
-   HARAYA will utilize your system's default camera for face detection and pose estimation.
-
-   When HARAYA detects a known face, it will log the time and the name of the person in a CSV file named [database.csv](database.csv).
-
-   After recognizing your face, HARAYA will greet you and ask how she can assist you.
+HARAYA will utilize your system's default camera for face detection and pose estimation. When HARAYA detects a known face, it will log the time and the name of the person in a CSV file named [database.csv](database.csv). After recognizing your face, HARAYA will greet you and ask how she can assist you.
 
 Please note that the successful operation of the face recognition system relies on appropriate lighting conditions and clear images of the faces in the [faces](./faces) directory.
 
