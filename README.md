@@ -77,5 +77,4 @@ If you have any questions, suggestions, or feedback, please feel free to reach o
 - Creator's GitHub profile: [https://github.com/gpbacay](https://github.com/gpbacay)
 
 Thank you for choosing HARAYA as your AI virtual assistant. We hope HARAYA enhances your productivity, provides valuable information, and delivers a personalized experience.
-Make sure to replace the haraya_logo.png with the actual logo file, and update any file paths or details specific to your project setup.
 
