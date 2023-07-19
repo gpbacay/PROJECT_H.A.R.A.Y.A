@@ -2,7 +2,7 @@
 
 ![HARAYA Logo](ai.png)
 
-**HARAYA**, an acronym for *High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant*, encompasses its name through exceptional qualities that set it apart as an extraordinary AI virtual assistant. Developed solely by Gianne P. Bacay, HARAYA offers a personalized and remarkably human-like virtual assistant experience, achieved by harnessing cutting-edge technologies in artificial intelligence, computer vision, and natural language processing.
+**HARAYA**, an acronym for *High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant*, encompasses its name through exceptional qualities that set it apart as an extraordinary AI virtual assistant. Developed solely by *Gianne P. Bacay*, HARAYA offers a personalized and remarkably human-like virtual assistant experience, achieved by harnessing cutting-edge technologies in artificial intelligence, computer vision, and natural language processing.
 
 The term "**High-functioning**" underscores HARAYA's exceptional performance and capabilities. It excels in efficiently executing complex tasks, making informed decisions, and providing outstanding support to users, surpassing the capabilities of traditional virtual assistants.
 
