@@ -60,7 +60,7 @@ This will install all the necessary packages and dependencies required by the HA
 
    Alternatively, if you are using Windows, you can run or double-click the [H.A.R.A.Y.A.exe](H.A.R.A.Y.A.exe) executable file located in the project directory in order to run `haraya.py`.
 
-Upon running HARAYA, the program will initially utilize the web data scraping system to gather data, such as the current time, date, location, and weather, from the internet. After collecting real time data, HARAYA will proceed to initialize the face recognition system and subsequently recognize the face of the person with whom it is interacting.
+Upon running HARAYA, the program will initially utilize the web data scraping system to gather data, such as the current time, date, location, and weather, from the internet. After collecting real time data, HARAYA will proceed to initializing the face recognition system and subsequently recognize the face of the person with whom it is interacting.
 
 To fully utilize the face recognition system, please follow these steps:
 
