@@ -2,19 +2,19 @@
 
 ![HARAYA Logo](ai.png)
 
-HARAYA is a high-functioning autonomous responsive anthropomorphic yielding assistant developed by Gianne P. Bacay. It is designed to provide a personalized and intelligent AI virtual assistant experience, leveraging cutting-edge technologies in artificial intelligence and natural language processing.
+**HARAYA** is a high-functioning autonomous responsive anthropomorphic yielding assistant developed by *Gianne P. Bacay*. It is designed and trained to provide a personalized and human-like AI virtual assistant experience, leveraging cutting-edge technologies in artificial intelligence, computer vision, and natural language processing.
 
 ## Features
 
 - Speech Recognition: HARAYA can understand voice commands, allowing for seamless and intuitive user interactions.
 
-- Face and Pose Recognition: HARAYA is equipped with the ability to recognize faces and poses, enabling applications in image analysis and identification.
+- Face and Pose Recognition: HARAYA is equipped with the ability to recognize faces and poses through computer vision, enabling applications in image analysis and identification.
 
 - Computer Automation: HARAYA can automate various computer tasks, streamlining workflows and enhancing productivity.
 
-- Question Answering: Powered by Google's Larage language model PaLM2 bison model, HARAYA can answer a wide range of questions and engage in informative conversations.
+- Question Answering: Powered by Google's Large language model PaLM2 bison model, HARAYA can answer a wide range of questions and engage in informative conversations.
 
-- Web Scraping: HARAYA has the capability to scrape data from the internet, facilitating automated data extraction and analysis.
+- Web Data Scraping: HARAYA has the capability to scrape data from the internet, facilitating automated data extraction and analysis.
 
 - Web Search: HARAYA can perform searches on the internet, providing relevant information and assisting users in finding desired content.
 
@@ -32,17 +32,17 @@ To get started with HARAYA, follow the instructions below:
 
 1. Clone or download the HARAYA repository to your local machine:
 
-        $ git clone https://github.com/gpbacay/PROJECT_H.A.R.A.Y.A.git
+        https://github.com/gpbacay/PROJECT_H.A.R.A.Y.A.git
 
 Alternatively, you can download the repository as a ZIP file and extract it to a directory of your choice.
 
 2. Navigate to the project directory:
 
-        $ cd PROJECT_H.A.R.A.Y.A
+        C:\Users\Gianne Bacay\Desktop\PROJECT_H.A.R.A.Y.A\haraya.py
 
 3. Install the required dependencies using `pip`, the Python package manager. Execute the following command:
 
-        $ pip install -r requirements.txt
+        pip install -r requirements.txt
 
 This will install all the necessary packages and dependencies required by the HARAYA program.
 
@@ -58,7 +58,7 @@ To use the face recognition system, please follow these steps:
 
 3. Run the `haraya.py` script in your preferred Python environment, such as the terminal, command prompt, or IDE:
 
-        $ python haraya.py
+        python haraya.py
 
    Alternatively, if you are using Windows, you can double-click the [H.A.R.A.Y.A.exe](H.A.R.A.Y.A.exe) executable file located in the project directory.
 
