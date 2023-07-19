@@ -18,7 +18,7 @@ Moreover, HARAYA's yielding nature allows it to dynamically generate personalize
 
 - Computer Automation: HARAYA can automate various computer tasks, streamlining workflows and enhancing productivity.
 
-- Question Answering: Powered by Google's Large language model PaLM2 bison model, HARAYA can answer a wide range of questions and engage in informative conversations.
+- Question Answering: HARAYA utilizes Google's advanced Large language model PaLM2 chat-bison foundation model to provide accurate answers to a diverse array of questions and engage in informative discussions. This large language model (LLM) is renowned for its outstanding proficiency in language understanding, generation, and conversational skills. Specifically fine-tuned for natural multi-turn dialogues, the model proves to be an excellent option for text-based tasks related to code, where interactive back-and-forth conversations are essential.
 
 - Web Data Scraping: HARAYA has the capability to scrape data from the internet, facilitating automated data extraction and analysis.
 
