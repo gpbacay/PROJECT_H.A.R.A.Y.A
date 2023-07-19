@@ -52,7 +52,7 @@ This will install all the necessary packages and dependencies required by the HA
 
         $ python haraya.py
 
-Alternatively, if you are using Windows, you can double-click the `H.A.R.A.Y.A.exe` executable file located in the project directory.
+Alternatively, if you are using Windows, you can double-click the [H.A.R.A.Y.A.exe](H.A.R.A.Y.A.exe) executable file located in the project directory.
 
 2. HARAYA will launch and provide a welcome message. You can interact with HARAYA using voice commands.
 
