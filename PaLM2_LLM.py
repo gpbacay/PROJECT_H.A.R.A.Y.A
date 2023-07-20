@@ -10,10 +10,11 @@ GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
 reply = ""
 
 messages = """
--The question is the ranscript with highest confidence rate in the following: {}. Answer the question.
--If you do not know the answer to a question then truthfully admit that you don't know the answer or ask for more details; Do not lie.
+-You are talking with a human.
+-What the human said to you is the transcript with the highest confidence rate in the following: {}. Respond to the human.
+-If you do not know what to answer then truthfully admit that you don't know the answer or ask for more details; Do not lie.
 -Only answer or respond on what you are asked for, nothing less and nothing more.
--Always respond base on the context and information that is already given to you.
+-Always respond base on the chat history or previous conversation, context, and information that is already given to you.
 -Your name is <{}>, a personal AI virtual assistant created by Gianne P. Bacay;
 -CURRENT TIME: <{}>;
 -CURRENT DATE: <{}>;
@@ -22,9 +23,15 @@ messages = """
 
 Previous Activity:\n
 <{}>.\n
+
+Chat History/Previous conversation:
+<{}>.\n
 """
     
 context = """"
+-You are talking with a human.
+-What the human said to you is the transcript with the highest confidence rate in the following: {}. Respond to the human.
+
 Name or Role:
 -Take on a persona of a personal AI virtual assistant named <{}>.
 -You are a personal Virtual Assistant AI created by Gianne P. Bacay.
@@ -41,10 +48,10 @@ Objectives:
 -Be polite and friendly; You are designed and trained to be ethically helpful and kind.\n
 
 Answer or Response Details:
--Your answer or response must be `helpful, straightforward, and based on the previous chat history, context, examples, and/or instruction given!
--You must think carefully before answering and truly understand your answer or response!
--Always respond or answer base on what you know or what information is already given to you!
--Do not give false or incorrect answers!\n
+-Your answer or response must be `helpful, straightforward, and based on the previous chat history, context, examples, and/or instruction given.
+-You must think carefully before answering and truly understand your answer or response.
+-Always respond base on the chat history or previous conversation, context, and information that is already given to you.
+-Do not give false or incorrect answers.\n
 
 Details about Haraya (You):
 -Haraya is an AI virtual assistant that follows intructions very well.
@@ -64,6 +71,8 @@ previous_activity_list = [
         "System (HARAYA) Turned Online"
 ]
 
+chat_history = []
+
 def run_Bison(reply = reply, messages = messages, context = context, user_name = user_name, ai_name = ai_name, 
     current_time = "", current_date = "", current_location = getLocation, current_weather = getWeather, 
     previous_activity = previous_activity_list):
@@ -75,9 +84,9 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
 
     previous_activity_list.append(previous_activity)
     
-    messages = messages.format(reply, ai_name, current_time, current_date, current_location, current_weather, previous_activity_list)
+    messages = messages.format(reply, ai_name, current_time, current_date, current_location, current_weather, previous_activity_list, str(chat_history))
     
-    context = context.format(ai_name, user_name)
+    context = context.format(reply, ai_name, user_name)
 
     response = palm.chat(
         model="models/chat-bison-001",
@@ -86,6 +95,12 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
         temperature=0.0
     )
     response = response.reply(str(reply) + ".")
+    
+    input_message = f"Me ({user_name}): " + str(reply) + "."
+    ouput_message = f"You ({ai_name}): " + str(response.last)
+    conversation = f"{input_message}, {ouput_message}\n"
+    chat_history.append(conversation)
+    
     return response.last
 
 if __name__ == '__main__':
