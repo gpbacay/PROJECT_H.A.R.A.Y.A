@@ -2,13 +2,7 @@
 
 ![HARAYA Logo](ai.png)
 
-**HARAYA**, an acronym for **H**igh-functioning **A**utonomous **R**esponsive **A**nthropomorphic **Y**ielding **A**ssistant, is an exceptional leap in AI virtual assistants, meticulously developed by the visionary mind of [*Gianne P. Bacay*](https://www.facebook.com/giannebacay). Seamlessly integrating cutting-edge technologies in artificial intelligence, computer vision, web data scraping, computer automation, and natural language processing, HARAYA offers an unparalleled personalized and remarkably human-like virtual assistant experience. With an unwavering commitment to excellence, HARAYA outperforms traditional virtual assistants, effortlessly excelling in executing complex tasks, making informed decisions, and providing unparalleled user support.
-
-Embodying true autonomy, HARAYA operates independently and intelligently, continuously adapting and evolving through advanced machine learning techniques like unsupervised learning, semi-supervised learning, and reinforcement learning. This unique level of autonomy empowers HARAYA to respond with unmatched efficiency, offering quick and accurate reactions to user interactions and inquiries. Its intuitive responsiveness fosters a natural and engaging communication experience, akin to interacting with a human assistant.
-
-Further enhancing user engagement, HARAYA boasts anthropomorphic characteristics in appearance, behavior, and mannerisms, artfully designed to establish a sense of familiarity and emotional connection with users. The result is an enriched and fulfilling user experience, reflecting the very essence of human-like interactions.
-
-Moreover, HARAYA's yielding nature allows it to dynamically generate personalized and coherent responses, effortlessly tailoring its assistance to meet the diverse needs and preferences of individual users. By encompassing these extraordinary qualities, HARAYA stands tall as a high-functioning, autonomous, responsive, anthropomorphic, and yielding virtual assistant, shattering the boundaries of conventional AI technology. With a relentless drive for innovation, HARAYA redefines the landscape of virtual assistant interactions, marking a new era of user-centric and technologically advanced AI experiences.
+**HARAYA**, an acronym for **H**igh-functioning **A**utonomous **R**esponsive **A**nthropomorphic **Y**ielding **A**ssistant, is an exceptional leap in AI virtual assistants, solely developed by [*Gianne P. Bacay*](https://www.facebook.com/giannebacay). It seamlessly integrates cutting-edge technologies in artificial intelligence, computer vision, web data scraping, automation, and natural language processing to offer a personalized and remarkably human-like experience. HARAYA operates autonomously, continuously adapting through advanced machine learning techniques, and excels in executing complex tasks, making informed decisions, and providing unparalleled user support. Its anthropomorphic characteristics foster engaging communication, while its yielding nature allows it to tailor assistance to individual users, redefining the landscape of virtual assistant interactions and marking a new era of user-centric AI virtual assistant experiences.
 
 ## Features
 
@@ -18,9 +12,9 @@ Moreover, HARAYA's yielding nature allows it to dynamically generate personalize
 
 - **Computer Automation**: HARAYA can automate various computer tasks, streamlining workflows and enhancing productivity.
 
-- **Question Answering**: HARAYA utilizes Google's advanced Large language model PaLM2 chat-bison foundation model to provide accurate answers to a diverse array of questions and engage in informative discussions. This large language model (LLM) is renowned for its outstanding proficiency in language understanding, generation, and conversational skills. Specifically fine-tuned for natural multi-turn dialogues, the model proves to be an excellent option for text-based tasks related to code, where interactive back-and-forth conversations are essential.
+- **Question Answering**: HARAYA uses Google AI's PaLM2 LLM, a renowned language model known for its exceptional proficiency in language understanding, generation, and conversational skills. Specifically fine-tuned for natural multi-turn dialogues, it excels in providing accurate answers to a diverse range of questions and is ideal for text-based tasks involving coding, advanced reasoning, mathematics, and supports over 100 languages.
 
-- **Web Data Scraping**: HARAYA has the capability to scrape data from the internet, facilitating automated data extraction and analysis.
+- **Web Data Scraping**: HARAYA has the capability to scrape data from any website in the internet, facilitating automated data extraction and analysis.
 
 - **Web Search**: HARAYA can perform searches on the internet, providing relevant information and assisting users in finding desired content.
 
@@ -32,7 +26,15 @@ To get started with HARAYA, follow the instructions below:
 
 ### Prerequisites
 
-- Python: Ensure that you have Python installed on your system. You can download the latest version of Python from the official Python website: [https://www.python.org/downloads/](https://www.python.org/downloads/)
+Before getting started with HARAYA, ensure that you meet the following prerequisites:
+
+- **Internet**: Ensure that you are connected to the internet with a strong connection.
+
+- **Microphone**: Ensure that you have a microphone, preferably with noise cancelation, as HARAYA can only be activated or utilize through speech or voice commands.
+
+- **Camera**: Ensure that you also have a camera or a webcam on your computer for face recognition and computer vision capabilities of HARAYA.
+
+- **Python**: Ensure that you have Python installed on your system. You can download the latest version of Python from the official Python website: [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
 ### Installation
 
