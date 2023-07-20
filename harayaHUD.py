@@ -91,7 +91,7 @@ class harayaHUD():
                             current_frame = len(gif_reader) - 1
                         elif current_frame >= len(gif_reader):
                             current_frame = -1000
-                        playback_speed = 9999999999
+                        playback_speed = 1000
                         clock.tick(playback_speed)
                 except EOFError:
                     # Reached the end of the GIF, restart from the beginning

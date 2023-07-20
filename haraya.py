@@ -16,7 +16,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-import textwrap
 from LoadingBar import LoadingBar 
 runLoadingBar = LoadingBar.RunLoadingBar
 import pyautogui
@@ -875,8 +874,7 @@ def run_haraya():
     else:
         print(colorama.Fore.RED + command)
         response = run_Bison(reply=command, user_name=MyName)
-        wrapped_text = textwrap.fill(response, width=200, break_long_words=False, replace_whitespace=False)
-        print(colorama.Fore.YELLOW + wrapped_text)
+        print(colorama.Fore.YELLOW + response)
         speak(response)
         exit(run_haraya())
     exitHUD()
