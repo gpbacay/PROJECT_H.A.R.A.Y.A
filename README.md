@@ -46,7 +46,7 @@ Before getting started with HARAYA, ensure that you meet the following prerequis
 
    Alternatively, you can download the repository as a ZIP file and extract it to a directory of your choice.
 
-2. Navigate to the project directory:
+2. Navigate to the project directory, for example:
 
         C:\Users\Gianne Bacay\Desktop\PROJECT_H.A.R.A.Y.A\haraya.py
 
