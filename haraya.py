@@ -39,10 +39,10 @@ tGUI.start()
 from PaLM2_LLM import run_Bison
 
 
-
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
 #Run Command: python haraya.py
 recognizer = sr.Recognizer()
+
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
@@ -179,7 +179,7 @@ def Listen_command_MainFunction():
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
             voice = recognizer.listen(source, timeout=10, phrase_time_limit=12)
-            command = recognizer.recognize_google(voice)
+            command = recognizer.recognize_google(voice, show_all=True)
             command = command.lower()
     except:
         pass
@@ -215,7 +215,7 @@ def Add_command_MainFunction(command):
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
             voice = recognizer.listen(source, timeout=10, phrase_time_limit=12)
-            command = recognizer.recognize_google(voice)
+            command = recognizer.recognize_google(voice, show_all=True)
             command = command.lower()
     except:
         pass
@@ -234,7 +234,7 @@ def Wait_command_MainFunction():
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
             voice = recognizer.listen(source, timeout=10, phrase_time_limit=12)
-            command = recognizer.recognize_google(voice)
+            command = recognizer.recognize_google(voice, show_all=True)
             command = command.lower()
     except:
         pass
@@ -460,7 +460,7 @@ def run_haraya():
         command = Add_command_MainFunction(command)
         
         if command in Yes_KeyWords:
-            print(colorama.Fore.RED + command)
+            print(colorama.Fore.RED + str(command))
             command = command.replace(command, '')
             response = "Then, please do tell."
             print(colorama.Fore.GREEN + response)
@@ -468,7 +468,7 @@ def run_haraya():
             exit(run_haraya())
 
         elif '' == command:
-            print(colorama.Fore.RED + command)
+            print(colorama.Fore.RED + str(command))
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
             speak(response)
@@ -493,11 +493,11 @@ def run_haraya():
                 recognizer.energy_threshold = 1.0
                 recognizer.pause_threshold = 2.0
                 voice = recognizer.listen(source, timeout=7)
-                command = recognizer.recognize_google(voice)
+                command = recognizer.recognize_google(voice, show_all=True)
                 command = command.lower()
         except:
             pass
-        print(colorama.Fore.RED + command)
+        print(colorama.Fore.RED + str(command))
         speak(command)
         time.sleep(5)
         Confirmation_SubFunction(command)
@@ -553,7 +553,7 @@ def run_haraya():
     #________________________________________________________________TERMINATION_BLOCK
     #Run Command: python haraya.py
     elif command in Stop_KeyWords:
-        print(colorama.Fore.RED + command)
+        print(colorama.Fore.RED + str(command))
         Locate_NameHA()
         response = "As you wish " + NameHA + ". Signing off..."
         print(colorama.Fore.GREEN + response)
@@ -563,7 +563,7 @@ def run_haraya():
         exit()
 
     elif command in GoodBye_KeyWords:
-        print(colorama.Fore.RED + command)
+        print(colorama.Fore.RED + str(command))
         response = "Goodbye " + NameHA + "! Have a great day!"
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -572,7 +572,7 @@ def run_haraya():
         exit()
         
     elif "turn off my computer" in command:
-        print(colorama.Fore.RED + command)
+        print(colorama.Fore.RED + str(command))
         response = "As you wish " + NameHA + ". Turning off..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -649,7 +649,7 @@ def run_haraya():
     #________________________________________________________________________________________________OPEN/ACCESS_BLOCK
     #Run Command: python haraya.py
     elif "open" in command or "access" in command:
-        print(colorama.Fore.RED + command)
+        print(colorama.Fore.RED + str(command))
         command = command.replace("open", '')
         command = command.replace("access", '')
         try:
@@ -865,14 +865,14 @@ def run_haraya():
     #Run Command: python haraya.py
     elif '' == command:
         time.sleep(3)
-        print(colorama.Fore.RED + command)
+        print(colorama.Fore.RED + str(command))
         response = "Hello? Are you still there?"
         print(colorama.Fore.GREEN + response)
         speak(response)
         Play_Listening_Sound()
         Standby_SubFunction()
     else:
-        print(colorama.Fore.RED + command)
+        print(colorama.Fore.RED + str(command))
         response = run_Bison(reply=command, user_name=MyName)
         print(colorama.Fore.YELLOW + response)
         speak(response)

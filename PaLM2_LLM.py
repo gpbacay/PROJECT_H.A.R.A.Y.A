@@ -10,6 +10,7 @@ GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
 reply = ""
 
 messages = """
+-The question is the ranscript with highest confidence rate in the following: {}. Answer the question.
 -If you do not know the answer to a question then truthfully admit that you don't know the answer or ask for more details; Do not lie.
 -Only answer or respond on what you are asked for, nothing less and nothing more.
 -Always respond base on the context and information that is already given to you.
@@ -74,7 +75,7 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
 
     previous_activity_list.append(previous_activity)
     
-    messages = messages.format(ai_name, current_time, current_date, current_location, current_weather, previous_activity_list)
+    messages = messages.format(reply, ai_name, current_time, current_date, current_location, current_weather, previous_activity_list)
     
     context = context.format(ai_name, user_name)
 
@@ -84,7 +85,7 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
         messages=messages,
         temperature=0.0
     )
-    response = response.reply(reply+".")
+    response = response.reply(str(reply) + ".")
     return response.last
 
 if __name__ == '__main__':
