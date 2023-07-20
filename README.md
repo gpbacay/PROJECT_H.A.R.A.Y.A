@@ -6,7 +6,9 @@
 
 ## Features
 
-- **Speech Recognition**: HARAYA can understand voice commands, allowing for seamless and intuitive user interactions.
+- **Speech Recognition**: HARAYA can understand speeches or voice commands, allowing for seamless and intuitive user interactions.
+
+- **Text to Speech**: HARAYA includes a Text to Speech ability, allowing it to convert text-based information into spoken words. This feature enhances user interactions by enabling HARAYA to provide information audibly, making it even more intuitive and user-friendly.
 
 - **Face and Pose Recognition**: HARAYA is equipped with the ability to recognize faces and poses through computer vision, enabling applications in image analysis and identification.
 
@@ -14,9 +16,9 @@
 
 - **Question Answering**: HARAYA uses Google AI's PaLM2 LLM, a renowned language model known for its exceptional proficiency in language understanding, generation, and conversational skills. Specifically fine-tuned for natural multi-turn dialogues, it excels in providing accurate answers to a diverse range of questions and is ideal for text-based tasks involving coding, advanced reasoning, mathematics, and supports over 100 languages.
 
-- **Web Data Scraping**: HARAYA has the capability to scrape data from any website in the internet, facilitating automated data extraction and analysis.
-
 - **Web Search**: HARAYA can perform searches on the internet, providing relevant information and assisting users in finding desired content.
+
+- **Web Data Scraping**: HARAYA has the capability to scrape data from any website in the internet, facilitating automated data extraction and analysis.
 
 - **Information Provision**: HARAYA is a valuable source of information, leveraging AI capabilities and online resources to provide insights on various topics.
 
