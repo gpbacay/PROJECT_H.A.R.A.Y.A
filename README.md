@@ -38,6 +38,8 @@ Before getting started with HARAYA, ensure that you meet the following prerequis
 
 - **Python**: Ensure that you have Python installed on your system. You can download the latest version of Python from the official Python website: [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
+- **Python pip**: Ensure that you have the Python package manager or `pip` installed on your system. It is usually included by default when installing Python, but if for any reason it's not available, you can refer to the official Python documentation for installation instructions: [https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+
 ### Installation
 
 1. Clone or download the HARAYA repository to your local machine:
