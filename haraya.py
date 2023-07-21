@@ -457,6 +457,7 @@ def run_haraya():
             if 'haraya' in str(command) or str(command) in Haraya_KeyWords:
                 Play_Prompt_Sound()
                 response = "Yes? How can I help you?"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 break
@@ -529,6 +530,7 @@ def run_haraya():
             response = "Activating Face Recognition System..."
         else:
             response = "Running Face Recognition System..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         Initialize_Face_Recognition_System()
@@ -551,6 +553,7 @@ def run_haraya():
             response = "Activating Pose Recognition System..."
         else:
             response = "Running Pose Recognition System..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         Initialize_Pose_Recognition_System()
@@ -567,6 +570,7 @@ def run_haraya():
         print(colorama.Fore.RED + str(command))
         Locate_NameHA()
         response = "As you wish " + NameHA + ". Signing off..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         exitHUD()
@@ -576,6 +580,7 @@ def run_haraya():
     elif str(command) in GoodBye_KeyWords:
         print(colorama.Fore.RED + str(command))
         response = "Goodbye " + NameHA + "! Have a great day!"
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         exitHUD()
@@ -585,6 +590,7 @@ def run_haraya():
     elif "turn off my computer" in str(command):
         print(colorama.Fore.RED + str(command))
         response = "As you wish " + NameHA + ". Turning off..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         exitHUD()
@@ -607,6 +613,7 @@ def run_haraya():
             information = search_list[-1]
             response = "Searching" + colorama.Fore.RED + information
             response1 = "Searching" + information
+            run_Bison(reply=str(command))
             print(colorama.Fore.GREEN + response)
             speak(response1)
             for i in range(1):
@@ -622,6 +629,7 @@ def run_haraya():
 
     elif "in youtube" in str(command) or "play" in str(command):
         response = "Searching..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         song_title = command.replace("haraya", '')
@@ -645,6 +653,7 @@ def run_haraya():
 
     elif "search in wikipedia" in str(command) or "in wikipedia search" in str(command):
         response = "Searching..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         person = command.replace("search in wikipedia", '')
@@ -665,6 +674,7 @@ def run_haraya():
         try:
             if "chrome" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\Program Files\Google\Chrome\Application\chrome.exe"
@@ -676,6 +686,7 @@ def run_haraya():
                 
             elif "aqw game launcher" in str(command) or "aqw" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\Program Files\Artix Game Launcher\Artix Game Launcher.exe"
@@ -687,6 +698,7 @@ def run_haraya():
                 
             elif "genshin impact" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\Program Files\Genshin Impact\launcher.exe"
@@ -698,6 +710,7 @@ def run_haraya():
                 
             elif "command prompt" in str(command) or "cmd" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "cmd.exe"
@@ -709,6 +722,7 @@ def run_haraya():
                 
             elif "notepad" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "notepad.exe"
@@ -720,6 +734,7 @@ def run_haraya():
                 
             elif "calculator" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "calc.exe"
@@ -731,6 +746,7 @@ def run_haraya():
                 
             elif "vlc" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"
@@ -742,6 +758,7 @@ def run_haraya():
                 
             elif "visual studio code" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
@@ -753,6 +770,7 @@ def run_haraya():
                 
             elif "messenger" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Messenger.exe.lnk"
@@ -764,6 +782,7 @@ def run_haraya():
                 
             elif "downloads" in str(command) or "download" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Downloads.lnk"
@@ -775,6 +794,7 @@ def run_haraya():
                 
             elif "videos" in str(command) or "video" in str(command):
                 response = "As you wish!"
+                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Videos.lnk"
@@ -786,6 +806,7 @@ def run_haraya():
                 
         except:
             response = """Access denied! An error occured while accessing."""
+            run_Bison(reply=str(command))
             print(colorama.Fore.LIGHTRED_EX + response)
             speak(response)
         exit(Confirmation_SubFunction(command))
@@ -795,6 +816,7 @@ def run_haraya():
     #Run Command: python haraya.py
     elif "shutdown my computer" in str(command):
         response = "as you wish! shutting down your computer..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         os.system("shutdown /s /t 0")
@@ -804,6 +826,7 @@ def run_haraya():
 
     elif "restart my computer" in str(command):
         response = "as you wish! restarting your computer..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         os.system("shutdown /r")
@@ -813,6 +836,7 @@ def run_haraya():
 
     elif "sign off my computer" in str(command) or "signoff my computer" in str(command):
         response = "as you wish! signing off your computer..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         os.system("shutdown /l")
@@ -821,6 +845,7 @@ def run_haraya():
         
     elif "logout my computer" in str(command) or "log out my computer" in str(command):
         response = "as you wish! logging out your computer..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         os.system("shutdown /l")
@@ -829,6 +854,7 @@ def run_haraya():
         
     elif "sign out my computer" in str(command) or "signout my computer" in str(command):
         response = "as you wish! signing out your computer..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         os.system("shutdown /l")
@@ -837,6 +863,7 @@ def run_haraya():
         
     elif "increase" in str(command) and "volume" in str(command) or "volume up" in str(command):
         response = "Increasing volume..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         pyautogui.press("volumeup", 10)
@@ -845,6 +872,7 @@ def run_haraya():
         
     elif "decrease" in str(command) and "volume" in str(command) or "lower down the volume" in str(command) or "lower the volume" in str(command):
         response = "Decreasing volume..."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         pyautogui.press("volumedown", 10)
@@ -855,6 +883,7 @@ def run_haraya():
     #Run Command: python haraya.py
     elif str(command) in Standby_KeyWords:
         response = "Understood! Take your time. I'll wait."
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         Standby_SubFunction()
