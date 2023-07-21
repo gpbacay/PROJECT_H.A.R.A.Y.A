@@ -600,6 +600,7 @@ def run_haraya():
     #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
     #Run Command: python haraya.py
     elif "in google" in str(command) or "in google search" in str(command):
+        run_Bison(reply=str(command))
         try:
             information = command.replace("search in google", '')
             information = information.replace("haraya", '')
@@ -613,7 +614,6 @@ def run_haraya():
             information = search_list[-1]
             response = "Searching" + colorama.Fore.RED + information
             response1 = "Searching" + information
-            run_Bison(reply=str(command))
             print(colorama.Fore.GREEN + response)
             speak(response1)
             for i in range(1):
@@ -669,12 +669,12 @@ def run_haraya():
     #Run Command: python haraya.py
     elif "open" in str(command) or "access" in str(command):
         print(colorama.Fore.RED + str(command))
+        run_Bison(reply=str(command))
         command = command.replace("open", '')
         command = command.replace("access", '')
         try:
             if "chrome" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\Program Files\Google\Chrome\Application\chrome.exe"
@@ -686,7 +686,6 @@ def run_haraya():
                 
             elif "aqw game launcher" in str(command) or "aqw" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\Program Files\Artix Game Launcher\Artix Game Launcher.exe"
@@ -698,7 +697,6 @@ def run_haraya():
                 
             elif "genshin impact" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\Program Files\Genshin Impact\launcher.exe"
@@ -710,7 +708,6 @@ def run_haraya():
                 
             elif "command prompt" in str(command) or "cmd" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "cmd.exe"
@@ -722,7 +719,6 @@ def run_haraya():
                 
             elif "notepad" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "notepad.exe"
@@ -734,7 +730,6 @@ def run_haraya():
                 
             elif "calculator" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "calc.exe"
@@ -746,7 +741,6 @@ def run_haraya():
                 
             elif "vlc" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"
@@ -758,7 +752,6 @@ def run_haraya():
                 
             elif "visual studio code" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
@@ -770,7 +763,6 @@ def run_haraya():
                 
             elif "messenger" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Messenger.exe.lnk"
@@ -794,7 +786,6 @@ def run_haraya():
                 
             elif "videos" in str(command) or "video" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Videos.lnk"
@@ -806,7 +797,6 @@ def run_haraya():
                 
         except:
             response = """Access denied! An error occured while accessing."""
-            run_Bison(reply=str(command))
             print(colorama.Fore.LIGHTRED_EX + response)
             speak(response)
         exit(Confirmation_SubFunction(command))
