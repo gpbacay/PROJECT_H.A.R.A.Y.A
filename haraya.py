@@ -787,8 +787,9 @@ def run_haraya():
     exit()
 
 #______________________________________RUN_haraya_IN_A_LOOP_BLOCK
-while True:
-    Start_Up_command_MainFunction()
-    run_haraya()
-    
+class Main():
+    while True:
+        Start_Up_command_MainFunction()
+        run_haraya()
+
 #Run Command: python haraya.py
