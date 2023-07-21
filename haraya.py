@@ -867,6 +867,7 @@ def run_haraya():
         response = "Hello? Are you still there?"
         print(colorama.Fore.GREEN + response)
         speak(response)
+        run_Bison(chat_history_message_input=str(command), chat_history_message_output=response)
         Play_Listening_Sound()
         Standby_SubFunction()
         
