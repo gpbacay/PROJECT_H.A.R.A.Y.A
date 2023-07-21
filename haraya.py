@@ -179,7 +179,7 @@ def Listen_command_MainFunction():
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
             #voice = recognizer.record(source)
-            voice = recognizer.record(source)
+            voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
             command = recognizer.recognize_google(voice, show_all=True)
             command = command.lower()
             command = str(command)
@@ -217,7 +217,7 @@ def Add_command_MainFunction(command):
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
             #voice = recognizer.record(source)
-            voice = recognizer.record(source)
+            voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
             command = recognizer.recognize_google(voice, show_all=True)
             command = command.lower()
             command = str(command)
@@ -238,7 +238,7 @@ def Wait_command_MainFunction():
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
             #voice = recognizer.record(source)
-            voice = recognizer.record(source)
+            voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
             command = recognizer.recognize_google(voice, show_all=True)
             command = command.lower()
             command = str(command)
@@ -500,7 +500,7 @@ def run_haraya():
                 recognizer.energy_threshold = 1.0
                 recognizer.pause_threshold = 0.8
                 #voice = recognizer.record(source)
-                voice = recognizer.record(source)
+                voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
                 command = recognizer.recognize_google(voice, show_all=True)
                 command = command.lower()
                 command = str(command)
