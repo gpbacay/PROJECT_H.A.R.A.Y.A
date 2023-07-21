@@ -448,17 +448,7 @@ def run_haraya():
     #Run Command: python haraya.py
     if "run" in str(command) or "activate" in str(command) or "initialize" in str(command):
         if "face recognition system" in str(command):
-            if "run" in str(command):
-                response = "Running Face Recognition System..."
-            elif "initialize" in str(command):
-                response = "Initializing Face Recognition System..."
-            elif "activate" in str(command):
-                response = "Activating Face Recognition System..."
-            else:
-                response = "Running Face Recognition System..."
             run_Bison(reply=str(command))
-            print(colorama.Fore.GREEN + response)
-            speak(response)
             Initialize_Face_Recognition_System()
             NameHA = Name_Honorific_Address[-1]
             MyName = Name[-1]
@@ -472,17 +462,7 @@ def run_haraya():
     #Run Command: python haraya.py
     elif "run" in str(command) or "activate" in str(command) or "initialize" in str(command):
         if "pose recognition system" in str(command):
-            if "run" in str(command):
-                response = "Running Pose Recognition System..."
-            elif "initialize" in str(command):
-                response = "Initializing Pose Recognition System..."
-            elif "activate" in str(command):
-                response = "Activating Pose Recognition System..."
-            else:
-                response = "Running Pose Recognition System..."
             run_Bison(reply=str(command))
-            print(colorama.Fore.GREEN + response)
-            speak(response)
             Initialize_Pose_Recognition_System()
             Confirmation_SubFunction(command)
 
