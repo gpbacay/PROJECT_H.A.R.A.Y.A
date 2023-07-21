@@ -498,8 +498,9 @@ def run_haraya():
                 speak(response)
                 Play_Listening_Sound()
                 recognizer.energy_threshold = 1.0
-                recognizer.pause_threshold = 2.0
-                voice = recognizer.listen(source, timeout=7)
+                recognizer.pause_threshold = 0.8
+                #voice = recognizer.record(source)
+                voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
                 command = recognizer.recognize_google(voice, show_all=True)
                 command = command.lower()
                 command = str(command)
