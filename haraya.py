@@ -376,26 +376,26 @@ def run_haraya():
                     "copy what I say"]
     
     GoogleSearch_HotWords = ["in google search",
-                             "search in google",
-                             "in google navigate",
-                             "navigate in google",
-                             "in google find",
-                             "find in google",
-                             "in google"]
+                            "search in google",
+                            "in google navigate",
+                            "navigate in google",
+                            "in google find",
+                            "find in google",
+                            "in google"]
     
     YouTubeSearch_HotWords = ["in youtube search",
-                             "search in youtube",
-                             "in youtube play",
-                             "play in youtube",
-                             "in youtube find",
-                             "find in youtube",
-                             "in youtube"]
+                            "search in youtube",
+                            "in youtube play",
+                            "play in youtube",
+                            "in youtube find",
+                            "find in youtube",
+                            "in youtube"]
     
     WikipediaSearch_HotWords = ["in wikipedia search",
-                             "search in wikipedia",
-                             "in wikipedia find",
-                             "find in wikipedia",
-                             "in wikipedia"]
+                            "search in wikipedia",
+                            "in wikipedia find",
+                            "find in wikipedia",
+                            "in wikipedia"]
 
     #_______________________________________________________________________STANDBY_SUBFUNCTION
     #Run Command: python haraya.py
