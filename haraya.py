@@ -198,18 +198,18 @@ def Listen_command_MainFunction():
 #Run Command: python haraya.py
 def Add_command_MainFunction(command):
     command = str(command)
-    Interrogative_words = ['what', ' what ', 'what ', ' what',
+    Interrogative_HotWords = ['what', ' what ', 'what ', ' what',
                         'who', ' who ', 'who ', ' who',
                         'where', ' where ', 'where ', ' where',
                         'when', ' when ', 'when ', ' when',
                         'why', ' why ', 'why ', ' why',
                         'how', ' how ', 'how ', ' how']
     try:
-        if str(command) in Interrogative_words:
+        if (hotword in str(command) for hotword in Interrogative_HotWords):
             response = "Is there anything specific you would like to know or ask?"
             print(colorama.Fore.GREEN + response)
             speak(response)
-        elif str(command) not in Interrogative_words:
+        elif (hotword not in str(command) for hotword in Interrogative_HotWords):
             response = "Is there anything else I could do for you?"
             print(colorama.Fore.GREEN + response)
             speak(response)
@@ -437,32 +437,6 @@ def run_haraya():
             speak(response)
             exit(run_haraya())
 
-    #_______________________________________________________________________REPEAT_SUBFUNCTION
-    #Run Command: python haraya.py
-    def Repeat_SubFunction():
-        global command
-        command = ""
-        
-        try:
-            with sr.Microphone() as source:
-                response = "Understood, I'm listening..."
-                print(colorama.Fore.GREEN + response)
-                speak(response)
-                Play_Listening_Sound()
-                recognizer.energy_threshold = 1.0
-                recognizer.pause_threshold = 0.8
-                #voice = recognizer.record(source)
-                voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
-                command = recognizer.recognize_google(voice, show_all=True)
-                command = str(command)
-            command = command.lower()
-        except:
-            pass
-        print(colorama.Fore.RED + str(command))
-        speak(command)
-        time.sleep(5)
-        Confirmation_SubFunction(command)
-
     #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
     #Run Command: python haraya.py
 
@@ -485,11 +459,6 @@ def run_haraya():
             run_Bison(reply=str(command))
             Initialize_Pose_Recognition_System()
             Confirmation_SubFunction(command)
-
-    #________________________________________________________________REPEAT_BLOCK
-    #Run Command: python haraya.py
-    elif (hotword in str(command) for hotword in Repeat_HotWords):
-        Repeat_SubFunction()
 
     #________________________________________________________________TERMINATION_BLOCK
     #Run Command: python haraya.py
