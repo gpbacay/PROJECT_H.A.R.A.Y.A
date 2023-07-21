@@ -24,8 +24,9 @@ messages = """
 Previous Activity:\n
 <{}>.\n
 
-Chat History/Previous conversation:
+Our Chat History/Previous conversation:
 <{}>.\n
+Note: Summarize our chat history if asked.\n
 """
     
 context = """"
@@ -103,8 +104,8 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
     )
     response = response.reply(str(reply) + ".")
     
-    message_input = f"Me ({user_name}): " + str(reply) + "."
-    message_output = f"You ({ai_name}): " + str(response.last)
+    message_input = f"User ({user_name}): " + str(reply) + "."
+    message_output = f"Assistant ({ai_name}): " + str(response.last)
     conversation = f"{message_input}, {message_output}\n"
     chat_history.append(conversation)
     
