@@ -148,7 +148,13 @@ Initialize_Face_Recognition_System()
 def Initialize_Pose_Recognition_System():
     response = "Recognizing pose..."
     print(colorama.Fore.GREEN + response)
-    Pose_Recognition_System()
+    tPRS = Thread(target=Pose_Recognition_System)
+    tPRS.start()
+    tLoadBar2 = Thread(target=runLoadingBar, args=(10, "INITIALIZING PRS", "PRS INITIALIZED!"),)
+    tLoadBar2.start()
+    response = "Initializing Pose Recognition System"
+    speak(response)
+    tPRS.join()
     Play_Prompt_Sound()
 
 
@@ -344,88 +350,7 @@ def run_haraya():
                     "definitely yes",
                     "you got it right",
                     "I said yes"]
-    
-    RunFaceRecog_KeyWords = ["run face recognition system",
-                            "run face rec again",
-                            "recognize my face again",
-                            "face recognition again",
-                            "run face recognition system again",
-                            "run face recognition",
-                            "run the face recognition system",
-                            "run the video face recognition system",
-                            "run video face recognition system",
-                            "run the video face recognition system",
-                            "run video face recognition system",
-                            "run the live face recognition system",
-                            "run live face recognition system",
-                            "face recognition system with smart attendance system",
-                            "run the video face recognition system with smart attendance system",
-                            "run video face recognition system with smart attendance system",
-                            "run the live face recognition system with smart attendance system",
-                            "run live face recognition system with smart attendance system"]
-    
-    InitializeFaceRecog_KeyWords = ["initialize face recognition system",
-                            "initialize face recognition",
-                            "initialize the face recognition system",
-                            "initialize face recognition system again",
-                            "initialize the video face recognition system",
-                            "initialize video face recognition system",
-                            "initialize the video face recognition system",
-                            "initialize video face recognition system",
-                            "initialize the live face recognition system",
-                            "initialize live face recognition system",
-                            "initialize recognition system with smart attendance system",
-                            "initialize the video face recognition system with smart attendance system",
-                            "initialize video face recognition system with smart attendance system",
-                            "initialize the live face recognition system with smart attendance system",
-                            "initialize live face recognition system with smart attendance system"]
-    
-    ActivateFaceRecog_KeyWords = ["activate face recognition system",
-                            "activate face recognition",
-                            "activate the face recognition system",
-                            "activate the video face recognition system",
-                            "activate video face recognition system",
-                            "activate the video face recognition system",
-                            "activate face recognition system again",
-                            "activate video face recognition system",
-                            "activate the live face recognition system",
-                            "activate live face recognition system",
-                            "activate recognition system with smart attendance system",
-                            "activate the video face recognition system with smart attendance system",
-                            "activate video face recognition system with smart attendance system",
-                            "activate the live face recognition system with smart attendance system",
-                            "activate live face recognition system with smart attendance system"]
-    
-    RunPoseRecog_KeyWords = ["run pose recognition system",
-                            "run pose recognition",
-                            "run the pose recognition system",
-                            "run the video pose recognition system",
-                            "run video pose recognition system",
-                            "run the video pose recognition system",
-                            "run video pose recognition system",
-                            "run the live pose recognition system",
-                            "run live pose recognition system"]
-    
-    InitializePoseRecog_KeyWords = ["initialize pose recognition system",
-                            "initialize pose recognition",
-                            "initialize the pose recognition system",
-                            "initialize the video pose recognition system",
-                            "initialize video pose recognition system",
-                            "initialize the video pose recognition system",
-                            "initialize video pose recognition system",
-                            "initialize the live pose recognition system",
-                            "initialize live pose recognition system"]
-    
-    ActivatePoseRecog_KeyWords = ["activate pose recognition system",
-                            "activate pose recognition",
-                            "activate the pose recognition system",
-                            "activate the video pose recognition system",
-                            "activate video pose recognition system",
-                            "activate the video pose recognition system",
-                            "activate video pose recognition system",
-                            "activate the live pose recognition system",
-                            "activate live pose recognition system"]
-    
+
     Haraya_KeyWords = ["haraya",
                     "araya",
                     "mariah",
@@ -521,43 +446,45 @@ def run_haraya():
 
     #______________________________________________________FACE_RECOGNITION_BLOCK
     #Run Command: python haraya.py
-    if str(command) in RunFaceRecog_KeyWords or str(command) in InitializeFaceRecog_KeyWords or str(command) in ActivateFaceRecog_KeyWords:
-        if "run" in str(command):
-            response = "Running Face Recognition System..."
-        elif "initialize" in str(command):
-            response = "Initializing Face Recognition System..."
-        elif "activate" in str(command):
-            response = "Activating Face Recognition System..."
-        else:
-            response = "Running Face Recognition System..."
-        run_Bison(reply=str(command))
-        print(colorama.Fore.GREEN + response)
-        speak(response)
-        Initialize_Face_Recognition_System()
-        NameHA = Name_Honorific_Address[-1]
-        MyName = Name[-1]
-        response = "Hello " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "!"
-        response1 = "Hello " + NameHA + " " + MyName + "!"
-        print(colorama.Fore.GREEN + response)
-        speak(response1)
-        Confirmation_SubFunction(command)
+    if "run" in str(command) or "activate" in str(command) or "initialize" in str(command):
+        if "face recognition system" in str(command):
+            if "run" in str(command):
+                response = "Running Face Recognition System..."
+            elif "initialize" in str(command):
+                response = "Initializing Face Recognition System..."
+            elif "activate" in str(command):
+                response = "Activating Face Recognition System..."
+            else:
+                response = "Running Face Recognition System..."
+            run_Bison(reply=str(command))
+            print(colorama.Fore.GREEN + response)
+            speak(response)
+            Initialize_Face_Recognition_System()
+            NameHA = Name_Honorific_Address[-1]
+            MyName = Name[-1]
+            response = "Hello " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "!"
+            response1 = "Hello " + NameHA + " " + MyName + "!"
+            print(colorama.Fore.GREEN + response)
+            speak(response1)
+            Confirmation_SubFunction(command)
         
     #______________________________________________________POSE_RECOGNITION_BLOCK
     #Run Command: python haraya.py
-    if str(command) in RunPoseRecog_KeyWords or str(command) in InitializePoseRecog_KeyWords or str(command) in ActivatePoseRecog_KeyWords:
-        if "run" in str(command):
-            response = "Running Pose Recognition System..."
-        elif "initialize" in str(command):
-            response = "Initializing Pose Recognition System..."
-        elif "activate" in str(command):
-            response = "Activating Pose Recognition System..."
-        else:
-            response = "Running Pose Recognition System..."
-        run_Bison(reply=str(command))
-        print(colorama.Fore.GREEN + response)
-        speak(response)
-        Initialize_Pose_Recognition_System()
-        Confirmation_SubFunction(command)
+    elif "run" in str(command) or "activate" in str(command) or "initialize" in str(command):
+        if "pose recognition system" in str(command):
+            if "run" in str(command):
+                response = "Running Pose Recognition System..."
+            elif "initialize" in str(command):
+                response = "Initializing Pose Recognition System..."
+            elif "activate" in str(command):
+                response = "Activating Pose Recognition System..."
+            else:
+                response = "Running Pose Recognition System..."
+            run_Bison(reply=str(command))
+            print(colorama.Fore.GREEN + response)
+            speak(response)
+            Initialize_Pose_Recognition_System()
+            Confirmation_SubFunction(command)
 
     #________________________________________________________________REPEAT_BLOCK
     #Run Command: python haraya.py
