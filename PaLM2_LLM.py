@@ -62,9 +62,9 @@ Details about Haraya (You):
 """
 
 examples = [
-    (" .", ""),
-    ("", ""),
-    (" ", " ")
+    (" .", "."),
+    ("[].", "."),
+    (".", ".")
 ]
 
 user_name = "Gianne P. Bacay"
