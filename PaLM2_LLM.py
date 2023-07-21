@@ -26,7 +26,7 @@ Previous Activity:\n
 
 Our Chat History/Previous conversation:
 <{}>.\n
-Note: Summarize our chat history if asked.\n
+Note: Understand and summarize our chat history in one paragraph if asked.\n
 """
     
 context = """"
