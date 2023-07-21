@@ -47,58 +47,61 @@ class harayaHUD():
         # Main loop
         clock = pygame.time.Clock()
         while running:
-            for event in pygame.event.get():
-                if event.type == KEYDOWN:
-                    if event.key == K_UP:
-                        setIsRandom(0)
-                    elif event.key == K_DOWN:
-                        setIsRandom(1)
-                    elif event.key == K_ESCAPE:
-                        running = False
+            try:
+                for event in pygame.event.get():
+                    if event.type == KEYDOWN:
+                        if event.key == K_UP:
+                            setIsRandom(0)
+                        elif event.key == K_DOWN:
+                            setIsRandom(1)
+                        elif event.key == K_ESCAPE:
+                            running = False
 
-            if play_gif:
-                try:
-                    # Clear the screen
-                    screen.fill((0, 0, 0))
+                if play_gif:
+                    try:
+                        # Clear the screen
+                        screen.fill((0, 0, 0))
 
-                    # Read the current GIF frame
-                    frame = gif_reader.get_data(current_frame)
+                        # Read the current GIF frame
+                        frame = gif_reader.get_data(current_frame)
 
-                    # Convert the frame to a PIL image
-                    pil_image = Image.fromarray(frame)
+                        # Convert the frame to a PIL image
+                        pil_image = Image.fromarray(frame)
 
-                    # Convert the PIL image to a Pygame surface
-                    frame_surface = pygame.image.fromstring(pil_image.tobytes(), pil_image.size, pil_image.mode)
+                        # Convert the PIL image to a Pygame surface
+                        frame_surface = pygame.image.fromstring(pil_image.tobytes(), pil_image.size, pil_image.mode)
 
-                    # Draw the current GIF frame
-                    screen.blit(frame_surface, (0, 0))
+                        # Draw the current GIF frame
+                        screen.blit(frame_surface, (0, 0))
 
-                    # Update the display
-                    pygame.display.flip()
+                        # Update the display
+                        pygame.display.flip()
 
-                    selector = random.randint(0,is_random)
-                    if selector == 0:
-                        gif_path = "harayasorb1.gif"
+                        selector = random.randint(0,is_random)
+                        if selector == 0:
+                            gif_path = "harayasorb1.gif"
+                            gif_reader = imageio.get_reader(gif_path)
+                            current_frame += 1
+                            playback_speed = random.randint(14, 15)
+                            clock.tick(playback_speed)
+                        elif selector == 1:
+                            gif_path = "harayasorb.gif"
+                            gif_reader = imageio.get_reader(gif_path)
+                            current_frame -= 1
+                            if current_frame < -1000:
+                                current_frame = len(gif_reader) - 1
+                            elif current_frame >= len(gif_reader):
+                                current_frame = -1000
+                            playback_speed = 1000
+                            clock.tick(playback_speed)
+                    except EOFError:
+                        # Reached the end of the GIF, restart from the beginning
+                        gif_reader.close()
                         gif_reader = imageio.get_reader(gif_path)
-                        current_frame += 1
-                        playback_speed = random.randint(14, 15)
-                        clock.tick(playback_speed)
-                    elif selector == 1:
-                        gif_path = "harayasorb.gif"
-                        gif_reader = imageio.get_reader(gif_path)
-                        current_frame -= 1
-                        if current_frame < -1000:
-                            current_frame = len(gif_reader) - 1
-                        elif current_frame >= len(gif_reader):
-                            current_frame = -1000
-                        playback_speed = 1000
-                        clock.tick(playback_speed)
-                except EOFError:
-                    # Reached the end of the GIF, restart from the beginning
-                    gif_reader.close()
-                    gif_reader = imageio.get_reader(gif_path)
-                    current_frame = 0
-
+                        current_frame = 0
+            except:
+                continue
+        
         # Clean up
         gif_reader.close()
         pygame.quit()
