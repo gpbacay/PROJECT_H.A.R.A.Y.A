@@ -181,8 +181,8 @@ def Listen_command_MainFunction():
             #voice = recognizer.record(source)
             voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
             command = recognizer.recognize_google(voice, show_all=True)
-            command = command.lower()
             command = str(command)
+            command = command.lower()
     except:
         pass
     return command
@@ -219,8 +219,8 @@ def Add_command_MainFunction(command):
             #voice = recognizer.record(source)
             voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
             command = recognizer.recognize_google(voice, show_all=True)
-            command = command.lower()
             command = str(command)
+            command = command.lower()
     except:
         pass
     return command
@@ -240,8 +240,8 @@ def Wait_command_MainFunction():
             #voice = recognizer.record(source)
             voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
             command = recognizer.recognize_google(voice, show_all=True)
-            command = command.lower()
             command = str(command)
+            command = command.lower()
     except:
         pass
     return command
@@ -504,8 +504,8 @@ def run_haraya():
                 #voice = recognizer.record(source)
                 voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
                 command = recognizer.recognize_google(voice, show_all=True)
-                command = command.lower()
                 command = str(command)
+            command = command.lower()
         except:
             pass
         print(colorama.Fore.RED + str(command))
