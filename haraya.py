@@ -25,7 +25,7 @@ tStartUp.start()
 time.sleep(1)
 import colorama
 colorama.init(autoreset=True)
-Header = "                                          " + colorama.Style.BRIGHT + colorama.Fore.GREEN + "H.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\n"
+Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + "\t\t\t\t H.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant) \t\t\t\t\n"
 tHeader = Thread(target=print, args=(Header,))
 tHeader.start()
 
@@ -171,16 +171,18 @@ def Start_Up_command_MainFunction():
 #Run Command: python haraya.py
 def Listen_command_MainFunction():
     global command
-    command = ''
+    command = ""
     try:
         with sr.Microphone() as source:
             print(colorama.Fore.CYAN + "Listening...")
             Play_Listening_Sound()
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
-            voice = recognizer.listen(source, timeout=10, phrase_time_limit=12)
+            #voice = recognizer.record(source)
+            voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
             command = recognizer.recognize_google(voice, show_all=True)
             command = command.lower()
+            command = str(command)
     except:
         pass
     return command
@@ -189,7 +191,7 @@ def Listen_command_MainFunction():
 #______________________________ADD_COMMAND_MAIN_FUNCTION
 #Run Command: python haraya.py
 def Add_command_MainFunction(command):
-    
+    command = str(command)
     Interrogative_words = ['what', ' what ', 'what ', ' what',
                         'who', ' who ', 'who ', ' who',
                         'where', ' where ', 'where ', ' where',
@@ -197,11 +199,11 @@ def Add_command_MainFunction(command):
                         'why', ' why ', 'why ', ' why',
                         'how', ' how ', 'how ', ' how']
     try:
-        if command in Interrogative_words:
+        if str(command) in Interrogative_words:
             response = "Is there anything specific you would like to know or ask?"
             print(colorama.Fore.GREEN + response)
             speak(response)
-        elif command not in Interrogative_words:
+        elif str(command) not in Interrogative_words:
             response = "Is there anything else I could do for you?"
             print(colorama.Fore.GREEN + response)
             speak(response)
@@ -214,9 +216,11 @@ def Add_command_MainFunction(command):
             Play_Listening_Sound()
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
-            voice = recognizer.listen(source, timeout=10, phrase_time_limit=12)
+            #voice = recognizer.record(source)
+            voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
             command = recognizer.recognize_google(voice, show_all=True)
             command = command.lower()
+            command = str(command)
     except:
         pass
     return command
@@ -226,16 +230,18 @@ def Add_command_MainFunction(command):
 #Run Command: python haraya.py
 def Wait_command_MainFunction():
     global command
-    command = ''
+    command = ""
     
     try:
         with sr.Microphone() as source:
             print(colorama.Fore.CYAN + "Waiting...")
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
-            voice = recognizer.listen(source, timeout=10, phrase_time_limit=12)
+            #voice = recognizer.record(source)
+            voice = recognizer.listen(source, timeout=7, phrase_time_limit=7)
             command = recognizer.recognize_google(voice, show_all=True)
             command = command.lower()
+            command = str(command)
     except:
         pass
     return command
@@ -447,7 +453,7 @@ def run_haraya():
     def Standby_SubFunction():
         while True:
             command = Wait_command_MainFunction()
-            if 'haraya' in command or command in Haraya_KeyWords:
+            if 'haraya' in str(command) or str(command) in Haraya_KeyWords:
                 Play_Prompt_Sound()
                 response = "Yes? How can I help you?"
                 print(colorama.Fore.GREEN + response)
@@ -457,9 +463,9 @@ def run_haraya():
     #_______________________________________________________________________CONFIRMATION_SUBFUNCTION
     #Run Command: python haraya.py
     def Confirmation_SubFunction(command):
-        command = Add_command_MainFunction(command)
+        command = Add_command_MainFunction(str(command))
         
-        if command in Yes_KeyWords:
+        if str(command) in Yes_KeyWords:
             print(colorama.Fore.RED + str(command))
             command = command.replace(command, '')
             response = "Then, please do tell."
@@ -467,7 +473,7 @@ def run_haraya():
             speak(response)
             exit(run_haraya())
 
-        elif '' == command:
+        elif '' == str(command):
             print(colorama.Fore.RED + str(command))
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
@@ -482,7 +488,8 @@ def run_haraya():
     #_______________________________________________________________________REPEAT_SUBFUNCTION
     #Run Command: python haraya.py
     def Repeat_SubFunction():
-        command = ''
+        global command
+        command = ""
         
         try:
             with sr.Microphone() as source:
@@ -495,6 +502,7 @@ def run_haraya():
                 voice = recognizer.listen(source, timeout=7)
                 command = recognizer.recognize_google(voice, show_all=True)
                 command = command.lower()
+                command = str(command)
         except:
             pass
         print(colorama.Fore.RED + str(command))
@@ -505,16 +513,16 @@ def run_haraya():
     #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
     #Run Command: python haraya.py
 
-    command = Listen_command_MainFunction()
+    command = str(Listen_command_MainFunction())
 
     #______________________________________________________FACE_RECOGNITION_BLOCK
     #Run Command: python haraya.py
-    if command in RunFaceRecog_KeyWords or command in InitializeFaceRecog_KeyWords or command in ActivateFaceRecog_KeyWords:
-        if "run" in command:
+    if str(command) in RunFaceRecog_KeyWords or str(command) in InitializeFaceRecog_KeyWords or str(command) in ActivateFaceRecog_KeyWords:
+        if "run" in str(command):
             response = "Running Face Recognition System..."
-        elif "initialize" in command:
+        elif "initialize" in str(command):
             response = "Initializing Face Recognition System..."
-        elif "activate" in command:
+        elif "activate" in str(command):
             response = "Activating Face Recognition System..."
         else:
             response = "Running Face Recognition System..."
@@ -531,12 +539,12 @@ def run_haraya():
         
     #______________________________________________________POSE_RECOGNITION_BLOCK
     #Run Command: python haraya.py
-    if command in RunPoseRecog_KeyWords or command in InitializePoseRecog_KeyWords or command in ActivatePoseRecog_KeyWords:
-        if "run" in command:
+    if str(command) in RunPoseRecog_KeyWords or str(command) in InitializePoseRecog_KeyWords or str(command) in ActivatePoseRecog_KeyWords:
+        if "run" in str(command):
             response = "Running Pose Recognition System..."
-        elif "initialize" in command:
+        elif "initialize" in str(command):
             response = "Initializing Pose Recognition System..."
-        elif "activate" in command:
+        elif "activate" in str(command):
             response = "Activating Pose Recognition System..."
         else:
             response = "Running Pose Recognition System..."
@@ -547,12 +555,12 @@ def run_haraya():
 
     #________________________________________________________________REPEAT_BLOCK
     #Run Command: python haraya.py
-    elif command in Repeat_KeyWords:
+    elif str(command) in Repeat_KeyWords:
         Repeat_SubFunction()
 
     #________________________________________________________________TERMINATION_BLOCK
     #Run Command: python haraya.py
-    elif command in Stop_KeyWords:
+    elif str(command) in Stop_KeyWords:
         print(colorama.Fore.RED + str(command))
         Locate_NameHA()
         response = "As you wish " + NameHA + ". Signing off..."
@@ -562,7 +570,7 @@ def run_haraya():
         Play_Shutdown_Sound()
         exit()
 
-    elif command in GoodBye_KeyWords:
+    elif str(command) in GoodBye_KeyWords:
         print(colorama.Fore.RED + str(command))
         response = "Goodbye " + NameHA + "! Have a great day!"
         print(colorama.Fore.GREEN + response)
@@ -571,7 +579,7 @@ def run_haraya():
         Play_Shutdown_Sound()
         exit()
         
-    elif "turn off my computer" in command:
+    elif "turn off my computer" in str(command):
         print(colorama.Fore.RED + str(command))
         response = "As you wish " + NameHA + ". Turning off..."
         print(colorama.Fore.GREEN + response)
@@ -582,14 +590,13 @@ def run_haraya():
 
     #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
     #Run Command: python haraya.py
-    elif "in google" in command or "in google search" in command or "google" in command or "navigate" in command:
+    elif "in google" in str(command) or "in google search" in str(command):
         try:
             information = command.replace("search in google", '')
             information = information.replace("haraya", '')
             information = information.replace("search", '')
             information = information.replace("in google", '')
             information = information.replace("google", '')
-            information = information.replace("navigate", '')
             information = information.replace("can you", '')
             information = information.replace("help me", '')
             search_list = []
@@ -610,7 +617,7 @@ def run_haraya():
             exitHUD()
             exit()
 
-    elif "in youtube" in command or "play" in command:
+    elif "in youtube" in str(command) or "play" in str(command):
         response = "Searching..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -633,7 +640,7 @@ def run_haraya():
         speak(response1)
         Confirmation_SubFunction(command)
 
-    elif "search in wikipedia" in command or "in wikipedia search" in command:
+    elif "search in wikipedia" in str(command) or "in wikipedia search" in str(command):
         response = "Searching..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -648,12 +655,12 @@ def run_haraya():
 
     #________________________________________________________________________________________________OPEN/ACCESS_BLOCK
     #Run Command: python haraya.py
-    elif "open" in command or "access" in command:
+    elif "open" in str(command) or "access" in str(command):
         print(colorama.Fore.RED + str(command))
         command = command.replace("open", '')
         command = command.replace("access", '')
         try:
-            if "chrome" in command:
+            if "chrome" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -664,7 +671,7 @@ def run_haraya():
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
-            elif "aqw game launcher" in command or "aqw" in command:
+            elif "aqw game launcher" in str(command) or "aqw" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -675,7 +682,7 @@ def run_haraya():
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
-            elif "genshin impact" in command:
+            elif "genshin impact" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -686,7 +693,7 @@ def run_haraya():
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
-            elif "command prompt" in command or "cmd" in command:
+            elif "command prompt" in str(command) or "cmd" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -697,7 +704,7 @@ def run_haraya():
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
-            elif "notepad" in command:
+            elif "notepad" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -708,7 +715,7 @@ def run_haraya():
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
-            elif "calculator" in command:
+            elif "calculator" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -719,7 +726,7 @@ def run_haraya():
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
-            elif "vlc" in command:
+            elif "vlc" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -730,7 +737,7 @@ def run_haraya():
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
-            elif "visual studio code" in command:
+            elif "visual studio code" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -741,7 +748,7 @@ def run_haraya():
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
-            elif "messenger" in command:
+            elif "messenger" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -752,7 +759,7 @@ def run_haraya():
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
-            elif "downloads" in command or "download" in command:
+            elif "downloads" in str(command) or "download" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -763,7 +770,7 @@ def run_haraya():
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
                 
-            elif "videos" in command or "video" in command:
+            elif "videos" in str(command) or "video" in str(command):
                 response = "As you wish!"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -783,7 +790,7 @@ def run_haraya():
         
     #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
     #Run Command: python haraya.py
-    elif "shutdown my computer" in command:
+    elif "shutdown my computer" in str(command):
         response = "as you wish! shutting down your computer..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -792,7 +799,7 @@ def run_haraya():
         exitHUD()
         exit()
 
-    elif "restart my computer" in command:
+    elif "restart my computer" in str(command):
         response = "as you wish! restarting your computer..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -801,7 +808,7 @@ def run_haraya():
         exitHUD()
         exit()
 
-    elif "sign off my computer" in command or "signoff my computer" in command:
+    elif "sign off my computer" in str(command) or "signoff my computer" in str(command):
         response = "as you wish! signing off your computer..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -809,7 +816,7 @@ def run_haraya():
         Play_Prompt_Sound()
         Confirmation_SubFunction(command)
         
-    elif "logout my computer" in command or "log out my computer" in command:
+    elif "logout my computer" in str(command) or "log out my computer" in str(command):
         response = "as you wish! logging out your computer..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -817,7 +824,7 @@ def run_haraya():
         Play_Prompt_Sound()
         Confirmation_SubFunction(command)
         
-    elif "sign out my computer" in command or "signout my computer" in command:
+    elif "sign out my computer" in str(command) or "signout my computer" in str(command):
         response = "as you wish! signing out your computer..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -825,7 +832,7 @@ def run_haraya():
         Play_Prompt_Sound()
         Confirmation_SubFunction(command)
         
-    elif "increase" in command and "volume" in command or "volume up" in command:
+    elif "increase" in str(command) and "volume" in str(command) or "volume up" in str(command):
         response = "Increasing volume..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -833,7 +840,7 @@ def run_haraya():
         Play_Prompt_Sound()
         exit(run_haraya())
         
-    elif "decrease" in command and "volume" in command or "lower down the volume" in command or "lower the volume" in command:
+    elif "decrease" in str(command) and "volume" in str(command) or "lower down the volume" in str(command) or "lower the volume" in str(command):
         response = "Decreasing volume..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -841,21 +848,9 @@ def run_haraya():
         Play_Prompt_Sound()
         exit(run_haraya())
         
-        
-    #_________________________________________________________________CONVERSATIONAL_BLOCK
-    #Run Command: python haraya.py
-    elif "what is your name" == command:
-        response = """
-        My name is Haraya.
-        """
-        print(colorama.Fore.GREEN + response)
-        speak(response)
-        run_Bison(reply="remember, your name is Haraya")
-        Confirmation_SubFunction(command)
-        
     #________________________________________________________________________STANDBY_BLOCK
     #Run Command: python haraya.py
-    elif command in Standby_KeyWords:
+    elif str(command) in Standby_KeyWords:
         response = "Understood! Take your time. I'll wait."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -863,7 +858,7 @@ def run_haraya():
         
     #_______________________________________________________NoCommands/NotClearCommands_BLOCK
     #Run Command: python haraya.py
-    elif '' == command:
+    elif "[]" == str(command) or "" == str(command):
         time.sleep(3)
         print(colorama.Fore.RED + str(command))
         response = "Hello? Are you still there?"
@@ -871,6 +866,7 @@ def run_haraya():
         speak(response)
         Play_Listening_Sound()
         Standby_SubFunction()
+        
     else:
         print(colorama.Fore.RED + str(command))
         response = run_Bison(reply=command, user_name=MyName)
@@ -887,13 +883,3 @@ while True:
     run_haraya()
     
 #Run Command: python haraya.py
-
-#Run on openvino environment:
-#____________________________Get-ExecutionPolicy;
-#____________________________Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force;
-
-#Download openvino:
-#____________________________python -m venv openvino_env
-#____________________________openvino_env\Scripts\activate
-#____________________________python -m pip install --upgrade pip
-#____________________________pip install openvino-dev==2023.0.1
