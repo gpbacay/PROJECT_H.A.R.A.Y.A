@@ -864,7 +864,7 @@ def run_haraya():
     elif "[]" == str(command) or "" == str(command):
         print(colorama.Fore.RED + str(command))
         response = "Hello? Are you still there?"
-        run_Bison(reply="", chat_history_message_input=str(command), chat_history_message_output=response)
+        run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
         speak(response)
         Play_Listening_Sound()

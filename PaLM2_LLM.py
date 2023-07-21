@@ -60,7 +60,13 @@ Details about Haraya (You):
 -You are a female or a woman; You have femenine qualities or behaviours.
 -You are currently talking with me, the interlocutor, and my name is: <{}>.\n\n
 """
-    
+
+examples = [
+    (" .", ""),
+    ("", ""),
+    (" ", " ")
+]
+
 user_name = "Gianne P. Bacay"
 ai_name = "HARAYA"
 
@@ -75,7 +81,7 @@ chat_history = []
 
 def run_Bison(reply = reply, messages = messages, context = context, user_name = user_name, ai_name = ai_name, 
     current_time = "", current_date = "", current_location = getLocation, current_weather = getWeather, 
-    previous_activity = previous_activity_list, chat_history_message_input = "", chat_history_message_output = ""):
+    previous_activity = previous_activity_list):
     
     DataScrapper.SetCurrentTime()
     DataScrapper.SetCurrentDate()
@@ -92,6 +98,7 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
         model="models/chat-bison-001",
         context=context,
         messages=messages,
+        examples=examples,
         temperature=0.0
     )
     response = response.reply(str(reply) + ".")
@@ -100,11 +107,6 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
     message_output = f"You ({ai_name}): " + str(response.last)
     conversation = f"{message_input}, {message_output}\n"
     chat_history.append(conversation)
-    
-    add_message_input = f"Me ({user_name}): " + str(chat_history_message_input) + "."
-    add_message_output = f"You ({ai_name}): " + str(chat_history_message_output)
-    add_conversation = f"{add_message_input}, {add_message_output}\n"
-    chat_history.append(add_conversation)
     
     return response.last
 
