@@ -1,7 +1,7 @@
-command = "qedsvsdfvfdshutdowndadaturnoffdasa"
+command = "qedsvsdfvfdshowndadaturfdasa"
 keywords = ["turn off", "shutdown"]
 
-if (hotword in str(command) for hotword in keywords):
+if any(hotword in str(command) for hotword in keywords):
     print("truned off")
 
 

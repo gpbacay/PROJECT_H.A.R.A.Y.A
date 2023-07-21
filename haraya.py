@@ -205,7 +205,7 @@ def Add_command_MainFunction(command):
                         'why', ' why ', 'why ', ' why',
                         'how', ' how ', 'how ', ' how']
     try:
-        if (hotword in str(command) for hotword in Interrogative_HotWords):
+        if any(hotword in str(command) for hotword in Interrogative_HotWords):
             response = "Is there anything specific you would like to know or ask?"
             print(colorama.Fore.GREEN + response)
             speak(response)
@@ -366,15 +366,6 @@ def run_haraya():
                     "herya",
                     "halaya"]
     
-    Repeat_HotWords = ["repeat after me",
-                    "haraya repeat after me",
-                    "repeat after me haraya",
-                    "say what i'm going to say",
-                    "haraya say what i'm going to say",
-                    "speak after me",
-                    "mimic me",
-                    "copy what I say"]
-    
     GoogleSearch_HotWords = ["in google search",
                             "search in google",
                             "in google navigate",
@@ -403,7 +394,7 @@ def run_haraya():
         while True:
             command = Wait_command_MainFunction()
             print(colorama.Fore.RED + str(command))
-            if (hotword in str(command) for hotword in Haraya_HotWords):
+            if any(hotword in str(command) for hotword in Haraya_HotWords):
                 Play_Prompt_Sound()
                 response = "Yes? How can I help you?"
                 run_Bison(reply=str(command))
@@ -417,7 +408,7 @@ def run_haraya():
     def Confirmation_SubFunction(command):
         command = Add_command_MainFunction(str(command))
         
-        if (hotword in str(command) for hotword in Yes_HotWords):
+        if any(hotword in str(command) for hotword in Yes_HotWords):
             print(colorama.Fore.RED + str(command))
             command = command.replace(command, '')
             response = "Then, please do tell."
@@ -462,7 +453,7 @@ def run_haraya():
 
     #________________________________________________________________TERMINATION_BLOCK
     #Run Command: python haraya.py
-    elif (hotword in str(command) for hotword in Stop_HotWords):
+    elif "turn off" in str(command) or any(hotword in str(command) for hotword in Stop_HotWords):
         print(colorama.Fore.RED + str(command))
         Locate_NameHA()
         response = "As you wish " + NameHA + ". Signing off..."
@@ -473,7 +464,7 @@ def run_haraya():
         Play_Shutdown_Sound()
         exit()
 
-    elif (hotword in str(command) for hotword in GoodBye_HotWords):
+    elif any(hotword in str(command) for hotword in GoodBye_HotWords):
         print(colorama.Fore.RED + str(command))
         response = "Goodbye " + NameHA + "! Have a great day!"
         run_Bison(reply=str(command))
@@ -495,7 +486,7 @@ def run_haraya():
 
     #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
     #Run Command: python haraya.py
-    elif (hotword in str(command) for hotword in GoogleSearch_HotWords):
+    elif any(hotword in str(command) for hotword in GoogleSearch_HotWords):
         run_Bison(reply=str(command))
         try:
             information = command.replace("search in google", '')
@@ -523,7 +514,7 @@ def run_haraya():
             exitHUD()
             exit()
 
-    elif (hotword in str(command) for hotword in YouTubeSearch_HotWords):
+    elif any(hotword in str(command) for hotword in YouTubeSearch_HotWords):
         response = "Searching..."
         run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
@@ -547,7 +538,7 @@ def run_haraya():
         speak(response1)
         Confirmation_SubFunction(command)
 
-    elif (hotword in str(command) for hotword in WikipediaSearch_HotWords):
+    elif any(hotword in str(command) for hotword in WikipediaSearch_HotWords):
         response = "Searching..."
         run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
@@ -767,7 +758,7 @@ def run_haraya():
         
     #________________________________________________________________________STANDBY_BLOCK
     #Run Command: python haraya.py
-    elif (hotword in str(command) for hotword in Standby_HotWords):
+    elif any(hotword in str(command) for hotword in Standby_HotWords):
         response = "Understood! Take your time. I'll wait."
         run_Bison(reply=str(command))
         print(colorama.Fore.GREEN + response)
