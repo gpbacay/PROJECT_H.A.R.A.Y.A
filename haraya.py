@@ -862,12 +862,11 @@ def run_haraya():
     #_______________________________________________________NoCommands/NotClearCommands_BLOCK
     #Run Command: python haraya.py
     elif "[]" == str(command) or "" == str(command):
-        time.sleep(3)
         print(colorama.Fore.RED + str(command))
         response = "Hello? Are you still there?"
+        run_Bison(chat_history_message_input=str(command), chat_history_message_output=response)
         print(colorama.Fore.GREEN + response)
         speak(response)
-        run_Bison(chat_history_message_input=str(command), chat_history_message_output=response)
         Play_Listening_Sound()
         Standby_SubFunction()
         
