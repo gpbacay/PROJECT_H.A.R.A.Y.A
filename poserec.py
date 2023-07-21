@@ -34,7 +34,7 @@ def Pose_Recognition_System():
                 nose_x = results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].x * image_width
                 nose_y = results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].y * image_height
                 
-                print(f'Nose Coordinates: ({round(nose_x)}, {round(nose_y)})')
+                print(f'\r Nose Coordinates: ({round(nose_x)}, {round(nose_y)})', end="\r")
 
             # Draw Landmarks
             mp_drawing.draw_landmarks(
