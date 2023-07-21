@@ -453,12 +453,14 @@ def run_haraya():
     def Standby_SubFunction():
         while True:
             command = Wait_command_MainFunction()
+            print(colorama.Fore.RED + str(command))
             if 'haraya' in str(command) or str(command) in Haraya_KeyWords:
                 Play_Prompt_Sound()
                 response = "Yes? How can I help you?"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
-                exit(run_haraya())
+                break
+        exit(run_haraya())
 
     #_______________________________________________________________________CONFIRMATION_SUBFUNCTION
     #Run Command: python haraya.py
