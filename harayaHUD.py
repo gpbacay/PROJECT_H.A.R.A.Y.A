@@ -33,7 +33,7 @@ class harayaHUD():
         first_frame = gif_reader.get_data(0)
         screen = pygame.display.set_mode(first_frame.shape[:2])
         pygame.display.set_caption("H.A.R.A.Y.A")
-        icon_image = pygame.image.load("ai.png")
+        icon_image = pygame.image.load("harayasorb_icon.png")
         pygame.display.set_icon(icon_image)
 
         # Set the initial playback speed (in frames per second)
