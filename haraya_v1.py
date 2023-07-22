@@ -31,7 +31,7 @@ Header = "H.A.R.A.Y.A (High-functioning Autonomous Responsive And Yielding Assis
 print(Header)
 
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
@@ -44,7 +44,7 @@ def speak(text):
 
 
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 def Play_Prompt_Sound():
     from playsound import playsound
     mp3_path = U"prompt1.mp3"
@@ -57,7 +57,7 @@ def Play_Listening_Sound():
     
     
 #______________________________________________________CORE_TEMPORARY_MEMORY_BANKS
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 Name = []
 Name_Honorific_Address = []
 NameList = []
@@ -70,7 +70,7 @@ Date = []
 count = []
 
 #______________________________________________________FACE_RECOGNITION_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 def Locate_MyFullName():
     with open("attendance.csv", "r+") as attendance:
         MyDatalist =  attendance.readlines()
@@ -90,7 +90,7 @@ and append it into the Name list in the memory banks.
 """
 
 #_______________________________________Binary-Gendered_Honorifics_Selector_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 def Locate_NameHA():
     Male_Names = ["Gianne Bacay",
                 "Earl Jay Tagud",
@@ -123,7 +123,7 @@ def Locate_NameHA():
 Locate_NameHA()
 
 #_____________________________________________INITIALIZE_FACE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 def Initialize_Face_Recognition_System():
     response = "Recognizing face..."
     print(response)
@@ -136,7 +136,7 @@ Initialize_Face_Recognition_System()
 
 
 #_____________________________________________INITIALIZE_POSE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 def Initialize_Pose_Recognition_System():
     response = "Recognizing pose..."
     print(response)
@@ -145,7 +145,7 @@ def Initialize_Pose_Recognition_System():
 
 
 #_______________________________________START_UP_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 def Start_Up_command_MainFunction():
     Play_Prompt_Sound()
     try:
@@ -159,7 +159,7 @@ def Start_Up_command_MainFunction():
 
 
 #______________________________LISTEN_COMMAND_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 def Listen_command_MainFunction():
     global command
     command = ''
@@ -178,7 +178,7 @@ def Listen_command_MainFunction():
 
 
 #______________________________ADD_COMMAND_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 def Add_command_MainFunction(command):
     
     Interrogative_words = ['what', ' what ', 'what ', ' what',
@@ -214,7 +214,7 @@ def Add_command_MainFunction(command):
 
 
 #______________________________WAIT_COMMAND_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 def Wait_command_MainFunction():
     global command
     command = ''
@@ -233,7 +233,7 @@ def Wait_command_MainFunction():
 
 
 #_______________________________________________________________________________haraya_CORE_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 def run_haraya():
     Locate_MyFullName()
     Locate_NameHA()
@@ -243,7 +243,7 @@ def run_haraya():
 
 
     #________________________________________________LISTS_OF_COMMAND_KEY_WORDS
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     Standby_KeyWords = ["standby",
                         "haraya stand by",
                         "just stand by",
@@ -666,7 +666,7 @@ def run_haraya():
                     "would you"]
 
     #_______________________________________________________________________STANDBY_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     def Standby_SubFunction():
         while True:
             command = Wait_command_MainFunction()
@@ -678,7 +678,7 @@ def run_haraya():
                 exit(run_haraya())
 
     #_______________________________________________________________________CONFIRMATION_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     def Confirmation_SubFunction(command):
         command = Add_command_MainFunction(command)
         
@@ -712,7 +712,7 @@ def run_haraya():
             exit(run_haraya())
 
     #_______________________________________________________________________REPEAT_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     def Repeat_SubFunction():
         command = ''
         
@@ -735,7 +735,7 @@ def run_haraya():
         Confirmation_SubFunction(command)
 
     #________________________________________________________________AUTO_REPLACEMENT_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     def Auto_Replacement_Subfunction(command):
 
         try:
@@ -756,7 +756,7 @@ def run_haraya():
         return command
     
     #______________________________________________________________________SPELLED_NUMBER_CONVERTER_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     def SpelledNumber_Converter(StrNumbers):
             number_words = {"zero": 0,
                             "one": 1,
@@ -799,17 +799,17 @@ def run_haraya():
             return total
         
     #______________________________________________________________NON_SPELLED_NUMBER_LOCATOR_and_CONVERTER_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     def NonSpelledNumber_Converter(string_numbers):
         numbers = re.findall(r"-?\d+", string_numbers)
         return [int(number) for number in numbers]
 
     #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     command = Listen_command_MainFunction()
 
     #______________________________________________________FACE_RECOGNITION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     if command in RunFaceRecog_KeyWords or command in InitializeFaceRecog_KeyWords or command in ActivateFaceRecog_KeyWords:
         if "run" in command:
             response = "Running Face Recognition System..."
@@ -830,7 +830,7 @@ def run_haraya():
         Confirmation_SubFunction(command)
         
     #______________________________________________________POSE_RECOGNITION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     if command in RunPoseRecog_KeyWords or command in InitializePoseRecog_KeyWords or command in ActivatePoseRecog_KeyWords:
         if "run" in command:
             response = "Running Pose Recognition System..."
@@ -846,12 +846,12 @@ def run_haraya():
         Confirmation_SubFunction(command)
 
     #________________________________________________________________REPEAT_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif command in Repeat_KeyWords:
         Repeat_SubFunction()
 
     #_________________________________________________________________BASIC_ARITHMETIC_CALCULATIONS_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif "*" in command or "times" in command or "multiply" in command:
         def Product_Calculator():
             global command
@@ -1019,7 +1019,7 @@ def run_haraya():
         Confirmation_SubFunction(command)
     
     #_________________________________________________________________ROLL_A_DIE_GAME_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif command in Roll_A_Die_KeyWords:
         def Roll_The_Dice():
             def Choose_A_Number():
@@ -1141,7 +1141,7 @@ def run_haraya():
         Confirmation_SubFunction(command)
 
     #________________________________________________________________TERMINATION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif command in Stop_KeyWords:
         print(command)
         Locate_NameHA()
@@ -1184,7 +1184,7 @@ def run_haraya():
         exit()
 
     #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif "in google" in command or "in google search" in command or "google" in command or "navigate" in command:
         try:
             information = command.replace("search in google", '')
@@ -1270,7 +1270,7 @@ def run_haraya():
         Confirmation_SubFunction(command)
 
     #________________________________________________________________________________________________OPEN/ACCESS_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif "open" in command or "access" in command:
         command = command.replace("open", '')
         command = command.replace("access", '')
@@ -1372,7 +1372,7 @@ def run_haraya():
         exit(Confirmation_SubFunction(command))
 
     #_________________________________________________________________________________________________DATE_and_TIME_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif command in CurrentDate_KeyWords:
         Date_format = datetime.datetime.now().strftime("%m/%d/%y")
         Date_format = Date_format.replace('/', ' ')
@@ -1459,7 +1459,7 @@ def run_haraya():
         Confirmation_SubFunction(command)
 
     #_____________________________________________________________________________________________________________QUERY_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif "what do you think about humans" in command or "what do you think about humanity" in command:
         command = Auto_Replacement_Subfunction(command + " do you think about humans?")
         response = ["Humans are odd. ",
@@ -1473,7 +1473,7 @@ def run_haraya():
         
         
     #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif "shutdown my computer" in command:
         response = "as you wish! shutting down your computer..."
         print(response)
@@ -1532,7 +1532,7 @@ def run_haraya():
         
         
     #_________________________________________________________________CONVERSATIONAL_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif command in Hello_Hi_KeyWords:
         if "hello" in command:
             try:
@@ -1715,7 +1715,7 @@ def run_haraya():
         exit(run_haraya())
         
     #_______________________________________________________________________________COUNTDOWN_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     
     elif command in Coundown_KeyWords or "countdown" in command:
         def Choose_A_Starting_Number():
@@ -1765,7 +1765,7 @@ def run_haraya():
         Confirmation_SubFunction(command)
         
     #________________________________________________________________________STANDBY_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif command in Standby_KeyWords:
         response = "Understood! Take your time. I'll wait."
         print(response)
@@ -1773,7 +1773,7 @@ def run_haraya():
         Standby_SubFunction()
         
     #_______________________________________________________NoCommands/NotClearCommands_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v1.py
     elif '' == command:
         time.sleep(3)
         print(command)
@@ -1797,7 +1797,7 @@ def run_haraya():
 while True:
     Start_Up_command_MainFunction()
     run_haraya()
-#Run Command: python haraya.py
+#Run Command: python haraya_v1.py
 
 #Run on openvino environment:
 #____________________________Get-ExecutionPolicy;
