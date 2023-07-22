@@ -8,13 +8,13 @@
 
 - **Speech Recognition**: HARAYA can understand speeches or voice commands, allowing for seamless and intuitive user interactions.
 
-- **Text to Speech**: HARAYA utilizes a Text to Speech module, allowing her to convert text-based data into spoken words. This allows HARAYA to provide information audibly, enhancing user interactions and making her even more intuitive and user-friendly.
+- **Text to Speech Generation**: HARAYA utilizes a Text to Speech module, allowing her to convert text-based data into spoken words. This allows HARAYA to provide information audibly, enhancing user interactions and making her even more intuitive and user-friendly.
 
 - **Face and Pose Recognition**: HARAYA is equipped with the ability to recognize faces and poses through computer vision, enabling applications in image analysis and identification.
 
 - **Computer Automation**: HARAYA can automate various computer tasks, streamlining workflows and enhancing productivity.
 
-- **Question Answering**: HARAYA utilizes Google AI's PaLM2 Large Language Model (LLM), renowned for its exceptional language understanding, generation, and conversational skills. Haraya can process human-like text, translate multiple languages, summarize, solve arithmetic problems, determine sentiment, answer a diverse range of questions, code, remember or memorize, follow instructions, comprehend context in convesation, and more.
+- **Natural Language Processing**: HARAYA utilizes Google AI's PaLM2 Large Language Model (LLM), renowned for its exceptional language understanding, generation, and conversational skills. Haraya can process human-like text, translate multiple languages, summarize, solve arithmetic problems, determine sentiment, answer a diverse range of questions, code, remember or memorize, follow instructions, comprehend context in convesation, and more.
 
 - **Web Search**: HARAYA can perform searches on the internet, providing relevant information and assisting users in finding desired content.
 
