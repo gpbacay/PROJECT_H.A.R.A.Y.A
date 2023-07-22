@@ -26,7 +26,7 @@ Previous Activity:\n
 
 Our Chat History/Previous conversation:
 <{}>.\n
-Note: Assimilate and summarize our chat history in one paragraph if asked.\n
+Note: Assimilate and summarize our chat history before explaining.\n
 """
     
 context = """"
