@@ -3,7 +3,6 @@ import pygame
 from pygame.locals import *
 from PIL import Image
 import random
-import os
 from threading import Thread
 
 class harayaHUD():
@@ -87,12 +86,8 @@ class harayaHUD():
                         elif selector == 1:
                             gif_path = "harayasorb.gif"
                             gif_reader = imageio.get_reader(gif_path)
-                            current_frame -= 1
-                            if current_frame < -1000:
-                                current_frame = len(gif_reader) - 1
-                            elif current_frame >= len(gif_reader):
-                                current_frame = -1000
-                            playback_speed = 1000
+                            current_frame += 1
+                            playback_speed = random.randint(14, 15)
                             clock.tick(playback_speed)
                     except EOFError:
                         # Reached the end of the GIF, restart from the beginning
