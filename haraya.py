@@ -20,6 +20,12 @@ from LoadingBar import LoadingBar
 runLoadingBar = LoadingBar.RunLoadingBar
 import pyautogui
 
+import colorama
+colorama.init(autoreset=True)
+Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + "\t\t\t\t H.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant) \t\t\t\t\n"
+tHeader = Thread(target=print, args=(Header,))
+tHeader.start()
+
 from PaLM2_LLM import run_Bison
 tStartUp = Thread(target=run_Bison, args=("you are now online",))
 tStartUp.start()
@@ -27,11 +33,6 @@ tStartUp.start()
 tStartUp = Thread(target=playsound, args=(U"startUp.mp3",))
 tStartUp.start()
 time.sleep(1)
-import colorama
-colorama.init(autoreset=True)
-Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + "\t\t\t\t H.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant) \t\t\t\t\n"
-tHeader = Thread(target=print, args=(Header,))
-tHeader.start()
 
 from harayaHUD import harayaHUD
 runHUD = harayaHUD.runHUD
