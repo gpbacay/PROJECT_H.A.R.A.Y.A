@@ -2,13 +2,13 @@
 
 ![HARAYA Logo](ai.png)
 
-**HARAYA**, an acronym for **H**igh-functioning **A**utonomous **R**esponsive **A**nthropomorphic **Y**ielding **A**ssistant, is an exceptional leap in AI virtual assistants, solely developed by [*Gianne P. Bacay*](https://www.facebook.com/giannebacay). It seamlessly integrates cutting-edge technologies in artificial intelligence, computer vision, web data scraping, automation, and natural language processing to offer a personalized and remarkably human-like experience. HARAYA operates autonomously, continuously adapting through advanced machine learning techniques, and excels in executing complex tasks, making informed decisions, and providing unparalleled user support. Its anthropomorphic characteristics foster engaging communication, while its yielding nature allows it to tailor assistance to individual users, redefining the landscape of virtual assistant interactions and marking a new era of user-centric AI virtual assistant experiences.
+**HARAYA**, an acronym for **H**igh-functioning **A**utonomous **R**esponsive **A**nthropomorphic **Y**ielding **A**ssistant, is an exceptional leap in AI virtual assistants, solely developed by [*Gianne P. Bacay*](https://www.facebook.com/giannebacay). It seamlessly integrates cutting-edge technologies in artificial intelligence, such as computer vision, web data scraping, automation, deep learning, large language models (LLMs), natural language processing (NLP), and large language generation (NLG) to offer a personalized and remarkably human-like experience. HARAYA operates autonomously, continuously adapting through advanced machine learning techniques, and excels in executing complex tasks, making informed decisions, and providing unparalleled user support. Its anthropomorphic characteristics foster engaging communication, while its yielding nature allows it to tailor assistance to individual users, redefining the landscape of virtual assistant interactions and marking a new era of user-centric AI virtual assistant experiences.
 
 ## Features
 
 - **Speech Recognition**: HARAYA can understand speeches or voice commands, allowing for seamless and intuitive user interactions.
 
-- **Text to Speech**: HARAYA includes a Text to Speech ability, allowing it to convert text-based information into spoken words. This feature enhances user interactions by enabling HARAYA to provide information audibly, making it even more intuitive and user-friendly.
+- **Text to Speech**: HARAYA utilizes a Text to Speech module, allowing her to convert text-based data into spoken words. This allows HARAYA to provide information audibly, enhancing user interactions and making her even more intuitive and user-friendly.
 
 - **Face and Pose Recognition**: HARAYA is equipped with the ability to recognize faces and poses through computer vision, enabling applications in image analysis and identification.
 
@@ -52,7 +52,7 @@ Before getting started with HARAYA, ensure that you meet the following prerequis
 
         C:\Users\Gianne Bacay\Desktop\PROJECT_H.A.R.A.Y.A\haraya.py
 
-3. Install the required dependencies using `pip`, the Python package manager. Execute the following command:
+3. Open `haraya.py` in integrated terminal and install the required dependencies using `pip`, the Python package manager. Execute the following command in the integrated terminal:
 
         pip install -r requirements.txt
 
@@ -97,5 +97,5 @@ If you have any questions, suggestions, or feedback, please feel free to reach o
 
 - Creator's GitHub profile: [https://github.com/gpbacay](https://github.com/gpbacay)
 
-Thank you for choosing HARAYA as your AI virtual assistant. We hope HARAYA enhances your productivity, provides valuable information, and delivers a personalized experience.
+Thank you for choosing HARAYA as your AI virtual assistant. I hope HARAYA enhances your productivity, provides valuable information, and delivers a personalized experience.
 
