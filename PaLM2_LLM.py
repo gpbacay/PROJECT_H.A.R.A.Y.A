@@ -1,7 +1,7 @@
 import os
 import google.generativeai as palm
-from dotenv import load_dotenv, find_dotenv
 from webDataScrapingSystem import DataScrapper
+from dotenv import load_dotenv, find_dotenv
 
 
 load_dotenv(find_dotenv())

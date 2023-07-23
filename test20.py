@@ -1,39 +1,61 @@
-# Copyright (c) Microsoft. All rights reserved.
-# Licensed under the MIT license. See LICENSE.md file in the project root for full license information.
+import os
+from google.cloud import texttospeech
+import pyaudio
 
-# <code>
-import azure.cognitiveservices.speech as speechsdk
+# Set your Google Cloud credentials as you did before
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"nodal-skein-392905-babe98c4288f.json"
 
-# Creates an instance of a speech config with specified subscription key and service region.
-# Replace with your own subscription key and service region (e.g., "westus").
-speech_key, service_region = "YourSubscriptionKey", "YourServiceRegion"
-speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
+def Speak(input_text: str):
+    # Initialize the Text-to-Speech client
+    client = texttospeech.TextToSpeechClient()
 
-# Set the voice name, refer to https://aka.ms/speech/voices/neural for full list.
-speech_config.speech_synthesis_voice_name = "en-US-AriaNeural"
+    # Set the text input to be synthesized
+    synthesis_input = texttospeech.SynthesisInput(text=input_text)
 
-# Creates a speech synthesizer using the default speaker as audio output.
-speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config)
+    # Build the voice request, select the language code ("en-US") and the ssml
+    # voice gender ("neutral")
+    voice = texttospeech.VoiceSelectionParams(
+        language_code="fil-ph",#language_code="fil-PH",
+        name="fil-ph-Neural2-A",#name="fil-PH-Wavenet-A",
+        ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
+    )
 
-# Receives a text from console input.
-print("Type some text that you want to speak...")
-text = input()
+    # Select the type of audio file you want returned
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.LINEAR16,
+        sample_rate_hertz=16000
+    )
 
-# Synthesizes the received text to speech.
-# The synthesized speech is expected to be heard on the speaker with this line executed.
-result = speech_synthesizer.speak_text_async(text).get()
+    # Perform the text-to-speech request on the text input with the selected
+    # voice parameters and audio file type
+    response = client.synthesize_speech(
+        input=synthesis_input, voice=voice, audio_config=audio_config
+    )
 
-# Checks result.
-if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
-    print("Speech synthesized to speaker for text [{}]".format(text))
-elif result.reason == speechsdk.ResultReason.Canceled:
-    cancellation_details = result.cancellation_details
-    print("Speech synthesis canceled: {}".format(cancellation_details.reason))
-    if cancellation_details.reason == speechsdk.CancellationReason.Error:
-        if cancellation_details.error_details:
-            print("Error details: {}".format(cancellation_details.error_details))
-    print("Did you update the subscription info?")
-# </code>
-#___________________pip install azure-cognitiveservices-speech
+    # Initialize PyAudio
+    p = pyaudio.PyAudio()
+
+    # Open a new stream to play the audio
+    stream = p.open(
+        format=pyaudio.paInt16,
+        channels=1,
+        rate=16000,
+        output=True
+    )
+
+    # Play the audio by writing the raw data to the stream
+    stream.write(response.audio_content)
+
+    # Stop and close the stream
+    stream.stop_stream()
+    stream.close()
+
+    # Terminate PyAudio
+    p.terminate()
+
+if __name__ == '__main__':
+    Speak("Initializing Face Recognition System! Hello, Gianne P. Bacay, I am Haraya! How can I help you?")
+
+#___________________pip install --upgrade google-cloud-texttospeech
 #___________________python test20.py
 
