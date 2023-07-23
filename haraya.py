@@ -48,11 +48,11 @@ tGUI.start()
 recognizer = sr.Recognizer()
 
 def speak(text_input):
-    time.sleep(3)
-    tSpeaking = Thread(target=setIsRandom, args=(1,))
-    tSpeaking.start()
     tSpeak = Thread(target=hveSpeak, args=(text_input,))
     tSpeak.start()
+    time.sleep(1)
+    tSpeaking = Thread(target=setIsRandom, args=(1,))
+    tSpeaking.start()
     tSpeak.join()
     setIsRandom(0)
 
