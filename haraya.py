@@ -48,8 +48,12 @@ tGUI.start()
 recognizer = sr.Recognizer()
 
 def speak(text_input):
-    setIsRandom(1)
-    hveSpeak(text_input)
+    time.sleep(3)
+    tSpeaking = Thread(target=setIsRandom, args=(1,))
+    tSpeaking.start()
+    tSpeak = Thread(target=hveSpeak, args=(text_input,))
+    tSpeak.start()
+    tSpeak.join()
     setIsRandom(0)
 
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
@@ -778,7 +782,7 @@ def run_haraya():
     else:
         print(colorama.Fore.RED + str(command))
         response = run_Bison(reply=command, user_name=MyName)
-        print(colorama.Fore.YELLOW + response)
+        print(colorama.Fore.YELLOW + str(response))
         speak(response)
         exit(run_haraya())
     exitHUD()
