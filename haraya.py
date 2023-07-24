@@ -21,7 +21,7 @@ runLoadingBar = LoadingBar.RunLoadingBar
 import pyautogui
 import colorama
 
-tStartUp = Thread(target=playsound, args=(U"startUp.mp3",))
+tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
 tStartUp.start()
 
 colorama.init(autoreset=True)
@@ -57,15 +57,15 @@ def speak(text):
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
 #Run Command: python haraya.py
 def Play_Prompt_Sound():
-    mp3_path = U"prompt1.mp3"
+    mp3_path = u"audioFiles\\prompt1.mp3"
     playsound(mp3_path)
     
 def Play_Listening_Sound():
-    mp3_path = u"Listening.mp3"
+    mp3_path = u"audioFiles\\Listening.mp3"
     playsound(mp3_path)
     
 def Play_Shutdown_Sound():
-    mp3_path = u"shutdown.mp3"
+    mp3_path = u"audioFiles\\shutdown.mp3"
     playsound(mp3_path)
 #______________________________________________________CORE_TEMPORARY_MEMORY_BANKS
 #Run Command: python haraya.py
