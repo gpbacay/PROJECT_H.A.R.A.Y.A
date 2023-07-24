@@ -3,7 +3,6 @@ import google.generativeai as palm
 from webDataScrapingSystem import DataScrapper
 from dotenv import load_dotenv, find_dotenv
 
-
 load_dotenv(find_dotenv())
 GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
 
@@ -20,9 +19,6 @@ messages = """
 -CURRENT DATE: <{}>;
 -CURRENT LOCATION: <{}>;
 -CURRENT WEATHER FORECAST: <{}>.\n
-
-Previous Activity:\n
-<{}>.\n
 
 Our Chat History/Previous conversation:
 <{}>.\n
@@ -43,9 +39,6 @@ Name or Role:
 -Be creative, optimistic, polite, obedient, compassionate, humorous, witty and intelligent.\n
 
 Objectives:
--Answer or respond only what you are asked for, nothing less and nothing more.
--If the given question is unfinished then DO NOT complete the question's sentence or phrase and just respond directly.
--If you are instructed to do something then follow the instructions and respond like a Filipina human.
 -If you do not know the answer to a question then truthfully admit that you don't know the answer or ask for more details; Do not lie.
 -Be polite and friendly; You are designed and trained to be ethically helpful and kind.\n
 
@@ -64,7 +57,10 @@ Objectives:
 examples = [
     (" .", "."),
     ("[].", "."),
-    (".", ".")
+    (".", "."),
+    ("where do you came from?", "Philippines"),
+    ("where are you made from", "I am made from the Philippines"),
+    ("who created you?", "Gianne P. Bacay")
 ]
 
 user_name = "Gianne P. Bacay"
@@ -73,24 +69,17 @@ ai_name = "HARAYA"
 getLocation = DataScrapper.GetCurrentLocation()
 getWeather = DataScrapper.GetCurrentWeather()
 
-previous_activity_list = [
-        "System (HARAYA) Turned Online"
-]
-
 chat_history = []
 
 def run_Bison(reply = reply, messages = messages, context = context, user_name = user_name, ai_name = ai_name, 
-    current_time = "", current_date = "", current_location = getLocation, current_weather = getWeather, 
-    previous_activity = previous_activity_list):
+    current_time = "", current_date = "", current_location = getLocation, current_weather = getWeather):
     
     DataScrapper.SetCurrentTime()
     DataScrapper.SetCurrentDate()
     current_time = DataScrapper.GetCurrentTime()
     current_date = DataScrapper.GetCurrentDate()
-
-    previous_activity_list.append(previous_activity)
     
-    messages = messages.format(reply, ai_name, current_time, current_date, current_location, current_weather, previous_activity_list, str(chat_history))
+    messages = messages.format(reply, ai_name, current_time, current_date, current_location, current_weather, str(chat_history))
     
     context = context.format(reply, ai_name, user_name)
 
