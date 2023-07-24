@@ -44,5 +44,5 @@ colorama
 pygame
 imageio
 pydub
-
-
+gtts
+pyglet

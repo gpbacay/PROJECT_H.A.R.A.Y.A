@@ -373,7 +373,9 @@ def run_haraya():
                             "in google find",
                             "find in google",
                             "in google",
-                            "google search"]
+                            "google search",
+                            "go on google",
+                            "on google"]
     
     YouTubeSearch_HotWords = ["in youtube search",
                             "search in youtube",
@@ -382,14 +384,18 @@ def run_haraya():
                             "in youtube find",
                             "find in youtube",
                             "in youtube",
-                            "youtube search"]
+                            "youtube search",
+                            "go on youtube",
+                            "on youtube"]
     
     WikipediaSearch_HotWords = ["in wikipedia search",
                             "search in wikipedia",
                             "in wikipedia find",
                             "find in wikipedia",
                             "in wikipedia",
-                            "wikipedia search"]
+                            "wikipedia search",
+                            "go on wikipedia",
+                            "on wikipedia"]
 
     #_______________________________________________________________________STANDBY_SUBFUNCTION
     #Run Command: python haraya.py
@@ -399,7 +405,6 @@ def run_haraya():
             print(colorama.Fore.RED + str(command))
             if any(hotword in str(command) for hotword in Haraya_HotWords):
                 response = "Yes? How can I help you?"
-                run_Bison(reply="Haraya, are you there?")
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 break
@@ -434,12 +439,12 @@ def run_haraya():
     #Run Command: python haraya.py
 
     command = str(Listen_command_MainFunction())
+    run_Bison(reply=command)
     
     #______________________________________________________POSE_RECOGNITION_BLOCK
     #Run Command: python haraya.py
     if "run" in str(command) or "activate" in str(command) or "initialize" in str(command):
         if "face recognition system" in str(command):
-            run_Bison(reply="Run the face recognition system")
             Initialize_Face_Recognition_System()
             NameHA = Name_Honorific_Address[-1]
             MyName = Name[-1]
@@ -449,7 +454,6 @@ def run_haraya():
             speak(response1)
             Confirmation_SubFunction(command)
         elif "pose recognition system" in str(command):
-            run_Bison(reply="you are told to run the pose recognition system")
             Initialize_Pose_Recognition_System()
             Confirmation_SubFunction(command)
 
@@ -459,7 +463,6 @@ def run_haraya():
         print(colorama.Fore.RED + str(command))
         Locate_NameHA()
         response = "As you wish " + NameHA + ". Signing off..."
-        run_Bison(reply="Sign off")
         print(colorama.Fore.GREEN + response)
         speak(response)
         exitHUD()
@@ -469,7 +472,6 @@ def run_haraya():
     elif any(hotword in str(command) for hotword in GoodBye_HotWords):
         print(colorama.Fore.RED + str(command))
         response = "Goodbye " + NameHA + "! Have a great day!"
-        run_Bison(reply="That's a wrap, goodbye haraya")
         print(colorama.Fore.GREEN + response)
         speak(response)
         exitHUD()
@@ -479,7 +481,6 @@ def run_haraya():
     elif "turn off my computer" in str(command):
         print(colorama.Fore.RED + str(command))
         response = "As you wish " + NameHA + ". Turning off..."
-        run_Bison(reply="Turn off my computer")
         print(colorama.Fore.GREEN + response)
         speak(response)
         exitHUD()
@@ -520,7 +521,6 @@ def run_haraya():
             information = search_list[-1]
             response = "Searching" + colorama.Fore.RED + information
             response1 = "Searching" + information
-            run_Bison(reply=f"In Google, search: {information}.")
             print(colorama.Fore.GREEN + response)
             speak(response1)
             for i in range(1):
@@ -571,7 +571,6 @@ def run_haraya():
         pywhatkit.playonyt(song_title)
         response = "Now Playing" + colorama.Fore.RED + song_title
         response1 = "Now Playing" + song_title
-        run_Bison(reply=f"In YouTube, play: {song_title}.")
         print(colorama.Fore.GREEN + response)
         speak(response1)
         Confirmation_SubFunction(command)
@@ -602,7 +601,6 @@ def run_haraya():
         person = person.replace("in wikipedia search", '')
         person = person.replace("haraya", '')
         person = person.replace("who is", '')
-        run_Bison(reply=f"In wikipedia, search: {person}.")
         info = wikipedia.summary(person, 1)
         print(info)
         speak(info)
@@ -717,7 +715,6 @@ def run_haraya():
                 
             elif "downloads" in str(command) or "download" in str(command):
                 response = "As you wish!"
-                run_Bison(reply=str(command))
                 print(colorama.Fore.GREEN + response)
                 speak(response)
                 program = "C:\\Users\\Gianne Bacay\\Desktop\\Downloads.lnk"
@@ -737,7 +734,7 @@ def run_haraya():
                 response1 = "Opening " + "Videos..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
-            run_Bison(reply=f"Task: {response1}")
+                
         except:
             response = """Access denied! An error occured while accessing."""
             print(colorama.Fore.LIGHTRED_EX + response)
@@ -749,7 +746,6 @@ def run_haraya():
     #Run Command: python haraya.py
     elif "shutdown my computer" in str(command):
         response = "as you wish! shutting down your computer..."
-        run_Bison(reply="shutdown my computer")
         print(colorama.Fore.GREEN + response)
         speak(response)
         os.system("shutdown /s /t 0")
@@ -759,7 +755,6 @@ def run_haraya():
 
     elif "restart my computer" in str(command):
         response = "as you wish! restarting your computer..."
-        run_Bison(reply="restart my computer")
         print(colorama.Fore.GREEN + response)
         speak(response)
         os.system("shutdown /r")
@@ -769,7 +764,6 @@ def run_haraya():
 
     elif "sign off my computer" in str(command) or "signoff my computer" in str(command):
         response = "as you wish! signing off your computer..."
-        run_Bison(reply="Sign off my computer")
         print(colorama.Fore.GREEN + response)
         speak(response)
         os.system("shutdown /l")
@@ -778,7 +772,6 @@ def run_haraya():
         
     elif "logout my computer" in str(command) or "log out my computer" in str(command):
         response = "as you wish! logging out your computer..."
-        run_Bison(reply="Log out my computer")
         print(colorama.Fore.GREEN + response)
         speak(response)
         os.system("shutdown /l")
@@ -787,7 +780,6 @@ def run_haraya():
         
     elif "sign out my computer" in str(command) or "signout my computer" in str(command):
         response = "as you wish! signing out your computer..."
-        run_Bison(reply="Sign out my computer")
         print(colorama.Fore.GREEN + response)
         speak(response)
         os.system("shutdown /l")
@@ -796,7 +788,6 @@ def run_haraya():
         
     elif "increase" in str(command) and "volume" in str(command) or "volume up" in str(command):
         response = "Increasing volume..."
-        run_Bison(reply="Increase the volume of my computer")
         print(colorama.Fore.GREEN + response)
         speak(response)
         pyautogui.press("volumeup", 10)
@@ -805,7 +796,6 @@ def run_haraya():
         
     elif "decrease" in str(command) and "volume" in str(command) or "lower down the volume" in str(command) or "lower the volume" in str(command):
         response = "Decreasing volume..."
-        run_Bison(reply="Decrease the volume of my computer")
         print(colorama.Fore.GREEN + response)
         speak(response)
         pyautogui.press("volumedown", 10)
@@ -816,7 +806,6 @@ def run_haraya():
     #Run Command: python haraya.py
     elif any(hotword in str(command) for hotword in Standby_HotWords):
         response = "Sure, take your time. I'll wait."
-        run_Bison(reply="Wait")
         print(colorama.Fore.GREEN + response)
         speak(response)
         Standby_SubFunction()
@@ -826,7 +815,6 @@ def run_haraya():
     elif "[]" == str(command) or "" == str(command):
         print(colorama.Fore.RED + str(command))
         response = "Hello? Are you still there?"
-        run_Bison(reply="You heard nothing")
         print(colorama.Fore.GREEN + response)
         speak(response)
         Play_Listening_Sound()
