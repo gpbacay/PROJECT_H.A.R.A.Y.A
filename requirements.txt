@@ -35,7 +35,6 @@ pyinstaller
 sentence_transformers
 transformers
 InstructorEmbedding
-chromadb
 google-generativeai
 einops
 accelerate

@@ -5,9 +5,10 @@ import pyaudio
 # Set your Google Cloud credentials as you did before
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"nodal-skein-392905-babe98c4288f.json"
 
+# Initialize the Text-to-Speech client
+client = texttospeech.TextToSpeechClient()
+    
 def Speak(input_text: str):
-    # Initialize the Text-to-Speech client
-    client = texttospeech.TextToSpeechClient()
 
     # Set the text input to be synthesized
     synthesis_input = texttospeech.SynthesisInput(text=input_text)

@@ -683,12 +683,11 @@ def run_haraya():
                 response1 = "Opening " + "Videos..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
-                
+            run_Bison(reply=f"Task: {response1}")
         except:
             response = """Access denied! An error occured while accessing."""
             print(colorama.Fore.LIGHTRED_EX + response)
             speak(response)
-        run_Bison(reply=f"Task: {response1}")
         exit(Confirmation_SubFunction(command))
         
         
