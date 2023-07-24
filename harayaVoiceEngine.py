@@ -4,7 +4,7 @@ import pyaudio
 import wave
 
 # Set your Google Cloud credentials as you did before
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"nodal-skein-392905-babe98c4288f.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"Resources\\nodal-skein-392905-babe98c4288f.json"
 
 # Initialize the Text-to-Speech client
 client = texttospeech.TextToSpeechClient()

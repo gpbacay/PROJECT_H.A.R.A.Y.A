@@ -13,7 +13,7 @@ class harayaHUD():
 
     global is_random, gif_path, running
     is_random = 0
-    gif_path = "harayasorb1.gif"
+    gif_path = "Resources\\harayasorb.gif"
     running = True
     
     def setIsRandom(num=0):
@@ -33,7 +33,7 @@ class harayaHUD():
         first_frame = gif_reader.get_data(0)
         screen = pygame.display.set_mode(first_frame.shape[:2])
         pygame.display.set_caption("H.A.R.A.Y.A")
-        icon_image = pygame.image.load("harayasorb_icon.png")
+        icon_image = pygame.image.load("Resources\\harayasorb_icon.png")
         pygame.display.set_icon(icon_image)
 
         # Set the initial playback speed (in frames per second)
@@ -78,13 +78,13 @@ class harayaHUD():
 
                         selector = random.randint(0,is_random)
                         if selector == 0:
-                            gif_path = "harayasorb1.gif"
+                            gif_path = "Resources\\harayasorb1.gif"
                             gif_reader = imageio.get_reader(gif_path)
                             current_frame += 1
                             playback_speed = random.randint(14, 15)
                             clock.tick(playback_speed)
                         elif selector == 1:
-                            gif_path = "harayasorb.gif"
+                            gif_path = "Resources\\harayasorb.gif"
                             gif_reader = imageio.get_reader(gif_path)
                             current_frame += 1
                             playback_speed = random.randint(14, 15)
