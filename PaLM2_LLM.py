@@ -91,7 +91,7 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
         model="models/chat-bison-001",
         context=context,
         messages=messages,
-        temperature=1.0
+        temperature=0.1
     )
     reply = str(reply) + "."
     
