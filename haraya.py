@@ -19,8 +19,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 from LoadingBar import LoadingBar 
 runLoadingBar = LoadingBar.RunLoadingBar
 import pyautogui
-
 import colorama
+
+tStartUp = Thread(target=playsound, args=(U"startUp.mp3",))
+tStartUp.start()
+
 colorama.init(autoreset=True)
 Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + "\t\t\t\t H.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant) \t\t\t\t\n"
 tHeader = Thread(target=print, args=(Header,))
@@ -29,10 +32,6 @@ tHeader.start()
 from PaLM2_LLM import run_Bison
 tStartUp = Thread(target=run_Bison, args=("you are now online",))
 tStartUp.start()
-
-tStartUp = Thread(target=playsound, args=(U"startUp.mp3",))
-tStartUp.start()
-time.sleep(1)
 
 from harayaHUD import harayaHUD
 runHUD = harayaHUD.runHUD
@@ -47,7 +46,7 @@ recognizer = sr.Recognizer()
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[2].id)
+engine.setProperty('voice', voices[0].id)
 
 def speak(text):
     setIsRandom(1)
@@ -157,7 +156,6 @@ def Initialize_Pose_Recognition_System():
     response = "Initializing Pose Recognition System"
     speak(response)
     tPRS.join()
-    Play_Prompt_Sound()
 
 
 #_______________________________________START_UP_MAIN_FUNCTION
@@ -374,7 +372,8 @@ def run_haraya():
                             "navigate in google",
                             "in google find",
                             "find in google",
-                            "in google"]
+                            "in google",
+                            "google search"]
     
     YouTubeSearch_HotWords = ["in youtube search",
                             "search in youtube",
@@ -382,13 +381,15 @@ def run_haraya():
                             "play in youtube",
                             "in youtube find",
                             "find in youtube",
-                            "in youtube"]
+                            "in youtube",
+                            "youtube search"]
     
     WikipediaSearch_HotWords = ["in wikipedia search",
                             "search in wikipedia",
                             "in wikipedia find",
                             "find in wikipedia",
-                            "in wikipedia"]
+                            "in wikipedia",
+                            "wikipedia search"]
 
     #_______________________________________________________________________STANDBY_SUBFUNCTION
     #Run Command: python haraya.py
