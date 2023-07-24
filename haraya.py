@@ -4,9 +4,7 @@ import time
 from playsound import playsound
 import speech_recognition as sr
 import pywhatkit
-
-import harayaVoiceEngine
-hveSpeak = harayaVoiceEngine.Speak
+import pyttsx3
 
 from facerec import Face_Recognition_System
 from poserec import Pose_Recognition_System
@@ -47,13 +45,14 @@ tGUI.start()
 #Run Command: python haraya.py
 recognizer = sr.Recognizer()
 
-def speak(text_input):
-    tSpeak = Thread(target=hveSpeak, args=(text_input,))
-    tSpeak.start()
-    time.sleep(1)
-    tSpeaking = Thread(target=setIsRandom, args=(1,))
-    tSpeaking.start()
-    tSpeak.join()
+engine = pyttsx3.init()
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[2].id)
+
+def speak(text):
+    setIsRandom(1)
+    engine.say(text)
+    engine.runAndWait()
     setIsRandom(0)
 
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
