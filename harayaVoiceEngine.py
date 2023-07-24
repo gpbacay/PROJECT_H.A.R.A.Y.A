@@ -16,7 +16,7 @@ def Speak(input_text: str):
     # voice gender ("neutral")
     voice = texttospeech.VoiceSelectionParams(
         language_code="en-GB",
-        name="en-GB-Neural2-F",
+        name="en-GB-Neural2-A",
         ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
     )
 
