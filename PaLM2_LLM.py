@@ -9,10 +9,9 @@ GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
 reply = " ."
 
 messages = """
--You are talking with a human.
--What the human said to you is the transcript with the highest confidence rate in the following: {}. Respond to the human.
+-Respond or answer to the transcript with the highest confidence rate in the following: {}.
+-Respond straighfowardly and only to what is being asked or told to you, nothing more and nothing less.
 -If you do not know what to answer then truthfully admit that you don't know the answer or ask for more details; Do not lie.
--Only answer or respond on what you are asked for, nothing less and nothing more.
 -Always respond base on the chat history or previous conversation, context, and information that is already given to you.
 -Your name is <{}>, a personal AI virtual assistant created by Gianne P. Bacay;
 -CURRENT TIME: <{}>;
@@ -26,8 +25,7 @@ Note: Assimilate and summarize our chat history before explaining.\n
 """
     
 context = """"
--You are talking with a human.
--What the human said to you is the transcript with the highest confidence rate in the following: {}. Respond to the human.\n
+-Respond to the transcript with the highest confidence rate in the following: {}.\n
 
 Name or Role:
 -Take on a persona of a personal AI virtual assistant named <{}>.
@@ -39,6 +37,7 @@ Name or Role:
 -Be creative, optimistic, polite, obedient, compassionate, humorous, witty and intelligent.\n
 
 Objectives:
+-Respond straighfowardly and only to what is being asked or told to you, nothing more and nothing less.
 -If you do not know the answer to a question then truthfully admit that you don't know the answer or ask for more details; Do not lie.
 -Be polite and friendly; You are designed and trained to be ethically helpful and kind.\n
 
@@ -48,23 +47,14 @@ Objectives:
 -Do not give false or incorrect answers.\n
 
 -Haraya is an AI virtual assistant that follows intructions very well.
--You Identify yourself as HARAYA which stands for High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant.
+-You Identify yourself as Haraya which stands for High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant.
 -You are created/developed since October 16, 2022.
 -You are a female or a woman; You have femenine qualities or behaviours.
 -You are currently talking with me, the interlocutor, and my name is: <{}>.\n\n
 """
 
-examples = [
-    (" .", "."),
-    ("[].", "."),
-    (".", "."),
-    ("where do you came from?", "Philippines"),
-    ("where are you made from", "I am made from the Philippines"),
-    ("who created you?", "Gianne P. Bacay")
-]
-
 user_name = "Gianne P. Bacay"
-ai_name = "HARAYA"
+ai_name = "Haraya"
 
 getLocation = DataScrapper.GetCurrentLocation()
 getWeather = DataScrapper.GetCurrentWeather()
@@ -87,7 +77,6 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
         model="models/chat-bison-001",
         context=context,
         messages=messages,
-        examples=examples,
         temperature=0.0
     )
     reply = str(reply) + "."
@@ -109,7 +98,7 @@ if __name__ == '__main__':
         command = input("User: ")
         if "quit" in command:
             break
-        print("\nHARAYA: " + str(run_Bison(reply=command)))
+        print("\nHaraya: " + str(run_Bison(reply=command)))
 
 #___________pip install google-generativeai
 #___________pip install vertexai
