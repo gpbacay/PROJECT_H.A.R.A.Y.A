@@ -107,7 +107,8 @@ def Locate_NameHA():
                 "CK Zoe Villegas", 
                 "Pio Bustamante",
                 "Rolyn Morales",
-                "Alexander Villasis"]
+                "Alexander Villasis",
+                "Bryan Sarpamones"]
 
     Female_Names = ["Kleinieir Pearl Kandis Bacay",
                     "Princess Viznar",
