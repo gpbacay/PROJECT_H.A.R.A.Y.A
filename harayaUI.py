@@ -100,6 +100,7 @@ class harayaUI():
         # Clean up
         gif_reader.close()
         pygame.quit()
+        exit()
 
 if __name__ == '__main__':
     runUI = harayaUI.runUI
