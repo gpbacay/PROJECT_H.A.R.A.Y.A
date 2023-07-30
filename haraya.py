@@ -790,9 +790,13 @@ def run_haraya():
                             print(colorama.Fore.GREEN + response)
                             speak(response)
                         except psutil.AccessDenied:
-                            print("Permission denied. Unable to close Chrome.")
+                            response = "Permission denied. Unable to close Chrome."
+                            print(colorama.Fore.LIGHTRED_EX + response)
+                            speak(response)
                         except psutil.NoSuchProcess:
-                            print("Chrome is not running.")
+                            response = "Chrome is not running."
+                            print(colorama.Fore.LIGHTRED_EX + response)
+                            speak(response)
                         break
                 else:
                     print("Chrome is not running.")
