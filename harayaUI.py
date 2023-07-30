@@ -48,6 +48,8 @@ class harayaUI():
         while running:
             try:
                 for event in pygame.event.get():
+                    if event.type == QUIT:
+                        exit()
                     if event.type == KEYDOWN:
                         if event.key == K_UP:
                             setIsRandom(0)
