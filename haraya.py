@@ -766,7 +766,6 @@ def run_haraya():
                 response1 = "Opening " + "Videos..."
                 print(colorama.Fore.GREEN + response)
                 speak(response1)
-                
         except Exception as e:
             response = f"""An error occurLIGHTGREEN_EX while trying to open the said program: {e}"""
             print(colorama.Fore.LIGHTLIGHTGREEN_EX_EX + response)
@@ -776,6 +775,7 @@ def run_haraya():
     #________________________________________________________________________________________________CLOSE_BLOCK
     #Run Command: python haraya.py
     elif any(hotword in str(command) for hotword in Close_HotWords):
+        print(colorama.Fore.LIGHTGREEN_EX + str(command))
         try:
             if "chrome" in str(command):
                 response = "Closing " + colorama.Fore.LIGHTGREEN_EX + "Chrome" + colorama.Fore.GREEN + "..."
@@ -785,7 +785,8 @@ def run_haraya():
                 for process in psutil.process_iter(['pid', 'name']):
                     if process.info['name'] == 'chrome.exe':
                         try:
-                            process.kill()
+                            process.terminate()
+                            pyautogui.hotkey("ctrl", "w")
                             response = "Chrome has been closed."
                             print(colorama.Fore.GREEN + response)
                             speak(response)
