@@ -439,7 +439,7 @@ def run_haraya():
         while True:
             command = Wait_command_MainFunction()
             print(colorama.Fore.LIGHTGREEN_EX + str(command))
-            if any(hotword in str(command) for hotword in Haraya_HotWords):
+            if any(hotword in str(command) for hotword in Haraya_HotWords) or "yes I'm here" in str(command):
                 response = "Yes? How can I help you?"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
@@ -464,7 +464,7 @@ def run_haraya():
             response = "Alright then, signing off!"
             print(colorama.Fore.GREEN + response)
             speak(response)
-            exit(run_haraya())
+            exit()
             
         elif '' == str(command):
             print(colorama.Fore.LIGHTGREEN_EX + str(command))
