@@ -26,7 +26,7 @@ import colorama
 from harayaUI import harayaUI
 runUI = harayaUI.runUI
 setIsRandom = harayaUI.setIsRandom
-tGUI = Thread(target=runUI)
+tGUI = Thread(target=runUI, daemon=True)
 tGUI.start()
 
 tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
@@ -503,7 +503,7 @@ def run_haraya():
         print(colorama.Fore.GREEN + response)
         speak(response)
         Play_Shutdown_Sound()
-        os.exit()
+        exit()
 
     elif any(hotword in str(command) for hotword in GoodBye_HotWords):
         print(colorama.Fore.LIGHTGREEN_EX + str(command))
@@ -511,7 +511,7 @@ def run_haraya():
         print(colorama.Fore.GREEN + response)
         speak(response)
         Play_Shutdown_Sound()
-        os.exit()
+        exit()
         
     elif "turn off my computer" in str(command):
         print(colorama.Fore.LIGHTGREEN_EX + str(command))
@@ -519,7 +519,7 @@ def run_haraya():
         print(colorama.Fore.GREEN + response)
         speak(response)
         Play_Shutdown_Sound()
-        os.exit()
+        exit()
 
     #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
     #Run Command: python haraya.py
@@ -566,7 +566,7 @@ def run_haraya():
         except:
             Play_Prompt_Sound()
 
-            os.exit()
+            exit()
 
     elif any(hotword in str(command) for hotword in YouTubeSearch_HotWords):
         response = "What would you like to search or play in Youtube?"
@@ -815,7 +815,7 @@ def run_haraya():
         speak(response)
         os.system("shutdown /s /t 0")
         Play_Prompt_Sound()
-        os.exit()
+        exit()
 
     elif "restart my computer" in str(command):
         response = "as you wish! restarting your computer..."
@@ -823,7 +823,7 @@ def run_haraya():
         speak(response)
         os.system("shutdown /r")
         Play_Prompt_Sound()
-        os.exit()
+        exit()
 
     elif "sign off my computer" in str(command) or "signoff my computer" in str(command):
         response = "as you wish! signing off your computer..."
