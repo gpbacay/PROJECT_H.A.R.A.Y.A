@@ -5,7 +5,7 @@ from PIL import Image
 import random
 from threading import Thread
 
-class harayaHUD():
+class harayaUI():
     #os.environ['SDL_VIDEO_WINDOW_POS'] = '1140,420'
     
     # Initialize Pygame
@@ -24,7 +24,7 @@ class harayaHUD():
         global gif_path
         gif_path = new_gif_path
 
-    def runHUD():
+    def runUI():
         global running, gif_path
         # Load the GIF frames using imageio
         gif_reader = imageio.get_reader(gif_path)
@@ -100,16 +100,11 @@ class harayaHUD():
         # Clean up
         gif_reader.close()
         pygame.quit()
-        
-    def exitHUD():
-        global running
-        running = False
-        exit()
 
 if __name__ == '__main__':
-    runHUD = harayaHUD.runHUD
-    setIsRandom = harayaHUD.setIsRandom
-    tRandomize = Thread(target=runHUD)
+    runUI = harayaUI.runUI
+    setIsRandom = harayaUI.setIsRandom
+    tRandomize = Thread(target=runUI)
     tRandomize.start()
     
-#_____________________python harayaHUD.py
+#_____________________python harayaUI.py

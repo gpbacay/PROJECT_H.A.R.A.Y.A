@@ -36,7 +36,7 @@ tStartUp = Thread(target=playsound, args=(U"startUp.mp3",))
 tStartUp.start()
 time.sleep(1)
 
-from harayaHUD import harayaHUD
+from harayaUI import harayaHUD
 runHUD = harayaHUD.runHUD
 setIsRandom = harayaHUD.setIsRandom
 exitHUD = harayaHUD.exitHUD
