@@ -810,7 +810,7 @@ def run_haraya():
                 else:
                     print("Chrome is not running.")
         except Exception as e:
-            response = f"""An error occurLIGHTGREEN_EX while trying to close the said program: {e}"""
+            response = f"""An error occur while trying to close the said program: {e}"""
             print(colorama.Fore.LIGHTLIGHTGREEN_EX_EX + response)
             speak(response)
         exit(Confirmation_SubFunction(command))
@@ -902,6 +902,10 @@ def run_haraya():
 class Main():
     while True:
         Start_Up_command_MainFunction()
-        run_haraya()
-
+        try:
+            run_haraya()
+        except Exception as e:
+            print("An error occurred while running H.A.R.A.Y.A.")
+            continue
+            
 #Run Command: python haraya.py
