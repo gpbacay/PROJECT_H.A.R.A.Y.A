@@ -482,7 +482,8 @@ def run_haraya():
     #Run Command: python haraya.py
 
     command = str(Listen_command_MainFunction())
-    run_Bison(reply=command)
+    tAnnotateCommand = Thread(target=run_Bison, args=(command,))
+    tAnnotateCommand.start()
     
     #______________________________________________________POSE_RECOGNITION_BLOCK
     #Run Command: python haraya.py
