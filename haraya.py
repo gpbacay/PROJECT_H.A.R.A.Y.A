@@ -785,7 +785,7 @@ def run_haraya():
     elif any(hotword in str(command) for hotword in Close_HotWords):
         print(colorama.Fore.LIGHTGREEN_EX + str(command))
         try:
-            if "chrome" in str(command):
+            if "chrome" in str(command) or "tab" in str(command):
                 response = "Closing " + colorama.Fore.LIGHTGREEN_EX + "Chrome" + colorama.Fore.GREEN + "..."
                 response1 = "Closing " + "Chrome..."
                 print(colorama.Fore.GREEN + response)
