@@ -303,7 +303,9 @@ def run_haraya():
                         "you're good to go",
                         "you can go now",
                         "you can go to sleep now",
-                        "i need to go"]
+                        "i need to go",
+                        "ciao",
+                        "sayonara"]
 
     Stop_HotWords = ["sign off",
                     "haraya stop",
