@@ -26,7 +26,7 @@ import colorama
 from harayaUI import harayaUI
 runUI = harayaUI.runUI
 setIsRandom = harayaUI.setIsRandom
-tGUI = Thread(target=runUI, daemon=True)
+tGUI = Thread(target=runUI)
 tGUI.start()
 
 tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
