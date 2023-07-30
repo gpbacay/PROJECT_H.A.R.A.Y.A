@@ -46,7 +46,7 @@ recognizer = sr.Recognizer()
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[1].id)
+engine.setProperty('voice', voices[2].id)
 
 def speak(text):
     setIsRandom(1)
@@ -439,7 +439,7 @@ def run_haraya():
         while True:
             command = Wait_command_MainFunction()
             print(colorama.Fore.LIGHTGREEN_EX + str(command))
-            if any(hotword in str(command) for hotword in Haraya_HotWords) or "yes I'm here" in str(command):
+            if "i'm here" in str(command) or any(hotword in str(command) for hotword in Haraya_HotWords):
                 response = "Yes? How can I help you?"
                 print(colorama.Fore.GREEN + response)
                 speak(response)
