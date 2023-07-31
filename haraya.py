@@ -435,7 +435,7 @@ def run_haraya():
                     "return",
                     "close"]
 
-    #_______________________________________________________________________STANDBY_SUBFUNCTION
+    #________________________________________________________________________________________STANDBY_SUBFUNCTION
     #Run Command: python haraya.py
     def Standby_SubFunction():
         while True:
@@ -487,7 +487,7 @@ def run_haraya():
     tAnnotateCommand = Thread(target=run_Bison, args=(command,))
     tAnnotateCommand.start()
     
-    #______________________________________________________POSE_RECOGNITION_BLOCK
+    #____________________________________________________________________________________POSE_RECOGNITION_BLOCK
     #Run Command: python haraya.py
     if "run" in str(command) or "activate" in str(command) or "initialize" in str(command):
         if "face recognition system" in str(command):
@@ -504,7 +504,7 @@ def run_haraya():
             Confirmation_SubFunction(command)
         return
 
-    #________________________________________________________________TERMINATION_BLOCK
+    #___________________________________________________________________________________________TERMINATION_BLOCK
     #Run Command: python haraya.py
     elif "turn off" in str(command) or any(hotword in str(command) for hotword in Stop_HotWords):
         print(colorama.Fore.LIGHTGREEN_EX + str(command))
@@ -650,7 +650,7 @@ def run_haraya():
         speak(info)
         Confirmation_SubFunction(command)
 
-    #________________________________________________________________________________________________OPEN/ACCESS_BLOCK
+    #__________________________________________________________________________________________________________________OPEN/ACCESS_BLOCK
     #Run Command: python haraya.py
     elif any(hotword in str(command) for hotword in Open_HotWords):
         print(colorama.Fore.LIGHTGREEN_EX + str(command))
@@ -782,7 +782,7 @@ def run_haraya():
             speak(response)
         exit(Confirmation_SubFunction(command))
         
-    #________________________________________________________________________________________________CLOSE_BLOCK
+    #_____________________________________________________________________________________________________CLOSE_BLOCK
     #Run Command: python haraya.py
     elif any(hotword in str(command) for hotword in Close_HotWords):
         print(colorama.Fore.LIGHTGREEN_EX + str(command))

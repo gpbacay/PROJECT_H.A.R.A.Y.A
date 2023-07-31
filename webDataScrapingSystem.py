@@ -13,7 +13,10 @@ colorama.init(autoreset=True)
 
 class DataScrapper():
     print(colorama.Fore.GREEN + "Scraping Data out from the Internet...")
-    global current_date, current_time, current_location, current_weather
+    global service, current_date, current_time, current_location, current_weather
+    
+    service = Service(ChromeDriverManager(driver_version="115.0.5790.102").install())
+    
     current_time = ""
     current_date = ""
     current_location = ""
@@ -98,7 +101,6 @@ class DataScrapper():
         time.sleep(0.5)
 
     def SetCurrentLocation():
-        service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service)
         driver.get("https://www.google.com/search?q=my+current+location")
         element1 = driver.find_element(By.CLASS_NAME, "aiAXrc")
@@ -111,7 +113,6 @@ class DataScrapper():
         driver.quit()
     
     def SetCurrentWeather(location = current_location):
-        service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service)
         location = location.replace(" ", "+")
         driver.get("https://www.google.com/search?q=current+weather+in+" + location)
@@ -161,11 +162,11 @@ class DataScrapper():
     t2.start()
     
     #Acquire Location
-    tSetLocation = Thread(target=SetCurrentLocation, daemon=True)
+    tSetLocation = Thread(target=SetCurrentLocation)
     tSetLocation.start()
     
     #Acquire Weather
-    tSetWeather = Thread(target=SetCurrentWeather,daemon=True)
+    tSetWeather = Thread(target=SetCurrentWeather)
     tSetWeather.start()
     
     #LoadingBars
