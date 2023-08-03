@@ -16,8 +16,8 @@ def Speak(input_text: str):
     # Build the voice request, select the language code ("en-GB") and the ssml
     # voice gender ("neutral")
     voice = texttospeech.VoiceSelectionParams(
-        language_code="en-GB",
-        name="en-GB-Neural2-A",
+        language_code="fil-PH",
+        name="fil-PH-Neural2-A",
         ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
     )
 
@@ -72,7 +72,7 @@ def Speak(input_text: str):
     os.remove(temp_wav)
 
 if __name__ == '__main__':
-    Speak("Hello Gianne P. Bacay, I am Haraya. How can I help you?")
+    Speak("Ako ay may lobo, lumipad sa langit, hindi ko na nakita, pumutok na pala, sayang ang pera ko, pambili ng lobo, sa pagkain sana, nabusog pa ako!")
 
 #___________________pip install --upgrade google-cloud-texttospeech
 #___________________python harayaVoiceEngine.py

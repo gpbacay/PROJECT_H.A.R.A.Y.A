@@ -51,11 +51,11 @@ class harayaUI():
                     if event.type == QUIT:
                         running = False
                     if event.type == KEYDOWN:
-                        if event.key == K_UP:
+                        """ if event.key == K_UP:
                             setIsRandom(0)
                         elif event.key == K_DOWN:
-                            setIsRandom(1)
-                        elif event.key == K_ESCAPE:
+                            setIsRandom(1) """
+                        if event.key == K_ESCAPE:
                             running = False
 
                 if play_gif:

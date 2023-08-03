@@ -8,5 +8,5 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
     
-speak("Ethan Bahyot Pang et")
+speak("KC Bahyot Pang et")
 #_________________python test22.py

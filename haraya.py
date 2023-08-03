@@ -1,10 +1,13 @@
+#______________________________________________________________________________________________________Initialization_Block
 #Import Libraries/Modules
 from threading import Thread
 import time
 from playsound import playsound
 import speech_recognition as sr
 import pywhatkit
+
 import pyttsx3
+from harayaVoiceEngine import Speak as hveSpeak
 
 from facerec import Face_Recognition_System
 from poserec import Pose_Recognition_System
@@ -33,7 +36,8 @@ tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
 tStartUp.start()
 
 colorama.init(autoreset=True)
-Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + "\t\t\t\t H.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant) \t\t\t\t\n"
+HeaderStr = "\t\t\t\tH.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\t\t\t\t\n"
+Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + HeaderStr
 tHeader = Thread(target=print, args=(Header,))
 tHeader.start()
 
@@ -47,12 +51,21 @@ recognizer = sr.Recognizer()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[2].id)
-
+    
 def speak(text):
     setIsRandom(1)
     engine.say(text)
     engine.runAndWait()
     setIsRandom(0)
+
+""" def speak(text_input):
+    tSpeak = Thread(target=hveSpeak, args=(text_input,))
+    tSpeak.start()
+    time.sleep(1)
+    tSpeaking = Thread(target=setIsRandom, args=(1,))
+    tSpeaking.start()
+    tSpeak.join()
+    setIsRandom(0) """
 
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
 #Run Command: python haraya.py
@@ -144,7 +157,7 @@ def Initialize_Face_Recognition_System():
     Locate_MyFullName()
     Locate_NameHA()
 Initialize_Face_Recognition_System()
-    
+
 #_____________________________________________INITIALIZE_POSE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
 #Run Command: python haraya.py
 def Initialize_Pose_Recognition_System():
@@ -157,7 +170,6 @@ def Initialize_Pose_Recognition_System():
     response = "Initializing Pose Recognition System"
     speak(response)
     tPRS.join()
-
 
 #_______________________________________START_UP_MAIN_FUNCTION
 #Run Command: python haraya.py
@@ -172,7 +184,6 @@ def Start_Up_command_MainFunction():
         response = "Hi! How can I help you?"
     print(colorama.Fore.GREEN + response)
     speak(response1)
-
 
 #______________________________LISTEN_COMMAND_MAIN_FUNCTION
 #Run Command: python haraya.py
@@ -193,7 +204,6 @@ def Listen_command_MainFunction():
     except:
         pass
     return command
-
 
 #______________________________ADD_COMMAND_MAIN_FUNCTION
 #Run Command: python haraya.py
@@ -232,7 +242,6 @@ def Add_command_MainFunction(command):
         pass
     return command
 
-
 #______________________________WAIT_COMMAND_MAIN_FUNCTION
 #Run Command: python haraya.py
 def Wait_command_MainFunction():
@@ -253,7 +262,6 @@ def Wait_command_MainFunction():
         pass
     return command
 
-
 #_______________________________________________________________________________haraya_CORE_FUNCTION
 #Run Command: python haraya.py
 def run_haraya():
@@ -262,7 +270,6 @@ def run_haraya():
     global NameHA
     NameHA = Name_Honorific_Address[-1]
     MyName = Name[-1]
-
 
     #________________________________________________LISTS_OF_COMMAND_KEY_WORDS
     #Run Command: python haraya.py
@@ -575,7 +582,6 @@ def run_haraya():
             Confirmation_SubFunction(command)
         except:
             Play_Prompt_Sound()
-
             exit()
 
     elif any(hotword in str(command) for hotword in YouTubeSearch_HotWords):
@@ -909,5 +915,5 @@ class Main():
         except Exception as e:
             print("An error occurred while running H.A.R.A.Y.A.")
             continue
-        
+
 #Run Command: python haraya.py

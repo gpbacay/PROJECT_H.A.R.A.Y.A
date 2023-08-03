@@ -44,7 +44,7 @@ exitHUD = harayaHUD.exitHUD
 tGUI = Thread(target=runHUD, daemon=True)
 tGUI.start()
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 recognizer = sr.Recognizer()
 
 def speak(text_input):
@@ -57,7 +57,7 @@ def speak(text_input):
     setIsRandom(0)
 
 #______________________________________________________PLAY_A_SOUND_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 def Play_Prompt_Sound():
     mp3_path = U"prompt1.mp3"
     playsound(mp3_path)
@@ -70,7 +70,7 @@ def Play_Shutdown_Sound():
     mp3_path = u"shutdown.mp3"
     playsound(mp3_path)
 #______________________________________________________CORE_TEMPORARY_MEMORY_BANKS
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 Name = []
 Name_Honorific_Address = []
 NameList = []
@@ -83,7 +83,7 @@ Date = []
 count = []
 
 #______________________________________________________FACE_RECOGNITION_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 def Locate_MyFullName():
     with open("attendance.csv", "r+") as attendance:
         MyDatalist =  attendance.readlines()
@@ -99,7 +99,7 @@ and append it into the Name list in the memory banks.
 """
 
 #_______________________________________Binary-Gendered_Honorifics_Selector_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 def Locate_NameHA():
     Male_Names = ["Gianne Bacay",
                 "Earl Jay Tagud",
@@ -132,7 +132,7 @@ def Locate_NameHA():
 Locate_NameHA()
 
 #_____________________________________________INITIALIZE_FACE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 def Initialize_Face_Recognition_System():
     tFRS = Thread(target=Face_Recognition_System)
     tFRS.start()
@@ -147,7 +147,7 @@ def Initialize_Face_Recognition_System():
 Initialize_Face_Recognition_System()
     
 #_____________________________________________INITIALIZE_POSE_RECOGNITION_SYSTEM_BLOCK/FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 def Initialize_Pose_Recognition_System():
     response = "Recognizing pose..."
     print(colorama.Fore.GREEN + response)
@@ -162,7 +162,7 @@ def Initialize_Pose_Recognition_System():
 
 
 #_______________________________________START_UP_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 def Start_Up_command_MainFunction():
     Play_Prompt_Sound()
     try:
@@ -177,7 +177,7 @@ def Start_Up_command_MainFunction():
 
 
 #______________________________LISTEN_COMMAND_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 def Listen_command_MainFunction():
     global command
     command = ""
@@ -198,7 +198,7 @@ def Listen_command_MainFunction():
 
 
 #______________________________ADD_COMMAND_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 def Add_command_MainFunction(command):
     command = str(command)
     Interrogative_HotWords = ['what', ' what ', 'what ', ' what',
@@ -236,7 +236,7 @@ def Add_command_MainFunction(command):
 
 
 #______________________________WAIT_COMMAND_MAIN_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 def Wait_command_MainFunction():
     global command
     command = ""
@@ -257,7 +257,7 @@ def Wait_command_MainFunction():
 
 
 #_______________________________________________________________________________haraya_CORE_FUNCTION
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 def run_haraya():
     Locate_MyFullName()
     Locate_NameHA()
@@ -267,7 +267,7 @@ def run_haraya():
 
 
     #________________________________________________LISTS_OF_COMMAND_KEY_WORDS
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
     Standby_HotWords = ["standby",
                         "haraya stand by",
                         "just stand by",
@@ -392,7 +392,7 @@ def run_haraya():
                             "in wikipedia"]
 
     #_______________________________________________________________________STANDBY_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
     def Standby_SubFunction():
         while True:
             command = Wait_command_MainFunction()
@@ -406,7 +406,7 @@ def run_haraya():
         exit(run_haraya())
 
     #_______________________________________________________________________CONFIRMATION_SUBFUNCTION
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
     def Confirmation_SubFunction(command):
         command = Add_command_MainFunction(str(command))
         
@@ -431,12 +431,12 @@ def run_haraya():
             exit(run_haraya())
 
     #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
 
     command = str(Listen_command_MainFunction())
     
     #______________________________________________________POSE_RECOGNITION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
     if "run" in str(command) or "activate" in str(command) or "initialize" in str(command):
         if "face recognition system" in str(command):
             run_Bison(reply="Run the face recognition system")
@@ -454,7 +454,7 @@ def run_haraya():
             Confirmation_SubFunction(command)
 
     #________________________________________________________________TERMINATION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
     elif "turn off" in str(command) or any(hotword in str(command) for hotword in Stop_HotWords):
         print(colorama.Fore.RED + str(command))
         Locate_NameHA()
@@ -487,7 +487,7 @@ def run_haraya():
         exit()
 
     #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
     elif any(hotword in str(command) for hotword in GoogleSearch_HotWords):
         response = "What would you like to search in Google?"
         print(colorama.Fore.GREEN + response)
@@ -609,7 +609,7 @@ def run_haraya():
         Confirmation_SubFunction(command)
 
     #________________________________________________________________________________________________OPEN/ACCESS_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
     elif "open" in str(command) or "access" in str(command):
         print(colorama.Fore.RED + str(command))
         command = command.replace("open", '')
@@ -746,7 +746,7 @@ def run_haraya():
         
         
     #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
     elif "shutdown my computer" in str(command):
         response = "as you wish! shutting down your computer..."
         run_Bison(reply="shutdown my computer")
@@ -813,7 +813,7 @@ def run_haraya():
         exit(run_haraya())
         
     #________________________________________________________________________STANDBY_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
     elif any(hotword in str(command) for hotword in Standby_HotWords):
         response = "Sure, take your time. I'll wait."
         run_Bison(reply="Wait")
@@ -822,7 +822,7 @@ def run_haraya():
         Standby_SubFunction()
         
     #_______________________________________________________NoCommands/NotClearCommands_BLOCK
-    #Run Command: python haraya.py
+    #Run Command: python haraya_v2.py
     elif "[]" == str(command) or "" == str(command):
         print(colorama.Fore.RED + str(command))
         response = "Hello? Are you still there?"
@@ -848,5 +848,5 @@ class Main():
         Start_Up_command_MainFunction()
         run_haraya()
 
-#Run Command: python haraya.py
+#Run Command: python haraya_v2.py
 
