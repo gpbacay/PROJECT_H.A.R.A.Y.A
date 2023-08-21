@@ -13,7 +13,7 @@ class harayaUI():
 
     global is_random, gif_path, running
     is_random = 0
-    gif_path = "Resources\\harayasorb.gif"
+    gif_path = "Resources\\listen.gif"
     running = True
     
     def setIsRandom(num=0):
@@ -78,19 +78,15 @@ class harayaUI():
                         # Update the display
                         pygame.display.flip()
 
-                        selector = random.randint(0,is_random)
-                        if selector == 0:
-                            gif_path = "Resources\\harayasorb1.gif"
-                            gif_reader = imageio.get_reader(gif_path)
-                            current_frame += 1
-                            playback_speed = random.randint(14, 15)
-                            clock.tick(playback_speed)
-                        elif selector == 1:
-                            gif_path = "Resources\\harayasorb.gif"
-                            gif_reader = imageio.get_reader(gif_path)
-                            current_frame += 1
-                            playback_speed = random.randint(14, 15)
-                            clock.tick(playback_speed)
+                        speaking = random.randint(0,is_random)
+                        if speaking == 0:
+                            gif_path = "Resources\\speak.gif"
+                        elif speaking == 1:
+                            gif_path = "Resources\\listen.gif"
+                        gif_reader = imageio.get_reader(gif_path)
+                        current_frame += 1
+                        playback_speed = random.randint(14, 15)
+                        clock.tick(playback_speed)
                     except EOFError:
                         # Reached the end of the GIF, restart from the beginning
                         gif_reader.close()

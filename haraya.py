@@ -913,7 +913,7 @@ class Main():
         try:
             run_haraya()
         except Exception as e:
-            print("An error occurred while running H.A.R.A.Y.A.")
+            print(colorama.Fore.LIGHTRED_EX + "An error occurred while running H.A.R.A.Y.A.")
             continue
 
 #Run Command: python haraya.py

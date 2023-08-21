@@ -12,7 +12,7 @@ colorama.init(autoreset=True)
 
 
 class DataScrapper():
-    print(colorama.Fore.GREEN + "Scraping Data out from the Internet...")
+    print(colorama.Fore.GREEN + "Scraping data out from the internet...")
     global service, current_date, current_time, current_location, current_weather
     
     service = Service(ChromeDriverManager(driver_version="115.0.5790.102").install())
