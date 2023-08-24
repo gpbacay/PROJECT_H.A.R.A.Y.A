@@ -6,7 +6,7 @@ print("Listening...")
 try:
     with sr.Microphone() as source:
         recognizer.pause_threshold = 1.5
-        voice = recognizer.listen(source, timeout=10)
+        voice = recognizer.listen(source, timeout=5, phrase_time_limit=5)
 except:
     pass
 text = recognizer.recognize_google(voice)
