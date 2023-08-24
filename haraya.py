@@ -251,6 +251,7 @@ def Wait_command_MainFunction():
     try:
         with sr.Microphone() as source:
             print(colorama.Fore.CYAN + "Waiting...")
+            Play_Listening_Sound()
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
             #voice = recognizer.record(source)
@@ -896,7 +897,6 @@ def run_haraya():
         response = "Hello? Are you still there?"
         print(colorama.Fore.GREEN + response)
         speak(response)
-        Play_Listening_Sound()
         Standby_SubFunction()
         
     else:
