@@ -42,9 +42,6 @@ tHeader = Thread(target=print, args=(Header,))
 tHeader.start()
 
 from PaLM2_LLM import run_Bison
-tStartUp = Thread(target=run_Bison, args=("System are now online.",))
-tStartUp.start()
-
 
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
 #Run Command: python haraya.py
