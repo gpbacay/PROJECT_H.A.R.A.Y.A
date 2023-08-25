@@ -1,6 +1,6 @@
 # HARAYA (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)
 
-![HARAYA Logo](Resources/harayasorb.gif)
+![HARAYA Logo](Resources/listen.gif)
 
 **HARAYA**, which stands for **H**igh-functioning **A**utonomous **R**esponsive **A**nthropomorphic **Y**ielding **A**ssistant, represents a groundbreaking advancement in the realm of AI virtual assistants, solely developed by [*Gianne P. Bacay*](https://www.facebook.com/giannebacay) since October 16, 2022. HARAYA offers a personalized and remarkably human-like user experience by integrating cutting-edge technologies like computer vision, web data scraping, computer automation,and  natural language processing (NLP). Its advanced machine learning and deep learning capabilities enable autonomous operation and continuous adaptation, allowing HARAYA to handle complex tasks, make informed decisions, and provide unparalleled user support. With its anthropomorphic characteristics, HARAYA fosters engaging communication, while its generative nature allows tailored assistance for individual users, setting a new standard for virtual assistant interactions and ushering in a new era of user-centric AI virtual assistant experiences.
 
