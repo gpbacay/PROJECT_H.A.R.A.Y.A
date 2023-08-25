@@ -7,7 +7,7 @@ import speech_recognition as sr
 import pywhatkit
 
 import pyttsx3
-from harayaVoiceEngine import Speak as hveSpeak
+#from harayaVoiceEngine import Speak as hveSpeak
 
 from facerec import Face_Recognition_System
 from poserec import Pose_Recognition_System
@@ -21,7 +21,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-from LoadingBar import LoadingBar 
+from LoadingBar import LoadingBar
 runLoadingBar = LoadingBar.RunLoadingBar
 import pyautogui
 import colorama
@@ -44,6 +44,8 @@ tHeader.start()
 from PaLM2_LLM import run_Bison
 tStartUp = Thread(target=run_Bison, args=("you are now online",))
 tStartUp.start()
+
+
 #______________________________________________________VOICE_BOX_PRIMARY_BLOCK/FUNCTION
 #Run Command: python haraya.py
 recognizer = sr.Recognizer()
@@ -97,17 +99,11 @@ count = []
 #Run Command: python haraya.py
 def Locate_MyFullName():
     with open("attendance.csv", "r+") as attendance:
-        MyDatalist =  attendance.readlines()
+        MyDatalist = attendance.readlines()
         NameList.append(MyDatalist[-1])
         
         MyFullName = NameList[-1].replace("'", '').split(",")[0]
         Name.append(MyFullName)
-        
-        
-"""
-Locate MyFullName from the Face Recognition System
-and append it into the Name list in the memory banks.
-"""
 
 #_______________________________________Binary-GendeLIGHTGREEN_EX_Honorifics_Selector_BLOCK/FUNCTION
 #Run Command: python haraya.py
@@ -127,7 +123,6 @@ def Locate_NameHA():
                     "Princess Viznar",
                     "Nichi Bacay",
                     "Roz Waeschet Bacay",
-                    "Killy Obligation",
                     "Jane Rose Bandoy"]
 
     try:
@@ -193,11 +188,11 @@ def Listen_command_MainFunction():
     try:
         with sr.Microphone() as source:
             print(colorama.Fore.CYAN + "Listening...")
+            print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
             Play_Listening_Sound()
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
-            #voice = recognizer.record(source)
-            voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
+            voice = recognizer.listen(source)
             command = recognizer.recognize_google(voice, show_all=True)
             command = str(command)
             command = command.lower()
@@ -209,6 +204,7 @@ def Listen_command_MainFunction():
 #Run Command: python haraya.py
 def Add_command_MainFunction(command):
     command = str(command)
+    
     Interrogative_HotWords = ['what', ' what ', 'what ', ' what',
                         'who', ' who ', 'who ', ' who',
                         'where', ' where ', 'where ', ' where',
@@ -228,13 +224,14 @@ def Add_command_MainFunction(command):
             response = ''
             print(response)
             speak(response)
+        
         with sr.Microphone() as source:
             print(colorama.Fore.CYAN + "Listening...")
+            print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
             Play_Listening_Sound()
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
-            #voice = recognizer.record(source)
-            voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
+            voice = recognizer.listen(source)
             command = recognizer.recognize_google(voice, show_all=True)
             command = str(command)
             command = command.lower()
@@ -251,11 +248,11 @@ def Wait_command_MainFunction():
     try:
         with sr.Microphone() as source:
             print(colorama.Fore.CYAN + "Waiting...")
+            print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
             Play_Listening_Sound()
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
-            #voice = recognizer.record(source)
-            voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
+            voice = recognizer.listen(source)
             command = recognizer.recognize_google(voice, show_all=True)
             command = str(command)
             command = command.lower()
@@ -550,11 +547,11 @@ def run_haraya():
         try:
             with sr.Microphone() as source:
                 print(colorama.Fore.CYAN + "Listening...")
+                print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
                 Play_Listening_Sound()
                 recognizer.energy_threshold = 1.0
                 recognizer.pause_threshold = 0.8
-                #voice = recognizer.record(source)
-                voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
+                voice = recognizer.listen(source)
                 command = recognizer.recognize_google(voice)
                 command = command.lower()
         except:
@@ -594,11 +591,11 @@ def run_haraya():
         try:
             with sr.Microphone() as source:
                 print(colorama.Fore.CYAN + "Listening...")
+                print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
                 Play_Listening_Sound()
                 recognizer.energy_threshold = 1.0
                 recognizer.pause_threshold = 0.8
-                #voice = recognizer.record(source)
-                voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
+                voice = recognizer.listen(source)
                 command = recognizer.recognize_google(voice)
                 command = command.lower()
         except:
@@ -635,11 +632,11 @@ def run_haraya():
         try:
             with sr.Microphone() as source:
                 print(colorama.Fore.CYAN + "Listening...")
+                print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
                 Play_Listening_Sound()
                 recognizer.energy_threshold = 1.0
                 recognizer.pause_threshold = 0.8
-                #voice = recognizer.record(source)
-                voice = recognizer.listen(source, timeout=10, phrase_time_limit=10)
+                voice = recognizer.listen(source)
                 command = recognizer.recognize_google(voice)
                 command = command.lower()
         except:
