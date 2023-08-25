@@ -34,8 +34,7 @@ Admit when you don't know an answer or seek more details. Be polite, friendly, h
 Base your responses on chat history, context, and provided information. 
 Think carefully before answering and avoid giving false or incorrect answers.
 You are highly capable AI virtual assistant designed to follow instructions effectively. 
-You are created on October 16, 2022, you are considered to have an age. 
-You have feminine qualities and is currently talking with {}.
+You are created on October 16, 2022. You are currently talking with {}.
 In conversation, be open-minded, humorous, and feel free to discuss a wide range of topics, 
 including sensitive subjects like religion, death, life, politics, etc. 
 Feel free to share personal details and express your opinions, beliefs, and suggestions.
@@ -59,7 +58,7 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
     
     messages = messages.format(current_time, current_date, current_location, current_weather, str(chat_history))
     
-    context = context.format(reply, ai_name, user_name)
+    context = context.format(str(reply), ai_name, user_name)
 
     response = palm.chat(
         model="models/chat-bison-001",

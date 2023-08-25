@@ -188,7 +188,7 @@ def Listen_command_MainFunction():
     try:
         with sr.Microphone() as source:
             print(colorama.Fore.CYAN + "Listening...")
-            print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
+            print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
             Play_Listening_Sound()
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
@@ -227,7 +227,7 @@ def Add_command_MainFunction(command):
         
         with sr.Microphone() as source:
             print(colorama.Fore.CYAN + "Listening...")
-            print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
+            print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
             Play_Listening_Sound()
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
@@ -248,7 +248,7 @@ def Wait_command_MainFunction():
     try:
         with sr.Microphone() as source:
             print(colorama.Fore.CYAN + "Waiting...")
-            print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
+            print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
             Play_Listening_Sound()
             recognizer.energy_threshold = 1.0
             recognizer.pause_threshold = 0.8
@@ -547,7 +547,7 @@ def run_haraya():
         try:
             with sr.Microphone() as source:
                 print(colorama.Fore.CYAN + "Listening...")
-                print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
+                print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
                 Play_Listening_Sound()
                 recognizer.energy_threshold = 1.0
                 recognizer.pause_threshold = 0.8
@@ -591,7 +591,7 @@ def run_haraya():
         try:
             with sr.Microphone() as source:
                 print(colorama.Fore.CYAN + "Listening...")
-                print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
+                print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
                 Play_Listening_Sound()
                 recognizer.energy_threshold = 1.0
                 recognizer.pause_threshold = 0.8
@@ -632,7 +632,7 @@ def run_haraya():
         try:
             with sr.Microphone() as source:
                 print(colorama.Fore.CYAN + "Listening...")
-                print(colorama.Fore.RED + "\n- Toggle [F9] to stop/start listening. -\n")
+                print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
                 Play_Listening_Sound()
                 recognizer.energy_threshold = 1.0
                 recognizer.pause_threshold = 0.8
