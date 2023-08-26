@@ -170,19 +170,19 @@ class DataScrapper():
     tSetWeather.start()
     
     #LoadingBars
-    tLoadBar1 = Thread(target=runLoadingBar, args=(0.5, "ACQUIRING TIME DATA", "TIME ACQUIRED!"),)
+    tLoadBar1 = Thread(target=runLoadingBar, args=(0.1, "ACQUIRING TIME DATA", "TIME ACQUIRED!"),)
     tLoadBar1.start()
     tLoadBar1.join()
     
-    tLoadBar2 = Thread(target=runLoadingBar, args=(0.5, "ACQUIRING DATE DATA", "DATE ACQUIRED!"),)
+    tLoadBar2 = Thread(target=runLoadingBar, args=(0.1, "ACQUIRING DATE DATA", "DATE ACQUIRED!"),)
     tLoadBar2.start()
     tLoadBar2.join()
     
-    tLoadBar3 = Thread(target=runLoadingBar, args=(0.5, "ACQUIRING LOCATION DATA", "LOCATION ACQUIRED"),)
+    tLoadBar3 = Thread(target=runLoadingBar, args=(0.1, "ACQUIRING LOCATION DATA", "LOCATION ACQUIRED"),)
     tLoadBar3.start()
     tLoadBar3.join()
     
-    tLoadBar4 = Thread(target=runLoadingBar, args=(0.5, "ACQUIRING WEATHER DATA", "WEATHER ACQUIRED!"),)
+    tLoadBar4 = Thread(target=runLoadingBar, args=(0.1, "ACQUIRING WEATHER DATA", "WEATHER ACQUIRED!"),)
     tLoadBar4.start()
     tLoadBar4.join()
     
