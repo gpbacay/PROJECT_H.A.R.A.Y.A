@@ -77,7 +77,6 @@ def run_Bison(reply = reply, messages = messages, context = context, user_name =
         message_output = f"Assistant ({ai_name}): " + str(response.last)
         conversation = f"{message_input}, {message_output}\n"
         chat_history.append(conversation)
-    
     return response.last
 
 if __name__ == '__main__':

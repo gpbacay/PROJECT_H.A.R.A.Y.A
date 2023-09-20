@@ -72,7 +72,7 @@ def Speak(input_text: str):
     os.remove(temp_wav)
 
 if __name__ == '__main__':
-    Speak("Ako ay may lobo, lumipad sa langit, hindi ko na nakita, pumutok na pala, sayang ang pera ko, pambili ng lobo, sa pagkain sana, nabusog pa ako!")
+    Speak("Mabuhay GDSC UIC! Maraming salamat sa opportunidad")
 
 #___________________pip install --upgrade google-cloud-texttospeech
 #___________________python harayaVoiceEngine.py
