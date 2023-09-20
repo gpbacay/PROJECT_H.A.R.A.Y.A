@@ -594,8 +594,8 @@ def run_haraya():
         song_list.append(song_title)
         song_title = song_list[-1]
         pywhatkit.playonyt(song_title)
-        response = "Now Playing" + colorama.Fore.LIGHTGREEN_EX + song_title
-        response1 = "Now Playing" + song_title
+        response = "Now Playing " + colorama.Fore.LIGHTGREEN_EX + song_title
+        response1 = "Now Playing " + song_title
         print(colorama.Fore.GREEN + response)
         speak(response1)
         Confirmation_SubFunction(command)
