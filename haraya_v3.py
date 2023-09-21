@@ -848,7 +848,7 @@ def run_haraya():
         Play_Prompt_Sound()
         exit(run_haraya())
         
-    elif "decrease" in command and "volume" in command or "lower down the volume" in command or "lower the volume" in command:
+    elif "volume" in command and "decrease" in command or "lower" in command:
         response = "Decreasing volume..."
         print(colorama.Fore.GREEN + response)
         speak(response)
@@ -860,9 +860,15 @@ def run_haraya():
         battery = psutil.sensors_battery()
         percentage = battery.percent
         #isCharging = battery.power_plugged
-        response = f"The current battery percentage is ", percentage, "%"
-        print(colorama.Fore.GREEN + response)
-        speak(response)
+        if percentage > 50:
+            response = f"The current battery percentage is " + colorama.Fore.GREEN + str(percentage) + "%"
+        elif percentage <= 50 and percentage > 20:
+            response = f"The current battery percentage is " + colorama.Fore.YELLOW + str(percentage) + "%"
+        elif percentage <= 20:
+            response = f"The current battery percentage is " + colorama.Fore.RED + str(percentage) + "%"
+        response1 = f"The current battery percentage is " + str(percentage) + "%"
+        print(response)
+        speak(response1)
         exit(run_haraya())
     #________________________________________________________________________STANDBY_BLOCK
     #Run Command: python haraya_v3.py
