@@ -787,7 +787,7 @@ def run_haraya():
                         print("Chrome is not running.")
         except Exception as e:
             response = f"""An error occur while trying to close the said program: {e}"""
-            print(colorama.Fore.LIGHTLIGHTGREEN_EX_EX + response)
+            print(colorama.Fore.LIGHTGREEN_EX + response)
             speak(response)
         exit(Confirmation_SubFunction(command))
     
