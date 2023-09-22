@@ -10,7 +10,7 @@ reply = " ."
 
 messages = """
 Respond only to the transcript with the highest confidence rate.
-Respond straightforwardly without adding or omitting anything. 
+Respond straightforwardly without thoughtlessly adding or omitting anything. 
 Keep your response short and relevant.
 If unsure of an answer, honestly admit it or seek more details without resorting to dishonesty.
 Always base your responses on the chat history, previous conversation, context, and the information already provided to you.
