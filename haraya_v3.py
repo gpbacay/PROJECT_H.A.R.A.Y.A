@@ -30,7 +30,7 @@ HeaderStr = "\t\t\t\tH.A.R.A.Y.A (High-functioning Autonomous Responsive Anthrop
 Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + HeaderStr
 tHeader = Thread(target=print, args=(Header,))
 tHeader.start()
-from PaLM2_LLM import run_Bison
+from PaLM2_LLM import getChatResponse
 
 #______________________________________________________VOICE_ENGINE_PRIMARY_BLOCK/FUNCTION
 #Run Command: python haraya_v3.py
@@ -459,7 +459,7 @@ def run_haraya():
     #Run Command: python haraya_v3.py
 
     command = str(Listen_command_MainFunction())
-    tAnnotateCommand = Thread(target=run_Bison, args=(command,))
+    tAnnotateCommand = Thread(target=getChatResponse, args=(command,))
     tAnnotateCommand.start()
     
     #____________________________________________________________________________________POSE_RECOGNITION_BLOCK
@@ -882,7 +882,7 @@ def run_haraya():
         
     else:
         print(colorama.Fore.LIGHTGREEN_EX + command)
-        response = run_Bison(reply=command, user_name=MyName)
+        response = getChatResponse(reply=command, user_name=MyName)
         print(colorama.Fore.YELLOW + str(response))
         speak(response)
         exit(run_haraya())
@@ -894,7 +894,7 @@ class Main():
         try:
             run_haraya()
         except Exception as e:
-            print(colorama.Fore.LIGHTRED_EX + "An error occurred while running H.A.R.A.Y.A: " + e)
+            print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: {e}")
             continue
 
 #Run Command: python haraya_v3.py
