@@ -538,8 +538,8 @@ def run_haraya():
             search_list = []
             search_list.append(information)
             information = search_list[-1]
-            response = "Searching" + colorama.Fore.LIGHTGREEN_EX + information
-            response1 = "Searching" + information
+            response = "Searching " + colorama.Fore.LIGHTGREEN_EX + information
+            response1 = "Searching " + information
             print(colorama.Fore.GREEN + response)
             speak(response1)
             for i in range(1):
