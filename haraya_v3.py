@@ -15,42 +15,37 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from loadingBar import LoadingBar
-
 import colorama
 import pyautogui
-import harayaUI as fromHarayaUI
-import PaLM2_LLM as fromPaLM2_LLM
 
 class haraya_v3():
-    #___________________________________________Attributes_Declaration_BLOCK
-    #Run Command: python haraya_v3.py
-    global runLoadingBar, setIsRandom, recognizer, engine
-    global Name, Name_Honorific_Address, NameList
-    global speak, harayaListenCommand, harayaAddCommand, harayaWaitCommand
-    global playPromptSound, playListeningSound, playShutdownSound
-    global getFullName, getHonorificAddress, initializeFaceRecognitionSystem, initializePoseRecognitionSystem
-    global harayaStartUp, harayaNeuralNetwork
-    global harayaUI, getChatResponse
-    
+    def __init__():
+        #___________________________________________Attributes_Declaration_BLOCK
+        #Run Command: python haraya_v3.py
+        global runLoadingBar, getChatResponse, setIsRandom, recognizer, engine
+        global Name, Name_Honorific_Address, NameList
+        global speak, harayaListenCommand, harayaAddCommand, harayaWaitCommand
+        global playPromptSound, playListeningSound, playShutdownSound
+        global getFullName, getHonorificAddress, initializeFaceRecognitionSystem, initializePoseRecognitionSystem
+        global harayaStartUp, harayaNeuralNetwork
     #__________________________________________________________Constructor_Definition_Block
     #Run Command: python haraya_v3.py
-    def __init__(self):
-        harayaUI = fromHarayaUI.harayaUI
-        runUI = harayaUI.runUI
-        tGUI = Thread(target=runUI, daemon=True)
-        tGUI.start()
-        tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
-        tStartUp.start()
-        colorama.init(autoreset=True)
-        HeaderStr = "\t\t\t\tH.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\t\t\t\t\n"
-        Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + HeaderStr
-        tHeader = Thread(target=print, args=(Header,))
-        tHeader.start()
+    tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
+    tStartUp.start()
+    colorama.init(autoreset=True)
+    HeaderStr = "\t\t\t\tH.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\t\t\t\t\n"
+    Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + HeaderStr
+    tHeader = Thread(target=print, args=(Header,))
+    tHeader.start()
+    from harayaUI import harayaUI
+    from PaLM2_LLM import getChatResponse
     #___________________________________________Attributes_Initialization_BLOCK 
     #Run Command: python haraya_v3.py
-    getChatResponse = fromPaLM2_LLM.getChatResponse
+    setIsRandom = harayaUI.setIsRandom
+    runUI = harayaUI.runUI
+    tGUI = Thread(target=runUI, daemon=True)
+    tGUI.start()
     runLoadingBar = LoadingBar.RunLoadingBar
-    setIsRandom = fromHarayaUI.setIsRandom
     recognizer = sr.Recognizer()
     engine = pyttsx3.init()
     voices = engine.getProperty('voices')
@@ -276,6 +271,7 @@ class haraya_v3():
                             "let's call it a day",
                             "i said goodbye",
                             "you're good to go",
+                            "you can go",
                             "you can go now",
                             "you can go to sleep now",
                             "i need to go",
@@ -865,6 +861,7 @@ class haraya_v3():
             print(colorama.Fore.YELLOW + str(response))
             speak(response)
             exit(harayaNeuralNetwork())
+        exit()
 haraya_v3()
 #______________________________________harayaNeuralNetwork_IN_A_LOOP_BLOCK
 if __name__ == '__main__':
