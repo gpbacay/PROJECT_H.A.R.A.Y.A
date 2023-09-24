@@ -856,10 +856,11 @@ class haraya_v3():
             print(colorama.Fore.YELLOW + str(response))
             speak(response)
             exit(harayaNeuralNetwork())
-startUp = haraya_v3()
+haraya_v3()
 #______________________________________harayaNeuralNetwork_IN_A_LOOP_BLOCK
-while True:
-        startUp.harayaStartUp()
+if __name__ == '__main__':
+    while True:
+        harayaStartUp()
         try:
             haraya_v3.harayaNeuralNetwork()
         except Exception as e:
