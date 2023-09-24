@@ -5,7 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from threading import Thread
-from LoadingBar import LoadingBar
+from loadingBar import LoadingBar
 import time
 import colorama
 colorama.init(autoreset=True)

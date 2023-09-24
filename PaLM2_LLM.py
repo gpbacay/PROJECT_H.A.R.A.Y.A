@@ -124,6 +124,7 @@ def getChatResponse(reply = reply, messages = messages, context = context, user_
 
 if __name__ == '__main__':
     while True:
+        print("\n")
         command = input("User: ")
         if "quit" == command:
             break
