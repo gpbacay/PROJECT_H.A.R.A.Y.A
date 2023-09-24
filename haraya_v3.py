@@ -23,10 +23,13 @@ class haraya_v3():
     #Run Command: python haraya_v3.py
     global runLoadingBar, getChatResponse, setIsRandom, recognizer, engine
     global Name, Name_Honorific_Address, NameList
+    global Standby_HotWords, GoodBye_HotWords, Stop_HotWords, Yes_HotWords, No_HotWords, Haraya_HotWords
+    global GoogleSearch_HotWords, YouTubeSearch_HotWords, WikipediaSearch_HotWords, Open_HotWords, Close_HotWords
     global speak, harayaListenCommand, harayaAddCommand, harayaWaitCommand
     global playPromptSound, playListeningSound, playShutdownSound
     global getFullName, getHonorificAddress, initializeFaceRecognitionSystem, initializePoseRecognitionSystem
     global harayaStartUp, harayaNeuralNetwork
+    global Standby_SubFunction, Confirmation_SubFunction
     #__________________________________________________________Constructor_Definition_Block
     #Run Command: python haraya_v3.py
     tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
@@ -54,6 +57,167 @@ class haraya_v3():
     Name = []
     Name_Honorific_Address = []
     NameList = []
+    #________________________________________________LISTS_OF_COMMAND_KEY_WORDS
+    #Run Command: python haraya_v3.py
+    Standby_HotWords = ["standby",
+                        "haraya stand by",
+                        "just stand by",
+                        "wait",
+                        "wait a sec",
+                        "give me a sec",
+                        "hold for a sec",
+                        "wait for a sec",
+                        "give me a second",
+                        "hold for a second",
+                        "wait for a second",
+                        "give me a minute",
+                        "hold for a minute",
+                        "wait for a minute",
+                        "give me an hour",
+                        "hold for an hour",
+                        "wait for an hour",
+                        "just a moment",
+                        "just a sec",
+                        "just a minute",
+                        "just an hour",
+                        "call you later",
+                        "i'll be back",
+                        "be right back"]
+    GoodBye_HotWords = ["goodbye",
+                        "good bye",
+                        "haraya goodbye",
+                        "goodbye haraya",
+                        "haraya bye",
+                        "bye haraya",
+                        "bye",
+                        "let's call it a day",
+                        "i said goodbye",
+                        "you're good to go",
+                        "you can go",
+                        "you can go now",
+                        "you can go to sleep now",
+                        "i need to go",
+                        "ciao",
+                        "sayonara"]
+    Stop_HotWords = ["sign off",
+                    "haraya stop",
+                    "stop please",
+                    "go to sleep",
+                    "go to rest",
+                    "just go to sleep",
+                    "just go to rest",
+                    "go to sleep haraya",
+                    "stop listening",
+                    "terminate yourself",
+                    "enough",
+                    "that's enough",
+                    "I said enough",
+                    "I said stop",
+                    "you can go to sleep now",
+                    "i told you to go to sleep",
+                    "didn't i told you to go to sleep",
+                    "didn't i told you to sleep",
+                    "i told you to stop",
+                    "didn't i told you to stop",
+                    "turn off",
+                    "shutdown"]
+    Yes_HotWords = ["yes",
+                    "yup",
+                    "yes please",
+                    "of course yes",
+                    "yes I do",
+                    "I do",
+                    "you got it right",
+                    "yes actually",
+                    "actually yes",
+                    "that's a yes",
+                    "I think yes",
+                    "sure",
+                    "yah",
+                    "absolutely yes",
+                    "definitely yes",
+                    "you got it right",
+                    "I said yes",
+                    "affirmative"]
+    No_HotWords = ["no",
+                    "nope",
+                    "no please",
+                    "of course no",
+                    "no I don't",
+                    "I don't think so",
+                    "you got it wrong",
+                    "no actually",
+                    "actually no",
+                    "that's a no",
+                    "I'm not",
+                    "I think not",
+                    "none so far",
+                    "I'm not sure",
+                    "noh",
+                    "nah",
+                    "none",
+                    "that's a no no",
+                    "absolutely no",
+                    "definitely no",
+                    "absolutely not",
+                    "definitely not",
+                    "incorrect",
+                    "I said no",
+                    "negative"]
+    Haraya_HotWords = ["haraya",
+                    "araya",
+                    "mariah",
+                    "meriah",
+                    "hiraya",
+                    "raya",
+                    "yaya",
+                    "heraya",
+                    "area",
+                    "ryan",
+                    "aya",
+                    "heria",
+                    "herya",
+                    "halaya"]
+    GoogleSearch_HotWords = ["in google search",
+                            "search in google",
+                            "in google navigate",
+                            "navigate in google",
+                            "in google find",
+                            "find in google",
+                            "in google",
+                            "google search",
+                            "go on google",
+                            "on google"]
+    YouTubeSearch_HotWords = ["in youtube search",
+                            "search in youtube",
+                            "in youtube play",
+                            "play in youtube",
+                            "in youtube find",
+                            "find in youtube",
+                            "in youtube",
+                            "youtube search",
+                            "go on youtube",
+                            "on youtube"]
+    WikipediaSearch_HotWords = ["in wikipedia search",
+                            "search in wikipedia",
+                            "in wikipedia find",
+                            "find in wikipedia",
+                            "in wikipedia",
+                            "wikipedia search",
+                            "go on wikipedia",
+                            "on wikipedia"]
+    Open_HotWords = ["open",
+                    "access",
+                    "go to",
+                    "go on",
+                    "run"]
+    Close_HotWords = ["close it",
+                    "terminate it",
+                    "exit",
+                    "escape",
+                    "quit",
+                    "return",
+                    "close"]
     #______________________________________________________METHODS_IMPLEMENTATION_BLOCK
     #Run Command: python haraya_v3.py
     def speak(text):
@@ -185,7 +349,6 @@ class haraya_v3():
         except:
             Honorific_Address = "Master"
         Name_Honorific_Address.append(Honorific_Address)
-    getHonorificAddress()
     #_____________________________________________initializeFaceRecognitionSystem_BLOCK/FUNCTION
     #Run Command: python haraya_v3.py
     def initializeFaceRecognitionSystem():
@@ -199,7 +362,6 @@ class haraya_v3():
         runLoadingBar(0.5, "RECOGNIZING FACE", "FACE RECOGNIZED!")
         getFullName()
         getHonorificAddress()
-    initializeFaceRecognitionSystem()
     #_____________________________________________initializePoseRecognitionSystem_BLOCK/FUNCTION
     #Run Command: python haraya_v3.py
     def initializePoseRecognitionSystem():
@@ -212,7 +374,6 @@ class haraya_v3():
         response = "Initializing Pose Recognition System"
         speak(response)
         tPRS.join()
-
     #_______________________________________START_UP_MAIN_FUNCTION
     #Run Command: python haraya_v3.py
     def harayaStartUp():
@@ -226,224 +387,66 @@ class haraya_v3():
             response = "Hi! How can I help you?"
         print(colorama.Fore.GREEN + response)
         speak(response1)
+    #________________________________________________________________________________________STANDBY_SUBFUNCTION
+    #Run Command: python haraya_v3.py
+    def Standby_SubFunction():
+        playListeningSound()
+        while True:
+            command = harayaWaitCommand()
+            print(colorama.Fore.LIGHTGREEN_EX + command)
+            if "i'm here" in command or any(hotword in command for hotword in Haraya_HotWords):
+                response = "Yes? How can I help you?"
+                print(colorama.Fore.GREEN + response)
+                speak(response)
+                break
+        exit(harayaNeuralNetwork())
+    #_______________________________________________________________________CONFIRMATION_SUBFUNCTION
+    #Run Command: python haraya_v3.py
+    def Confirmation_SubFunction(command):
+        command = harayaAddCommand(command)
+        
+        if any(hotword == command for hotword in Yes_HotWords):
+            print(colorama.Fore.LIGHTGREEN_EX + command)
+            command = command.replace(command, '')
+            response = "Then, please do tell."
+            print(colorama.Fore.GREEN + response)
+            speak(response)
+            exit(harayaNeuralNetwork())
+            
+        elif any(hotword == command for hotword in No_HotWords):
+            print(colorama.Fore.LIGHTGREEN_EX + command)
+            response = "Alright then, signing off!"
+            print(colorama.Fore.GREEN + response)
+            speak(response)
+            exit()
+            
+        elif '' == command:
+            print(colorama.Fore.LIGHTGREEN_EX + command)
+            response = "Hello? Are you still there?"
+            print(colorama.Fore.GREEN + response)
+            speak(response)
+            Standby_SubFunction()
+        else:
+            response = "Come again?"
+            print(response)
+            speak(response)
+            exit(harayaNeuralNetwork())
+    getHonorificAddress()
+    initializeFaceRecognitionSystem()
+    
     #_______________________________________________________________________________haraya_CORE_FUNCTION
     #Run Command: python haraya_v3.py
     def harayaNeuralNetwork():
-        getFullName()
-        getHonorificAddress()
         global NameHA
         NameHA = Name_Honorific_Address[-1]
         MyName = Name[-1]
-        #________________________________________________LISTS_OF_COMMAND_KEY_WORDS
-        #Run Command: python haraya_v3.py
-        Standby_HotWords = ["standby",
-                            "haraya stand by",
-                            "just stand by",
-                            "wait",
-                            "wait a sec",
-                            "give me a sec",
-                            "hold for a sec",
-                            "wait for a sec",
-                            "give me a second",
-                            "hold for a second",
-                            "wait for a second",
-                            "give me a minute",
-                            "hold for a minute",
-                            "wait for a minute",
-                            "give me an hour",
-                            "hold for an hour",
-                            "wait for an hour",
-                            "just a moment",
-                            "just a sec",
-                            "just a minute",
-                            "just an hour",
-                            "call you later",
-                            "i'll be back",
-                            "be right back"]
-        GoodBye_HotWords = ["goodbye",
-                            "good bye",
-                            "haraya goodbye",
-                            "goodbye haraya",
-                            "haraya bye",
-                            "bye haraya",
-                            "bye",
-                            "let's call it a day",
-                            "i said goodbye",
-                            "you're good to go",
-                            "you can go",
-                            "you can go now",
-                            "you can go to sleep now",
-                            "i need to go",
-                            "ciao",
-                            "sayonara"]
-        Stop_HotWords = ["sign off",
-                        "haraya stop",
-                        "stop please",
-                        "go to sleep",
-                        "go to rest",
-                        "just go to sleep",
-                        "just go to rest",
-                        "go to sleep haraya",
-                        "stop listening",
-                        "terminate yourself",
-                        "enough",
-                        "that's enough",
-                        "I said enough",
-                        "I said stop",
-                        "you can go to sleep now",
-                        "i told you to go to sleep",
-                        "didn't i told you to go to sleep",
-                        "didn't i told you to sleep",
-                        "i told you to stop",
-                        "didn't i told you to stop",
-                        "turn off",
-                        "shutdown"]
-        Yes_HotWords = ["yes",
-                        "yup",
-                        "yes please",
-                        "of course yes",
-                        "yes I do",
-                        "I do",
-                        "you got it right",
-                        "yes actually",
-                        "actually yes",
-                        "that's a yes",
-                        "I think yes",
-                        "sure",
-                        "yah",
-                        "absolutely yes",
-                        "definitely yes",
-                        "you got it right",
-                        "I said yes",
-                        "affirmative"]
-        No_HotWords = ["no",
-                        "nope",
-                        "no please",
-                        "of course no",
-                        "no I don't",
-                        "I don't think so",
-                        "you got it wrong",
-                        "no actually",
-                        "actually no",
-                        "that's a no",
-                        "I'm not",
-                        "I think not",
-                        "none so far",
-                        "I'm not sure",
-                        "noh",
-                        "nah",
-                        "none",
-                        "that's a no no",
-                        "absolutely no",
-                        "definitely no",
-                        "absolutely not",
-                        "definitely not",
-                        "incorrect",
-                        "I said no",
-                        "negative"]
-        Haraya_HotWords = ["haraya",
-                        "araya",
-                        "mariah",
-                        "meriah",
-                        "hiraya",
-                        "raya",
-                        "yaya",
-                        "heraya",
-                        "area",
-                        "ryan",
-                        "aya",
-                        "heria",
-                        "herya",
-                        "halaya"]
-        GoogleSearch_HotWords = ["in google search",
-                                "search in google",
-                                "in google navigate",
-                                "navigate in google",
-                                "in google find",
-                                "find in google",
-                                "in google",
-                                "google search",
-                                "go on google",
-                                "on google"]
-        YouTubeSearch_HotWords = ["in youtube search",
-                                "search in youtube",
-                                "in youtube play",
-                                "play in youtube",
-                                "in youtube find",
-                                "find in youtube",
-                                "in youtube",
-                                "youtube search",
-                                "go on youtube",
-                                "on youtube"]
-        WikipediaSearch_HotWords = ["in wikipedia search",
-                                "search in wikipedia",
-                                "in wikipedia find",
-                                "find in wikipedia",
-                                "in wikipedia",
-                                "wikipedia search",
-                                "go on wikipedia",
-                                "on wikipedia"]
-        Open_HotWords = ["open",
-                        "access",
-                        "go to",
-                        "go on",
-                        "run"]
-        Close_HotWords = ["close it",
-                        "terminate it",
-                        "exit",
-                        "escape",
-                        "quit",
-                        "return",
-                        "close"]
-        #________________________________________________________________________________________STANDBY_SUBFUNCTION
-        #Run Command: python haraya_v3.py
-        def Standby_SubFunction():
-            playListeningSound()
-            while True:
-                command = harayaWaitCommand()
-                print(colorama.Fore.LIGHTGREEN_EX + command)
-                if "i'm here" in command or any(hotword in command for hotword in Haraya_HotWords):
-                    response = "Yes? How can I help you?"
-                    print(colorama.Fore.GREEN + response)
-                    speak(response)
-                    break
-            exit(harayaNeuralNetwork())
-        #_______________________________________________________________________CONFIRMATION_SUBFUNCTION
-        #Run Command: python haraya_v3.py
-        def Confirmation_SubFunction(command):
-            command = harayaAddCommand(command)
-            
-            if any(hotword == command for hotword in Yes_HotWords):
-                print(colorama.Fore.LIGHTGREEN_EX + command)
-                command = command.replace(command, '')
-                response = "Then, please do tell."
-                print(colorama.Fore.GREEN + response)
-                speak(response)
-                exit(harayaNeuralNetwork())
-                
-            elif any(hotword == command for hotword in No_HotWords):
-                print(colorama.Fore.LIGHTGREEN_EX + command)
-                response = "Alright then, signing off!"
-                print(colorama.Fore.GREEN + response)
-                speak(response)
-                exit()
-                
-            elif '' == command:
-                print(colorama.Fore.LIGHTGREEN_EX + command)
-                response = "Hello? Are you still there?"
-                print(colorama.Fore.GREEN + response)
-                speak(response)
-                Standby_SubFunction()
-            else:
-                response = "Come again?"
-                print(response)
-                speak(response)
-                exit(harayaNeuralNetwork())
         #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
         #Run Command: python haraya_v3.py
         command = str(harayaListenCommand())
         tAnnotateCommand = Thread(target=getChatResponse, args=(command,))
         tAnnotateCommand.start()
+        getFullName()
+        getHonorificAddress()
         #____________________________________________________________________________________POSE_RECOGNITION_BLOCK
         #Run Command: python haraya_v3.py
         if "run" in command or "activate" in command or "initialize" in command:
