@@ -1,4 +1,5 @@
 #_____________________________________________Import_Necessary_Libraries/Modules
+#Run Command: python haraya_v3.py
 from threading import Thread
 from playsound import playsound
 import speech_recognition as sr
@@ -14,21 +15,27 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from loadingBar import LoadingBar
+
 import colorama
 import pyautogui
+import harayaUI as fromHarayaUI
+import PaLM2_LLM as fromPaLM2_LLM
 
 class haraya_v3():
     #___________________________________________Attributes_Declaration_BLOCK
+    #Run Command: python haraya_v3.py
     global runLoadingBar, setIsRandom, recognizer, engine
     global Name, Name_Honorific_Address, NameList
     global speak, harayaListenCommand, harayaAddCommand, harayaWaitCommand
     global playPromptSound, playListeningSound, playShutdownSound
     global getFullName, getHonorificAddress, initializeFaceRecognitionSystem, initializePoseRecognitionSystem
     global harayaStartUp, harayaNeuralNetwork
+    global harayaUI, getChatResponse
     
     #__________________________________________________________Constructor_Definition_Block
+    #Run Command: python haraya_v3.py
     def __init__(self):
-        colorama.init(autoreset=True)
+        harayaUI = fromHarayaUI.harayaUI
         runUI = harayaUI.runUI
         tGUI = Thread(target=runUI, daemon=True)
         tGUI.start()
@@ -39,12 +46,11 @@ class haraya_v3():
         Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + HeaderStr
         tHeader = Thread(target=print, args=(Header,))
         tHeader.start()
-        global harayaUI, getChatResponse
-        from harayaUI import harayaUI
-        from PaLM2_LLM import getChatResponse
-    #___________________________________________Attributes_Initialization_BLOCK
+    #___________________________________________Attributes_Initialization_BLOCK 
+    #Run Command: python haraya_v3.py
+    getChatResponse = fromPaLM2_LLM.getChatResponse
     runLoadingBar = LoadingBar.RunLoadingBar
-    setIsRandom = harayaUI.setIsRandom
+    setIsRandom = fromHarayaUI.setIsRandom
     recognizer = sr.Recognizer()
     engine = pyttsx3.init()
     voices = engine.getProperty('voices')
