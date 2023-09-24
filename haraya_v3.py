@@ -14,14 +14,21 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from loadingBar import LoadingBar
-
-import pyautogui
 import colorama
-from harayaUI import harayaUI
-from PaLM2_LLM import getChatResponse
+import pyautogui
 
 class haraya_v3():
+    #___________________________________________Attributes_Declaration_BLOCK
+    global runLoadingBar, setIsRandom, recognizer, engine
+    global Name, Name_Honorific_Address, NameList
+    global speak, harayaListenCommand, harayaAddCommand, harayaWaitCommand
+    global playPromptSound, playListeningSound, playShutdownSound
+    global getFullName, getHonorificAddress, initializeFaceRecognitionSystem, initializePoseRecognitionSystem
+    global harayaStartUp, harayaNeuralNetwork
+    
+    #__________________________________________________________Constructor_Definition_Block
     def __init__(self):
+        colorama.init(autoreset=True)
         runUI = harayaUI.runUI
         tGUI = Thread(target=runUI, daemon=True)
         tGUI.start()
@@ -32,13 +39,9 @@ class haraya_v3():
         Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + HeaderStr
         tHeader = Thread(target=print, args=(Header,))
         tHeader.start()
-    #___________________________________________Attributes_Declaration_BLOCK
-    global runLoadingBar, setIsRandom, recognizer, engine
-    global Name, Name_Honorific_Address, NameList
-    global speak, harayaListenCommand, harayaAddCommand, harayaWaitCommand
-    global playPromptSound, playListeningSound, playShutdownSound
-    global getFullName, getHonorificAddress, initializeFaceRecognitionSystem, initializePoseRecognitionSystem
-    global harayaStartUp, harayaNeuralNetwork
+        global harayaUI, getChatResponse
+        from harayaUI import harayaUI
+        from PaLM2_LLM import getChatResponse
     #___________________________________________Attributes_Initialization_BLOCK
     runLoadingBar = LoadingBar.RunLoadingBar
     setIsRandom = harayaUI.setIsRandom
@@ -862,7 +865,7 @@ if __name__ == '__main__':
     while True:
         harayaStartUp()
         try:
-            haraya_v3.harayaNeuralNetwork()
+            harayaNeuralNetwork()
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: {e}")
         continue
