@@ -19,15 +19,14 @@ import colorama
 import pyautogui
 
 class haraya_v3():
-    def __init__():
-        #___________________________________________Attributes_Declaration_BLOCK
-        #Run Command: python haraya_v3.py
-        global runLoadingBar, getChatResponse, setIsRandom, recognizer, engine
-        global Name, Name_Honorific_Address, NameList
-        global speak, harayaListenCommand, harayaAddCommand, harayaWaitCommand
-        global playPromptSound, playListeningSound, playShutdownSound
-        global getFullName, getHonorificAddress, initializeFaceRecognitionSystem, initializePoseRecognitionSystem
-        global harayaStartUp, harayaNeuralNetwork
+    #___________________________________________Attributes_Declaration_BLOCK
+    #Run Command: python haraya_v3.py
+    global runLoadingBar, getChatResponse, setIsRandom, recognizer, engine
+    global Name, Name_Honorific_Address, NameList
+    global speak, harayaListenCommand, harayaAddCommand, harayaWaitCommand
+    global playPromptSound, playListeningSound, playShutdownSound
+    global getFullName, getHonorificAddress, initializeFaceRecognitionSystem, initializePoseRecognitionSystem
+    global harayaStartUp, harayaNeuralNetwork
     #__________________________________________________________Constructor_Definition_Block
     #Run Command: python haraya_v3.py
     tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
