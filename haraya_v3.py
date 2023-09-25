@@ -192,22 +192,12 @@ class haraya_v3:
 
     # Binary-GendeLIGHTGREEN_EX_Honorifics_Selector_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
-    def getHonorificAddress(self):
-        Male_Names = ["Gianne Bacay",
-                    "Earl Jay Tagud",
-                    "Gemmuel Balceda",
-                    "Mark Anthony Lagrosa",
-                    "Klausmieir Villegas",
-                    "CK Zoe Villegas", 
-                    "Pio Bustamante",
-                    "Rolyn Morales",
-                    "Alexander Villasis",
-                    "Bryan Sarpamones"]
-        Female_Names = ["Kleinieir Pearl Kandis Bacay",
-                        "Princess Viznar",
-                        "Nichi Bacay",
-                        "Roz Waeschet Bacay",
-                        "Jane Rose Bandoy"]
+    def setHonorificAddress(self):
+        Male_Names = ["Gianne Bacay", "Earl Jay Tagud", "Gemmuel Balceda", "Mark Anthony Lagrosa",
+                    "Klausmieir Villegas", "CK Zoe Villegas", "Pio Bustamante", "Rolyn Morales",
+                    "Alexander Villasis", "Bryan Sarpamones"]
+        Female_Names = ["Kleinieir Pearl Kandis Bacay", "Princess Viznar", "Nichi Bacay",
+                        "Roz Waeschet Bacay", "Jane Rose Bandoy"]
         try:
             Gender_Name = self.Name[-1]
             if Gender_Name in Male_Names:
@@ -232,7 +222,7 @@ class haraya_v3:
         tFRS.join()
         self.runLoadingBar(0.5, "RECOGNIZING FACE", "FACE RECOGNIZED!")
         self.getFullName()
-        self.getHonorificAddress()
+        self.setHonorificAddress()
 
     # initializePoseRecognitionSystem_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
@@ -319,7 +309,7 @@ class haraya_v3:
         tAnnotateCommand = Thread(target=self.getChatResponse, args=(command,))
         tAnnotateCommand.start()
         self.getFullName()
-        self.getHonorificAddress()
+        self.setHonorificAddress()
         #____________________________________________________________________________________POSE_RECOGNITION_BLOCK
         #Run Command: python haraya_v3.py
         if "run" in command or "activate" in command or "initialize" in command:
@@ -340,7 +330,7 @@ class haraya_v3:
         #Run Command: python haraya_v3.py
         elif "turn off" in command or any(hotword in command for hotword in self.Stop_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
-            self.getHonorificAddress()
+            self.setHonorificAddress()
             response = "As you wish " + NameHA + ". Signing off..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
@@ -697,7 +687,7 @@ class haraya_v3:
         exit()
 # Create an instance of the HarayaV3 class
 haraya_v3_instance = haraya_v3()
-haraya_v3_instance.getHonorificAddress()
+haraya_v3_instance.setHonorificAddress()
 haraya_v3_instance.initializeFaceRecognitionSystem()
 #______________________________________harayaNeuralNetwork_IN_A_LOOP_BLOCK
 if __name__ == '__main__':
