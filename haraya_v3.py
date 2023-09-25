@@ -19,9 +19,12 @@ import colorama
 import pyautogui
 
 class haraya_v3:
+    global command, NameHA
     # Constructor Definition Block
     #Run Command: python haraya_v3.py
     def __init__(self):
+        self.command = ""
+        self.NameHA = ""
         self.tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
         self.tStartUp.start()
         colorama.init(autoreset=True)
@@ -93,8 +96,6 @@ class haraya_v3:
     # LISTEN_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def listenCommand(self):
-        global command
-        command = ""
         try:
             with sr.Microphone() as source:
                 print(colorama.Fore.CYAN + "Listening...")
@@ -111,7 +112,6 @@ class haraya_v3:
     # ADD_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def addCommand(self, command):
-        command = command
         Interrogative_HotWords = ['what', ' what ', 'what ', ' what',
                                 'who', ' who ', 'who ', ' who',
                                 'where', ' where ', 'where ', ' where',
@@ -146,8 +146,6 @@ class haraya_v3:
     # WAIT_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def waitCommand(self):
-        global command
-        command = ""
         try:
             with sr.Microphone() as source:
                 print(colorama.Fore.CYAN + "Waiting...")
@@ -285,7 +283,6 @@ class haraya_v3:
 #_______________________________________________________________________________haraya_CORE_FUNCTION
     #Run Command: python haraya_v3.py
     def harayaNeuralNetwork(self):
-        global NameHA
         NameHA = self.Name_Honorific_Address[-1]
         MyName = self.Name[-1]
         #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)

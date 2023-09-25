@@ -23,7 +23,7 @@ import random
 import re
 import pyautogui
 
-import falconLLM
+import testFiles.falconLLM as falconLLM
 import textwrap
 
 
