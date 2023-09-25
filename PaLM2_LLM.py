@@ -93,10 +93,10 @@ def getEmbedding(model = "models/embedding-gecko-001", text = ""):
 def getChatResponse(reply = reply, messages = messages, context = context, user_name = user_name, ai_name = ai_name, 
     current_time = current_time, current_date = current_date, current_location = getLocation, current_weather = getWeather):
     
-    DataScrapper.SetCurrentTime()
-    DataScrapper.SetCurrentDate()
-    current_time = DataScrapper.GetCurrentTime()
-    current_date = DataScrapper.GetCurrentDate()
+    Scrapper.SetCurrentTime()
+    Scrapper.SetCurrentDate()
+    current_time = Scrapper.GetCurrentTime()
+    current_date = Scrapper.GetCurrentDate()
     
     messages = messages.format(current_time, current_date, current_location, current_weather, str(chat_history))
     
