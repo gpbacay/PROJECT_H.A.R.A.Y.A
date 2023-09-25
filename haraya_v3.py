@@ -677,7 +677,6 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             self.Standby_SubFunction()
-            
         else:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = self.getChatResponse(reply=command, user_name=MyName)
