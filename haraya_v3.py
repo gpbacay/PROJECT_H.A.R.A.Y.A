@@ -661,9 +661,9 @@ haraya_v3_instance.initializeFaceRecognitionSystem()
 if __name__ == '__main__':
     while True:
         haraya_v3_instance.harayaStartUp()
-        # try:
-        haraya_v3_instance.harayaNeuralNetwork()
-        # except Exception as e:
-        #     print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: {e}")
-        # continue
+        try:
+            haraya_v3_instance.harayaNeuralNetwork()
+        except Exception as e:
+            print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
+        continue
 #Run Command: python haraya_v3.py
