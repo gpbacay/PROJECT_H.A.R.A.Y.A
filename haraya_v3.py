@@ -43,13 +43,11 @@ class haraya_v3:
         self.engine = pyttsx3.init()
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[2].id)
-
         # Lists Attributes Initialization Block
         # Run Command: python haraya_v3.py
         self.Name = []
         self.Name_Honorific_Address = []
         self.NameList = []
-
         # Lists of Command Keywords
         # Run Command: python haraya_v3.py
         self.Standby_HotWords = ["standby", "haraya stand by", "just stand by", "wait", "wait a sec", "give me a sec", 
@@ -92,7 +90,6 @@ class haraya_v3:
         self.engine.say(text)
         self.engine.runAndWait()
         self.setIsRandom(0)
-
     # LISTEN_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def listenCommand(self):
@@ -111,7 +108,6 @@ class haraya_v3:
         except:
             pass
         return command
-
     # ADD_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def addCommand(self, command):
@@ -147,7 +143,6 @@ class haraya_v3:
         except:
             pass
         return command
-
     # WAIT_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def waitCommand(self):
@@ -165,21 +160,17 @@ class haraya_v3:
         except:
             pass
         return command
-
     # AUDIO_EFFECTS_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def playPromptSound(self):
         mp3_path = u"audioFiles\\prompt1.mp3"
         playsound(mp3_path)
-        
     def playListeningSound(self):
         mp3_path = u"audioFiles\\Listening.mp3"
         playsound(mp3_path)
-        
     def playShutdownSound(self):
         mp3_path = u"audioFiles\\shutdown.mp3"
         playsound(mp3_path)
-
     # FACE_RECOGNITION_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def getFullName(self):
@@ -189,7 +180,6 @@ class haraya_v3:
             
             MyFullName = self.NameList[-1].replace("'", '').split(",")[0]
             self.Name.append(MyFullName)
-
     # Binary-GendeLIGHTGREEN_EX_Honorifics_Selector_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def setHonorificAddress(self):
@@ -209,7 +199,6 @@ class haraya_v3:
         except:
             Honorific_Address = "Master"
         self.Name_Honorific_Address.append(Honorific_Address)
-
     # initializeFaceRecognitionSystem_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def initializeFaceRecognitionSystem(self):
@@ -223,7 +212,6 @@ class haraya_v3:
         self.runLoadingBar(0.5, "RECOGNIZING FACE", "FACE RECOGNIZED!")
         self.getFullName()
         self.setHonorificAddress()
-
     # initializePoseRecognitionSystem_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def initializePoseRecognitionSystem(self):
@@ -236,7 +224,6 @@ class haraya_v3:
         response = "Initializing Pose Recognition System"
         self.speak(response)
         tPRS.join()
-
     # START_UP_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def harayaStartUp(self):
@@ -250,7 +237,6 @@ class haraya_v3:
             response = "Hi! How can I help you?"
         print(colorama.Fore.GREEN + response)
         self.speak(response1)
-
     # STANDBY_SUBFUNCTION
     # Run Command: python haraya_v3.py
     def Standby_SubFunction(self):
@@ -264,7 +250,6 @@ class haraya_v3:
                 self.speak(response)
                 break
         exit(self.harayaNeuralNetwork())
-
     # CONFIRMATION_SUBFUNCTION
     # Run Command: python haraya_v3.py
     def Confirmation_SubFunction(self, command):
@@ -440,7 +425,6 @@ class haraya_v3:
                     response1 = "Opening " + "Chrome..."
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
-                    
                 elif "aqw game launcher" in command or "aqw" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
@@ -451,7 +435,6 @@ class haraya_v3:
                     response1 = "Opening " + "Artix game launcher..."
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
-                    
                 elif "genshin impact" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
@@ -462,7 +445,6 @@ class haraya_v3:
                     response1 = "Opening " + "Genshin Impact..."
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
-                    
                 elif "command prompt" in command or "cmd" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
@@ -473,7 +455,6 @@ class haraya_v3:
                     response1 = "Opening " + "Command Prompt..."
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
-                    
                 elif "notepad" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
@@ -484,7 +465,6 @@ class haraya_v3:
                     response1 = "Opening " + "Notepad..."
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
-                    
                 elif "calculator" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
@@ -495,7 +475,6 @@ class haraya_v3:
                     response1 = "Opening " + "Calculator..."
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
-                    
                 elif "vlc" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
@@ -506,7 +485,6 @@ class haraya_v3:
                     response1 = "Opening " + "VLC Media Player..."
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
-                    
                 elif "visual studio code" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
@@ -517,7 +495,6 @@ class haraya_v3:
                     response1 = "Opening " + "Visual Studio Code..."
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
-                    
                 elif "messenger" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
@@ -528,7 +505,6 @@ class haraya_v3:
                     response1 = "Opening " + "Messenger..."
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
-                    
                 elif "downloads" in command or "download" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
@@ -539,7 +515,6 @@ class haraya_v3:
                     response1 = "Opening " + "Downloads..."
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
-                    
                 elif "videos" in command or "video" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
@@ -555,7 +530,6 @@ class haraya_v3:
                 print(colorama.Fore.LIGHTLIGHTGREEN_EX_EX + response)
                 self.speak(response)
             exit(self.Confirmation_SubFunction(command))
-            
         #_____________________________________________________________________________________________________CLOSE_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.Close_HotWords):
@@ -590,7 +564,6 @@ class haraya_v3:
                 print(colorama.Fore.LIGHTGREEN_EX + response)
                 self.speak(response)
             exit(self.Confirmation_SubFunction(command))
-        
         #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
         #Run Command: python haraya_v3.py
         elif "shutdown my computer" in command:
@@ -614,7 +587,6 @@ class haraya_v3:
             os.system("shutdown /l")
             self.playPromptSound()
             self.Confirmation_SubFunction(command)
-            
         elif "logout my computer" in command or "log out my computer" in command:
             response = "as you wish! logging out your computer..."
             print(colorama.Fore.GREEN + response)
@@ -622,7 +594,6 @@ class haraya_v3:
             os.system("shutdown /l")
             self.playPromptSound()
             self.Confirmation_SubFunction(command)
-            
         elif "sign out my computer" in command or "signout my computer" in command:
             response = "as you wish! signing out your computer..."
             print(colorama.Fore.GREEN + response)
@@ -630,7 +601,6 @@ class haraya_v3:
             os.system("shutdown /l")
             self.playPromptSound()
             self.Confirmation_SubFunction(command)
-            
         elif "increase" in command and "volume" in command or "volume up" in command:
             response = "Increasing volume..."
             print(colorama.Fore.GREEN + response)
@@ -646,7 +616,6 @@ class haraya_v3:
             pyautogui.press("volumedown", 10)
             self.playPromptSound()
             exit(self.harayaNeuralNetwork())
-            
         elif "battery" in command and "status" in command or "level" in command or "percentage" in command:
             battery = psutil.sensors_battery()
             percentage = battery.percent
