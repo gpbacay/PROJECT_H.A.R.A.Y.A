@@ -73,13 +73,11 @@ Instructions:
 user_name = "User"
 ai_name = "Haraya"
 
-DataScrapper.SetCurrentTime()
-DataScrapper.SetCurrentDate()
-current_time = DataScrapper.GetCurrentTime()
-current_date = DataScrapper.GetCurrentDate()
-    
-getLocation = DataScrapper.GetCurrentLocation()
-getWeather = DataScrapper.GetCurrentWeather()
+Scrapper = DataScrapper()
+current_time = Scrapper.GetCurrentTime()
+current_date = Scrapper.GetCurrentDate()
+getLocation = Scrapper.GetCurrentLocation()
+getWeather = Scrapper.GetCurrentWeather()
 
 chat_history = []
 
