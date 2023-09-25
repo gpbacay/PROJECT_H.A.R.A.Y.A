@@ -19,9 +19,9 @@ import colorama
 import pyautogui
 
 class haraya_v3:
+    # Constructor Definition Block
+    #Run Command: python haraya_v3.py
     def __init__(self):
-        # Constructor Definition Block
-        #Run Command: python haraya_v3.py
         self.tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
         self.tStartUp.start()
         colorama.init(autoreset=True)
@@ -76,10 +76,10 @@ class haraya_v3:
                                 "ryan", "aya", "heria", "herya", "halaya"]
         self.GoogleSearch_HotWords = ["in google search", "search in google", "in google navigate", "navigate in google", 
                                     "in google find", "find in google", "in google", "google search", "go on google", 
-                                    "on google"]
+                                    "go in google", "on google"]
         self.YouTubeSearch_HotWords = ["in youtube search", "search in youtube", "in youtube play", "play in youtube", 
                                     "in youtube find", "find in youtube", "in youtube", "youtube search", "go on youtube",
-                                    "on youtube"]
+                                    "go in youtube", "on youtube"]
         self.WikipediaSearch_HotWords = ["in wikipedia search", "search in wikipedia", "in wikipedia find", 
                                         "find in wikipedia", "in wikipedia", "wikipedia search", "go on wikipedia", 
                                         "on wikipedia"]
@@ -95,7 +95,7 @@ class haraya_v3:
 
     # LISTEN_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
-    def harayaListenCommand(self):
+    def listenCommand(self):
         global command
         command = ""
         try:
@@ -114,7 +114,7 @@ class haraya_v3:
 
     # ADD_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
-    def harayaAddCommand(self, command):
+    def addCommand(self, command):
         command = command
         Interrogative_HotWords = ['what', ' what ', 'what ', ' what',
                                 'who', ' who ', 'who ', ' who',
@@ -150,7 +150,7 @@ class haraya_v3:
 
     # WAIT_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
-    def harayaWaitCommand(self):
+    def waitCommand(self):
         global command
         command = ""
         try:
@@ -266,7 +266,7 @@ class haraya_v3:
     def Standby_SubFunction(self):
         self.playListeningSound()
         while True:
-            command = self.harayaWaitCommand()
+            command = self.waitCommand()
             print(colorama.Fore.LIGHTGREEN_EX + command)
             if "i'm here" in command or any(hotword in command for hotword in self.Haraya_HotWords):
                 response = "Yes? How can I help you?"
@@ -278,7 +278,7 @@ class haraya_v3:
     # CONFIRMATION_SUBFUNCTION
     # Run Command: python haraya_v3.py
     def Confirmation_SubFunction(self, command):
-        command = self.harayaAddCommand(command)
+        command = self.addCommand(command)
         
         if any(hotword == command for hotword in self.Yes_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
@@ -315,7 +315,7 @@ class haraya_v3:
         MyName = self.Name[-1]
         #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
         #Run Command: python haraya_v3.py
-        command = str(self.harayaListenCommand())
+        command = str(self.listenCommand())
         tAnnotateCommand = Thread(target=self.getChatResponse, args=(command,))
         tAnnotateCommand.start()
         self.getFullName()
@@ -367,21 +367,7 @@ class haraya_v3:
             response = "What would you like to search in Google?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            
-            command = ""
-            try:
-                with sr.Microphone() as source:
-                    print(colorama.Fore.CYAN + "Listening...")
-                    print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
-                    self.playListeningSound()
-                    self.recognizer.energy_threshold = 1.0
-                    self.recognizer.pause_threshold = 0.8
-                    voice = self.recognizer.listen(source)
-                    command = self.recognizer.recognize_google(voice)
-                    command = command.lower()
-            except:
-                pass
-            
+            command = self.listenCommand()
             try:
                 information = command.replace("search in google", '')
                 information = information.replace("haraya", '')
@@ -393,7 +379,7 @@ class haraya_v3:
                 search_list = []
                 search_list.append(information)
                 information = search_list[-1]
-                response = "Searching " + colorama.Fore.LIGHTGREEN_EX + information
+                response = "Searching " + colorama.Fore.CYAN + information
                 response1 = "Searching " + information
                 print(colorama.Fore.GREEN + response)
                 self.speak(response1)
@@ -410,21 +396,7 @@ class haraya_v3:
             response = "What would you like to search or play in Youtube?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            
-            command = ""
-            try:
-                with sr.Microphone() as source:
-                    print(colorama.Fore.CYAN + "Listening...")
-                    print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
-                    self.playListeningSound()
-                    self.recognizer.energy_threshold = 1.0
-                    self.recognizer.pause_threshold = 0.8
-                    voice = self.recognizer.listen(source)
-                    command = self.recognizer.recognize_google(voice)
-                    command = command.lower()
-            except:
-                pass
-            
+            command = self.listenCommand()
             response = "Searching..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
@@ -441,7 +413,7 @@ class haraya_v3:
             song_list.append(song_title)
             song_title = song_list[-1]
             pywhatkit.playonyt(song_title)
-            response = "Now Playing " + colorama.Fore.LIGHTGREEN_EX + song_title
+            response = "Now Playing " + colorama.Fore.CYAN + song_title
             response1 = "Now Playing " + song_title
             print(colorama.Fore.GREEN + response)
             self.speak(response1)
@@ -450,21 +422,7 @@ class haraya_v3:
             response = "What would you like to searchin Wikipedia?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            
-            command = ""
-            try:
-                with sr.Microphone() as source:
-                    print(colorama.Fore.CYAN + "Listening...")
-                    print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
-                    self.playListeningSound()
-                    self.recognizer.energy_threshold = 1.0
-                    self.recognizer.pause_threshold = 0.8
-                    voice = self.recognizer.listen(source)
-                    command = self.recognizer.recognize_google(voice)
-                    command = self.command.lower()
-            except:
-                pass
-            
+            command = self.listenCommand()
             response = "Searching..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
