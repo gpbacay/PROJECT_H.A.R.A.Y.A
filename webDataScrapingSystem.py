@@ -138,7 +138,7 @@ class DataScrapper:
             self.current_location = result
         except Exception as e:
             self.current_location = "[Current location information is not available.]"
-            print(f"Current location information is not available: {e}")
+            print(f"\nCurrent location information is not available: {e}\n")
         finally:
             driver.quit()
     
@@ -172,7 +172,7 @@ class DataScrapper:
             self.current_weather = result
         except Exception as e:
             self.current_weather = "[Current weather information is not available.]"
-            print(f"Current weather information is not available: {e}")
+            print(f"\nCurrent weather information is not available: {e}\n")
         finally:
             driver.quit()
     

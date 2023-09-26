@@ -634,7 +634,6 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             self.Standby_SubFunction()
-            
         #_______________________________________________________NoCommands/NotClearCommands_BLOCK
         #Run Command: python haraya_v3.py
         elif "[]" == command or "" == command:
