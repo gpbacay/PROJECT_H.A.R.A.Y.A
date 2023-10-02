@@ -43,6 +43,8 @@ class PaLM2_LLM:
         making it adept at handling complex tasks and providing exceptional user support. 
         With its anthropomorphic and generative characteristics, H.A.R.A.Y.A sets a new standard for virtual assistant interactions, 
         marking the dawn of a user-centric AI era.
+        The name "H.A.R.A.Y.A" is inspired by the Tagalog word "Haraya," which conveys the essence of "imagination," "vision," or "dream." 
+        This name reflects H.A.R.A.Y.A's commitment to limitless possibilities and its mission to assist users in reaching their dreams.
 
         Note: Remember, assimilate and summarize the information about your creator and about yourself before explaining it.
         """
@@ -98,14 +100,15 @@ class PaLM2_LLM:
         embedding = palm.generate_embeddings(model=model, text=text)
         return embedding
 
-    def getChatResponse(self, reply):
+    def getChatResponse(self, reply: str, user_name_input: str):
+        self.user_name = user_name_input
         
         self.Scrapper.SetCurrentTime()
         self.Scrapper.SetCurrentDate()
         
         self.messages = self.messages.format(self.current_time, self.current_date, self.current_location, self.current_weather, str(self.chat_history))
         
-        self.context = self.context.format(str(reply), self.ai_name, self.user_name)
+        self.context = self.context.format(str(reply), self.ai_name, user_name_input)
 
         self.response = palm.chat(
             model="models/chat-bison-001",
@@ -131,7 +134,7 @@ if __name__ == '__main__':
         command = input("User: ")
         if "quit" == command:
             break
-        print("\nHaraya: " + str(runLLM.getChatResponse(reply=command)))
+        print("\nHaraya: " + str(runLLM.getChatResponse(reply=command, user_name_input="Gianne",)))
 
 #___________pip install google-generativeai
 #___________pip install vertexai

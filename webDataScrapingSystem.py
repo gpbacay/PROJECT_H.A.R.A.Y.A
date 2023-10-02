@@ -97,33 +97,25 @@ class DataScrapper:
         self.current_time = result
     
     def SetCurrentDate(self):
-        Dates = []
-        Date_format = datetime.datetime.now().strftime("%m/%d/%y")
-        Date_format = Date_format.replace('/', ' ')
-        Date_format = Date_format.split(' ')
-        Dates.append(Date_format)
-        
-        Year_number = Dates[-1][2]
-        Year_number = int(Year_number) + 2000
-        
-        Month_number = Dates[-1][0][-1]
-        Month_number = int(Month_number)
-        
-        Day_number = Dates[-1][1]
-        Day_number = int(Day_number)
-        
+        current_date = datetime.datetime.now()
+        Year_number = current_date.year
+        Month_number = current_date.month
+        Day_number = current_date.day
+
         def determine_weekday_name(Year_number, Month_number, Day_number):
             day_of_week = calendar.weekday(Year_number, Month_number, Day_number)
             weekday_name = calendar.day_name[day_of_week]
             return weekday_name
+
         WeekDay_Name = determine_weekday_name(Year_number, Month_number, Day_number)
-        
+
         def determine_month_name(Month_number):
             month_name = calendar.month_name[Month_number]
             return month_name
+
         Month_Name = determine_month_name(Month_number)
-        
-        result = "Today is " + WeekDay_Name + ", " + Month_Name + " " + str(Day_number) + ", " + str(Year_number)
+
+        result = f"Today is {WeekDay_Name}, {Month_Name} {Day_number}, {Year_number}."
         self.current_date = result
 
     def SetCurrentLocation(self):

@@ -17,14 +17,16 @@ from webdriver_manager.chrome import ChromeDriverManager
 from loadingBar import LoadingBar
 import colorama
 import pyautogui
+from harayaUI import harayaUI
+from PaLM2_LLM import PaLM2_LLM
 
 class haraya_v3:
-    global command, NameHA
     # Constructor Definition Block
     #Run Command: python haraya_v3.py
     def __init__(self):
         self.command = ""
         self.NameHA = ""
+        self.MyName = ""
         self.tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
         self.tStartUp.start()
         colorama.init(autoreset=True)
@@ -32,12 +34,10 @@ class haraya_v3:
         self.Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + self.HeaderStr
         self.tHeader = Thread(target=print, args=(self.Header,))
         self.tHeader.start()
-        from harayaUI import harayaUI
-        from PaLM2_LLM import getChatResponse
+        self.PaLM2_LLM = PaLM2_LLM()
         # Attributes Declaration Block
         # Run Command: python haraya_v3.py
         self.setIsRandom = harayaUI.setIsRandom
-        self.getChatResponse = getChatResponse
         self.runUI = harayaUI.runUI
         self.tGUI = Thread(target=self.runUI, daemon=True)
         self.tGUI.start()
@@ -178,6 +178,7 @@ class haraya_v3:
             
             MyFullName = self.NameList[-1].replace("'", '').split(",")[0]
             self.Name.append(MyFullName)
+            self.MyName = MyFullName
     # Binary-GendeLIGHTGREEN_EX_Honorifics_Selector_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def setHonorificAddress(self):
@@ -267,7 +268,6 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             exit()
-            
         elif '' == command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Hello? Are you still there?"
@@ -279,16 +279,14 @@ class haraya_v3:
             print(response)
             self.speak(response)
             exit(self.harayaNeuralNetwork())
-
 #_______________________________________________________________________________haraya_CORE_FUNCTION
     #Run Command: python haraya_v3.py
     def harayaNeuralNetwork(self):
-        NameHA = self.Name_Honorific_Address[-1]
-        MyName = self.Name[-1]
-        #_____________________________________________________COMMAND_ASSIGNMENT_BLOCK (CORE SCRIPT)
-        #Run Command: python haraya_v3.py
+        global NameHA, MyName, command
+        NameHA = str(self.Name_Honorific_Address[-1])
+        MyName = self.MyName
         command = str(self.listenCommand())
-        tAnnotateCommand = Thread(target=self.getChatResponse, args=(command,))
+        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(command, MyName,))
         tAnnotateCommand.start()
         self.getFullName()
         self.setHonorificAddress()
@@ -297,8 +295,6 @@ class haraya_v3:
         if "run" in command or "activate" in command or "initialize" in command:
             if "face recognition system" in command:
                 self.initializeFaceRecognitionSystem()
-                NameHA = self.Name_Honorific_Address[-1]
-                MyName = self.Name[-1]
                 response = "Hello " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "!"
                 response1 = "Hello " + NameHA + " " + MyName + "!"
                 print(colorama.Fore.GREEN + response)
@@ -644,7 +640,7 @@ class haraya_v3:
             self.Standby_SubFunction()
         else:
             print(colorama.Fore.LIGHTGREEN_EX + command)
-            response = self.getChatResponse(reply=command, user_name=MyName)
+            response = self.PaLM2_LLM.getChatResponse(reply=command, user_name_input=MyName)
             print(colorama.Fore.YELLOW + str(response))
             self.speak(response)
             exit(self.harayaNeuralNetwork())
@@ -654,6 +650,7 @@ haraya_v3_instance = haraya_v3()
 haraya_v3_instance.setHonorificAddress()
 haraya_v3_instance.initializeFaceRecognitionSystem()
 #______________________________________harayaNeuralNetwork_IN_A_LOOP_BLOCK
+#Run Command: python haraya_v3.py
 if __name__ == '__main__':
     while True:
         haraya_v3_instance.harayaStartUp()
