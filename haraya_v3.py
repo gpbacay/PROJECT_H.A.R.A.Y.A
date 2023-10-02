@@ -27,7 +27,7 @@ class haraya_v3:
         self.command = ""
         self.NameHA = ""
         self.MyName = ""
-        self.tStartUp = Thread(target=playsound, args=(u"audioFiles\\startUp.mp3",))
+        self.tStartUp = Thread(target=playsound, args=(u"audioFiles\\prompt1.mp3",))
         self.tStartUp.start()
         colorama.init(autoreset=True)
         self.HeaderStr = "\t\t\t\tH.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\t\t\t\t\n"
@@ -169,6 +169,9 @@ class haraya_v3:
     def playShutdownSound(self):
         mp3_path = u"audioFiles\\shutdown.mp3"
         playsound(mp3_path)
+    def playSearchSound(self):
+        mp3_path = u"audioFiles\\searching.mp3"
+        playsound(mp3_path)
     # FACE_RECOGNITION_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def getFullName(self):
@@ -226,7 +229,6 @@ class haraya_v3:
     # START_UP_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def harayaStartUp(self):
-        self.playPromptSound()
         try:
             NameHA = self.Name_Honorific_Address[-1]
             MyName = self.Name[-1]
@@ -327,7 +329,8 @@ class haraya_v3:
             response = "As you wish " + NameHA + ". Turning off..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.playShutdownSound()
+            self.tStartUp = Thread(target=self.playSearchSound)
+            self.tStartUp.start()
             exit()
         #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
         #Run Command: python haraya_v3.py
@@ -351,6 +354,8 @@ class haraya_v3:
                 response1 = "Searching " + information
                 print(colorama.Fore.GREEN + response)
                 self.speak(response1)
+                self.tStartUp = Thread(target=self.playSearchSound)
+                self.tStartUp.start()
                 for i in range(1):
                     search = information.replace(' ', '+')
                     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -368,6 +373,8 @@ class haraya_v3:
             response = "Searching..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
+            self.tStartUp = Thread(target=self.playSearchSound)
+            self.tStartUp.start()
             song_title = command.replace("haraya", '')
             song_title = song_title.replace("play", '')
             song_title = song_title.replace("search", '')
@@ -394,6 +401,7 @@ class haraya_v3:
             response = "Searching..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
+            self.playSearchSound()
             person = command.replace("search in wikipedia", '')
             person = person.replace("in wikipedia search", '')
             person = person.replace("haraya", '')
