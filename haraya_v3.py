@@ -16,6 +16,8 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from loadingBar import LoadingBar
 import colorama
+import pygame
+from pygame.locals import *
 import pyautogui
 from harayaUI import harayaUI
 from PaLM2_LLM import PaLM2_LLM
@@ -37,6 +39,7 @@ class haraya_v3:
         self.PaLM2_LLM = PaLM2_LLM()
         # Attributes Declaration Block
         # Run Command: python haraya_v3.py
+        pygame.init()
         self.setIsRandom = harayaUI.setIsRandom
         self.runUI = harayaUI.runUI
         self.tGUI = Thread(target=self.runUI, daemon=True)
@@ -653,6 +656,7 @@ class haraya_v3:
             self.speak(response)
             exit(self.harayaNeuralNetwork())
         exit()
+    pygame.quit()
 # Create an instance of the HarayaV3 class
 haraya_v3_instance = haraya_v3()
 haraya_v3_instance.setHonorificAddress()
@@ -660,7 +664,31 @@ haraya_v3_instance.initializeFaceRecognitionSystem()
 #______________________________________harayaNeuralNetwork_IN_A_LOOP_BLOCK
 #Run Command: python haraya_v3.py
 if __name__ == '__main__':
-    while True:
+    pygame.init()
+    running = True
+    while running:
+        # def stopTalking():
+        #     while True:
+        #         try:
+        #             print("1")
+        #             for event in pygame.event.get():
+        #                 print("222222222222222222222222222222")
+        #                 if event.type == QUIT:
+        #                     break
+        #                 if event.type == KEYDOWN:
+        #                     if event.key == K_UP:
+        #                         print("333333333333333333333")
+        #                     elif event.key == K_DOWN:
+        #                         print("444444444444444444444")
+        #                     if event.key == K_ESCAPE:
+        #                         print("5555555555555555555555")
+        #                         break
+        #             print("6")
+        #         except Exception as e:
+        #             print(f"Error occured while stopping Haraya: {e}")
+        #             break
+        # tStopTalking = Thread(target=stopTalking)
+        # tStopTalking.start()
         haraya_v3_instance.harayaStartUp()
         try:
             haraya_v3_instance.harayaNeuralNetwork()

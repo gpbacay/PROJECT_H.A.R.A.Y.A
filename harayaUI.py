@@ -50,13 +50,6 @@ class harayaUI():
                 for event in pygame.event.get():
                     if event.type == QUIT:
                         running = False
-                    if event.type == KEYDOWN:
-                        """ if event.key == K_UP:
-                            setIsRandom(0)
-                        elif event.key == K_DOWN:
-                            setIsRandom(1) """
-                        if event.key == K_ESCAPE:
-                            running = False
 
                 if play_gif:
                     try:
@@ -93,7 +86,7 @@ class harayaUI():
                         gif_reader = imageio.get_reader(gif_path)
                         current_frame = 0
             except:
-                continue
+                break
         
         # Clean up
         gif_reader.close()
@@ -103,7 +96,6 @@ class harayaUI():
 if __name__ == '__main__':
     runUI = harayaUI.runUI
     setIsRandom = harayaUI.setIsRandom
-    tRandomize = Thread(target=runUI)
-    tRandomize.start()
+    runUI()
     
 #_____________________python harayaUI.py
