@@ -22,7 +22,7 @@ class PaLM2_LLM:
         - CURRENT DATE: <{}>;
         - CURRENT LOCATION: <{}>;
         - CURRENT WEATHER FORECAST: <{}>.
-        Our Chat History/Previous conversation:
+        Note: Our chat history/previous conversation:
         <{}>.
         Note: Remember, assimilate and summarize our chat history before explaining it.
 
@@ -130,11 +130,15 @@ class PaLM2_LLM:
 if __name__ == '__main__':
     runLLM = PaLM2_LLM()
     while True:
-        print("\n")
-        command = input("User: ")
-        if "quit" == command:
-            break
-        print("\nHaraya: " + str(runLLM.getChatResponse(reply=command, user_name_input="Gianne",)))
+        try:
+            print("\n")
+            command = input("User: ")
+            if "quit" == command:
+                break
+            print("\nHaraya: " + str(runLLM.getChatResponse(reply=command, user_name_input="Gianne",)))
+        except Exception as e:
+            print(f"Error occured while running PaLM2_LLM: {e}")
+            continue
 
 #___________pip install google-generativeai
 #___________pip install vertexai
