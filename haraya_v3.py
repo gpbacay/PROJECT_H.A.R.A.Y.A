@@ -1,6 +1,7 @@
 # Import Necessary Libraries/Modules
 # Run Command: python haraya_v3.py
 from threading import Thread
+import time
 from playsound import playsound
 import speech_recognition as sr
 import pywhatkit
@@ -21,6 +22,7 @@ from pygame.locals import *
 import pyautogui
 from harayaUI import harayaUI
 from PaLM2_LLM import PaLM2_LLM
+import harayaVoiceEngine as harayaVoiceEngine
 
 class haraya_v3:
     # Constructor Definition Block
@@ -49,6 +51,7 @@ class haraya_v3:
         self.engine = pyttsx3.init()
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[2].id)
+        self.hveSpeak = harayaVoiceEngine.Speak
         # Lists Attributes Initialization Block
         # Run Command: python haraya_v3.py
         self.Name = []
@@ -91,10 +94,19 @@ class haraya_v3:
         self.Close_HotWords = ["close", "terminate", "go out", "exit", "escape", "quit", "return", "close"]
     # Methods Implementation Block
     # Run Command: python haraya_v3.py
-    def speak(self, text):
-        self.setIsRandom(1)
-        self.engine.say(text)
-        self.engine.runAndWait()
+    # def speak(self, text):
+    #     self.setIsRandom(1)
+    #     self.engine.say(text)
+    #     self.engine.runAndWait()
+    #     self.setIsRandom(0)
+        
+    def speak(self, text_input):
+        tSpeak = Thread(target=self.hveSpeak, args=(text_input,))
+        tSpeak.start()
+        time.sleep(1)
+        tSpeaking = Thread(target=self.setIsRandom, args=(1,))
+        tSpeaking.start()
+        tSpeak.join()
         self.setIsRandom(0)
     # LISTEN_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py

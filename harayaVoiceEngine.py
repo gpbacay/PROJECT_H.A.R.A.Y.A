@@ -16,8 +16,8 @@ def Speak(input_text: str):
     # Build the voice request, select the language code ("en-GB") and the ssml
     # voice gender ("neutral")
     voice = texttospeech.VoiceSelectionParams(
-        language_code="fil-PH",
-        name="fil-PH-Neural2-A",
+        language_code="fil-PH", #fil-PH, en-AU, en-GB
+        name="fil-PH-Neural2-A",#fil-PH-Neural2-A, en-AU-Polyglot-1, en-GB-Standard-A
         ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
     )
 
@@ -72,7 +72,7 @@ def Speak(input_text: str):
     os.remove(temp_wav)
 
 if __name__ == '__main__':
-    Speak("Mabuhay GDSC UIC! Maraming salamat sa opportunidad")
+    Speak("Mabuhay GDSC UIC! Maraming salamat sa opportunidad, Ako ay may lobo lumipad sa langit di ko na nakita pumutok na pala sayang ang pera ko pambili ng lobo sa pagkain sana nabusog pa ako.")
 
 #___________________pip install --upgrade google-cloud-texttospeech
 #___________________python harayaVoiceEngine.py
