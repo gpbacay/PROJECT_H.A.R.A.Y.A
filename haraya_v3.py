@@ -488,10 +488,10 @@ class haraya_v3:
                 response1 = "Hello " + NameHA + " " + MyName + "!"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response1)
-                self.Confirmation_SubFunction(command)
+                return self.Confirmation_SubFunction(command)
             elif "pose recognition system" in command:
                 self.initializePoseRecognitionSystem()
-                self.Confirmation_SubFunction(command)
+                return self.Confirmation_SubFunction(command)
             return
         #__________________________________________________________________________________TERMINATION_BLOCK
         #Run Command: python haraya_v3.py
@@ -501,15 +501,13 @@ class haraya_v3:
             response = "As you wish " + NameHA + ". Signing off..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.playShutdownSound()
-            return
+            return self.playShutdownSound()
         elif any(hotword in command for hotword in self.GoodBye_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Goodbye " + NameHA + "! Have a great day!"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.playShutdownSound()
-            return
+            return self.playShutdownSound()
             
         elif "turn off my computer" in command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
@@ -548,9 +546,10 @@ class haraya_v3:
                     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
                     browser.get("https://www.google.com/search?q=" + search + "&start" + str(i))
                 self.speak("Here's what I've found.")
-                self.Confirmation_SubFunction(command)
-            except:
+                return self.Confirmation_SubFunction(command)
+            except Exception as e:
                 self.playPromptSound()
+                print(f"An error occured while Searching in Chrome: {e}")
                 return
         elif any(hotword in command for hotword in self.YouTubeSearch_HotWords):
             response = "What would you like to search or play in Youtube?"
@@ -579,7 +578,7 @@ class haraya_v3:
             response1 = "Now Playing " + song_title
             print(colorama.Fore.GREEN + response)
             self.speak(response1)
-            self.Confirmation_SubFunction(command)
+            return self.Confirmation_SubFunction(command)
         elif any(hotword in command for hotword in self.WikipediaSearch_HotWords):
             response = "What would you like to searchin Wikipedia?"
             print(colorama.Fore.GREEN + response)
@@ -596,7 +595,7 @@ class haraya_v3:
             info = wikipedia.summary(person, 1)
             print(info)
             self.speak(info)
-            self.Confirmation_SubFunction(command)
+            return self.Confirmation_SubFunction(command)
         #____________________________________________________________________________________________________________OPEN/ACCESS_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.Open_HotWords):
@@ -739,15 +738,13 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /s /t 0")
-            self.playPromptSound()
-            return
+            return self.playPromptSound()
         elif "restart my computer" in command:
             response = "as you wish! restarting your computer..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /r")
-            self.playPromptSound()
-            return
+            return self.playPromptSound()
         elif "sign off my computer" in command or "signoff my computer" in command:
             response = "as you wish! signing off your computer..."
             print(colorama.Fore.GREEN + response)
@@ -819,8 +816,6 @@ class haraya_v3:
             print(colorama.Fore.YELLOW + str(response))
             self.speak(response)
             return self.harayaNeuralNetwork()
-        exit()
-    pygame.quit()
 # Create an instance of the HarayaV3 class
 haraya_v3_instance = haraya_v3()
 haraya_v3_instance.setHonorificAddress()
@@ -838,4 +833,6 @@ if __name__ == '__main__':
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
         continue
+    pygame.quit()
+    exit()
 #Run Command: python haraya_v3.py
