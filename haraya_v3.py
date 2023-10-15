@@ -508,15 +508,12 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             return self.playShutdownSound()
-            
         elif "turn off my computer" in command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "As you wish " + NameHA + ". Turning off..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.tStartUp = Thread(target=self.playSearchSound)
-            self.tStartUp.start()
-            return
+            return self.playShutdownSound()
         #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.GoogleSearch_HotWords):
@@ -829,7 +826,8 @@ if __name__ == '__main__':
         haraya_v3_instance.harayaStartUp()
         try:
             haraya_v3_instance.harayaNeuralNetwork()
-            haraya_v3_instance.close_program(program_name="WindowsTerminal.exe")
+            #haraya_v3_instance.close_program(program_name="WindowsTerminal.exe")
+            break
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
         continue
