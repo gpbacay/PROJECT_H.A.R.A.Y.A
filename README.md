@@ -10,7 +10,7 @@
 
 - **Text to Speech Generation**: HARAYA can efficiently utilizes Google Cloud's Text-To-Speech API to synthesize natural-sounding speech from text-based data. This integration empowers HARAYA to provide information audibly, enhancing user interactions and ensuring a user-friendly experience.
 
-- **Face and Pose Recognition**: HARAYA is equipped with the ability to recognize faces and poses through computer vision, enabling applications in image analysis and identification.
+- **Face Recognition and Pose Estimation**: HARAYA is equipped with the ability to recognize faces and estimate poses through computer vision, enabling applications in image analysis and identification.
 
 - **Computer Automation**: HARAYA can automate various computer tasks, streamlining workflows and enhancing productivity.
 
