@@ -28,9 +28,9 @@ class haraya_v3:
     # Constructor Definition Block
     #Run Command: python haraya_v3.py
     def __init__(self):
-        self.command = ""
-        self.NameHA = ""
-        self.MyName = ""
+        self.command = "."
+        self.NameHA = "."
+        self.MyName = "."
         self.tStartUp = Thread(target=playsound, args=(u"audioFiles\\prompt1.mp3",))
         self.tStartUp.start()
         colorama.init(autoreset=True)
@@ -59,39 +59,171 @@ class haraya_v3:
         self.NameList = []
         # Lists of Command Keywords
         # Run Command: python haraya_v3.py
-        self.Standby_HotWords = ["standby", "haraya stand by", "just stand by", "wait", "wait a sec", "give me a sec", 
-                                "hold for a sec", "wait for a sec", "give me a second", "hold for a second", 
-                                "wait for a second", "give me a minute", "hold for a minute", "wait for a minute", 
-                                "give me an hour", "hold for an hour", "wait for an hour", "just a moment", "just a sec", 
-                                "just a minute", "just an hour", "call you later", "i'll be back", "be right back"]
-        self.GoodBye_HotWords = ["goodbye", "good bye", "haraya goodbye", "goodbye haraya", "haraya bye", "bye haraya", 
-                                "bye", "let's call it a day", "i said goodbye", "you're good to go", "you can go", 
-                                "you can go now", "you can go to sleep now", "i need to go", "ciao", "sayonara"]
-        self.Stop_HotWords = ["sign off", "haraya stop", "stop please", "go to sleep", "go to rest", "just go to sleep",
-                            "just go to rest", "go to sleep haraya", "stop listening", "terminate yourself", "enough",
-                            "that's enough", "I said enough", "I said stop", "you can go to sleep now", 
-                            "i told you to go to sleep", "didn't i told you to go to sleep", "didn't i told you to sleep", 
-                            "i told you to stop", "didn't i told you to stop", "turn off", "shutdown"]
-        self.Yes_HotWords = ["yes", "yup", "yes please", "of course yes", "yes I do", "I do", "you got it right", 
-                            "yes actually", "actually yes", "that's a yes", "I think yes", "sure", "yah", "absolutely yes", 
-                            "definitely yes", "you got it right", "I said yes", "affirmative"]
-        self.No_HotWords = ["no", "nope", "no please", "of course no", "no I don't", "I don't think so", "you got it wrong", 
-                            "no actually", "actually no", "that's a no", "I'm not", "I think not", "none so far", 
-                            "I'm not sure", "noh", "nah", "none", "that's a no no", "absolutely no", "definitely no", 
-                            "absolutely not", "definitely not", "incorrect", "I said no", "negative"]
-        self.Haraya_HotWords = ["haraya", "araya", "mariah", "meriah", "hiraya", "raya", "yaya", "heraya", "area", 
-                                "ryan", "aya", "heria", "herya", "halaya"]
-        self.GoogleSearch_HotWords = ["in google search", "search in google", "in google navigate", "navigate in google", 
-                                    "in google find", "find in google", "in google", "google search", "go on google", 
-                                    "go in google", "on google"]
-        self.YouTubeSearch_HotWords = ["in youtube search", "search in youtube", "in youtube play", "play in youtube", 
-                                    "in youtube find", "find in youtube", "in youtube", "youtube search", "go on youtube",
-                                    "go in youtube", "on youtube"]
-        self.WikipediaSearch_HotWords = ["in wikipedia search", "search in wikipedia", "in wikipedia find", 
-                                        "find in wikipedia", "in wikipedia", "wikipedia search", "go on wikipedia", 
+        self.Standby_HotWords = ["standby", 
+                                "haraya stand by", 
+                                "just stand by", "wait", 
+                                "wait a sec", 
+                                "give me a sec", 
+                                "hold for a sec", 
+                                "wait for a sec", 
+                                "give me a second", 
+                                "hold for a second", 
+                                "wait for a second", 
+                                "give me a minute", 
+                                "hold for a minute",
+                                "wait for a minute", 
+                                "give me an hour", 
+                                "hold for an hour", 
+                                "wait for an hour", 
+                                "just a moment",
+                                "just a sec", 
+                                "just a minute",
+                                "just an hour", 
+                                "call you later", 
+                                "i'll be back", 
+                                "be right back"]
+        self.GoodBye_HotWords = ["goodbye", 
+                                "good bye", 
+                                "haraya goodbye", 
+                                "goodbye haraya", 
+                                "haraya bye", 
+                                "bye haraya", 
+                                "bye", 
+                                "let's call it a day",
+                                "i said goodbye", 
+                                "you're good to go", 
+                                "you can go", 
+                                "you can go now", 
+                                "you can go to sleep now", 
+                                "i need to go", 
+                                "ciao", 
+                                "sayonara"]
+        self.Stop_HotWords = ["sign off", 
+                            "haraya stop",
+                            "stop please", 
+                            "go to sleep",
+                            "go to rest",
+                            "just go to sleep",
+                            "just go to rest", 
+                            "go to sleep haraya", 
+                            "stop listening",
+                            "terminate yourself",
+                            "enough",
+                            "that's enough",
+                            "I said enough",
+                            "I said stop",
+                            "you can go to sleep now", 
+                            "i told you to go to sleep", 
+                            "didn't i told you to go to sleep", 
+                            "didn't i told you to sleep", 
+                            "i told you to stop", 
+                            "didn't i told you to stop",
+                            "turn off", 
+                            "shutdown"]
+        self.Yes_HotWords = ["yes", 
+                            "yup",
+                            "yes please",
+                            "of course yes", 
+                            "yes I do",
+                            "I do", 
+                            "you got it right", 
+                            "yes actually", 
+                            "actually yes", 
+                            "that's a yes", 
+                            "I think yes", 
+                            "sure", 
+                            "yah",
+                            "absolutely yes", 
+                            "definitely yes",
+                            "you got it right", 
+                            "I said yes",
+                            "affirmative"]
+        self.No_HotWords = ["no",
+                            "nope", 
+                            "no please", 
+                            "of course no", 
+                            "no I don't", 
+                            "I don't think so", 
+                            "you got it wrong", 
+                            "no actually", 
+                            "actually no", 
+                            "that's a no", 
+                            "I'm not",
+                            "I think not", 
+                            "none so far", 
+                            "I'm not sure",
+                            "noh", 
+                            "nah",
+                            "none", 
+                            "that's a no no",
+                            "absolutely no", 
+                            "definitely no", 
+                            "absolutely not",
+                            "definitely not",
+                            "incorrect",
+                            "I said no",
+                            "negative"]
+        self.Haraya_HotWords = ["haraya",
+                                "araya", 
+                                "mariah", 
+                                "meriah",
+                                "hiraya",
+                                "raya", 
+                                "yaya", 
+                                "heraya", 
+                                "area", 
+                                "ryan", 
+                                "aya", 
+                                "heria", 
+                                "herya", 
+                                "halaya"]
+        self.GoogleSearch_HotWords = ["in google search",
+                                    "search in google", 
+                                    "in google navigate",
+                                    "navigate in google", 
+                                    "in google find", 
+                                    "find in google", 
+                                    "in google", 
+                                    "google search", 
+                                    "go on google", 
+                                    "go in google", 
+                                    "on google",
+                                    "search in chrome", 
+                                    "go in chrome", 
+                                    "go on chrome"]
+        self.YouTubeSearch_HotWords = ["in youtube search", 
+                                    "search in youtube", 
+                                    "in youtube play", 
+                                    "play in youtube", 
+                                    "in youtube find", 
+                                    "find in youtube", 
+                                    "in youtube", 
+                                    "youtube search",
+                                    "go on youtube",
+                                    "go in youtube", 
+                                    "on youtube"]
+        self.WikipediaSearch_HotWords = ["in wikipedia search",
+                                        "search in wikipedia", 
+                                        "in wikipedia find", 
+                                        "find in wikipedia", 
+                                        "in wikipedia",
+                                        "wikipedia search",
+                                        "go on wikipedia", 
                                         "on wikipedia"]
-        self.Open_HotWords = ["open", "access", "go to", "go in", "run", "launch"]
-        self.Close_HotWords = ["close", "terminate", "go out", "exit", "escape", "quit", "return", "close"]
+        self.Open_HotWords = ["open", 
+                            "access", 
+                            "go to", 
+                            "go in",
+                            "run", 
+                            "launch"]
+        self.Close_HotWords = ["close", 
+                            "terminate", 
+                            "go out", 
+                            "exit", 
+                            "escape",
+                            "quit", 
+                            "return",
+                            "close"]
     # Methods Implementation Block
     # Run Command: python haraya_v3.py
     # def speak(self, text):
@@ -99,7 +231,6 @@ class haraya_v3:
     #     self.engine.say(text)
     #     self.engine.runAndWait()
     #     self.setIsRandom(0)
-        
     def speak(self, text_input):
         tSpeak = Thread(target=self.hveSpeak, args=(text_input,))
         tSpeak.start()
@@ -111,6 +242,7 @@ class haraya_v3:
     # LISTEN_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def listenCommand(self):
+        command = self.command
         try:
             with sr.Microphone() as source:
                 print(colorama.Fore.CYAN + "Listening...")
@@ -161,6 +293,7 @@ class haraya_v3:
     # WAIT_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def waitCommand(self):
+        command = self.command
         try:
             with sr.Microphone() as source:
                 print(colorama.Fore.CYAN + "Waiting...")
@@ -247,8 +380,8 @@ class haraya_v3:
         try:
             NameHA = self.Name_Honorific_Address[-1]
             MyName = self.Name[-1]
-            response = "Hi " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "! How can I help you?"
-            response1 = "Hi " + NameHA + " " + MyName + "! How can I help you?"
+            response = "Hi " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "! I am Haraya, how can I help you?"
+            response1 = "Hi " + NameHA + " " + MyName + "! I am Haraya, how can I help you?"
         except:
             response = "Hi! How can I help you?"
         print(colorama.Fore.GREEN + response)
@@ -285,7 +418,7 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             exit()
-        elif '' == command:
+        elif "." == command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
@@ -296,7 +429,46 @@ class haraya_v3:
             print(response)
             self.speak(response)
             exit(self.harayaNeuralNetwork())
-#_______________________________________________________________________________haraya_CORE_FUNCTION
+    #____________________________________________________________________CLOSE_PROGRAM_FUNCTION
+    def close_program(self, program_name):
+        try:
+            response = "Closing " + colorama.Fore.LIGHTGREEN_EX + program_name + colorama.Fore.GREEN + "..."
+            response1 = "Closing " + program_name + "..."
+            print(colorama.Fore.GREEN + response)
+            self.speak(response1)
+            for process in psutil.process_iter(['pid', 'name']):
+                if process.info['name'] == program_name:
+                    try:
+                        process.terminate()
+                        response = program_name + " has been closed."
+                        print(colorama.Fore.GREEN + response)
+                        self.speak(response)
+                    except psutil.AccessDenied:
+                        response = "Permission denied. Unable to close " + program_name + "."
+                        print(colorama.Fore.LIGHTRED_EX + response)
+                        self.speak(response)
+                    except psutil.NoSuchProcess:
+                        response = program_name + " is not running."
+                        print(colorama.Fore.LIGHTRED_EX + response)
+                        self.speak(response)
+                    break
+                else:
+                    print(program_name + " is not running.")
+        except Exception as e:
+            print("An error occurred:", str(e))
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+#_______________________________________________________________________________haraya_NEURAL_NETWORK_FUNCTION
     #Run Command: python haraya_v3.py
     def harayaNeuralNetwork(self):
         global NameHA, MyName, command
@@ -307,7 +479,7 @@ class haraya_v3:
         tAnnotateCommand.start()
         self.getFullName()
         self.setHonorificAddress()
-        #____________________________________________________________________________________POSE_RECOGNITION_BLOCK
+        #______________________________________________________________________________POSE_RECOGNITION_BLOCK
         #Run Command: python haraya_v3.py
         if "run" in command or "activate" in command or "initialize" in command:
             if "face recognition system" in command:
@@ -321,7 +493,7 @@ class haraya_v3:
                 self.initializePoseRecognitionSystem()
                 self.Confirmation_SubFunction(command)
             return
-        #___________________________________________________________________________________________TERMINATION_BLOCK
+        #__________________________________________________________________________________TERMINATION_BLOCK
         #Run Command: python haraya_v3.py
         elif "turn off" in command or any(hotword in command for hotword in self.Stop_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
@@ -330,14 +502,14 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             self.playShutdownSound()
-            exit()
+            return
         elif any(hotword in command for hotword in self.GoodBye_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Goodbye " + NameHA + "! Have a great day!"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             self.playShutdownSound()
-            exit()
+            return
             
         elif "turn off my computer" in command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
@@ -346,7 +518,7 @@ class haraya_v3:
             self.speak(response)
             self.tStartUp = Thread(target=self.playSearchSound)
             self.tStartUp.start()
-            exit()
+            return
         #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.GoogleSearch_HotWords):
@@ -379,7 +551,7 @@ class haraya_v3:
                 self.Confirmation_SubFunction(command)
             except:
                 self.playPromptSound()
-                exit()
+                return
         elif any(hotword in command for hotword in self.YouTubeSearch_HotWords):
             response = "What would you like to search or play in Youtube?"
             print(colorama.Fore.GREEN + response)
@@ -425,7 +597,7 @@ class haraya_v3:
             print(info)
             self.speak(info)
             self.Confirmation_SubFunction(command)
-        #__________________________________________________________________________________________________________________OPEN/ACCESS_BLOCK
+        #____________________________________________________________________________________________________________OPEN/ACCESS_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.Open_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
@@ -542,44 +714,24 @@ class haraya_v3:
                     print(colorama.Fore.GREEN + response)
                     self.speak(response1)
             except Exception as e:
-                response = f"""An error occurLIGHTGREEN_EX while trying to open the said program: {e}"""
+                response = f"An error occurLIGHTGREEN_EX while trying to open the said program: {e}"
                 print(colorama.Fore.LIGHTLIGHTGREEN_EX_EX + response)
                 self.speak(response)
-            exit(self.Confirmation_SubFunction(command))
+            return self.Confirmation_SubFunction(command)
         #_____________________________________________________________________________________________________CLOSE_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.Close_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
             try:
                 if "chrome" in command or "tab" in command:
-                    response = "Closing " + colorama.Fore.LIGHTGREEN_EX + "Chrome" + colorama.Fore.GREEN + "..."
-                    response1 = "Closing " + "Chrome..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
-                    for process in psutil.process_iter(['pid', 'name']):
-                        if process.info['name'] == 'chrome.exe':
-                            try:
-                                process.terminate()
-                                pyautogui.hotkey("ctrl", "w")
-                                response = "Chrome has been closed."
-                                print(colorama.Fore.GREEN + response)
-                                self.speak(response)
-                            except psutil.AccessDenied:
-                                response = "Permission denied. Unable to close Chrome."
-                                print(colorama.Fore.LIGHTRED_EX + response)
-                                self.speak(response)
-                            except psutil.NoSuchProcess:
-                                response = "Chrome is not running."
-                                print(colorama.Fore.LIGHTRED_EX + response)
-                                self.speak(response)
-                            break
-                        else:
-                            print("Chrome is not running.")
+                    self.close_program(program_name="chrome.exe")
+                elif "command prompt" in command or "windows terminal" in command:
+                    self.close_program(program_name="WindowsTerminal.exe")
             except Exception as e:
-                response = f"""An error occur while trying to close the said program: {e}"""
+                response = f"An error occur while trying to close the said program: {e}"
                 print(colorama.Fore.LIGHTGREEN_EX + response)
                 self.speak(response)
-            exit(self.Confirmation_SubFunction(command))
+            return self.Confirmation_SubFunction(command)
         #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
         #Run Command: python haraya_v3.py
         elif "shutdown my computer" in command:
@@ -588,42 +740,42 @@ class haraya_v3:
             self.speak(response)
             os.system("shutdown /s /t 0")
             self.playPromptSound()
-            exit()
+            return
         elif "restart my computer" in command:
             response = "as you wish! restarting your computer..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /r")
             self.playPromptSound()
-            exit()
+            return
         elif "sign off my computer" in command or "signoff my computer" in command:
             response = "as you wish! signing off your computer..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /l")
             self.playPromptSound()
-            self.Confirmation_SubFunction(command)
+            return self.Confirmation_SubFunction(command)
         elif "logout my computer" in command or "log out my computer" in command:
             response = "as you wish! logging out your computer..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /l")
             self.playPromptSound()
-            self.Confirmation_SubFunction(command)
+            return self.Confirmation_SubFunction(command)
         elif "sign out my computer" in command or "signout my computer" in command:
             response = "as you wish! signing out your computer..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /l")
             self.playPromptSound()
-            self.Confirmation_SubFunction(command)
+            return self.Confirmation_SubFunction(command)
         elif "increase" in command and "volume" in command or "volume up" in command:
             response = "Increasing volume..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             pyautogui.press("volumeup", 10)
             self.playPromptSound()
-            exit(self.harayaNeuralNetwork())
+            return self.harayaNeuralNetwork()
             
         elif "volume" in command and "decrease" in command or "lower" in command:
             response = "Decreasing volume..."
@@ -631,7 +783,7 @@ class haraya_v3:
             self.speak(response)
             pyautogui.press("volumedown", 10)
             self.playPromptSound()
-            exit(self.harayaNeuralNetwork())
+            return self.harayaNeuralNetwork()
         elif "battery" in command and "status" in command or "level" in command or "percentage" in command:
             battery = psutil.sensors_battery()
             percentage = battery.percent
@@ -645,28 +797,28 @@ class haraya_v3:
             response1 = f"The current battery percentage is " + str(percentage) + "%"
             print(response)
             self.speak(response1)
-            exit(self.harayaNeuralNetwork())
+            return self.harayaNeuralNetwork()
         #________________________________________________________________________STANDBY_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.Standby_HotWords):
             response = "Sure, take your time. I'll wait."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.Standby_SubFunction()
+            return self.Standby_SubFunction()
         #_______________________________________________________NoCommands/NotClearCommands_BLOCK
         #Run Command: python haraya_v3.py
-        elif "[]" == command or "" == command:
+        elif " " == command or "[]" == command or "." == command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.Standby_SubFunction()
+            return self.Standby_SubFunction()
         else:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = self.PaLM2_LLM.getChatResponse(reply=command, user_name_input=MyName)
             print(colorama.Fore.YELLOW + str(response))
             self.speak(response)
-            exit(self.harayaNeuralNetwork())
+            return self.harayaNeuralNetwork()
         exit()
     pygame.quit()
 # Create an instance of the HarayaV3 class
@@ -679,31 +831,10 @@ if __name__ == '__main__':
     pygame.init()
     running = True
     while running:
-        # def stopTalking():
-        #     while True:
-        #         try:
-        #             print("1")
-        #             for event in pygame.event.get():
-        #                 print("222222222222222222222222222222")
-        #                 if event.type == QUIT:
-        #                     break
-        #                 if event.type == KEYDOWN:
-        #                     if event.key == K_UP:
-        #                         print("333333333333333333333")
-        #                     elif event.key == K_DOWN:
-        #                         print("444444444444444444444")
-        #                     if event.key == K_ESCAPE:
-        #                         print("5555555555555555555555")
-        #                         break
-        #             print("6")
-        #         except Exception as e:
-        #             print(f"Error occured while stopping Haraya: {e}")
-        #             break
-        # tStopTalking = Thread(target=stopTalking)
-        # tStopTalking.start()
         haraya_v3_instance.harayaStartUp()
         try:
             haraya_v3_instance.harayaNeuralNetwork()
+            haraya_v3_instance.close_program(program_name="WindowsTerminal.exe")
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
         continue
