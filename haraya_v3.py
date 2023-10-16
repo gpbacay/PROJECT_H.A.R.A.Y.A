@@ -352,7 +352,7 @@ class haraya_v3:
                 Honorific_Address = "Boss"
         except:
             Honorific_Address = "Master"
-        self.Name_Honorific_Address.append(Honorific_Address)
+        return self.Name_Honorific_Address.append(Honorific_Address)
     # initializeFaceRecognitionSystem_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def initializeFaceRecognitionSystem(self):
@@ -510,7 +510,8 @@ class haraya_v3:
                 self.Confirmation_SubFunction(command)
             elif "pose recognition system" in command:
                 self.initializePoseRecognitionSystem()
-                self.Confirmation_SubFunction(command)
+                response = self.Confirmation_SubFunction(command)
+            self.response = response
             return response
         #__________________________________________________________________________________TERMINATION_BLOCK
         #Run Command: python haraya_v3.py
@@ -520,19 +521,25 @@ class haraya_v3:
             response = "As you wish " + NameHA + ". Signing off..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            return self.playShutdownSound()
+            self.playShutdownSound()
+            self.response = response
+            return response
         elif any(hotword in command for hotword in self.GoodBye_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Goodbye " + NameHA + "! Have a great day!"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            return self.playShutdownSound()
+            self.playShutdownSound()
+            self.response = response
+            return response
         elif "turn off my computer" in command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "As you wish " + NameHA + ". Turning off..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            return self.playShutdownSound()
+            self.playShutdownSound()
+            self.response = response
+            return response
         #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.GoogleSearch_HotWords):
@@ -551,10 +558,10 @@ class haraya_v3:
                 search_list = []
                 search_list.append(information)
                 information = search_list[-1]
-                response = "Searching " + colorama.Fore.CYAN + information
-                response1 = "Searching " + information
-                print(colorama.Fore.GREEN + response)
-                self.speak(response1)
+                response = "Searching " + information
+                response1 = colorama.Fore.GREEN + "Searching " + colorama.Fore.CYAN + information
+                print(response1)
+                self.speak(response)
                 self.tStartUp = Thread(target=self.playSearchSound)
                 self.tStartUp.start()
                 for i in range(1):
@@ -562,11 +569,13 @@ class haraya_v3:
                     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
                     browser.get("https://www.google.com/search?q=" + search + "&start" + str(i))
                 self.speak("Here's what I've found.")
-                return self.Confirmation_SubFunction(command)
+                response = self.Confirmation_SubFunction(command)
             except Exception as e:
                 self.playPromptSound()
                 print(f"An error occured while Searching in Chrome: {e}")
-                return self.Confirmation_SubFunction(command)
+                response = self.Confirmation_SubFunction(command)
+            self.response = response
+            return response
         elif any(hotword in command for hotword in self.YouTubeSearch_HotWords):
             response = "What would you like to search or play in Youtube?"
             print(colorama.Fore.GREEN + response)
@@ -590,11 +599,13 @@ class haraya_v3:
             song_list.append(song_title)
             song_title = song_list[-1]
             pywhatkit.playonyt(song_title)
-            response = "Now Playing " + colorama.Fore.CYAN + song_title
-            response1 = "Now Playing " + song_title
-            print(colorama.Fore.GREEN + response)
-            self.speak(response1)
-            return self.Confirmation_SubFunction(command)
+            response = "Now Playing " + song_title
+            response1 = colorama.Fore.GREEN + "Now Playing " + colorama.Fore.CYAN + song_title
+            print(response1)
+            self.speak(response)
+            response = self.Confirmation_SubFunction(command)
+            self.response = response
+            return response
         elif any(hotword in command for hotword in self.WikipediaSearch_HotWords):
             response = "What would you like to searchin Wikipedia?"
             print(colorama.Fore.GREEN + response)
@@ -611,7 +622,9 @@ class haraya_v3:
             info = wikipedia.summary(person, 1)
             print(info)
             self.speak(info)
-            return self.Confirmation_SubFunction(command)
+            response = self.Confirmation_SubFunction(command)
+            self.response = response
+            return response
         #____________________________________________________________________________________________________________OPEN/ACCESS_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.Open_HotWords):
@@ -624,114 +637,115 @@ class haraya_v3:
                     self.speak(response)
                     program = "C:\Program Files\Google\Chrome\Application\chrome.exe"
                     subprocess.Popen([program])
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "Chrome" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "Chrome..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "Chrome..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Chrome" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
                 elif "aqw game launcher" in command or "aqw" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
                     self.speak(response)
                     program = "C:\Program Files\Artix Game Launcher\Artix Game Launcher.exe"
                     subprocess.Popen([program])
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "Artix game launcher" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "Artix game launcher..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "Artix game launcher..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Artix game launcher" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
                 elif "genshin impact" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
                     self.speak(response)
                     program = "C:\Program Files\Genshin Impact\launcher.exe"
                     subprocess.Popen(f'start /b /wait /min /high "Running Genhin Impact as Administrator" "{program}"', shell=True)
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "Genshin Impact" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "Genshin Impact..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "Genshin Impact..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Genshin Impact" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
                 elif "command prompt" in command or "cmd" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
                     self.speak(response)
                     program = "cmd.exe"
                     subprocess.Popen([program])
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "Command Prompt" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "Command Prompt..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "Command Prompt..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Command Prompt" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
                 elif "notepad" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
                     self.speak(response)
                     program = "notepad.exe"
                     subprocess.Popen([program])
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "Notepad" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "Notepad..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "Notepad..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Notepad" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
                 elif "calculator" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
                     self.speak(response)
                     program = "calc.exe"
                     subprocess.Popen([program])
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "Calculator" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "Calculator..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "Calculator..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Calculator" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
                 elif "vlc" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
                     self.speak(response)
                     program = "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"
                     subprocess.Popen([program])
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "VLC Media Player" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "VLC Media Player..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "VLC Media Player..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "VLC Media Player" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
                 elif "visual studio code" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
                     self.speak(response)
                     program = "C:\\Users\\Gianne Bacay\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
                     subprocess.Popen([program])
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "Visual Studio Code" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "Visual Studio Code..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "Visual Studio Code..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Visual Studio Code" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
                 elif "messenger" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
                     self.speak(response)
                     program = "C:\\Users\\Gianne Bacay\\Desktop\\Messenger.exe.lnk"
                     subprocess.Popen(f'start /b /wait /min /high "Running Messenger as Administrator" "{program}"', shell=True)
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "Messenger" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "Messenger..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "Messenger..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Messenger" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
                 elif "downloads" in command or "download" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
                     self.speak(response)
                     program = "C:\\Users\\Gianne Bacay\\Desktop\\Downloads.lnk"
                     subprocess.Popen(f'start /b /wait /min /high "Running Downloads as Administrator" "{program}"', shell=True)
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "Downloads" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "Downloads..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "Downloads..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Downloads" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
                 elif "videos" in command or "video" in command:
                     response = "As you wish!"
                     print(colorama.Fore.GREEN + response)
                     self.speak(response)
                     program = "C:\\Users\\Gianne Bacay\\Desktop\\Videos.lnk"
                     subprocess.Popen(f'start /b /wait /min /high "Running Videos as Administrator" "{program}"', shell=True)
-                    response = "Opening " + colorama.Fore.LIGHTGREEN_EX + "Videos" + colorama.Fore.GREEN + "..."
-                    response1 = "Opening " + "Videos..."
-                    print(colorama.Fore.GREEN + response)
-                    self.speak(response1)
+                    response = "Opening " + "Videos..."
+                    response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Videos" + colorama.Fore.GREEN + "..."
+                    print(response1)
+                    self.speak(response)
             except Exception as e:
                 response = f"An error occurLIGHTGREEN_EX while trying to open the said program: {e}"
                 print(colorama.Fore.LIGHTLIGHTGREEN_EX_EX + response)
                 self.speak(response)
+            self.response = response
             return self.harayaNeuralNetwork()
         #_____________________________________________________________________________________________________CLOSE_BLOCK
         #Run Command: python haraya_v3.py
@@ -746,7 +760,9 @@ class haraya_v3:
                 response = f"An error occur while trying to close the said program: {e}"
                 print(colorama.Fore.LIGHTGREEN_EX + response)
                 self.speak(response)
-            return self.Confirmation_SubFunction(command)
+            response = self.Confirmation_SubFunction(command)
+            self.response = response
+            return response
         #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
         #Run Command: python haraya_v3.py
         elif "shutdown my computer" in command:
@@ -754,48 +770,59 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /s /t 0")
-            return self.playPromptSound()
+            self.playPromptSound()
+            self.response = response
+            return response
         elif "restart my computer" in command:
             response = "as you wish! restarting your computer..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /r")
-            return self.playPromptSound()
+            self.playPromptSound()
+            self.response = response
+            return response
         elif "sign off my computer" in command or "signoff my computer" in command:
             response = "as you wish! signing off your computer..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /l")
             self.playPromptSound()
-            return self.Confirmation_SubFunction(command)
+            response = self.Confirmation_SubFunction(command)
+            self.response = response
+            return response
         elif "logout my computer" in command or "log out my computer" in command:
             response = "as you wish! logging out your computer..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /l")
             self.playPromptSound()
-            return self.Confirmation_SubFunction(command)
+            response = self.Confirmation_SubFunction(command)
+            self.response = response
+            return response
         elif "sign out my computer" in command or "signout my computer" in command:
             response = "as you wish! signing out your computer..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             os.system("shutdown /l")
             self.playPromptSound()
-            return self.Confirmation_SubFunction(command)
+            response = self.Confirmation_SubFunction(command)
+            self.response = response
+            return response
         elif "increase" in command and "volume" in command or "volume up" in command:
             response = "Increasing volume..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             pyautogui.press("volumeup", 10)
             self.playPromptSound()
+            self.response = response
             return self.harayaNeuralNetwork()
-            
         elif "volume" in command and "decrease" in command or "lower" in command:
             response = "Decreasing volume..."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             pyautogui.press("volumedown", 10)
             self.playPromptSound()
+            self.response = response
             return self.harayaNeuralNetwork()
         elif "battery" in command and "status" in command or "level" in command or "percentage" in command:
             battery = psutil.sensors_battery()
@@ -810,6 +837,7 @@ class haraya_v3:
             response1 = f"The current battery percentage is " + str(percentage) + "%"
             print(response)
             self.speak(response1)
+            self.response = response
             return self.harayaNeuralNetwork()
         #________________________________________________________________________STANDBY_BLOCK
         #Run Command: python haraya_v3.py
@@ -817,7 +845,9 @@ class haraya_v3:
             response = "Sure, take your time. I'll wait."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            return self.Standby_SubFunction()
+            response = self.Standby_SubFunction()
+            self.response = response
+            return response
         #_______________________________________________________NoCommands/NotClearCommands_BLOCK
         #Run Command: python haraya_v3.py
         elif " " == command or "[]" == command or "." == command:
@@ -826,7 +856,8 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             response = self.Standby_SubFunction()
-            self.harayaNeuralNetwork()
+            self.response = response
+            return self.harayaNeuralNetwork()
         else:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             try:
@@ -836,6 +867,7 @@ class haraya_v3:
                 response = "I beg your pardon—I'm afraid I didn't catch that."
             print(colorama.Fore.YELLOW + str(response))
             self.speak(response)
+            self.response = response
             return self.harayaNeuralNetwork()
 # Create an instance of the HarayaV3 class
 haraya_v3_instance = haraya_v3()
