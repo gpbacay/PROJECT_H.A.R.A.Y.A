@@ -121,7 +121,8 @@ class haraya_v3:
                             "i told you to stop", 
                             "didn't i told you to stop",
                             "turn off", 
-                            "shutdown"]
+                            "shutdown",
+                            "dismiss"]
         self.Yes_HotWords = ["yes", 
                             "yup",
                             "yes please",
@@ -191,6 +192,7 @@ class haraya_v3:
                                     "go in google", 
                                     "on google",
                                     "search in chrome", 
+                                    "go to chrome",
                                     "go in chrome", 
                                     "go on chrome"]
         self.YouTubeSearch_HotWords = ["in youtube search", 
@@ -523,7 +525,7 @@ class haraya_v3:
                 return response
             #__________________________________________________________________________________TERMINATION_BLOCK
             #Run Command: python haraya_v3.py
-            elif "turn off" in command or any(hotword in command for hotword in self.Stop_HotWords):
+            elif any(hotword == command for hotword in self.Stop_HotWords):
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 self.setHonorificAddress()
                 response = "As you wish " + NameHA + ". Signing off..."
@@ -533,7 +535,7 @@ class haraya_v3:
                 self.command = command
                 self.response = response
                 return response
-            elif any(hotword in command for hotword in self.GoodBye_HotWords):
+            elif any(hotword == command for hotword in self.GoodBye_HotWords):
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 response = "Goodbye " + NameHA + "! Have a great day!"
                 print(colorama.Fore.GREEN + response)
@@ -544,7 +546,7 @@ class haraya_v3:
                 return response
             #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
             #Run Command: python haraya_v3.py
-            elif any(hotword in command for hotword in self.GoogleSearch_HotWords):
+            elif any(hotword == command for hotword in self.GoogleSearch_HotWords):
                 response = "What would you like to search in Google?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
