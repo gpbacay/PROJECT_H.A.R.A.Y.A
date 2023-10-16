@@ -491,7 +491,6 @@ class haraya_v3:
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
     def harayaNeuralNetwork(self):
-        global NameHA, MyName, command
         NameHA = str(self.Name_Honorific_Address[-1])
         MyName = str(self.MyName)
         command = str(self.listenCommand())
@@ -874,7 +873,7 @@ haraya_v3_instance = haraya_v3()
 haraya_v3_instance.setHonorificAddress()
 haraya_v3_instance.initializeFaceRecognitionSystem()
 if __name__ == '__main__':
-    #____________________________________________________________________Run_Haraya
+    #____________________________________________________________________________________________Run_Haraya
     pygame.init()
     running = True
     while running:
@@ -885,7 +884,7 @@ if __name__ == '__main__':
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
             continue
-    #_____________________________________________________________________Terminate_Haraya
+    #______________________________________________________________________________________________Terminate_Haraya
     program_name="WindowsTerminal.exe"
     try:
         for process in psutil.process_iter(['pid', 'name']):
