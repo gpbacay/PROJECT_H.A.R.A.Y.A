@@ -870,7 +870,7 @@ class haraya_v3:
                 self.response = response
                 return self.harayaNeuralNetwork()
         except Exception as e:
-            print(f"Error occured while running Haraya's Neural Network: {e}")
+            print(colorama.Fore.LIGHTRED_EX + f"Error occured while running Haraya's Neural Network: {e}")
         finally:
             self.command = command
             self.response = response
