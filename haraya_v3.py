@@ -542,15 +542,6 @@ class haraya_v3:
                 self.command = command
                 self.response = response
                 return response
-            elif "turn off my computer" in command:
-                print(colorama.Fore.LIGHTGREEN_EX + command)
-                response = "As you wish " + NameHA + ". Turning off..."
-                print(colorama.Fore.GREEN + response)
-                self.speak(response)
-                self.playShutdownSound()
-                self.command = command
-                self.response = response
-                return response
             #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
             #Run Command: python haraya_v3.py
             elif any(hotword in command for hotword in self.GoogleSearch_HotWords):
@@ -794,7 +785,7 @@ class haraya_v3:
                 return response
             #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
             #Run Command: python haraya_v3.py
-            elif "shutdown my computer" in command:
+            elif "turn off my computer" in command or "shutdown my computer" in command:
                 response = "as you wish! shutting down your computer..."
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
