@@ -627,7 +627,8 @@ class haraya_v3:
                 response = "Searching..."
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
-                self.playSearchSound()
+                self.tStartUp = Thread(target=self.playSearchSound)
+                self.tStartUp.start()
                 person = command.replace("search in wikipedia", '')
                 person = person.replace("in wikipedia search", '')
                 person = person.replace("haraya", '')
@@ -644,6 +645,7 @@ class haraya_v3:
             elif any(hotword in command for hotword in self.Open_HotWords):
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 program = "program file path"
+                self.tStartUp = Thread(target=self.playSearchSound)
                 try:
                     if "chrome" in command:
                         response = "As you wish!"
@@ -653,6 +655,7 @@ class haraya_v3:
                         subprocess.Popen([program])
                         response = "Opening " + "Chrome..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Chrome" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                     elif "aqw game launcher" in command or "aqw" in command:
@@ -663,6 +666,7 @@ class haraya_v3:
                         subprocess.Popen([program])
                         response = "Opening " + "Artix game launcher..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Artix game launcher" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                     elif "genshin impact" in command:
@@ -673,6 +677,7 @@ class haraya_v3:
                         subprocess.Popen(f'start /b /wait /min /high "Running Genhin Impact as Administrator" "{program}"', shell=True)
                         response = "Opening " + "Genshin Impact..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Genshin Impact" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                     elif "command prompt" in command or "cmd" in command:
@@ -683,6 +688,7 @@ class haraya_v3:
                         subprocess.Popen([program])
                         response = "Opening " + "Command Prompt..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Command Prompt" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                     elif "notepad" in command:
@@ -693,6 +699,7 @@ class haraya_v3:
                         subprocess.Popen([program])
                         response = "Opening " + "Notepad..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Notepad" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                     elif "calculator" in command:
@@ -703,6 +710,7 @@ class haraya_v3:
                         subprocess.Popen([program])
                         response = "Opening " + "Calculator..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Calculator" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                     elif "vlc" in command:
@@ -713,6 +721,7 @@ class haraya_v3:
                         subprocess.Popen([program])
                         response = "Opening " + "VLC Media Player..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "VLC Media Player" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                     elif "visual studio code" in command:
@@ -723,6 +732,7 @@ class haraya_v3:
                         subprocess.Popen([program])
                         response = "Opening " + "Visual Studio Code..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Visual Studio Code" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                     elif "messenger" in command:
@@ -733,6 +743,7 @@ class haraya_v3:
                         subprocess.Popen(f'start /b /wait /min /high "Running Messenger as Administrator" "{program}"', shell=True)
                         response = "Opening " + "Messenger..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Messenger" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                     elif "downloads" in command or "download" in command:
@@ -743,6 +754,7 @@ class haraya_v3:
                         subprocess.Popen(f'start /b /wait /min /high "Running Downloads as Administrator" "{program}"', shell=True)
                         response = "Opening " + "Downloads..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Downloads" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                     elif "videos" in command or "video" in command:
@@ -753,6 +765,7 @@ class haraya_v3:
                         subprocess.Popen(f'start /b /wait /min /high "Running Videos as Administrator" "{program}"', shell=True)
                         response = "Opening " + "Videos..."
                         response1 = colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTGREEN_EX + "Videos" + colorama.Fore.GREEN + "..."
+                        self.tStartUp.start()
                         print(response1)
                         self.speak(response)
                 except Exception as e:
@@ -873,7 +886,7 @@ class haraya_v3:
                 return self.harayaNeuralNetwork()
             #_______________________________________________________NoCommands/NotClearCommands_BLOCK
             #Run Command: python haraya_v3.py
-            elif " " == command or "[]" == command or "." == command:
+            elif " " == command or "[]" == command or "." == command or command == None:
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 response = "Hello? Are you still there?"
                 print(colorama.Fore.GREEN + response)
