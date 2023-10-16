@@ -473,9 +473,9 @@ class haraya_v3:
     def harayaNeuralNetwork(self):
         global NameHA, MyName, command
         NameHA = str(self.Name_Honorific_Address[-1])
-        MyName = self.MyName
+        MyName = str(self.MyName)
         command = str(self.listenCommand())
-        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(command, MyName,))
+        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(str(command), MyName,))
         tAnnotateCommand.start()
         self.getFullName()
         self.setHonorificAddress()
@@ -547,7 +547,7 @@ class haraya_v3:
             except Exception as e:
                 self.playPromptSound()
                 print(f"An error occured while Searching in Chrome: {e}")
-                return
+                return self.Confirmation_SubFunction(command)
         elif any(hotword in command for hotword in self.YouTubeSearch_HotWords):
             response = "What would you like to search or play in Youtube?"
             print(colorama.Fore.GREEN + response)
@@ -713,7 +713,7 @@ class haraya_v3:
                 response = f"An error occurLIGHTGREEN_EX while trying to open the said program: {e}"
                 print(colorama.Fore.LIGHTLIGHTGREEN_EX_EX + response)
                 self.speak(response)
-            return self.Confirmation_SubFunction(command)
+            return self.harayaNeuralNetwork()
         #_____________________________________________________________________________________________________CLOSE_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.Close_HotWords):
@@ -809,7 +809,7 @@ class haraya_v3:
             return self.Standby_SubFunction()
         else:
             print(colorama.Fore.LIGHTGREEN_EX + command)
-            response = self.PaLM2_LLM.getChatResponse(reply=command, user_name_input=MyName)
+            response = self.PaLM2_LLM.getChatResponse(reply=str(command), user_name_input=MyName)
             print(colorama.Fore.YELLOW + str(response))
             self.speak(response)
             return self.harayaNeuralNetwork()
@@ -830,7 +830,7 @@ if __name__ == '__main__':
             break
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
-        continue
+            continue
     pygame.quit()
     exit()
 #Run Command: python haraya_v3.py
