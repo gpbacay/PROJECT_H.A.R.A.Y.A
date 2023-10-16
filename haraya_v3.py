@@ -923,8 +923,8 @@ if __name__ == '__main__':
             continue
     #______________________________________________________________________________________________Terminate_Haraya
     #Run Command: python haraya_v3.py
-    program_name="WindowsTerminal.exe"
     try:
+        program_name="WindowsTerminal.exe"
         for process in psutil.process_iter(['pid', 'name']):
             if process.info['name'] == program_name:
                 try:
