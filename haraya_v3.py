@@ -60,7 +60,8 @@ class haraya_v3:
         self.NameList = []
         # Lists of Command Keywords
         # Run Command: python haraya_v3.py
-        self.Standby_HotWords = ["standby", 
+        self.Standby_HotWords = ["standby",
+                                "stand by", 
                                 "haraya stand by", 
                                 "just stand by", "wait", 
                                 "wait a sec", 
@@ -395,9 +396,9 @@ class haraya_v3:
         self.speak(response)
         self.response = response
         return self.response
-    # STANDBY_SUBFUNCTION
+    # Standby
     # Run Command: python haraya_v3.py
-    def Standby_SubFunction(self):
+    def Standby(self):
         response = self.response
         self.playListeningSound()
         while True:
@@ -407,9 +408,8 @@ class haraya_v3:
                 response = "Yes? How can I help you?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
+                self.response = response
                 break
-        self.response = response
-        return response
     # CONFIRMATION_SUBFUNCTION
     # Run Command: python haraya_v3.py
     def Confirmation_SubFunction(self, command):
@@ -435,8 +435,8 @@ class haraya_v3:
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            response = self.Standby_SubFunction()
-            self.response = response
+            self.Standby()
+            return self.harayaNeuralNetwork()
         else:
             response = "Come again?"
             print(response)
@@ -840,15 +840,14 @@ class haraya_v3:
             self.speak(response1)
             self.response = response
             return self.harayaNeuralNetwork()
-        #________________________________________________________________________STANDBY_BLOCK
+        #________________________________________________________________________Standby_BLOCK
         #Run Command: python haraya_v3.py
         elif any(hotword in command for hotword in self.Standby_HotWords):
             response = "Sure, take your time. I'll wait."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            response = self.Standby_SubFunction()
-            self.response = response
-            return response
+            self.Standby()
+            return self.harayaNeuralNetwork()
         #_______________________________________________________NoCommands/NotClearCommands_BLOCK
         #Run Command: python haraya_v3.py
         elif " " == command or "[]" == command or "." == command:
@@ -856,8 +855,7 @@ class haraya_v3:
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            response = self.Standby_SubFunction()
-            self.response = response
+            self.Standby()
             return self.harayaNeuralNetwork()
         else:
             print(colorama.Fore.LIGHTGREEN_EX + command)
