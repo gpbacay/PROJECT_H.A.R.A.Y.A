@@ -488,6 +488,7 @@ class haraya_v3:
             
 #_______________________________________________________________________________haraya_NEURAL_NETWORK_FUNCTION
     #Run Command: python haraya_v3.py
+    # takes command, returns reponse
     def harayaNeuralNetwork(self):
         global NameHA, MyName, command
         NameHA = str(self.Name_Honorific_Address[-1])
