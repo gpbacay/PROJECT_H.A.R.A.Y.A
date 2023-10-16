@@ -293,6 +293,7 @@ class haraya_v3:
             print(f"An error occured while adding command: {e}")
             pass
         finally:
+            self.command = command
             self.response = response
         return command
     # WAIT_COMMAND_MAIN_FUNCTION
@@ -408,6 +409,7 @@ class haraya_v3:
                 response = "Yes? How can I help you?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
+                self.command = command
                 self.response = response
                 break
     # Confirmation
@@ -422,6 +424,7 @@ class haraya_v3:
             response = "Then, please do tell."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
+            self.command = command
             self.response = response
             return self.harayaNeuralNetwork()
         elif any(hotword == command for hotword in self.No_HotWords):
@@ -435,12 +438,14 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             self.Standby()
+            self.command = command
             self.response = response
             return self.harayaNeuralNetwork()
         else:
             response = "Come again?"
             print(response)
             self.speak(response)
+            self.command = command
             self.response = response
             return self.harayaNeuralNetwork()
         self.response = response
@@ -513,6 +518,7 @@ class haraya_v3:
                 elif "pose recognition system" in command:
                     self.initializePoseRecognitionSystem()
                     response = self.Confirmation(command)
+                self.command = command
                 self.response = response
                 return response
             #__________________________________________________________________________________TERMINATION_BLOCK
@@ -524,6 +530,7 @@ class haraya_v3:
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 self.playShutdownSound()
+                self.command = command
                 self.response = response
                 return response
             elif any(hotword in command for hotword in self.GoodBye_HotWords):
@@ -532,6 +539,7 @@ class haraya_v3:
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 self.playShutdownSound()
+                self.command = command
                 self.response = response
                 return response
             elif "turn off my computer" in command:
@@ -540,6 +548,7 @@ class haraya_v3:
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 self.playShutdownSound()
+                self.command = command
                 self.response = response
                 return response
             #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
@@ -576,6 +585,7 @@ class haraya_v3:
                     self.playPromptSound()
                     print(f"An error occured while Searching in Chrome: {e}")
                     response = self.Confirmation(command)
+                self.command = command
                 self.response = response
                 return response
             elif any(hotword in command for hotword in self.YouTubeSearch_HotWords):
@@ -606,6 +616,7 @@ class haraya_v3:
                 print(response1)
                 self.speak(response)
                 response = self.Confirmation(command)
+                self.command = command
                 self.response = response
                 return response
             elif any(hotword in command for hotword in self.WikipediaSearch_HotWords):
@@ -625,6 +636,7 @@ class haraya_v3:
                 print(info)
                 self.speak(info)
                 response = self.Confirmation(command)
+                self.command = command
                 self.response = response
                 return response
             #____________________________________________________________________________________________________________OPEN/ACCESS_BLOCK
@@ -747,6 +759,7 @@ class haraya_v3:
                     response = f"An error occurLIGHTGREEN_EX while trying to open the said program: {e}"
                     print(colorama.Fore.LIGHTLIGHTGREEN_EX_EX + response)
                     self.speak(response)
+                self.command = command
                 self.response = response
                 return self.harayaNeuralNetwork()
             #_____________________________________________________________________________________________________CLOSE_BLOCK
@@ -763,6 +776,7 @@ class haraya_v3:
                     print(colorama.Fore.LIGHTGREEN_EX + response)
                     self.speak(response)
                 response = self.Confirmation(command)
+                self.command = command
                 self.response = response
                 return response
             #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
@@ -773,6 +787,7 @@ class haraya_v3:
                 self.speak(response)
                 os.system("shutdown /s /t 0")
                 self.playPromptSound()
+                self.command = command
                 self.response = response
                 return response
             elif "restart my computer" in command:
@@ -781,6 +796,7 @@ class haraya_v3:
                 self.speak(response)
                 os.system("shutdown /r")
                 self.playPromptSound()
+                self.command = command
                 self.response = response
                 return response
             elif "sign off my computer" in command or "signoff my computer" in command:
@@ -790,6 +806,7 @@ class haraya_v3:
                 os.system("shutdown /l")
                 self.playPromptSound()
                 response = self.Confirmation(command)
+                self.command = command
                 self.response = response
                 return response
             elif "logout my computer" in command or "log out my computer" in command:
@@ -799,6 +816,7 @@ class haraya_v3:
                 os.system("shutdown /l")
                 self.playPromptSound()
                 response = self.Confirmation(command)
+                self.command = command
                 self.response = response
                 return response
             elif "sign out my computer" in command or "signout my computer" in command:
@@ -808,6 +826,7 @@ class haraya_v3:
                 os.system("shutdown /l")
                 self.playPromptSound()
                 response = self.Confirmation(command)
+                self.command = command
                 self.response = response
                 return response
             elif "increase" in command and "volume" in command or "volume up" in command:
@@ -816,6 +835,7 @@ class haraya_v3:
                 self.speak(response)
                 pyautogui.press("volumeup", 10)
                 self.playPromptSound()
+                self.command = command
                 self.response = response
                 return self.harayaNeuralNetwork()
             elif "volume" in command and "decrease" in command or "lower" in command:
@@ -824,6 +844,7 @@ class haraya_v3:
                 self.speak(response)
                 pyautogui.press("volumedown", 10)
                 self.playPromptSound()
+                self.command = command
                 self.response = response
                 return self.harayaNeuralNetwork()
             elif "battery" in command and "status" in command or "level" in command or "percentage" in command:
@@ -839,6 +860,7 @@ class haraya_v3:
                 response1 = f"The current battery percentage is " + str(percentage) + "%"
                 print(response)
                 self.speak(response1)
+                self.command = command
                 self.response = response
                 return self.harayaNeuralNetwork()
             #________________________________________________________________________Standby_BLOCK
@@ -867,6 +889,7 @@ class haraya_v3:
                     response = "I beg your pardon—I'm afraid I didn't catch that."
                 print(colorama.Fore.YELLOW + str(response))
                 self.speak(response)
+                self.command = command
                 self.response = response
                 return self.harayaNeuralNetwork()
         except Exception as e:
