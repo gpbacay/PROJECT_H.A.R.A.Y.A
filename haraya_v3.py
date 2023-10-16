@@ -410,9 +410,9 @@ class haraya_v3:
                 self.speak(response)
                 self.response = response
                 break
-    # CONFIRMATION_SUBFUNCTION
+    # Confirmation
     # Run Command: python haraya_v3.py
-    def Confirmation_SubFunction(self, command):
+    def Confirmation(self, command):
         command = self.addCommand(command)
         response = self.response
         
@@ -429,13 +429,13 @@ class haraya_v3:
             response = "Alright then, signing off!"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.response = response
         elif "." == command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             self.Standby()
+            self.response = response
             return self.harayaNeuralNetwork()
         else:
             response = "Come again?"
@@ -443,6 +443,7 @@ class haraya_v3:
             self.speak(response)
             self.response = response
             return self.harayaNeuralNetwork()
+        self.response = response
         return response
     #____________________________________________________________________CLOSE_PROGRAM_FUNCTION
     def close_program(self, program_name):
@@ -508,10 +509,10 @@ class haraya_v3:
                 response1 = colorama.Fore.GREEN + "Hello " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "!"
                 print(response1)
                 self.speak(response)
-                self.Confirmation_SubFunction(command)
+                response = self.Confirmation(command)
             elif "pose recognition system" in command:
                 self.initializePoseRecognitionSystem()
-                response = self.Confirmation_SubFunction(command)
+                response = self.Confirmation(command)
             self.response = response
             return response
         #__________________________________________________________________________________TERMINATION_BLOCK
@@ -570,11 +571,11 @@ class haraya_v3:
                     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
                     browser.get("https://www.google.com/search?q=" + search + "&start" + str(i))
                 self.speak("Here's what I've found.")
-                response = self.Confirmation_SubFunction(command)
+                response = self.Confirmation(command)
             except Exception as e:
                 self.playPromptSound()
                 print(f"An error occured while Searching in Chrome: {e}")
-                response = self.Confirmation_SubFunction(command)
+                response = self.Confirmation(command)
             self.response = response
             return response
         elif any(hotword in command for hotword in self.YouTubeSearch_HotWords):
@@ -604,7 +605,7 @@ class haraya_v3:
             response1 = colorama.Fore.GREEN + "Now Playing " + colorama.Fore.CYAN + song_title
             print(response1)
             self.speak(response)
-            response = self.Confirmation_SubFunction(command)
+            response = self.Confirmation(command)
             self.response = response
             return response
         elif any(hotword in command for hotword in self.WikipediaSearch_HotWords):
@@ -623,7 +624,7 @@ class haraya_v3:
             info = wikipedia.summary(person, 1)
             print(info)
             self.speak(info)
-            response = self.Confirmation_SubFunction(command)
+            response = self.Confirmation(command)
             self.response = response
             return response
         #____________________________________________________________________________________________________________OPEN/ACCESS_BLOCK
@@ -761,7 +762,7 @@ class haraya_v3:
                 response = f"An error occur while trying to close the said program: {e}"
                 print(colorama.Fore.LIGHTGREEN_EX + response)
                 self.speak(response)
-            response = self.Confirmation_SubFunction(command)
+            response = self.Confirmation(command)
             self.response = response
             return response
         #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
@@ -788,7 +789,7 @@ class haraya_v3:
             self.speak(response)
             os.system("shutdown /l")
             self.playPromptSound()
-            response = self.Confirmation_SubFunction(command)
+            response = self.Confirmation(command)
             self.response = response
             return response
         elif "logout my computer" in command or "log out my computer" in command:
@@ -797,7 +798,7 @@ class haraya_v3:
             self.speak(response)
             os.system("shutdown /l")
             self.playPromptSound()
-            response = self.Confirmation_SubFunction(command)
+            response = self.Confirmation(command)
             self.response = response
             return response
         elif "sign out my computer" in command or "signout my computer" in command:
@@ -806,7 +807,7 @@ class haraya_v3:
             self.speak(response)
             os.system("shutdown /l")
             self.playPromptSound()
-            response = self.Confirmation_SubFunction(command)
+            response = self.Confirmation(command)
             self.response = response
             return response
         elif "increase" in command and "volume" in command or "volume up" in command:
@@ -868,13 +869,12 @@ class haraya_v3:
             self.speak(response)
             self.response = response
             return self.harayaNeuralNetwork()
-# Create an instance of the HarayaV3 class
+#____________________________________________________________Instantiate_Haraya 
 haraya_v3_instance = haraya_v3()
 haraya_v3_instance.setHonorificAddress()
 haraya_v3_instance.initializeFaceRecognitionSystem()
-#______________________________________harayaNeuralNetwork_IN_A_LOOP_BLOCK
-#Run Command: python haraya_v3.py
 if __name__ == '__main__':
+    #____________________________________________________________________Run_Haraya
     pygame.init()
     running = True
     while running:
@@ -885,7 +885,27 @@ if __name__ == '__main__':
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
             continue
-    haraya_v3_instance.close_program(program_name="WindowsTerminal.exe")
-    pygame.quit()
-    exit()
+    #_____________________________________________________________________Terminate_Haraya
+    program_name="WindowsTerminal.exe"
+    try:
+        for process in psutil.process_iter(['pid', 'name']):
+            if process.info['name'] == program_name:
+                try:
+                    process.terminate()
+                    response = program_name + " has been closed."
+                    print(colorama.Fore.GREEN + response)
+                except psutil.AccessDenied:
+                    response = "Permission denied. Unable to close " + program_name + "."
+                    print(colorama.Fore.LIGHTRED_EX + response)
+                except psutil.NoSuchProcess:
+                    response = program_name + " is not running."
+                    print(colorama.Fore.LIGHTRED_EX + response)
+                break
+            else:
+                print(colorama.Fore.LIGHTRED_EX + program_name + " is not running.")
+    except Exception as e:
+        print("An error occurred:", str(e))
+    finally:
+        pygame.quit()
+        exit()
 #Run Command: python haraya_v3.py
