@@ -830,7 +830,7 @@ class haraya_v3:
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 os.system("shutdown /l")
-                self.playPromptSound()
+                self.playShutdownSound()
                 response = self.Confirmation(command)
                 self.command = command
                 self.response = response
