@@ -869,19 +869,19 @@ class haraya_v3:
                 self.speak(response)
                 self.response = response
                 return self.harayaNeuralNetwork()
-        except:
-            pass
+        except Exception as e:
+            print(f"Error occured while running Haraya's Neural Network: {e}")
         finally:
             self.command = command
             self.response = response
-            print(f"Command: {self.command}")
-            print(f"Response: {self.response}")
-#____________________________________________________________Instantiate_Haraya 
+#____________________________________________________________Instantiate_Haraya
+#Run Command: python haraya_v3.py
 haraya_v3_instance = haraya_v3()
 haraya_v3_instance.setHonorificAddress()
 haraya_v3_instance.initializeFaceRecognitionSystem()
 if __name__ == '__main__':
     #____________________________________________________________________________________________Run_Haraya
+    #Run Command: python haraya_v3.py
     pygame.init()
     running = True
     while running:
@@ -893,6 +893,7 @@ if __name__ == '__main__':
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
             continue
     #______________________________________________________________________________________________Terminate_Haraya
+    #Run Command: python haraya_v3.py
     program_name="WindowsTerminal.exe"
     try:
         for process in psutil.process_iter(['pid', 'name']):
