@@ -874,6 +874,8 @@ class haraya_v3:
         finally:
             self.command = command
             self.response = response
+            print(f"Command: {self.command}")
+            print(f"Response: {self.response}")
 #____________________________________________________________Instantiate_Haraya 
 haraya_v3_instance = haraya_v3()
 haraya_v3_instance.setHonorificAddress()
