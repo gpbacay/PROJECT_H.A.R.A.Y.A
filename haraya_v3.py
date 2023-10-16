@@ -380,8 +380,8 @@ class haraya_v3:
         try:
             NameHA = self.Name_Honorific_Address[-1]
             MyName = self.Name[-1]
-            response = "Hi " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "! I am Haraya, how can I help you?"
-            response1 = "Hi " + NameHA + " " + MyName + "! I am Haraya, how can I help you?"
+            response = "Hi " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
+            response1 = "Hi " + NameHA + " " + MyName + "! I am Haraya, your personal AI assistant! How can I help you?"
         except:
             response = "Hi! How can I help you?"
         print(colorama.Fore.GREEN + response)
@@ -809,7 +809,11 @@ class haraya_v3:
             return self.Standby_SubFunction()
         else:
             print(colorama.Fore.LIGHTGREEN_EX + command)
-            response = self.PaLM2_LLM.getChatResponse(reply=str(command), user_name_input=MyName)
+            try:
+                response = self.PaLM2_LLM.getChatResponse(reply=str(command), user_name_input=MyName)
+            except Exception as e:
+                print(f"Error occured while running PaLM2_LLM: {e}")
+                response = "I beg your pardon—I'm afraid I didn't catch that."
             print(colorama.Fore.YELLOW + str(response))
             self.speak(response)
             return self.harayaNeuralNetwork()
@@ -826,11 +830,11 @@ if __name__ == '__main__':
         haraya_v3_instance.harayaStartUp()
         try:
             haraya_v3_instance.harayaNeuralNetwork()
-            haraya_v3_instance.close_program(program_name="WindowsTerminal.exe")
             break
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
             continue
+    haraya_v3_instance.close_program(program_name="WindowsTerminal.exe")
     pygame.quit()
     exit()
 #Run Command: python haraya_v3.py
