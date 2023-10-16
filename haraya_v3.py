@@ -29,6 +29,7 @@ class haraya_v3:
     #Run Command: python haraya_v3.py
     def __init__(self):
         self.command = "."
+        self.response = "."
         self.NameHA = "."
         self.MyName = "."
         self.tStartUp = Thread(target=playsound, args=(u"audioFiles\\prompt1.mp3",))
@@ -259,6 +260,7 @@ class haraya_v3:
     # ADD_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def addCommand(self, command):
+        response = self.response
         Interrogative_HotWords = ['what', ' what ', 'what ', ' what',
                                 'who', ' who ', 'who ', ' who',
                                 'where', ' where ', 'where ', ' where',
@@ -275,7 +277,6 @@ class haraya_v3:
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
             else:
-                response = ''
                 print(response)
                 self.speak(response)
             with sr.Microphone() as source:
@@ -287,8 +288,11 @@ class haraya_v3:
                 voice = self.recognizer.listen(source)
                 command = self.recognizer.recognize_google(voice)
                 command = command.lower()
-        except:
+        except Exception as e:
+            print(f"An error occured while adding command: {e}")
             pass
+        finally:
+            self.response = response
         return command
     # WAIT_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
@@ -365,6 +369,7 @@ class haraya_v3:
     # initializePoseRecognitionSystem_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def initializePoseRecognitionSystem(self):
+        response = self.response
         response = "Recognizing pose..."
         print(colorama.Fore.GREEN + response)
         tPRS = Thread(target=Pose_Recognition_System)
@@ -374,21 +379,26 @@ class haraya_v3:
         response = "Initializing Pose Recognition System"
         self.speak(response)
         tPRS.join()
+        self.response = response
     # START_UP_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def harayaStartUp(self):
+        response = self.response
         try:
             NameHA = self.Name_Honorific_Address[-1]
             MyName = self.Name[-1]
-            response = "Hi " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
-            response1 = "Hi " + NameHA + " " + MyName + "! I am Haraya, your personal AI assistant! How can I help you?"
+            response = "Hi " + NameHA + " " + MyName + "! I am Haraya, your personal AI assistant! How can I help you?"
+            response1 = colorama.Fore.GREEN + "Hi " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
         except:
             response = "Hi! How can I help you?"
-        print(colorama.Fore.GREEN + response)
-        self.speak(response1)
+        print(response1)
+        self.speak(response)
+        self.response = response
+        return self.response
     # STANDBY_SUBFUNCTION
     # Run Command: python haraya_v3.py
     def Standby_SubFunction(self):
+        response = self.response
         self.playListeningSound()
         while True:
             command = self.waitCommand()
@@ -398,11 +408,13 @@ class haraya_v3:
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 break
-        exit(self.harayaNeuralNetwork())
+        self.response = response
+        return response
     # CONFIRMATION_SUBFUNCTION
     # Run Command: python haraya_v3.py
     def Confirmation_SubFunction(self, command):
         command = self.addCommand(command)
+        response = self.response
         
         if any(hotword == command for hotword in self.Yes_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
@@ -410,32 +422,36 @@ class haraya_v3:
             response = "Then, please do tell."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            exit(self.harayaNeuralNetwork())
-            
+            self.response = response
+            return self.harayaNeuralNetwork()
         elif any(hotword == command for hotword in self.No_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Alright then, signing off!"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            exit()
+            self.response = response
         elif "." == command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.Standby_SubFunction()
+            response = self.Standby_SubFunction()
+            self.response = response
         else:
             response = "Come again?"
             print(response)
             self.speak(response)
-            exit(self.harayaNeuralNetwork())
+            self.response = response
+            return self.harayaNeuralNetwork()
+        return response
     #____________________________________________________________________CLOSE_PROGRAM_FUNCTION
     def close_program(self, program_name):
+        response = self.response
         try:
-            response = "Closing " + colorama.Fore.LIGHTGREEN_EX + program_name + colorama.Fore.GREEN + "..."
-            response1 = "Closing " + program_name + "..."
-            print(colorama.Fore.GREEN + response)
-            self.speak(response1)
+            response = "Closing " + program_name + "..."
+            response1 = colorama.Fore.GREEN + "Closing " + colorama.Fore.LIGHTRED_EX + program_name + colorama.Fore.GREEN + "..."
+            print(response1)
+            self.speak(response)
             for process in psutil.process_iter(['pid', 'name']):
                 if process.info['name'] == program_name:
                     try:
@@ -456,6 +472,8 @@ class haraya_v3:
                     print(program_name + " is not running.")
         except Exception as e:
             print("An error occurred:", str(e))
+        finally:
+            self.response = response
             
             
             
@@ -475,6 +493,7 @@ class haraya_v3:
         NameHA = str(self.Name_Honorific_Address[-1])
         MyName = str(self.MyName)
         command = str(self.listenCommand())
+        response = str(self.response)
         tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(str(command), MyName,))
         tAnnotateCommand.start()
         self.getFullName()
@@ -484,15 +503,15 @@ class haraya_v3:
         if "run" in command or "activate" in command or "initialize" in command:
             if "face recognition system" in command:
                 self.initializeFaceRecognitionSystem()
-                response = "Hello " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "!"
-                response1 = "Hello " + NameHA + " " + MyName + "!"
-                print(colorama.Fore.GREEN + response)
-                self.speak(response1)
-                return self.Confirmation_SubFunction(command)
+                response = "Hello " + NameHA + " " + MyName + "!"
+                response1 = colorama.Fore.GREEN + "Hello " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "!"
+                print(response1)
+                self.speak(response)
+                self.Confirmation_SubFunction(command)
             elif "pose recognition system" in command:
                 self.initializePoseRecognitionSystem()
-                return self.Confirmation_SubFunction(command)
-            return
+                self.Confirmation_SubFunction(command)
+            return response
         #__________________________________________________________________________________TERMINATION_BLOCK
         #Run Command: python haraya_v3.py
         elif "turn off" in command or any(hotword in command for hotword in self.Stop_HotWords):
@@ -806,7 +825,8 @@ class haraya_v3:
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            return self.Standby_SubFunction()
+            response = self.Standby_SubFunction()
+            self.harayaNeuralNetwork()
         else:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             try:
