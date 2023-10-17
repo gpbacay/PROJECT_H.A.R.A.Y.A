@@ -114,7 +114,7 @@ class PaLM2_LLM:
             model="models/chat-bison-001",
             context=self.context,
             messages=self.messages,
-            temperature=0.5
+            temperature=0.6
         )
         self.reply = str(self.reply) + "."
         
