@@ -535,11 +535,9 @@ class haraya_v3:
     # takes command, returns reponse
     def harayaNeuralNetwork(self, command_input):
         self.setCommand(command_input=command_input)
-        NameHA = str(self.NameHonorificAddress[-1])
-        MyName = str(self.MyName)
         command = str(self.listenCommand())
-        response = str(self.response)
-        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(str(command), MyName,))
+        response = str(self.getResponse())
+        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(str(command), self.getMyName(),))
         tAnnotateCommand.start()
         self.initMyName()
         self.initHonorificAddress()
@@ -549,8 +547,8 @@ class haraya_v3:
             if "run" in command or "activate" in command or "initialize" in command:
                 if "face recognition system" in command:
                     self.initializeFaceRecognitionSystem()
-                    response = "Hello " + NameHA + " " + MyName + "!"
-                    response1 = colorama.Fore.GREEN + "Hello " + NameHA + " " + colorama.Fore.CYAN + MyName + colorama.Fore.GREEN + "!"
+                    response = "Hello " + self.getHonorificAddress() + " " + self.getMyName() + "!"
+                    response1 = colorama.Fore.GREEN + "Hello " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "!"
                     print(response1)
                     self.speak(response)
                     response = self.Confirmation()
@@ -564,20 +562,18 @@ class haraya_v3:
             elif any(hotword == command for hotword in self.Stop_HotWords):
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 self.initHonorificAddress()
-                response = "As you wish " + NameHA + ". Signing off..."
+                response = "As you wish " + self.getHonorificAddress() + ". Signing off..."
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 self.playShutdownSound()
-
                 self.setResponse(response_input=response)
                 return response
             elif any(hotword == command for hotword in self.GoodBye_HotWords):
                 print(colorama.Fore.LIGHTGREEN_EX + command)
-                response = "Goodbye " + NameHA + "! Have a great day!"
+                response = "Goodbye " + self.getHonorificAddress() + "! Have a great day!"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 self.playShutdownSound()
-
                 self.setResponse(response_input=response)
                 return response
             #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
@@ -925,7 +921,7 @@ class haraya_v3:
             else:
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
-                    response = self.PaLM2_LLM.getChatResponse(reply=str(command), user_name_input=MyName)
+                    response = self.PaLM2_LLM.getChatResponse(reply=str(command), user_name_input=self.getMyName())
                 except Exception as e:
                     print(f"Error occured while running PaLM2_LLM: {e}")
                     response = "I beg your pardon—I'm afraid I didn't catch that."
