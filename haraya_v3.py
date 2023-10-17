@@ -401,7 +401,7 @@ class haraya_v3:
         return self.response
     # Standby
     # Run Command: python haraya_v3.py
-    def Standby(self):
+    def harayaStandby(self):
         response = self.response
         self.playListeningSound()
         while True:
@@ -428,7 +428,7 @@ class haraya_v3:
             self.speak(response)
             self.command = command
             self.response = response
-            return self.harayaNeuralNetwork()
+            return self.harayaNeuralNetwork(command_input=command)
         elif any(hotword == command for hotword in self.No_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Alright then, signing off!"
@@ -439,17 +439,17 @@ class haraya_v3:
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.Standby()
+            self.harayaStandby()
             self.command = command
             self.response = response
-            return self.harayaNeuralNetwork()
+            return self.harayaNeuralNetwork(command_input=command)
         else:
             response = "Come again?"
             print(response)
             self.speak(response)
             self.command = command
             self.response = response
-            return self.harayaNeuralNetwork()
+            return self.harayaNeuralNetwork(command_input=command)
         self.response = response
         return response
     #____________________________________________________________________CLOSE_PROGRAM_FUNCTION
@@ -497,7 +497,7 @@ class haraya_v3:
 #_______________________________________________________________________________haraya_NEURAL_NETWORK_FUNCTION
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
-    def harayaNeuralNetwork(self):
+    def harayaNeuralNetwork(self, command_input):
         NameHA = str(self.Name_Honorific_Address[-1])
         MyName = str(self.MyName)
         command = str(self.listenCommand())
@@ -767,7 +767,7 @@ class haraya_v3:
                     self.speak(response)
                 self.command = command
                 self.response = response
-                return self.harayaNeuralNetwork()
+                return self.harayaNeuralNetwork(command_input=command)
             #_____________________________________________________________________________________________________CLOSE_BLOCK
             #Run Command: python haraya_v3.py
             elif any(hotword in command for hotword in self.Close_HotWords):
@@ -843,7 +843,7 @@ class haraya_v3:
                 self.playPromptSound()
                 self.command = command
                 self.response = response
-                return self.harayaNeuralNetwork()
+                return self.harayaNeuralNetwork(command_input=command)
             elif "volume" in command and "decrease" in command or "lower" in command:
                 response = "Decreasing volume..."
                 print(colorama.Fore.GREEN + response)
@@ -852,7 +852,7 @@ class haraya_v3:
                 self.playPromptSound()
                 self.command = command
                 self.response = response
-                return self.harayaNeuralNetwork()
+                return self.harayaNeuralNetwork(command_input=command)
             elif "battery" in command and "status" in command or "level" in command or "percentage" in command:
                 battery = psutil.sensors_battery()
                 percentage = battery.percent
@@ -868,15 +868,15 @@ class haraya_v3:
                 self.speak(response1)
                 self.command = command
                 self.response = response
-                return self.harayaNeuralNetwork()
+                return self.harayaNeuralNetwork(command_input=command)
             #________________________________________________________________________Standby_BLOCK
             #Run Command: python haraya_v3.py
             elif any(hotword in command for hotword in self.Standby_HotWords):
                 response = "Sure, take your time. I'll wait."
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
-                self.Standby()
-                return self.harayaNeuralNetwork()
+                self.harayaStandby()
+                return self.harayaNeuralNetwork(command_input=command)
             #_______________________________________________________NoCommands/NotClearCommands_BLOCK
             #Run Command: python haraya_v3.py
             elif " " == command or "[]" == command or "." == command or command == None:
@@ -884,8 +884,8 @@ class haraya_v3:
                 response = "Hello? Are you still there?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
-                self.Standby()
-                return self.harayaNeuralNetwork()
+                self.harayaStandby()
+                return self.harayaNeuralNetwork(command_input=command)
             else:
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
@@ -897,7 +897,7 @@ class haraya_v3:
                 self.speak(response)
                 self.command = command
                 self.response = response
-                return self.harayaNeuralNetwork()
+                return self.harayaNeuralNetwork(command_input=command)
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"Error occured while running Haraya's Neural Network: {e}")
         finally:
