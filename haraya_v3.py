@@ -456,7 +456,7 @@ class haraya_v3:
     # Confirmation
     # Run Command: python haraya_v3.py
     def Confirmation(self):
-        command = self.addCommand()
+        command = self.addCommand(self.getCommand())
         response = self.response
         
         if any(hotword == command for hotword in self.Yes_HotWords):
@@ -500,20 +500,20 @@ class haraya_v3:
                 if process.info['name'] == program_name:
                     try:
                         process.terminate()
-                        response = program_name + " has been closed."
-                        print(colorama.Fore.GREEN + response)
+                        response = program_name + f"\r has been closed."
+                        print(colorama.Fore.GREEN + response, end="\r")
                         self.speak(response)
                     except psutil.AccessDenied:
-                        response = "Permission denied. Unable to close " + program_name + "."
-                        print(colorama.Fore.LIGHTRED_EX + response)
+                        response = f"\r Permission denied. Unable to close " + program_name + "."
+                        print(colorama.Fore.LIGHTRED_EX + response, end="\r")
                         self.speak(response)
                     except psutil.NoSuchProcess:
-                        response = program_name + " is not running."
-                        print(colorama.Fore.LIGHTRED_EX + response)
+                        response = f"\r {program_name} is not running."
+                        print(colorama.Fore.LIGHTRED_EX + response, end="\r")
                         self.speak(response)
                     break
                 else:
-                    print(program_name + " is not running.")
+                    print(f"\r {program_name} is not running.", end="\r")
         except Exception as e:
             print("An error occurred:", str(e))
         finally:
@@ -960,17 +960,17 @@ if __name__ == '__main__':
             if process.info['name'] == program_name:
                 try:
                     process.terminate()
-                    response = program_name + " has been closed."
-                    print(colorama.Fore.GREEN + response)
+                    response = f"\r{program_name} has been closed."
+                    print(colorama.Fore.GREEN + response, end="\r")
                 except psutil.AccessDenied:
-                    response = "Permission denied. Unable to close " + program_name + "."
-                    print(colorama.Fore.LIGHTRED_EX + response)
+                    response = f"\rPermission denied. Unable to close " + program_name + "."
+                    print(colorama.Fore.LIGHTRED_EX + response, end="\r")
                 except psutil.NoSuchProcess:
-                    response = program_name + " is not running."
-                    print(colorama.Fore.LIGHTRED_EX + response)
+                    response = f"\r{program_name} is not running."
+                    print(colorama.Fore.LIGHTRED_EX + response, end="\r")
                 break
             else:
-                print(colorama.Fore.LIGHTRED_EX + program_name + " is not running.")
+                print(colorama.Fore.LIGHTRED_EX + f"\r {program_name} is not running.", end="\r")
     except Exception as e:
         print("An error occurred:", str(e))
     finally:
