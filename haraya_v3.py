@@ -920,7 +920,7 @@ class haraya_v3:
             else:
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
-                    response = self.PaLM2_LLM.getChatResponse(reply=str(command), user_name_input=self.getMyName())
+                    response = self.PaLM2_LLM.getChatResponse(f"{self.getMyName()}:" + str(command), prev_response="Haraya: " + self.getResponse(), user_name_input=self.getMyName())
                 except Exception as e:
                     print(f"Error occured while running PaLM2_LLM: {e}")
                     response = "I beg your pardon—I'm afraid I didn't catch that."
