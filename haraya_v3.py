@@ -413,7 +413,6 @@ class haraya_v3:
                 response = "Yes? How can I help you?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
-
                 self.setResponse(response_input=response)
                 break
     # ADD_COMMAND_MAIN_FUNCTION
