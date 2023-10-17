@@ -301,7 +301,7 @@ class haraya_v3:
     def speak(self, text_input):
         tSpeak = Thread(target=self.hveSpeak, args=(text_input,))
         tSpeak.start()
-        time.sleep(2)
+        time.sleep(1)
         tSpeaking = Thread(target=self.setIsRandom, args=(1,))
         tSpeaking.start()
         tSpeak.join()
@@ -391,8 +391,6 @@ class haraya_v3:
     # Run Command: python haraya_v3.py
     def harayaStartUp(self):
         self.initializeFaceRecognitionSystem()
-        self.tStartUp = Thread(target=self.playSearchSound)
-        self.tStartUp.start()
         try:
             response = f"Hi {self.getHonorificAddress()} {self.getMyName()}! I am Haraya, your personal AI assistant! How can I help you?"
             response1 = colorama.Fore.GREEN + "Hi " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
