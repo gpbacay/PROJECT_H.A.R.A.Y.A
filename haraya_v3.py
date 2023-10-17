@@ -948,7 +948,7 @@ if __name__ == '__main__':
     while running:
         response = haraya_v3_instance.harayaStartUp()
         try:
-            haraya_v3_instance.harayaNeuralNetwork(command_input=haraya_v3_instance.command, response_input=haraya_v3_instance.getResponse())
+            haraya_v3_instance.harayaNeuralNetwork(command_input=haraya_v3_instance.getCommand(), response_input=haraya_v3_instance.getResponse())
             break
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
