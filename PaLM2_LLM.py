@@ -8,7 +8,8 @@ class PaLM2_LLM:
         load_dotenv(find_dotenv())
         self.GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
 
-        self.reply = " ."
+        self.reply = "."
+        self.prev_response = "."
 
         self.messages = """
         Note: remember to take the persona of Haraya.
@@ -47,6 +48,7 @@ class PaLM2_LLM:
         This name reflects H.A.R.A.Y.A's commitment to limitless possibilities and its mission to assist users in reaching their dreams.
 
         Note: Remember, assimilate and summarize the information about your creator and about yourself before explaining it.
+        Remember: This is your previous response to the user: {}
         """
 
         self.context = """"
@@ -72,6 +74,7 @@ class PaLM2_LLM:
         -You are created on October 16, 2022. You are currently talking with the user named {}.
         -Feel free to share personal details or sentiments and express your opinions, beliefs, and suggestions.
         -Before you reply, attend, think and remember all the instructions set here.
+        Remember: This is your previous response to the user: {}
         """
 
         self.user_name = "User"
@@ -100,15 +103,16 @@ class PaLM2_LLM:
         embedding = palm.generate_embeddings(model=model, text=text)
         return embedding
 
-    def getChatResponse(self, reply: str, user_name_input: str):
+    def getChatResponse(self, reply: str, prev_response: str, user_name_input: str):
+        self.prev_response = prev_response
         self.user_name = user_name_input
         
         self.Scrapper.SetCurrentTime()
         self.Scrapper.SetCurrentDate()
         
-        self.messages = self.messages.format(self.current_time, self.current_date, self.current_location, self.current_weather, str(self.chat_history))
+        self.messages = self.messages.format(self.current_time, self.current_date, self.current_location, self.current_weather, str(self.chat_history), self.prev_response)
         
-        self.context = self.context.format(str(reply), self.ai_name, user_name_input)
+        self.context = self.context.format(str(reply), self.ai_name, user_name_input, self.prev_response)
 
         self.response = palm.chat(
             model="models/chat-bison-001",

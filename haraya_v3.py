@@ -258,12 +258,11 @@ class haraya_v3:
             with open("attendance.csv", "r+") as attendance:
                 MyDatalist = attendance.readlines()
                 NameList.append(MyDatalist[-1])
-                self.setMyName(NameList[-1].replace("'", '').split(",")[0])
         except Exception as e:
             print(f"An error occured while getting the Full Name: {e}")
             pass
         finally:
-            return self.getMyName()
+            self.setMyName(NameList[-1].replace("'", '').split(",")[0])
     # Initialize appropriate Honorofic Address for user's gender and/or name
     def initHonorificAddress(self):
         Male_Names = ["Gianne Bacay", 
@@ -293,7 +292,6 @@ class haraya_v3:
             HonorificAddress = "Master"
         finally:
             self.setHonorificAddress(HonorificAddress_input=HonorificAddress)
-            return self.getHonorificAddress()
     # Run Command: python haraya_v3.py
     # def speak(self, text):
     #     self.setIsRandom(1)
@@ -533,14 +531,15 @@ class haraya_v3:
 #_______________________________________________________________________________haraya_NEURAL_NETWORK_FUNCTION
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
-    def harayaNeuralNetwork(self, command_input):
-        self.setCommand(command_input=command_input)
-        command = str(self.listenCommand())
-        response = str(self.getResponse())
-        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(str(command), self.getMyName(),))
-        tAnnotateCommand.start()
+    def harayaNeuralNetwork(self, command_input, response_input):
         self.initMyName()
         self.initHonorificAddress()
+        self.setCommand(command_input=command_input)
+        self.setResponse(response_input=response_input)
+        command = str(self.listenCommand())
+        response = str(self.getResponse())
+        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(f"{self.getMyName()}:" + str(command), "Haraya: " + self.getResponse(), self.getMyName(),))
+        tAnnotateCommand.start()
         try:
             #______________________________________________________________________________POSE_RECOGNITION_BLOCK
             #Run Command: python haraya_v3.py
@@ -933,6 +932,7 @@ class haraya_v3:
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"Error occured while running Haraya's Neural Network: {e}")
         finally:
+            self.setCommand(command_input=command)
             self.setResponse(response_input=response)
 #____________________________________________________________Instantiate_Haraya
 #Run Command: python haraya_v3.py
