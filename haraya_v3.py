@@ -250,6 +250,7 @@ class haraya_v3:
         return self.HonorificAddress
     # ______________________________________________________________________________User-Defined Functions:
     # Initialize user's name/ retrive user's name from the attendance csv
+    # Run Command: python haraya_v3.py
     def initMyName(self):
         MyDatalist = []
         NameList = []
@@ -263,6 +264,7 @@ class haraya_v3:
         finally:
             self.setMyName(NameList[-1].replace("'", '').split(",")[0])
     # Initialize appropriate Honorofic Address for user's gender and/or name
+    # Run Command: python haraya_v3.py
     def initHonorificAddress(self):
         Male_Names = ["Gianne Bacay", 
                     "Earl Jay Tagud",
