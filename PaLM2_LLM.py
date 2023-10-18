@@ -81,8 +81,11 @@ class PaLM2_LLM:
         Remember: This is your previous response to the user: {}
         """
 
-        self.examples = [("What is your name", "My name is Haraya"),
-                        ("say hi", "hi")]
+        self.examples = [
+                        ("What is your name", "My name is Haraya"),
+                        ("say hi", "hi")
+                        ]
+        
         self.user_name = "User"
         self.ai_name = "Haraya"
 
