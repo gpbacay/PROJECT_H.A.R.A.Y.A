@@ -54,7 +54,8 @@ class PaLM2_LLM:
         """
 
         self.context = """"
-        Remember: You are Haraya, my personal AI Assistant.
+        Remember: 
+            -You are Haraya, my personal AI Assistant.
             -Act as Haraya, a High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant.
         Note:  
             -Respond only to the transcript with the highest confidence rate in the following: {}.
@@ -123,7 +124,7 @@ class PaLM2_LLM:
             context=self.context,
             messages=self.messages,
             examples=self.examples,
-            temperature=0.5
+            temperature=0.8
         )
         self.reply = str(self.reply) + "."
         
