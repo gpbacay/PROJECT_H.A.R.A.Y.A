@@ -71,7 +71,8 @@ class PaLM2_LLM:
         Remember: This is your previous response to the user: {}
         """
 
-        self.examples = [("What is your name", "My name is Haraya")]
+        self.examples = [("What is your name", "My name is Haraya"),
+                        ("say hi", "hi")]
         self.user_name = "User"
         self.ai_name = "Haraya"
 
@@ -120,6 +121,7 @@ class PaLM2_LLM:
             model="models/chat-bison-001",
             context=self.context,
             messages=self.messages,
+            examples=self.examples,
             temperature=0.5
         )
         self.reply = str(self.reply) + "."
