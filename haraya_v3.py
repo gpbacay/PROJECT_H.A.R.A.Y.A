@@ -514,9 +514,10 @@ class haraya_v3:
                     break
                 else:
                     print(f"\r {program_name} is not running.", end="\r")
-                    break
+                    pass
         except Exception as e:
             print("An error occurred:", str(e))
+            pass
         finally:
             self.setResponse(response_input=response)
             
@@ -950,7 +951,7 @@ if __name__ == '__main__':
                 break
             else:
                 print(colorama.Fore.LIGHTRED_EX + f"\r {program_name} is not running.", end="\r")
-                break
+                pass
     except Exception as e:
         print("An error occurred:", str(e))
         pass
