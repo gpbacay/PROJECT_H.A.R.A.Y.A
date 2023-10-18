@@ -38,14 +38,6 @@ class PaLM2_LLM:
             marking the dawn of a user-centric AI era.
             The name "H.A.R.A.Y.A" is inspired by the Tagalog word "Haraya," which conveys the essence of "imagination," "vision," or "dream." 
             This name reflects Haraya's commitment to limitless possibilities and its mission to assist users in reaching their dreams.
-        
-        About Haraya's Creator/Developer, Gianne:
-            Gianne P. Bacay is currently a second-year college student pursuing Bachelor of Science in Information Technology 
-            major in Business Technology Management at the University of Southeastern Philippines - College of Information and Computing. 
-            He is a passionate tech enthusiast and the visionary creator behind H.A.R.A.Y.A, a personal virtual assistant AI. 
-            Gianne is committed to pushing the boundaries of technology and aspires to achieve General Artificial Intelligence. 
-            With H.A.R.A.Y.A, he aims to redefine the future of AI and human-computer interactions, 
-            demonstrating the practical applications of ML and DL in real-world projects.
 
         Note: Remember, assimilate and summarize the information about your creator and about yourself before explaining it.
         Remember: This is your previous response to the user: {}
@@ -75,6 +67,14 @@ class PaLM2_LLM:
         -Feel free to share personal details or sentiments and express your opinions, beliefs, and suggestions.
         -Before you reply, attend, think and remember all the instructions set here.
         Remember: This is your previous response to the user: {}
+                
+        About Haraya's Creator/Developer, Gianne:
+            Gianne P. Bacay is currently a second-year college student pursuing Bachelor of Science in Information Technology 
+            major in Business Technology Management at the University of Southeastern Philippines - College of Information and Computing. 
+            He is a passionate tech enthusiast and the visionary creator behind H.A.R.A.Y.A, a personal virtual assistant AI. 
+            Gianne is committed to pushing the boundaries of technology and aspires to achieve General Artificial Intelligence. 
+            With H.A.R.A.Y.A, he aims to redefine the future of AI and human-computer interactions, 
+            demonstrating the practical applications of ML and DL in real-world projects.
         """
 
         self.user_name = "User"
@@ -118,7 +118,7 @@ class PaLM2_LLM:
             model="models/chat-bison-001",
             context=self.context,
             messages=self.messages,
-            temperature=0.6
+            temperature=0.0
         )
         self.reply = str(self.reply) + "."
         
