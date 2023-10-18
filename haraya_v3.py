@@ -953,6 +953,7 @@ if __name__ == '__main__':
                 break
     except Exception as e:
         print("An error occurred:", str(e))
+        pass
     finally:
         pygame.quit()
         exit()
