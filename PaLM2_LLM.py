@@ -143,7 +143,6 @@ class PaLM2_LLM:
         self.messages = messages
         self.context = context
         self.examples = examples
-        print(messages)
         
         self.response = palm.chat(
             model="models/chat-bison-001",
@@ -161,7 +160,6 @@ class PaLM2_LLM:
         self.conversation = f"{self.message_input}, {self.message_output}\n"
         self.chat_history.append(self.conversation)
         
-        print(self.Scraper.GetCurrentTime(self=self))
         return self.response.last
 
 if __name__ == '__main__':
