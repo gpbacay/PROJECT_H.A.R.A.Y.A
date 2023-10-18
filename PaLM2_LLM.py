@@ -149,7 +149,7 @@ class PaLM2_LLM:
             context=self.context,
             messages=self.messages,
             examples=self.examples,
-            temperature=0.1
+            temperature=0.5
         )
         self.reply = str(self.reply) + "."
         
