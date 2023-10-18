@@ -300,7 +300,7 @@ class haraya_v3:
     #     self.engine.runAndWait()
     #     self.setIsRandom(0)
     def speak(self, text_input: str):
-        tSpeak = Thread(target=self.hveSpeak, args=(text_input,))
+        tSpeak = Thread(target=self.hveSpeak, args=(text_input,),daemon=True)
         tSpeak.start()
         time.sleep(1)
         tSpeaking = Thread(target=self.setIsRandom, args=(1,))
@@ -369,8 +369,6 @@ class haraya_v3:
     def initializeFaceRecognitionSystem(self):
         tFRS = Thread(target=Face_Recognition_System)
         tFRS.start()
-        tLoadBar1 = Thread(target=self.runLoadingBar, args=(10, "INITIALIZING FRS", "FRS INITIALIZED!"),)
-        tLoadBar1.start()
         response = "Initializing Face Recognition System"
         self.speak(response)
         tFRS.join()
@@ -407,14 +405,14 @@ class haraya_v3:
             return self.getResponse()
     # Standby
     # Run Command: python haraya_v3.py
-    def harayaStandby(self):
+    def Standby(self):
         response = self.response
         self.playListeningSound()
         while True:
             command = self.waitCommand()
             print(colorama.Fore.LIGHTGREEN_EX + command)
-            if "i'm here" in command or any(hotword in command for hotword in self.Haraya_HotWords):
-                response = "Yes? How can I help you?"
+            if "yes" in command or any(hotword in command for hotword in self.Haraya_HotWords):
+                response = "How can I help you?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 self.setResponse(response_input=response)
@@ -481,7 +479,7 @@ class haraya_v3:
             response = "Hello? Are you still there?"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.harayaStandby()
+            self.Standby()
             self.setResponse(response_input=response)
             return self.harayaNeuralNetwork(command_input=command, response_input=self.getResponse())
         else:
@@ -903,7 +901,7 @@ class haraya_v3:
                 response = "Sure, take your time. I'll wait."
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
-                self.harayaStandby()
+                self.Standby()
                 return self.harayaNeuralNetwork(command_input=command, response_input=self.getResponse())
             #_______________________________________________________NoCommands/NotClearCommands_BLOCK
             #Run Command: python haraya_v3.py
@@ -912,7 +910,7 @@ class haraya_v3:
                 response = "Hello? Are you still there?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
-                self.harayaStandby()
+                self.Standby()
                 return self.harayaNeuralNetwork(command_input=command, response_input=self.getResponse())
             else:
                 print(colorama.Fore.LIGHTGREEN_EX + command)
