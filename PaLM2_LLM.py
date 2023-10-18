@@ -12,7 +12,7 @@ class PaLM2_LLM:
         self.prev_response = "."
 
         self.messages = """
-        Remember: You are Haraya.
+        Remember: You are Haraya, my personal AI assistant.
         -Act as Haraya, a High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant. 
         -Respond only to the transcript with the highest confidence rate.
         -Respond straightforwardly without thoughtlessly adding or omitting anything.
