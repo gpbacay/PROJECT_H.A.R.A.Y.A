@@ -6,7 +6,7 @@ import colorama
 colorama.init(autoreset=True)
 
 class LoadingBar():
-    def RunLoadingBar(seconds=15, loading_tag="LOADING", end_tag="LOADED SUCCESSFULLY!", finish_loading=False):
+    def RunLoadingBar(seconds=15, loading_tag="LOADING", end_tag="LOADED SUCCESSFULLY!", finishedLoading=False):
         t1 = Thread(target=playsound, args=(u"audioFiles\\loadingbar.mp3",), daemon=True)
         t1.start()
         time.sleep(0.5)
@@ -20,7 +20,7 @@ class LoadingBar():
                 print("\n")
                 playsound(u"audioFiles\\loadcomplete.mp3")
 
-        if finish_loading:
+        if finishedLoading:
             seconds = 0.5
         numbers = [x * int(seconds * 2.3) for x in range(1000)]
         results = []
@@ -31,7 +31,7 @@ class LoadingBar():
         print(colorama.Fore.RESET)
     
 if __name__ == '__main__':
-    LoadingBar.RunLoadingBar(10)
+    LoadingBar.RunLoadingBar(seconds=5)
 
 #____________pip install colorama
 #____________python LoadingBar.py

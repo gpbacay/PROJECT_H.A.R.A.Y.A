@@ -259,7 +259,7 @@ class haraya_v3:
                 MyDatalist = attendance.readlines()
                 NameList.append(MyDatalist[-1])
         except Exception as e:
-            print(f"An error occured while getting the Full Name: {e}")
+            print(f"An error occured while initializing MyName: {e}")
             pass
         finally:
             self.setMyName(NameList[-1].replace("'", '').split(",")[0])
@@ -323,6 +323,7 @@ class haraya_v3:
                 command = self.recognizer.recognize_google(voice)
                 command = command.lower()
         except:
+            print(f"An error occured while listening a command: {e}")
             pass
         finally:
             self.setCommand(command_input=command)
@@ -343,6 +344,7 @@ class haraya_v3:
                 command = self.recognizer.recognize_google(voice)
                 command = command.lower()
         except:
+            print(f"An error occured while waiting a command: {e}")
             pass
         finally:
             self.setCommand(command_input=command)
@@ -397,10 +399,12 @@ class haraya_v3:
             response1 = colorama.Fore.GREEN + "Hi " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
         except:
             response = "Hi! How can I help you?"
-        print(response1)
-        self.speak(response)
-        self.setResponse(response_input=response)
-        return self.getResponse()
+            pass
+        finally:
+            print(response1)
+            self.speak(response)
+            self.setResponse(response_input=response)
+            return self.getResponse()
     # Standby
     # Run Command: python haraya_v3.py
     def harayaStandby(self):
@@ -516,10 +520,11 @@ class haraya_v3:
                     print(f"\r {program_name} is not running.", end="\r")
                     pass
         except Exception as e:
-            print("An error occurred:", str(e))
+            print(f"An error occurred while closing {program_name}:", str(e))
             pass
         finally:
             self.setResponse(response_input=response)
+            return self.getResponse()
             
             
             
@@ -603,10 +608,12 @@ class haraya_v3:
                     response = self.Confirmation()
                 except Exception as e:
                     self.playPromptSound()
-                    print(f"An error occured while Searching in Chrome: {e}")
+                    print(f"An error occured while searching in Chrome: {e}")
                     response = self.Confirmation()
-                self.setResponse(response_input=response)
-                return response
+                    pass
+                finally:
+                    self.setResponse(response_input=response)
+                    return response
             elif any(hotword in command for hotword in self.YouTubeSearch_HotWords):
                 response = "What would you like to search or play in Youtube?"
                 print(colorama.Fore.GREEN + response)
@@ -786,27 +793,34 @@ class haraya_v3:
                         print(response1)
                         self.speak(response)
                 except Exception as e:
-                    response = f"An error occurLIGHTGREEN_EX while trying to open the said program: {e}"
+                    response = f"An error occur while trying to open the said program: {e}"
                     print(colorama.Fore.LIGHTLIGHTGREEN_EX_EX + response)
                     self.speak(response)
-                self.setResponse(response_input=response)
-                return self.harayaNeuralNetwork(command_input=command, response_input=self.getResponse())
+                    pass
+                finally:
+                    self.setResponse(response_input=response)
+                    return self.harayaNeuralNetwork(command_input=command, response_input=self.getResponse())
             #_____________________________________________________________________________________________________CLOSE_BLOCK
             #Run Command: python haraya_v3.py
             elif any(hotword in command for hotword in self.Close_HotWords):
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
                     if "chrome" in command or "tab" in command:
-                        self.close_program(program_name="chrome.exe")
+                        response = self.close_program(program_name="chrome.exe")
                     elif "command prompt" in command or "windows terminal" in command:
-                        self.close_program(program_name="WindowsTerminal.exe")
+                        response = self.close_program(program_name="WindowsTerminal.exe")
+                    elif "messenger" in command:
+                        response = self.close_program(program_name="Messenger.exe")
+                    elif "file explorer" in command or "Windows explorer" in command:
+                        response = self.close_program(program_name="explorer.exe")
                 except Exception as e:
                     response = f"An error occur while trying to close the said program: {e}"
                     print(colorama.Fore.LIGHTGREEN_EX + response)
                     self.speak(response)
-                response = self.Confirmation()
-                self.setResponse(response_input=response)
-                return response
+                    pass
+                finally:
+                    self.setResponse(response_input=response)
+                    return self.harayaNeuralNetwork(command_input=command, response_input=self.getResponse())
             #________________________________________________________________________COMPUTER_AUTOMATION_BLOCK
             #Run Command: python haraya_v3.py
             elif "turn off my computer" in command or "shutdown my computer" in command:
@@ -907,12 +921,14 @@ class haraya_v3:
                 except Exception as e:
                     print(f"Error occured while running PaLM2_LLM: {e}")
                     response = "I beg your pardon—I'm afraid I didn't catch that."
+                    pass
                 print(colorama.Fore.YELLOW + str(response))
                 self.speak(response)
                 self.setResponse(response_input=response)
                 return self.harayaNeuralNetwork(command_input=command, response_input=self.getResponse())
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"Error occured while running Haraya's Neural Network: {e}")
+            pass
         finally:
             self.setCommand(command_input=command)
             self.setResponse(response_input=response)
