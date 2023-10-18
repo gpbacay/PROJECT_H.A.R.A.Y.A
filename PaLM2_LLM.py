@@ -118,6 +118,8 @@ class PaLM2_LLM:
         
         self.Scrapper.SetCurrentTime()
         self.Scrapper.SetCurrentDate()
+        self.current_time = self.Scrapper.GetCurrentTime()
+        self.current_date = self.Scrapper.GetCurrentDate()
         
         self.messages = self.messages.format(self.current_time, self.current_date, self.current_location, self.current_weather, str(self.chat_history), self.prev_response)
         

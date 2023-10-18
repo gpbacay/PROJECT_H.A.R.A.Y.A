@@ -10,7 +10,6 @@ import colorama
 
 class DataScrapper:    
     def __init__(self):
-        print(colorama.Fore.GREEN + "Scraping data out from the internet...")
         colorama.init(autoreset=True)
         self.service = Service(ChromeDriverManager(driver_version="117.0.5938.92").install())
         self.runLoadingBar = LoadingBar.RunLoadingBar
@@ -21,21 +20,25 @@ class DataScrapper:
         self.start_threads()
         
         # LoadingBars
-        tLoadBar1 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING TIME DATA", "TIME ACQUIRED!"),)
-        tLoadBar1.start()
-        tLoadBar1.join()
+        tLoadBar = Thread(target=self.runLoadingBar, args=(0.1, "SCRAPING DATA OUT FROM THE INTERNET", "WEB DATA SCRAPPING COMPLETED!"),)
+        tLoadBar.start()
+        tLoadBar.join()
         
-        tLoadBar2 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING DATE DATA", "DATE ACQUIRED!"),)
-        tLoadBar2.start()
-        tLoadBar2.join()
+        # tLoadBar1 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING TIME DATA", "TIME ACQUIRED!"),)
+        # tLoadBar1.start()
+        # tLoadBar1.join()
         
-        tLoadBar3 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING LOCATION DATA", "LOCATION ACQUIRED"),)
-        tLoadBar3.start()
-        tLoadBar3.join()
+        # tLoadBar2 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING DATE DATA", "DATE ACQUIRED!"),)
+        # tLoadBar2.start()
+        # tLoadBar2.join()
         
-        tLoadBar4 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING WEATHER DATA", "WEATHER ACQUIRED!"),)
-        tLoadBar4.start()
-        tLoadBar4.join()
+        # tLoadBar3 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING LOCATION DATA", "LOCATION ACQUIRED"),)
+        # tLoadBar3.start()
+        # tLoadBar3.join()
+        
+        # tLoadBar4 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING WEATHER DATA", "WEATHER ACQUIRED!"),)
+        # tLoadBar4.start()
+        # tLoadBar4.join()
         
     def start_threads(self):
         t1 = Thread(target=self.SetCurrentTime)
