@@ -230,13 +230,13 @@ class haraya_v3:
                             "close"]
     #_________________________________________________________Setters
     # Run Command: python haraya_v3.py
-    def setCommand(self, command_input):
+    def setCommand(self, command_input: str):
         self.command = command_input
-    def setResponse(self, response_input):
+    def setResponse(self, response_input: str):
         self.response = response_input
-    def setMyName(self, MyName_input):
+    def setMyName(self, MyName_input: str):
         self.MyName = MyName_input
-    def setHonorificAddress(self, HonorificAddress_input):
+    def setHonorificAddress(self, HonorificAddress_input: str):
         self.HonorificAddress = HonorificAddress_input
     #_________________________________________________________Getters
     # Run Command: python haraya_v3.py
@@ -299,7 +299,7 @@ class haraya_v3:
     #     self.engine.say(text)
     #     self.engine.runAndWait()
     #     self.setIsRandom(0)
-    def speak(self, text_input):
+    def speak(self, text_input: str):
         tSpeak = Thread(target=self.hveSpeak, args=(text_input,))
         tSpeak.start()
         time.sleep(1)
@@ -417,7 +417,7 @@ class haraya_v3:
                 break
     # ADD_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
-    def addCommand(self, command):
+    def addCommand(self, command: str):
         response = self.getResponse()
         Interrogative_HotWords = ['what', ' what ', 'what ', ' what',
                                 'who', ' who ', 'who ', ' who',
@@ -489,7 +489,7 @@ class haraya_v3:
         self.setResponse(response_input=response)
         return response
     #____________________________________________________________________CLOSE_PROGRAM_FUNCTION
-    def close_program(self, program_name):
+    def close_program(self, program_name: str):
         response = self.response
         try:
             response = "Closing " + program_name + "..."
@@ -526,7 +526,7 @@ class haraya_v3:
 #_______________________________________________________________________________haraya_NEURAL_NETWORK_FUNCTION
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
-    def harayaNeuralNetwork(self, command_input, response_input):
+    def harayaNeuralNetwork(self, command_input: str, response_input: str):
         self.initMyName()
         self.initHonorificAddress()
         self.setCommand(command_input=command_input)
