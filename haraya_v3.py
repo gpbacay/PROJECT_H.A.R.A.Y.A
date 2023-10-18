@@ -537,7 +537,7 @@ class haraya_v3:
         self.setResponse(response_input=response_input)
         command = str(self.listenCommand())
         response = str(self.getResponse())
-        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(f"{self.getMyName()}:" + str(command), "Haraya: " + self.getResponse(), self.getMyName(),))
+        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(f"User: {self.getMyName()}:" + str(command), "Haraya: " + self.getResponse(), self.getMyName(),))
         tAnnotateCommand.start()
         try:
             #______________________________________________________________________________POSE_RECOGNITION_BLOCK
@@ -915,7 +915,7 @@ class haraya_v3:
             else:
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
-                    response = self.PaLM2_LLM.getChatResponse(f"{self.getMyName()}:" + str(command), prev_response="Haraya: " + self.getResponse(), user_name_input=self.getMyName())
+                    response = self.PaLM2_LLM.getChatResponse(f"User: {self.getMyName()}:" + str(command), prev_response="Haraya: " + self.getResponse(), user_name_input=self.getMyName())
                 except Exception as e:
                     print(f"Error occured while running PaLM2_LLM: {e}")
                     response = "I beg your pardon—I'm afraid I didn't catch that."
