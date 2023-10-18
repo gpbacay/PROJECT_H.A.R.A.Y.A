@@ -59,7 +59,7 @@ class haraya_v3:
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[2].id)
         self.hveSpeak = harayaVoiceEngine.Speak
-        self.DataScraper = DataScraper
+        self.DataScraper = DataScraper()
         # Lists of Command Keywords
         # Run Command: python haraya_v3.py
         self.Standby_HotWords = ["standby",
@@ -144,6 +144,7 @@ class haraya_v3:
                             "I said yes",
                             "affirmative"]
         self.No_HotWords = ["no",
+                            "no thank you",
                             "nope", 
                             "no please", 
                             "of course no", 
@@ -533,8 +534,10 @@ class haraya_v3:
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
     def harayaNeuralNetwork(self, command_input: str, response_input: str):
-        self.DataScraper.SetCurrentTime()
-        self.DataScraper.SetCurrentDate()
+        tSetCurrentTime = Thread(target=self.DataScraper.SetCurrentTime)
+        tSetCurrentTime.start()
+        tSetCurrentDate = Thread(target=self.DataScraper.SetCurrentDate)
+        tSetCurrentDate.start()
         self.initMyName()
         self.initHonorificAddress()
         self.setCommand(command_input=command_input)
