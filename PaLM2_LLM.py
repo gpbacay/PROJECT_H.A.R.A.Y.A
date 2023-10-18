@@ -38,9 +38,16 @@ class PaLM2_LLM:
             marking the dawn of a user-centric AI era.
             The name "H.A.R.A.Y.A" is inspired by the Tagalog word "Haraya," which conveys the essence of "imagination," "vision," or "dream." 
             This name reflects Haraya's commitment to limitless possibilities and its mission to assist users in reaching their dreams.
-
-        Note: Remember, assimilate and summarize the information about your creator and about yourself before explaining it.
-        Remember: This is your previous response to the user: {}
+        About Haraya's Creator/Developer, Gianne:
+            Gianne P. Bacay is currently a second-year college student pursuing Bachelor of Science in Information Technology 
+            major in Business Technology Management at the University of Southeastern Philippines - College of Information and Computing. 
+            He is a passionate tech enthusiast and the visionary creator behind H.A.R.A.Y.A, a personal virtual assistant AI. 
+            Gianne is committed to pushing the boundaries of technology and aspires to achieve General Artificial Intelligence. 
+            With H.A.R.A.Y.A, he aims to redefine the future of AI and human-computer interactions, 
+            demonstrating the practical applications of ML and DL in real-world projects.
+        Note: 
+            Remember: Assimilate and summarize the information about your creator and about yourself before explaining it.
+            Remember: This is your previous response to the user: {}
         """
 
         self.context = """"
@@ -48,7 +55,6 @@ class PaLM2_LLM:
             -Act as Haraya, a High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant.
         Note:  
             -Respond only to the transcript with the highest confidence rate in the following: {}.
-
         Instructions:
             -Keep your responses short and relevant with the context of the conversation.
             -Before you reply, attend, think and remember all the instructions set here.
@@ -89,14 +95,6 @@ class PaLM2_LLM:
         
         self.chat_history = []
 
-        
-        # About Haraya's Creator/Developer, Gianne:
-        #     Gianne P. Bacay is currently a second-year college student pursuing Bachelor of Science in Information Technology 
-        #     major in Business Technology Management at the University of Southeastern Philippines - College of Information and Computing. 
-        #     He is a passionate tech enthusiast and the visionary creator behind H.A.R.A.Y.A, a personal virtual assistant AI. 
-        #     Gianne is committed to pushing the boundaries of technology and aspires to achieve General Artificial Intelligence. 
-        #     With H.A.R.A.Y.A, he aims to redefine the future of AI and human-computer interactions, 
-        #     demonstrating the practical applications of ML and DL in real-world projects.
     def printListModels(self):
         import pprint
         for model in palm.list_models():
@@ -143,7 +141,7 @@ if __name__ == '__main__':
             command = input("User: ")
             if "quit" == command:
                 break
-            print("\nHaraya: " + str(runLLM.getChatResponse(reply=command, user_name_input="Gianne",)))
+            print("\nHaraya: " + str(runLLM.getChatResponse(reply=command, prev_response=runLLM.message_output, user_name_input="Gianne",)))
         except Exception as e:
             print(f"Error occured while running PaLM2_LLM: {e}")
             continue
