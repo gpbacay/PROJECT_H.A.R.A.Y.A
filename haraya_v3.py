@@ -23,6 +23,7 @@ import pyautogui
 from harayaUI import harayaUI
 from PaLM2_LLM import PaLM2_LLM
 import harayaVoiceEngine as harayaVoiceEngine
+from webDataScrapingSystem import DataScraper
 
 class haraya_v3:
     # Constructor Definition Block
@@ -58,6 +59,7 @@ class haraya_v3:
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[2].id)
         self.hveSpeak = harayaVoiceEngine.Speak
+        self.DataScraper = DataScraper
         # Lists of Command Keywords
         # Run Command: python haraya_v3.py
         self.Standby_HotWords = ["standby",
@@ -531,6 +533,8 @@ class haraya_v3:
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
     def harayaNeuralNetwork(self, command_input: str, response_input: str):
+        self.DataScraper.SetCurrentTime()
+        self.DataScraper.SetCurrentDate()
         self.initMyName()
         self.initHonorificAddress()
         self.setCommand(command_input=command_input)

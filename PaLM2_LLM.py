@@ -1,13 +1,18 @@
 import os
 import google.generativeai as palm
-from webDataScrapingSystem import DataScrapper
+from webDataScrapingSystem import DataScraper
 from dotenv import load_dotenv, find_dotenv
     
 class PaLM2_LLM:
     def __init__(self):
         load_dotenv(find_dotenv())
         self.GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
-
+        
+        self.Scraper = DataScraper()
+        self.current_time = self.Scraper.GetCurrentTime()
+        self.current_date = self.Scraper.GetCurrentDate()
+        self.current_location = self.Scraper.GetCurrentLocation()
+        self.current_weather = self.Scraper.GetCurrentWeather()
         self.reply = "."
         self.prev_response = "."
 
@@ -89,12 +94,6 @@ class PaLM2_LLM:
         
         self.user_name = "User"
         self.ai_name = "Haraya"
-
-        self.Scrapper = DataScrapper()
-        self.current_time = self.Scrapper.GetCurrentTime()
-        self.current_date = self.Scrapper.GetCurrentDate()
-        self.current_location = self.Scrapper.GetCurrentLocation()
-        self.current_weather = self.Scrapper.GetCurrentWeather()
         
         self.response = ""
         self.message_input = ""
@@ -116,10 +115,10 @@ class PaLM2_LLM:
         self.prev_response = prev_response
         self.user_name = user_name_input
         
-        self.Scrapper.SetCurrentTime()
-        self.Scrapper.SetCurrentDate()
-        self.current_time = self.Scrapper.GetCurrentTime()
-        self.current_date = self.Scrapper.GetCurrentDate()
+        self.Scraper.SetCurrentTime()
+        self.Scraper.SetCurrentDate()
+        self.current_time = self.Scraper.GetCurrentTime()
+        self.current_date = self.Scraper.GetCurrentDate()
         
         self.messages = self.messages.format(self.current_time, self.current_date, self.current_location, self.current_weather, str(self.chat_history), self.prev_response)
         
