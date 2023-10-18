@@ -953,7 +953,7 @@ if __name__ == '__main__':
                 print(colorama.Fore.LIGHTRED_EX + f"\r {program_name} is not running.", end="\r")
                 pass
     except Exception as e:
-        print("An error occurred:", str(e))
+        print("An error occurred while closing H.A.R.A.Y.A:", str(e))
         pass
     finally:
         pygame.quit()
