@@ -20,7 +20,7 @@ class DataScrapper:
         self.start_threads()
         
         # LoadingBars
-        tLoadBar = Thread(target=self.runLoadingBar, args=(0.1, "SCRAPING DATA OUT FROM THE INTERNET", "WEB DATA SCRAPPING COMPLETED!"),)
+        tLoadBar = Thread(target=self.runLoadingBar, args=(0.1, "SCRAPING WEB DATA", "COMPLETED!"),)
         tLoadBar.start()
         tLoadBar.join()
         
