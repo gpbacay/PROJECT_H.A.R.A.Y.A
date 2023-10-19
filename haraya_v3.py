@@ -554,7 +554,7 @@ class haraya_v3:
                 command = command + " haraya?"
                 self.setCommand(command_input=command)
             if "what is your name" == command:
-                command = "User: " + command
+                command = "User: " + command + "?"
                 self.setCommand(command_input=command)
             
             #______________________________Register Command to the LLM
