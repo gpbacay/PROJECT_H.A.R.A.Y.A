@@ -545,19 +545,24 @@ class haraya_v3:
         self.setResponse(response_input=response_input)
         command = str(self.listenCommand())
         response = str(self.getResponse())
-        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(self.getCommand(), self.getResponse(), self.getMyName(),))
-        tAnnotateCommand.start()
         try:
             #______________________________________________________________________________POSE_RECOGNITION_BLOCK
             #Run Command: python haraya_v3.py
-            #__________________________________________________INVALID COMMANDS CATCHING BLOCK
+            #__________________________________________________INVALID COMMANDS CATCHING BLOCKS:
+            #Run Command: python haraya_v3.py
             if "hi" == command:
-                command = command + "haraya"
+                command = command + " haraya"
                 self.setCommand(command_input=command)
             if "what is your name" == command:
-                command = "can you tell me your name?"
+                command = "User: " + command
                 self.setCommand(command_input=command)
-            #___________________________________________________VALID COMMANDS CATCHING BLOCK
+            
+            #______________________________Register Command to the LLM
+            #Run Command: python haraya_v3.py
+            tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(self.getCommand(), self.getResponse(), self.getMyName(),))
+            tAnnotateCommand.start()
+            #___________________________________________________VALID COMMANDS CATCHING BLOCKS:
+            #Run Command: python haraya_v3.py
             if "run" in command or "activate" in command or "initialize" in command:
                 if "face recognition system" in command:
                     self.initializeFaceRecognitionSystem()

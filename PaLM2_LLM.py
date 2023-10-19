@@ -73,7 +73,7 @@ class PaLM2_LLM:
             *CURRENT LOCATION: 
                 {self.current_location};
             *CURRENT WEATHER FORECAST: 
-                {self.current_weather}.
+                {self.current_weather};
             *Chat history/Previous conversation: 
                 {self.chat_history}.
         Note: 
