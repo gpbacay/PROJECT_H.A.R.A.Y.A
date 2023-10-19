@@ -130,15 +130,18 @@ class DataScraper:
     def SetCurrentLocation(self):
         try:
             self.driver.get("https://www.google.com/search?q=my+current+location")
+            
             city_element = self.driver.find_element(By.CLASS_NAME, "aiAXrc")
             province_element = self.driver.find_element(By.CLASS_NAME, "fMYBhe")
             city = city_element.text
             province = province_element.text
+            
             result = "You are currently located at: " + city + ", " + province
-            self.current_location = result
+            
+            self.SetCurrentLocation(result)
             self.driver.quit()
         except Exception as e:
-            self.current_location = "[Current location information is not available.]"
+            self.SetCurrentLocation("[Current location information is not available.]")
             print(f"\nCurrent location information is not available: {e}\n")
     
     def SetCurrentWeather(self):
@@ -164,10 +167,10 @@ class DataScraper:
             with a temperature of {weather_temperature}°C, {weather_precipitation} of precipitation, {weather_humidity} of humidity, 
             and a wind blowing {weather_wind}.
             """
-            self.current_weather = result
+            self.SetCurrentWeather(result)
             self.driver.quit()
         except Exception as e:
-            self.current_weather = "[Current weather information is not available.]"
+            self.SetCurrentWeather("[Current weather information is not available.]")
             print(f"\nCurrent weather information is not available: {e}\n")
     
     def GetCurrentTime(self):
