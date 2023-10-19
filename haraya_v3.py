@@ -356,7 +356,7 @@ class haraya_v3:
                 self.recognizer.energy_threshold = 1.0
                 self.recognizer.pause_threshold = 0.8
                 voice = self.recognizer.listen(source)
-                command = self.recognizer.recognize_google(voice)
+                command = str(self.recognizer.recognize_google(audio_data=voice, show_all=True))
                 command = command.lower()
         except:
             print(f"An error occured while listening a command: {e}")
@@ -377,7 +377,7 @@ class haraya_v3:
                 self.recognizer.energy_threshold = 1.0
                 self.recognizer.pause_threshold = 0.8
                 voice = self.recognizer.listen(source)
-                command = self.recognizer.recognize_google(voice)
+                command = str(self.recognizer.recognize_google(voice))
                 command = command.lower()
         except:
             print(f"An error occured while waiting a command: {e}")
