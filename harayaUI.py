@@ -1,3 +1,4 @@
+import sys
 import imageio
 import pygame
 from pygame.locals import *
@@ -91,11 +92,12 @@ class harayaUI():
         # Clean up
         gif_reader.close()
         pygame.quit()
-        exit()
+        sys.exit()
 
 if __name__ == '__main__':
     runUI = harayaUI.runUI
     setIsRandom = harayaUI.setIsRandom
     runUI()
+    sys.exit()
     
 #_____________________python harayaUI.py

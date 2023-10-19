@@ -1,3 +1,4 @@
+import sys
 import datetime
 import calendar
 from selenium import webdriver
@@ -186,6 +187,7 @@ class DataScraper:
 
 if __name__ == '__main__':
     Scraper = DataScraper()
+    sys.exit()
     # curTime = Scraper.GetCurrentTime()
     # print(curTime)
     # date = Scraper.GetCurrentDate()

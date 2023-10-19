@@ -1,5 +1,6 @@
 # Import Necessary Libraries/Modules
 # Run Command: python haraya_v3.py
+import sys
 from threading import Thread
 import time
 from playsound import playsound
@@ -549,7 +550,15 @@ class haraya_v3:
         try:
             #______________________________________________________________________________POSE_RECOGNITION_BLOCK
             #Run Command: python haraya_v3.py
-            if "run" in command or "activate" in command or "initialize" in command:
+            #__________________________________________________INVALID COMMANDS CATCHING BLOCK
+            if "hi" == command:
+                command = command + "haraya"
+                self.setCommand(command_input=command)
+            elif "what is your name" == command:
+                command = "can you tell me your name?"
+                self.setCommand(command_input=command)
+            #___________________________________________________VALID COMMANDS CATCHING BLOCK
+            elif "run" in command or "activate" in command or "initialize" in command:
                 if "face recognition system" in command:
                     self.initializeFaceRecognitionSystem()
                     response = "Hello " + self.getHonorificAddress() + " " + self.getMyName() + "!"
@@ -979,5 +988,5 @@ if __name__ == '__main__':
         pass
     finally:
         pygame.quit()
-        exit()
+        sys.exit()
 #Run Command: python haraya_v3.py

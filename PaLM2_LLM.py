@@ -1,3 +1,4 @@
+import sys
 import os
 import google.generativeai as palm
 from webDataScrapingSystem import DataScraper
@@ -152,6 +153,7 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"Error occured while running PaLM2_LLM: {e}")
             continue
+    sys.exit()
 
 #___________pip install google-generativeai
 #___________pip install vertexai
