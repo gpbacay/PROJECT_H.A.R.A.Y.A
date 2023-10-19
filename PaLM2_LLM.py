@@ -28,14 +28,18 @@ class PaLM2_LLM:
         
         self.chat_history = []
         
-        self.current_time = self.Scraper.GetCurrentTime(self=self)
-        self.current_date = self.Scraper.GetCurrentDate(self=self)
-        self.current_location = self.Scraper.GetCurrentLocation(self=self)
-        self.current_weather = self.Scraper.GetCurrentWeather(self=self)
+        self.current_time = self.Scraper.getCurrentTime(self=self)
+        self.current_date = self.Scraper.getCurrentDate(self=self)
+        self.current_location = self.Scraper.getCurrentLocation(self=self)
+        self.current_weather = self.Scraper.getCurrentWeather(self=self)
         
         self.messages = f"""."""
 
         self.context = f""""."""
+        
+        self.printListModels
+        self.getEmbedding
+        self.getChatResponse
 
     def printListModels(self):
         import pprint
@@ -50,13 +54,13 @@ class PaLM2_LLM:
         self.prev_response = prev_response
         self.user_name = user_name_input
         
-        self.Scraper.SetCurrentTime(self=self)
+        self.Scraper.initCurrentTime(self=self)
         self.Scraper.initCurrentDate(self=self)
         
-        self.current_time = self.Scraper.GetCurrentTime(self=self)
-        self.current_date = self.Scraper.GetCurrentDate(self=self)
-        self.current_location = self.Scraper.GetCurrentLocation(self=self)
-        self.current_weather = self.Scraper.GetCurrentWeather(self=self)
+        self.current_time = self.Scraper.getCurrentTime(self=self)
+        self.current_date = self.Scraper.getCurrentDate(self=self)
+        self.current_location = self.Scraper.getCurrentLocation(self=self)
+        self.current_weather = self.Scraper.getCurrentWeather(self=self)
         
         messages = f"""
         Remember: 
