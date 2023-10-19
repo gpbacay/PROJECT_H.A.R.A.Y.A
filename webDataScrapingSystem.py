@@ -9,7 +9,8 @@ from threading import Thread
 from loadingBar import LoadingBar
 import colorama
 
-class DataScraper:    
+class DataScraper:  
+    # python webDataScrapingSystem.py  
     def __init__(self):
         colorama.init(autoreset=True)
         self.service = Service(ChromeDriverManager(driver_version="118.0.5993.89").install())
@@ -44,7 +45,7 @@ class DataScraper:
         tLoadBar4.join()
     
     #_______________________________________________Loading Bar Threads
-    # Run Command: python haraya_v3.py
+    # Run Command: python webDataScrapingSystem.py
     def start_threads(self):
         t1 = Thread(target=self.initCurrentTime)
         t1.start()
@@ -138,10 +139,11 @@ class DataScraper:
             result = "You are currently located at: " + city + ", " + province
             
             self.setCurrentLocation(result)
-            self.driver.quit()
         except Exception as e:
             self.setCurrentLocation("[Current location information is not available.]")
             print(f"\nCurrent location information is not available: {e}\n")
+        finally:
+            self.driver.quit()
     
     def initCurrentWeather(self):
         try:
@@ -167,13 +169,14 @@ class DataScraper:
             and a wind blowing {weather_wind}.
             """
             self.setCurrentWeather(result)
-            self.driver.quit()
         except Exception as e:
             self.setCurrentWeather("[Current weather information is not available.]")
             print(f"\nCurrent weather information is not available: {e}\n")
+        finally:
+            self.driver.quit()
     
     #_________________________________________________________Setters
-    # Run Command: python haraya_v3.py
+    # Run Command: python webDataScrapingSystem.py
     def setCurrentTime(self, currentTime_input: str):
         self.current_time = currentTime_input
         
@@ -187,7 +190,7 @@ class DataScraper:
         self.current_weather = currentWeather_input
         
     #_________________________________________________________Getters
-    # Run Command: python haraya_v3.py
+    # Run Command: python webDataScrapingSystem.py
     def GetCurrentTime(self):
         return self.current_time
     
