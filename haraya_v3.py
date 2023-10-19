@@ -551,7 +551,7 @@ class haraya_v3:
             #__________________________________________________INVALID COMMANDS CATCHING BLOCKS:
             #Run Command: python haraya_v3.py
             if "hi" == command:
-                command = command + " haraya?"
+                command = "hello haraya"
                 self.setCommand(command_input=command)
             if "what is your name" == command:
                 command = "can you please tell me your name?"
@@ -961,7 +961,7 @@ if __name__ == '__main__':
     pygame.init()
     running = True
     while running:
-        response = haraya_v3_instance.harayaStartUp()
+        #response = haraya_v3_instance.harayaStartUp()
         try:
             haraya_v3_instance.harayaNeuralNetwork(command_input=haraya_v3_instance.getCommand(), response_input=haraya_v3_instance.getResponse())
             break
