@@ -143,10 +143,7 @@ class DataScraper:
     
     def SetCurrentWeather(self):
         try:
-            location = self.current_location
-            location = location.split(":")
-            location = location[-1]
-            self.driver.get("https://www.google.com/search?q=current+weather+in+" + location)
+            self.driver.get("https://www.google.com/search?q=current+weather")
             
             dayAndTime_element = self.driver.find_element("id", "wob_dts")
             condition_element = self.driver.find_element("id", "wob_dc")
@@ -163,7 +160,7 @@ class DataScraper:
             weather_wind = wind_element.text
             
             result = f"""
-            As of {weather_dayAndTime}, the current weather condition at {location} is {weather_condition}, 
+            As of {weather_dayAndTime}, the current weather condition at your current location is {weather_condition}, 
             with a temperature of {weather_temperature}°C, {weather_precipitation} of precipitation, {weather_humidity} of humidity, 
             and a wind blowing {weather_wind}.
             """
