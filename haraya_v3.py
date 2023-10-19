@@ -554,11 +554,11 @@ class haraya_v3:
             if "hi" == command:
                 command = command + "haraya"
                 self.setCommand(command_input=command)
-            elif "what is your name" == command:
+            if "what is your name" == command:
                 command = "can you tell me your name?"
                 self.setCommand(command_input=command)
             #___________________________________________________VALID COMMANDS CATCHING BLOCK
-            elif "run" in command or "activate" in command or "initialize" in command:
+            if "run" in command or "activate" in command or "initialize" in command:
                 if "face recognition system" in command:
                     self.initializeFaceRecognitionSystem()
                     response = "Hello " + self.getHonorificAddress() + " " + self.getMyName() + "!"
