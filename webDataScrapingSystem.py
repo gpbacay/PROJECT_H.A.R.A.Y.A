@@ -15,15 +15,12 @@ class DataScraper:
         self.service = Service(ChromeDriverManager(driver_version="118.0.5993.89").install())
         self.driver = webdriver.Chrome(service=self.service)
         self.runLoadingBar = LoadingBar.RunLoadingBar
+        
         self.current_time = "."
         self.current_date = "."
         self.current_location = "."
         self.current_weather = "."
         self.start_threads()
-        self.SetCurrentTime()
-        self.SetCurrentDate()
-        self.SetCurrentLocation()
-        self.SetCurrentWeather()
         
         # LoadingBars
         # tLoadBar = Thread(target=self.runLoadingBar, args=(10, "SCRAPING WEB DATA", "COMPLETED!"),)
@@ -45,24 +42,26 @@ class DataScraper:
         tLoadBar4 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING WEATHER DATA", "WEATHER ACQUIRED!"),)
         tLoadBar4.start()
         tLoadBar4.join()
-        
+    
+    #_______________________________________________Loading Bar Threads
+    # Run Command: python haraya_v3.py
     def start_threads(self):
-        t1 = Thread(target=self.SetCurrentTime)
+        t1 = Thread(target=self.initCurrentTime)
         t1.start()
         
         # Acquire Date
-        t2 = Thread(target=self.SetCurrentDate)
+        t2 = Thread(target=self.initCurrentDate)
         t2.start()
         
         # Acquire Location
-        tSetLocation = Thread(target=self.SetCurrentLocation)
+        tSetLocation = Thread(target=self.initCurrentLocation)
         tSetLocation.start()
         
         # Acquire Weather
-        tSetWeather = Thread(target=self.SetCurrentWeather)
+        tSetWeather = Thread(target=self.initCurrentWeather)
         tSetWeather.start()
         
-    def SetCurrentTime(self):
+    def initCurrentTime(self):
         currentTime = datetime.datetime.now().time()
         Hours = currentTime.hour
         Minutes = currentTime.minute
@@ -103,9 +102,9 @@ class DataScraper:
             time_format = f"It's {Minutes} to {Hours}."
             
         result = exact_time + " or " + time_format
-        self.current_time = result
+        self.setCurrentTime(result)
     
-    def SetCurrentDate(self):
+    def initCurrentDate(self):
         current_date = datetime.datetime.now()
         Year_number = current_date.year
         Month_number = current_date.month
@@ -125,9 +124,9 @@ class DataScraper:
         Month_Name = determine_month_name(Month_number)
 
         result = f"Today is {WeekDay_Name}, {Month_Name} {Day_number}, {Year_number}."
-        self.current_date = result
+        self.setCurrentDate(result)
 
-    def SetCurrentLocation(self):
+    def initCurrentLocation(self):
         try:
             self.driver.get("https://www.google.com/search?q=my+current+location")
             
@@ -138,13 +137,13 @@ class DataScraper:
             
             result = "You are currently located at: " + city + ", " + province
             
-            self.SetCurrentLocation(result)
+            self.setCurrentLocation(result)
             self.driver.quit()
         except Exception as e:
-            self.SetCurrentLocation("[Current location information is not available.]")
+            self.setCurrentLocation("[Current location information is not available.]")
             print(f"\nCurrent location information is not available: {e}\n")
     
-    def SetCurrentWeather(self):
+    def initCurrentWeather(self):
         try:
             self.driver.get("https://www.google.com/search?q=current+weather")
             
@@ -167,12 +166,28 @@ class DataScraper:
             with a temperature of {weather_temperature}°C, {weather_precipitation} of precipitation, {weather_humidity} of humidity, 
             and a wind blowing {weather_wind}.
             """
-            self.SetCurrentWeather(result)
+            self.setCurrentWeather(result)
             self.driver.quit()
         except Exception as e:
-            self.SetCurrentWeather("[Current weather information is not available.]")
+            self.setCurrentWeather("[Current weather information is not available.]")
             print(f"\nCurrent weather information is not available: {e}\n")
     
+    #_________________________________________________________Setters
+    # Run Command: python haraya_v3.py
+    def setCurrentTime(self, currentTime_input: str):
+        self.current_time = currentTime_input
+        
+    def setCurrentDate(self, currentDate_input: str):
+        self.current_date = currentDate_input
+        
+    def setCurrentLocation(self, currentLocation_input: str):
+        self.current_location = currentLocation_input
+        
+    def setCurrentWeather(self, currentWeather_input: str):
+        self.current_weather = currentWeather_input
+        
+    #_________________________________________________________Getters
+    # Run Command: python haraya_v3.py
     def GetCurrentTime(self):
         return self.current_time
     

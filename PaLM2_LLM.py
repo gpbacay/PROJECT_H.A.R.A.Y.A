@@ -51,7 +51,7 @@ class PaLM2_LLM:
         self.user_name = user_name_input
         
         self.Scraper.SetCurrentTime(self=self)
-        self.Scraper.SetCurrentDate(self=self)
+        self.Scraper.initCurrentDate(self=self)
         
         self.current_time = self.Scraper.GetCurrentTime(self=self)
         self.current_date = self.Scraper.GetCurrentDate(self=self)
