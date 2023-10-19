@@ -142,7 +142,6 @@ class DataScraper:
         try:
             self.driver = webdriver.Chrome(service=self.service)
             self.driver.get("https://www.google.com/search?q=my+current+location")
-            time.sleep(1)
             
             city_element = self.driver.find_element(By.CLASS_NAME, "aiAXrc")
             province_element = self.driver.find_element(By.CLASS_NAME, "fMYBhe")
@@ -162,7 +161,6 @@ class DataScraper:
         try:
             self.driver = webdriver.Chrome(service=self.service)
             self.driver.get("https://www.google.com/search?q=current+weather")
-            time.sleep(1)
             
             dayAndTime_element = self.driver.find_element("id", "wob_dts")
             condition_element = self.driver.find_element("id", "wob_dc")
