@@ -1,4 +1,5 @@
 import sys
+import time
 import datetime
 import calendar
 from selenium import webdriver
@@ -21,6 +22,7 @@ class DataScraper:
         self.current_date = "."
         self.current_location = "."
         self.current_weather = "."
+        
         self.start_threads()
         
         # LoadingBars
@@ -130,6 +132,7 @@ class DataScraper:
     def initCurrentLocation(self):
         try:
             self.driver.get("https://www.google.com/search?q=my+current+location")
+            time.sleep(5)
             
             city_element = self.driver.find_element(By.CLASS_NAME, "aiAXrc")
             province_element = self.driver.find_element(By.CLASS_NAME, "fMYBhe")
@@ -148,6 +151,7 @@ class DataScraper:
     def initCurrentWeather(self):
         try:
             self.driver.get("https://www.google.com/search?q=current+weather")
+            time.sleep(5)
             
             dayAndTime_element = self.driver.find_element("id", "wob_dts")
             condition_element = self.driver.find_element("id", "wob_dc")
