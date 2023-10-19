@@ -122,7 +122,6 @@ class PaLM2_LLM:
         
         self.messages = messages
         self.context = context
-        print(self.messages)
         
         self.response = palm.chat(
             model="models/chat-bison-001",

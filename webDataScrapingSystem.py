@@ -12,7 +12,7 @@ import colorama
 class DataScraper:    
     def __init__(self):
         colorama.init(autoreset=True)
-        self.service = Service(ChromeDriverManager(driver_version="118.0.5993.70").install())
+        self.service = Service(ChromeDriverManager(driver_version="118.0.5993.89").install())
         self.driver = webdriver.Chrome(service=self.service)
         self.runLoadingBar = LoadingBar.RunLoadingBar
         self.current_time = "."
@@ -187,14 +187,14 @@ class DataScraper:
 
 if __name__ == '__main__':
     Scraper = DataScraper()
+    curTime = Scraper.GetCurrentTime()
+    print(curTime)
+    date = Scraper.GetCurrentDate()
+    print(date)
+    location = Scraper.GetCurrentLocation()
+    print(location)
+    weather = Scraper.GetCurrentWeather()
+    print(weather)
     sys.exit()
-    # curTime = Scraper.GetCurrentTime()
-    # print(curTime)
-    # date = Scraper.GetCurrentDate()
-    # print(date)
-    # location = Scraper.GetCurrentLocation()
-    # print(location)
-    # weather = Scraper.GetCurrentWeather()
-    # print(weather)
 
 # python webDataScrapingSystem.py
