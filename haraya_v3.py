@@ -551,7 +551,7 @@ class haraya_v3:
             #__________________________________________________INVALID COMMANDS CATCHING BLOCKS:
             #Run Command: python haraya_v3.py
             if "hi" == command:
-                command = command + " haraya"
+                command = command + " haraya?"
                 self.setCommand(command_input=command)
             if "what is your name" == command:
                 command = "User: " + command
