@@ -21,9 +21,9 @@ import pygame
 from pygame.locals import *
 import pyautogui
 from harayaUI import harayaUI
+from webDataScrapingSystem import DataScraper
 from PaLM2_LLM import PaLM2_LLM
 import harayaVoiceEngine as harayaVoiceEngine
-from webDataScrapingSystem import DataScraper
 
 class haraya_v3:
     # Constructor Definition Block
@@ -42,6 +42,7 @@ class haraya_v3:
         self.Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + self.HeaderStr
         self.tHeader = Thread(target=print, args=(self.Header,))
         self.tHeader.start()
+        self.DataScraper = DataScraper()
         self.PaLM2_LLM = PaLM2_LLM()
         self.tHeader.join()
         # Attributes Declaration Block
@@ -59,7 +60,6 @@ class haraya_v3:
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[2].id)
         self.hveSpeak = harayaVoiceEngine.Speak
-        self.DataScraper = DataScraper()
         # Lists of Command Keywords
         # Run Command: python haraya_v3.py
         self.Standby_HotWords = ["standby",
@@ -544,7 +544,7 @@ class haraya_v3:
         self.setResponse(response_input=response_input)
         command = str(self.listenCommand())
         response = str(self.getResponse())
-        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(f"{self.getMyName()}:" + str(command), "Haraya: " + self.getResponse(), self.getMyName(),))
+        tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(self.getCommand(), self.getResponse(), self.getMyName(),))
         tAnnotateCommand.start()
         try:
             #______________________________________________________________________________POSE_RECOGNITION_BLOCK
@@ -922,7 +922,8 @@ class haraya_v3:
             else:
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
-                    response = self.PaLM2_LLM.getChatResponse(f"{self.getMyName()}:" + str(command), prev_response="Haraya: " + self.getResponse(), user_name_input=self.getMyName())
+                    self.setCommand(command_input=command)
+                    response = self.PaLM2_LLM.getChatResponse(reply=self.getCommand(), prev_response=self.getResponse(), user_name_input=self.getMyName())
                 except Exception as e:
                     print(f"Error occured while running PaLM2_LLM: {e}")
                     response = "I beg your pardon—I'm afraid I didn't catch that."

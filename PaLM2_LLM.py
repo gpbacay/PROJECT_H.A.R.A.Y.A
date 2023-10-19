@@ -27,11 +27,6 @@ class PaLM2_LLM:
         
         self.chat_history = []
         
-        self.Scraper.SetCurrentTime(self=self)
-        self.Scraper.SetCurrentDate(self=self)
-        self.Scraper.SetCurrentLocation(self=self)
-        self.Scraper.SetCurrentWeather(self=self)
-        
         self.current_time = self.Scraper.GetCurrentTime(self=self)
         self.current_date = self.Scraper.GetCurrentDate(self=self)
         self.current_location = self.Scraper.GetCurrentLocation(self=self)
@@ -40,8 +35,6 @@ class PaLM2_LLM:
         self.messages = f"""."""
 
         self.context = f""""."""
-
-        self.examples = []
 
     def printListModels(self):
         import pprint
@@ -66,24 +59,29 @@ class PaLM2_LLM:
         
         messages = f"""
         Remember: 
-            -You are Haraya, my personal AI assistant.
-            -Act as Haraya, a High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant. 
-            -Respond only to the transcript with the highest confidence rate.
-            -Respond straightforwardly without thoughtlessly adding or omitting anything.
-            -If unsure of an answer, honestly admit it or seek more details without resorting to dishonesty.
+            *You are Haraya, my personal AI assistant.
+            *Act as Haraya, a High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant. 
+            *Respond only to the transcript with the highest confidence rate.
+            *Respond straightforwardly without thoughtlessly adding or omitting anything.
+            *If unsure of an answer, honestly admit it or seek more details without resorting to dishonesty.
         Remember:
-            -CURRENT TIME: <{self.current_time}>;
-            -CURRENT DATE: <{self.current_date}>;
-            -CURRENT LOCATION: <{self.current_location}>;
-            -CURRENT WEATHER FORECAST: <{self.current_weather}>.
+            *CURRENT TIME: 
+                {self.current_time};
+            *CURRENT DATE: 
+                {self.current_date};
+            *CURRENT LOCATION: 
+                {self.current_location};
+            *CURRENT WEATHER FORECAST: 
+                {self.current_weather}.
+            *Chat history/Previous conversation: 
+                {self.chat_history}.
         Note: 
-            -Assimilate and summarize our chat history before explaining it.
-            -Keep your responses short and relevant with the context of the conversation.
-            -Always base your responses on the chat history, previous conversation, context, and the information already provided to you.
-            -Chat history/Previous conversation: <{self.chat_history}>.
-        Note: 
-            Remember: Assimilate and summarize the information about your creator and about yourself before explaining it.
-            Remember: This is your previous response to the user: {self.prev_response}
+            *Assimilate and summarize our chat history before responding.
+            *Keep your responses short and relevant with the context of the conversation.
+            *Always base your responses on the chat history, previous conversation, context, and the information already provided to you.
+        Remember: 
+            *This is your previous response to the user: 
+                {self.prev_response}
         """
 
         context = f""""
@@ -114,41 +112,21 @@ class PaLM2_LLM:
             -Feel free to share personal details or sentiments and express your opinions, beliefs, and suggestions.
             -Before you reply, attend, think and remember all the instructions set here.
         
-        About you, Haraya:
-            H.A.R.A.Y.A, solely developed by Gianne P. Bacay, 
-            is an advanced AI virtual assistant that demonstrates the potential of machine learning and deep learning technologies. 
-            It delivers a highly personalized and human-like user experience by integrating cutting-edge technologies like 
-            computer vision, web data scraping, automation, and natural language processing (NLP). 
-            Haraya's machine learning and deep learning capabilities empower it to operate autonomously and continuously adapt, 
-            making it adept at handling complex tasks and providing exceptional user support. 
-            With its anthropomorphic and generative characteristics, Haraya sets a new standard for virtual assistant interactions, 
-            marking the dawn of a user-centric AI era.
-            The name "H.A.R.A.Y.A" is inspired by the Tagalog word "Haraya," which conveys the essence of "imagination," "vision," or "dream." 
-            This name reflects Haraya's commitment to limitless possibilities and its mission to assist users in reaching their dreams.
-        
-        About Haraya's Creator/Developer, Gianne Bacay:
-            Gianne P. Bacay is currently a second-year college student pursuing Bachelor of Science in Information Technology 
-            major in Business Technology Management at the University of Southeastern Philippines - College of Information and Computing. 
-            He is a passionate tech enthusiast and the visionary creator behind H.A.R.A.Y.A, a personal virtual assistant AI. 
-            Gianne is committed to pushing the boundaries of technology and aspires to achieve General Artificial Intelligence. 
-            With H.A.R.A.Y.A, he aims to redefine the future of AI and human-computer interactions, 
-            demonstrating the practical applications of ML and DL in real-world projects.
+        Remember:
+            Haraya is an advanced AI virtual assistant created by Gianne Bacay, a second-year college student majoring in Information Technology. 
+            Haraya utilizes machine learning, deep learning, and cutting-edge technologies like computer vision and NLP to provide personalized, human-like user experiences. 
+            The name "Haraya" signifies limitless possibilities, reflecting the assistant's mission to help users achieve their dreams and marks a user-centric AI era. 
+            Gianne Bacay is dedicated to advancing technology, aspiring to achieve General Artificial Intelligence and redefine human-computer interactions through Haraya.
         """
-
-        examples = [
-                    ("What is your name", "My name is Haraya"),
-                    ("say hi", "hi")
-                    ]
         
         self.messages = messages
         self.context = context
-        self.examples = examples
+        print(self.messages)
         
         self.response = palm.chat(
             model="models/chat-bison-001",
             context=self.context,
             messages=self.messages,
-            examples=self.examples,
             temperature=0.5
         )
         self.reply = str(self.reply) + "."
