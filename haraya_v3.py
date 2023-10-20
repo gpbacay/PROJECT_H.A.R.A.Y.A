@@ -520,7 +520,7 @@ class haraya_v3:
         while True:
             command = self.waitCommand()
             print(colorama.Fore.LIGHTGREEN_EX + command)
-            if "yes" in command or any(hotword == command for hotword in self.Haraya_HotWords):
+            if "yes" in command or any(hotword in command for hotword in self.Haraya_HotWords):
                 response = "How can I help you?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
