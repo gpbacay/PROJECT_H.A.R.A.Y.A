@@ -542,6 +542,7 @@ class haraya_v3:
             response = "Alright then, signing off!"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
+            self.setRunning(False)
         elif "." == command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Hello? Are you still there?"
