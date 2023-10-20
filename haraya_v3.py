@@ -542,7 +542,7 @@ class haraya_v3:
             response = "Alright then, signing off!"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            self.setRunning(False)
+            return self.setRunning(False)
         elif "." == command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Hello? Are you still there?"
@@ -553,7 +553,6 @@ class haraya_v3:
             response = "Come again?"
             print(response)
             self.speak(response)
-        return response
     #____________________________________________________________________closeProgram_FUNCTION
     #Run Command: python haraya_v3.py
     def closeProgram(self, program_name: str):
@@ -636,10 +635,12 @@ class haraya_v3:
                     response1 = colorama.Fore.GREEN + "Hello " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "!"
                     print(response1)
                     self.speak(response)
-                    response = self.Confirmation()
+                    self.Confirmation()
+                    response = "Haraya's face recognition system was activated."
                 elif "pose recognition system" in command:
                     self.initPoseRecognitionSystem()
-                    response = self.Confirmation()
+                    self.Confirmation()
+                    response = "Haraya's pose recognition system was activated."
                 self.setResponse(response_input=response)
             #__________________________________________________________________________________TERMINATION_BLOCK
             #Run Command: python haraya_v3.py
