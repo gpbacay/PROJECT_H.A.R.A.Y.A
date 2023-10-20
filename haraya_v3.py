@@ -1026,7 +1026,7 @@ if __name__ == '__main__':
     #____________________________________________________________________________________________Run_Haraya
     #Run Command: python haraya_v3.py
     pygame.init()
-    #haraya_v3_instance.startUp()
+    haraya_v3_instance.startUp()
     while haraya_v3_instance.getRunning() == True:
         try:
             if haraya_v3_instance.getCommand() == haraya_v3_instance.listenCommand():
