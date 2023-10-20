@@ -589,13 +589,13 @@ class haraya_v3:
             
             
             
-
-
-
-
-
-
-
+            
+            
+            
+            
+            
+            
+            
 #_______________________________________________________________________________haraya_NEURAL_NETWORK_FUNCTION
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
@@ -1082,4 +1082,5 @@ if __name__ == '__main__':
         print("\n")
         pygame.quit()
         sys.exit()
+        
 #Run Command: python haraya_v3.py
