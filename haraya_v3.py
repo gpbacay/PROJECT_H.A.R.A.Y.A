@@ -619,9 +619,9 @@ class haraya_v3:
             #Run Command: python haraya_v3.py
             #__________________________________________________INVALID COMMANDS CATCHING BLOCKS:
             #Run Command: python haraya_v3.py
-            # if "what is your name" in command:
-            #     command = command.replace("what is your name","Could you enlighten me with your name?")
-            #     self.setCommand(command_input=command)
+            if "what is your name" in command:
+                command = command.replace("what is your name","introduce your name")
+                self.setCommand(command_input=command)
             
             #______________________________Register Command to the LLM
             #Run Command: python haraya_v3.py
