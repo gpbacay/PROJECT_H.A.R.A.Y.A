@@ -1005,7 +1005,6 @@ class haraya_v3:
                 response1 = f"The current battery percentage is " + str(percentage) + "%"
                 print(response)
                 self.speak(response1)
-                response = f"{self.getMyName} asked for computer's battery status."
                 self.setResponse(response_input=response)
             #________________________________________________________________________Standby_BLOCK
             #Run Command: python haraya_v3.py
