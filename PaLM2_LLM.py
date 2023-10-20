@@ -137,8 +137,8 @@ class PaLM2_LLM:
         
         self.response = self.response.reply(reply)
         
-        self.message_input = f"User ({self.user_name}): " + str(self.reply) + "."
-        self.message_output = f"Assistant ({self.ai_name}): " + str(self.response.last)
+        self.message_input = f"{self.user_name}: " + str(self.reply) + "."
+        self.message_output = f" {self.ai_name}: " + str(self.response.last) + "."
         self.conversation = f"{self.message_input}, {self.message_output}\n"
         self.chat_history.append(self.conversation)
         

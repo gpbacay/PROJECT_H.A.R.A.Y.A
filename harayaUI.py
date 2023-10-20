@@ -91,13 +91,13 @@ class harayaUI():
         
         # Clean up
         gif_reader.close()
-        pygame.quit()
         sys.exit()
 
 if __name__ == '__main__':
     runUI = harayaUI.runUI
     setIsRandom = harayaUI.setIsRandom
     runUI()
+    pygame.quit()
     sys.exit()
     
 #_____________________python harayaUI.py
