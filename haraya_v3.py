@@ -617,10 +617,10 @@ class haraya_v3:
             #__________________________________________________INVALID COMMANDS CATCHING BLOCKS:
             #Run Command: python haraya_v3.py
             if "what is your name" in command:
-                command = command.replace("what is your name","introduce your name")
+                command = command.replace("what is your name","explain your name")
                 self.setCommand(command_input=command)
                 command1 = self.getCommand1()
-                command1 = command1.replace("what is your name","introduce your name")
+                command1 = command1.replace("what is your name","explain your name")
                 self.setCommand1(command1_input=command1)
             
             #______________________________Register Command to the LLM
