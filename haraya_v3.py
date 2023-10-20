@@ -691,7 +691,6 @@ class haraya_v3:
                         browser.get("https://www.google.com/search?q=" + search + "&start" + str(i))
                     response = "Here's what I've found."
                     self.speak(response)
-                    response = self.Confirmation()
                 except Exception as e:
                     self.playPromptSound()
                     response = f"An error occured while searching in Chrome: {e}"
@@ -705,49 +704,63 @@ class haraya_v3:
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 command = self.listenCommand()
-                response = "Searching..."
-                print(colorama.Fore.GREEN + response)
-                self.speak(response)
-                self.tStartUp = Thread(target=self.playSearchSound)
-                self.tStartUp.start()
-                song_title = command.replace("haraya", '')
-                song_title = song_title.replace("play", '')
-                song_title = song_title.replace("search", '')
-                song_title = song_title.replace("in youtube search", '')
-                song_title = song_title.replace("in youtube", '')
-                song_title = song_title.replace("search in", '')
-                song_title = song_title.replace("play in", '')
-                song_title = song_title.replace("in youtube play", '')
-                song_title = song_title.replace("in youtube search", '')
-                song_list = []
-                song_list.append(song_title)
-                song_title = song_list[-1]
-                pywhatkit.playonyt(song_title)
-                response = "Now Playing " + song_title
-                response1 = colorama.Fore.GREEN + "Now Playing " + colorama.Fore.CYAN + song_title
-                print(response1)
-                self.speak(response)
-                self.setResponse(response_input=response)
-                self.Confirmation()
+                try:
+                    response = "Searching..."
+                    print(colorama.Fore.GREEN + response)
+                    self.speak(response)
+                    self.tStartUp = Thread(target=self.playSearchSound)
+                    self.tStartUp.start()
+                    song_title = command.replace("haraya", '')
+                    song_title = song_title.replace("play", '')
+                    song_title = song_title.replace("search", '')
+                    song_title = song_title.replace("in youtube search", '')
+                    song_title = song_title.replace("in youtube", '')
+                    song_title = song_title.replace("search in", '')
+                    song_title = song_title.replace("play in", '')
+                    song_title = song_title.replace("in youtube play", '')
+                    song_title = song_title.replace("in youtube search", '')
+                    song_list = []
+                    song_list.append(song_title)
+                    song_title = song_list[-1]
+                    pywhatkit.playonyt(song_title)
+                    response = "Now Playing " + song_title
+                    response1 = colorama.Fore.GREEN + "Now Playing " + colorama.Fore.CYAN + song_title
+                    print(response1)
+                    self.speak(response)
+                except Exception as e:
+                    self.playPromptSound()
+                    response = f"An error occured while playing in Youtube: {e}"
+                    print(response)
+                    pass
+                finally:
+                    self.setResponse(response_input=response)
+                    self.Confirmation()
             elif any(hotword == command for hotword in self.WikipediaSearch_HotWords):
                 response = "What would you like to searchin Wikipedia?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 command = self.listenCommand()
-                response = "Searching..."
-                print(colorama.Fore.GREEN + response)
-                self.speak(response)
-                self.tStartUp = Thread(target=self.playSearchSound)
-                self.tStartUp.start()
-                person = command.replace("search in wikipedia", '')
-                person = person.replace("in wikipedia search", '')
-                person = person.replace("haraya", '')
-                person = person.replace("who is", '')
-                info = wikipedia.summary(person, 1)
-                print(info)
-                self.speak(info)
-                self.setResponse(response_input=response)
-                self.Confirmation()
+                try:
+                    response = "Searching..."
+                    print(colorama.Fore.GREEN + response)
+                    self.speak(response)
+                    self.tStartUp = Thread(target=self.playSearchSound)
+                    self.tStartUp.start()
+                    person = command.replace("search in wikipedia", '')
+                    person = person.replace("in wikipedia search", '')
+                    person = person.replace("haraya", '')
+                    person = person.replace("who is", '')
+                    info = wikipedia.summary(person, 1)
+                    print(info)
+                    self.speak(info)
+                except Exception as e:
+                    self.playPromptSound()
+                    response = f"An error occured while searching in Wikipedia: {e}"
+                    print(response)
+                    pass
+                finally:
+                    self.setResponse(response_input=response)
+                    self.Confirmation()
             #____________________________________________________________________________________________________________OPEN/ACCESS_BLOCK
             #Run Command: python haraya_v3.py
             elif any(hotword in command for hotword in self.Open_HotWords):
