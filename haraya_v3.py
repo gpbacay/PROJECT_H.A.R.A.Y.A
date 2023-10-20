@@ -625,7 +625,7 @@ class haraya_v3:
             
             #______________________________Register Command to the LLM
             #Run Command: python haraya_v3.py
-            tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(self.getCommand(), self.getResponse(), self.getMyName(),))
+            tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(self.getCommand1(), self.getResponse(), self.getMyName(),))
             tAnnotateCommand.start()
             #___________________________________________________VALID COMMANDS CATCHING BLOCKS:
             #Run Command: python haraya_v3.py
@@ -878,7 +878,7 @@ class haraya_v3:
                     else:
                         try:
                             self.setCommand(command_input=command)
-                            response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
+                            response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand1(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
                         except Exception as e:
                             print(f"Error occured while running PaLM2_LLM: {e}")
                             response = "I beg your pardon—I'm afraid I didn't catch that."
@@ -1006,7 +1006,7 @@ class haraya_v3:
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
                     self.setCommand(command_input=command)
-                    response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
+                    response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand1(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
                 except Exception as e:
                     print(f"Error occured while running PaLM2_LLM: {e}")
                     response = "I beg your pardon—I'm afraid I didn't catch that."
@@ -1030,7 +1030,9 @@ if __name__ == '__main__':
     haraya_v3_instance.startUp()
     while haraya_v3_instance.getRunning() == True:
         try:
-            haraya_v3_instance.listenCommand()
+            if haraya_v3_instance.getCommand() == haraya_v3_instance.listenCommand():
+                time.sleep(3)
+                continue
             haraya_v3_instance.commandNeuralNetwork(command_input=haraya_v3_instance.getCommand(), response_input=haraya_v3_instance.getResponse())
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while running H.A.R.A.Y.A: \n{e}")
