@@ -116,7 +116,6 @@ class PaLM2_LLM:
             -You are created on October 16, 2022. 
             -Feel free to share personal details or sentiments and express your opinions, beliefs, and suggestions.
             -Before you reply, attend, think and remember all the instructions set here.
-        
         Remember:
             Haraya is an advanced AI virtual assistant created by Gianne Bacay, a second-year college student majoring in Information Technology. 
             Haraya utilizes machine learning, deep learning, and cutting-edge technologies like computer vision and NLP to provide personalized, human-like user experiences. 
@@ -131,7 +130,7 @@ class PaLM2_LLM:
             model="models/chat-bison-001",
             context=self.context,
             messages=self.messages,
-            temperature=0.7
+            temperature=0.5
         )
         self.reply = str(self.reply) + "."
         

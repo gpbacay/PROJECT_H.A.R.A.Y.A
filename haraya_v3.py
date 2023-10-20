@@ -537,7 +537,6 @@ class haraya_v3:
             response = "Then, please do tell."
             print(colorama.Fore.GREEN + response)
             self.speak(response)
-            return self.commandNeuralNetwork(command_input=command, response_input=response)
         elif any(hotword == command for hotword in self.No_HotWords):
             print(colorama.Fore.LIGHTGREEN_EX + command)
             response = "Alright then, signing off!"
@@ -549,12 +548,10 @@ class haraya_v3:
             print(colorama.Fore.GREEN + response)
             self.speak(response)
             self.Standby()
-            return self.commandNeuralNetwork(command_input=command, response_input=response)
         else:
             response = "Come again?"
             print(response)
             self.speak(response)
-            return self.commandNeuralNetwork(command_input=command, response_input=response)
         return response
     #____________________________________________________________________closeProgram_FUNCTION
     #Run Command: python haraya_v3.py
