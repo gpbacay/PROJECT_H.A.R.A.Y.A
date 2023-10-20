@@ -952,7 +952,8 @@ class haraya_v3:
                 self.speak(response)
                 os.system("shutdown /l")
                 self.playShutdownSound()
-                response = self.Confirmation()
+                self.Confirmation()
+                response = f"Successfully Signed off {self.getMyName}'s computer."
                 self.setResponse(response_input=response)
                 self.setRunning(False)
             elif "logout my computer" in command or "log out my computer" in command:
@@ -961,7 +962,8 @@ class haraya_v3:
                 self.speak(response)
                 os.system("shutdown /l")
                 self.playShutdownSound()
-                response = self.Confirmation()
+                self.Confirmation()
+                response = f"Successfully Logged off {self.getMyName}'s computer."
                 self.setResponse(response_input=response)
                 self.setRunning(False)
             elif "sign out my computer" in command or "signout my computer" in command:
@@ -970,7 +972,8 @@ class haraya_v3:
                 self.speak(response)
                 os.system("shutdown /l")
                 self.playShutdownSound()
-                response = self.Confirmation()
+                self.Confirmation()
+                response = f"Successfully Signed out {self.getMyName}'s computer."
                 self.setResponse(response_input=response)
                 self.setRunning(False)
             elif "increase" in command and "volume" in command or "volume up" in command:
@@ -979,6 +982,7 @@ class haraya_v3:
                 self.speak(response)
                 pyautogui.press("volumeup", 10)
                 self.playPromptSound()
+                response = f"Successfully increased the volume of {self.getMyName}'s computer."
                 self.setResponse(response_input=response)
             elif "volume" in command and "decrease" in command or "lower" in command:
                 response = "Decreasing volume..."
@@ -986,6 +990,7 @@ class haraya_v3:
                 self.speak(response)
                 pyautogui.press("volumedown", 10)
                 self.playPromptSound()
+                response = f"Successfully lowered the volume of {self.getMyName}'s computer."
                 self.setResponse(response_input=response)
             elif "battery" in command and "status" in command or "level" in command or "percentage" in command:
                 battery = psutil.sensors_battery()
@@ -1000,6 +1005,7 @@ class haraya_v3:
                 response1 = f"The current battery percentage is " + str(percentage) + "%"
                 print(response)
                 self.speak(response1)
+                response = f"{self.getMyName} asked for computer's battery status."
                 self.setResponse(response_input=response)
             #________________________________________________________________________Standby_BLOCK
             #Run Command: python haraya_v3.py
