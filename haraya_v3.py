@@ -622,7 +622,6 @@ class haraya_v3:
                 command1 = self.getCommand1()
                 command1 = command1.replace("what is your name","explain your name")
                 self.setCommand1(command1_input=command1)
-            
             #______________________________Register Command to the LLM
             #Run Command: python haraya_v3.py
             tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(self.getCommand1(), self.getResponse(), self.getMyName(),))
