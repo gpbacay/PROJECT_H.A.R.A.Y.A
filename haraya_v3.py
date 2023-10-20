@@ -619,9 +619,9 @@ class haraya_v3:
             #Run Command: python haraya_v3.py
             #__________________________________________________INVALID COMMANDS CATCHING BLOCKS:
             #Run Command: python haraya_v3.py
-            if "what is your name" in command:
-                command = command.replace("what is your name","can you please tell me your name?")
-                self.setCommand(command_input=command)
+            # if "what is your name" in command:
+            #     command = command.replace("what is your name","Could you enlighten me with your name?")
+            #     self.setCommand(command_input=command)
             
             #______________________________Register Command to the LLM
             #Run Command: python haraya_v3.py
@@ -1026,7 +1026,7 @@ if __name__ == '__main__':
     #____________________________________________________________________________________________Run_Haraya
     #Run Command: python haraya_v3.py
     pygame.init()
-    haraya_v3_instance.startUp()
+    #haraya_v3_instance.startUp()
     while haraya_v3_instance.getRunning() == True:
         try:
             if haraya_v3_instance.getCommand() == haraya_v3_instance.listenCommand():
