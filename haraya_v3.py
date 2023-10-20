@@ -386,7 +386,7 @@ class haraya_v3:
                 self.playListeningSound()
                 self.recognizer.energy_threshold = 1.0
                 self.recognizer.pause_threshold = 0.8
-                voice = self.recognizer.listen(source)
+                voice = self.recognizer.listen(source, timeout=20, phrase_time_limit=20)
                 command = str(self.recognizer.recognize_google(audio_data=voice))
                 command1 = str(self.recognizer.recognize_google(audio_data=voice, show_all=True))
                 command = command.lower()
@@ -409,7 +409,7 @@ class haraya_v3:
                 print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
                 self.recognizer.energy_threshold = 1.0
                 self.recognizer.pause_threshold = 0.8
-                voice = self.recognizer.listen(source)
+                voice = self.recognizer.listen(source, timeout=20, phrase_time_limit=20)
                 command = str(self.recognizer.recognize_google(audio_data=voice))
                 command1 = str(self.recognizer.recognize_google(audio_data=voice, show_all=True))
                 command = command.lower()
@@ -449,7 +449,7 @@ class haraya_v3:
                 self.playListeningSound()
                 self.recognizer.energy_threshold = 1.0
                 self.recognizer.pause_threshold = 0.8
-                voice = self.recognizer.listen(source)
+                voice = self.recognizer.listen(source, timeout=20, phrase_time_limit=20)
                 command = self.recognizer.recognize_google(audio_data=voice)
                 command1 = str(self.recognizer.recognize_google(audio_data=voice, show_all=True))
                 command = command.lower()
