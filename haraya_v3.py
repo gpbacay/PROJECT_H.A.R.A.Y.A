@@ -1019,7 +1019,6 @@ class haraya_v3:
             print(colorama.Fore.LIGHTRED_EX + f"Error occured while running Haraya's Neural Network: {e}")
             pass
             
-
 if __name__ == '__main__':
     #____________________________________________________________Instantiate_Haraya
     #Run Command: python haraya_v3.py
