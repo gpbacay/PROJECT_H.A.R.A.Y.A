@@ -38,14 +38,49 @@ class haraya_v3:
         self.response = "."
         self.MyName = "."
         self.HonorificAddress = "."
-        # Header Initialization
-        self.tStartUp = Thread(target=playsound, args=(u"audioFiles\\prompt1.mp3",))
-        self.tStartUp.start()
+        
+        # Member Methods Initialization
+        self.initHeader
+        self.setRunning
+        self.setAiName
+        self.setCommand
+        self.setResponse
+        self.setMyName
+        self.setHonorificAddress
+        
+        self.getRunning
+        self.getAiName
+        self.getCommand
+        self.getResponse
+        self.getMyName
+        self.getHonorificAddress
+        
+        self.initMyName
+        self.initHonorificAddress
+        
+        self.speak
+        self.listenCommand
+        self.waitCommand
+        self.addCommand
+        
+        self.playPromptSound
+        self.playListeningSound
+        self.playShutdownSound
+        self.playSearchSound
+        
+        self.initFaceRecognitionSystem
+        self.initPoseRecognitionSystem
+        
+        self.startUp
+        self.Standby
+        self.Confirmation
+        self.closeProgram
+        
+        self.commandNeuralNetwork
+        
+        #Initialization
         colorama.init(autoreset=True)
-        self.HeaderStr = "\t\t\t\tH.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\t\t\t\t\n"
-        self.Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + self.HeaderStr
-        self.tHeader = Thread(target=print, args=(self.Header,))
-        self.tHeader.start()
+        self.initHeader()
         self.DataScraper = DataScraper()
         self.PaLM2_LLM = PaLM2_LLM()
         self.tHeader.join()
@@ -242,43 +277,15 @@ class haraya_v3:
                             "quit", 
                             "return",
                             "close"]
-        # Member Methods Initialization
-        self.setRunning
-        self.setAiName
-        self.setCommand
-        self.setResponse
-        self.setMyName
-        self.setHonorificAddress
         
-        self.getRunning
-        self.getAiName
-        self.getCommand
-        self.getResponse
-        self.getMyName
-        self.getHonorificAddress
-        
-        self.initMyName
-        self.initHonorificAddress
-        
-        self.speak
-        self.listenCommand
-        self.waitCommand
-        self.addCommand
-        
-        self.playPromptSound
-        self.playListeningSound
-        self.playShutdownSound
-        self.playSearchSound
-        
-        self.initFaceRecognitionSystem
-        self.initPoseRecognitionSystem
-        
-        self.startUp
-        self.Standby
-        self.Confirmation
-        self.closeProgram
-        
-        self.commandNeuralNetwork
+    # Initialize Header
+    def initHeader(self):
+        self.tStartUp = Thread(target=playsound, args=(u"audioFiles\\prompt1.mp3",))
+        self.tStartUp.start()
+        self.HeaderStr = "\t\t\t\tH.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\t\t\t\t\n"
+        self.Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + self.HeaderStr
+        self.tHeader = Thread(target=print, args=(self.Header,))
+        self.tHeader.start()
     #_________________________________________________________Setters
     # Run Command: python haraya_v3.py
     def setRunning(self, Running_input: bool):
@@ -542,6 +549,7 @@ class haraya_v3:
             response = "Alright then, signing off!"
             print(colorama.Fore.GREEN + response)
             self.speak(response)
+            self.playShutdownSound()
             return self.setRunning(False)
         elif "." == command:
             print(colorama.Fore.LIGHTGREEN_EX + command)
