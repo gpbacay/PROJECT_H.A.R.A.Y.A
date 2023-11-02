@@ -1017,6 +1017,7 @@ class haraya_v3:
             #________________________________________________________________________Standby_BLOCK
             #Run Command: python haraya_v3.py
             elif any(hotword in command for hotword in self.Standby_HotWords):
+                print(colorama.Fore.LIGHTGREEN_EX + command)
                 response = "Sure, take your time. I'll wait."
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
