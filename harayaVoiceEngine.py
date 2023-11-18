@@ -15,10 +15,10 @@ def Speak(input_text: str):
 
     # Build the voice request, select the language code ("en-GB") and the ssml
     # voice gender ("neutral")
+    #___________________python harayaVoiceEngine.py
     voice = texttospeech.VoiceSelectionParams(
         language_code="fil-PH", #fil-PH, en-AU, en-GB
-        name="fil-PH-Neural2-A",#fil-PH-Neural2-A, en-AU-Polyglot-1, en-GB-Standard-A
-        ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
+        name="fil-PH-Neural2-A",#fil-PH-Neural2-A, en-AU-Polyglot-1, en-GB-Neural2-F(female),en-GB-News-K(male)
     )
 
     # Select the type of audio file you want returned
@@ -30,7 +30,9 @@ def Speak(input_text: str):
     # Perform the text-to-speech request on the text input with the selected
     # voice parameters and audio file type
     response = client.synthesize_speech(
-        input=synthesis_input, voice=voice, audio_config=audio_config
+        input=synthesis_input, 
+        voice=voice, 
+        audio_config=audio_config
     )
 
     # Save the audio content as a temporary WAV file

@@ -644,11 +644,15 @@ class haraya_v3:
                     print(response1)
                     self.speak(response)
                     self.Confirmation()
-                    response = "Haraya's face recognition system was activated."
+                    response = "Haraya's face recognition system was initialized."
                 elif "pose recognition system" in command:
                     self.initPoseRecognitionSystem()
                     self.Confirmation()
-                    response = "Haraya's pose recognition system was activated."
+                    response = "Haraya's pose recognition system was initialized."
+                elif "web data scrapping system" in command:
+                    self.DataScraper()
+                    self.Confirmation()
+                    response = "Haraya's web data scraping system was initialized."
                 self.setResponse(response_input=response)
             #__________________________________________________________________________________TERMINATION_BLOCK
             #Run Command: python haraya_v3.py
