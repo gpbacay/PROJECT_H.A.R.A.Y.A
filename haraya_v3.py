@@ -649,7 +649,7 @@ class haraya_v3:
                     self.initPoseRecognitionSystem()
                     self.Confirmation()
                     response = "Haraya's pose recognition system was initialized."
-                elif "web data scrapping system" in command:
+                elif "web data scraping system" in command:
                     self.DataScraper()
                     self.Confirmation()
                     response = "Haraya's web data scraping system was initialized."
