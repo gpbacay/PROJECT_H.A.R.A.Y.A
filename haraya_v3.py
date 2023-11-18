@@ -643,17 +643,19 @@ class haraya_v3:
                     response1 = colorama.Fore.GREEN + "Hello " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "!"
                     print(response1)
                     self.speak(response)
-                    self.Confirmation()
                     response = "Haraya's face recognition system was initialized."
                 elif "pose recognition system" in command:
                     self.initPoseRecognitionSystem()
-                    self.Confirmation()
                     response = "Haraya's pose recognition system was initialized."
+                    print(response)
+                    self.speak(response)
                 elif "web data scraping system" in command:
-                    self.DataScraper()
-                    self.Confirmation()
+                    self.DataScraper.start_threads()
                     response = "Haraya's web data scraping system was initialized."
+                    print(response)
+                    self.speak(response)
                 self.setResponse(response_input=response)
+                self.Confirmation()
             #__________________________________________________________________________________TERMINATION_BLOCK
             #Run Command: python haraya_v3.py
             elif any(hotword == command for hotword in self.Stop_HotWords):
