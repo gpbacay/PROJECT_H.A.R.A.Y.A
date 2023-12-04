@@ -3,7 +3,16 @@ import cv2
 import datetime
     
 def Pose_Recognition_System():
-
+    global position
+    position = " "
+        
+    def setPosition(input_position: str):
+        global position
+        position = input_position
+        
+    def getPosition():
+        return position
+    
     mp_holistic = mp.solutions.holistic
     mp_drawing = mp.solutions.drawing_utils
 
@@ -33,9 +42,21 @@ def Pose_Recognition_System():
             if results.pose_landmarks:
                 nose_x = results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].x * image_width
                 nose_y = results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].y * image_height
-                
-                print(f'\r Nose Coordinates: ({round(nose_x)}, {round(nose_y)})', end="\r")
+            
+                if round(nose_x) < 300 and round(nose_y) < 300:
+                    setPosition(input_position="Upper Left")
+                    print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
+                elif round(nose_x) > 300 and round(nose_y) < 300:
+                    setPosition(input_position="Upper Right")
+                    print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
+                elif round(nose_x) < 300 and round(nose_y) > 300:
+                    setPosition(input_position="Lower Left")
+                    print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
+                elif round(nose_x) > 300 and round(nose_y) > 300:
+                    setPosition(input_position="Lower Right")
+                    print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
 
+            #Run command: python poserec.py
             # Draw Landmarks
             mp_drawing.draw_landmarks(
                 image=frame,

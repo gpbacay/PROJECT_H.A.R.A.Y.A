@@ -46,3 +46,4 @@ imageio
 pydub
 gtts
 pyglet
+python-dotenv
