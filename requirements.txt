@@ -1,3 +1,4 @@
+re
 ez_setup
 wheel
 setuptools

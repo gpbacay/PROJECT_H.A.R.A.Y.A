@@ -1,5 +1,6 @@
 # Import Necessary Libraries/Modules
 # Run Command: python haraya_v3.py
+import re
 import sys
 from threading import Thread
 import time
@@ -374,6 +375,10 @@ class haraya_v3:
             text_input = text_input.replace(f"{self.getAiName()}:","")
         if f"{self.getMyName()}:" in text_input:
             text_input = text_input.replace(f"{self.getMyName()}:","")
+        
+        pattern = re.compile('[^a-zA-Z ]')
+        text_input = re.sub(pattern, '', text_input)
+        
         tSpeak = Thread(target=self.hveSpeak, args=(text_input,),daemon=True)
         tSpeak.start()
         time.sleep(1)
