@@ -376,7 +376,7 @@ class haraya_v3:
         if f"{self.getMyName()}:" in text_input:
             text_input = text_input.replace(f"{self.getMyName()}:","")
         
-        pattern = re.compile('[^a-zA-Z0-9,."\' ]|[*/\-`]')
+        pattern = re.compile('[^a-zA-Z0-9,."\' ]|[*/\`]')
         text_input = re.sub(pattern, '', text_input)
         
         tSpeak = Thread(target=self.hveSpeak, args=(text_input,),daemon=True)
