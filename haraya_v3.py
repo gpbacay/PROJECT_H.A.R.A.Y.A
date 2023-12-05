@@ -90,7 +90,8 @@ class haraya_v3:
         pygame.init()
         self.initMyName()
         self.initHonorificAddress()
-        self.setIsRandom = harayaUI.setIsRandom
+        self.isSpeaking = harayaUI.isSpeaking
+        self.isWaiting = harayaUI.isWaiting
         self.runUI = harayaUI.runUI
         self.tGUI = Thread(target=self.runUI, daemon=True)
         self.tGUI.start()
@@ -366,10 +367,10 @@ class haraya_v3:
             self.setHonorificAddress(HonorificAddress_input=HonorificAddress)
     # Run Command: python haraya_v3.py
     # def speak(self, text):
-    #     self.setIsRandom(1)
+    #     self.isSpeaking(1)
     #     self.engine.say(text)
     #     self.engine.runAndWait()
-    #     self.setIsRandom(0)
+    #     self.isSpeaking(0)
     def speak(self, text_input: str):
         if f"{self.getAiName()}:" in text_input:
             text_input = text_input.replace(f"{self.getAiName()}:","")
@@ -383,10 +384,10 @@ class haraya_v3:
         tSpeak = Thread(target=self.hveSpeak, args=(text_input,),daemon=True)
         tSpeak.start()
         time.sleep(1)
-        tSpeaking = Thread(target=self.setIsRandom, args=(1,))
+        tSpeaking = Thread(target=self.isSpeaking, args=(1,))
         tSpeaking.start()
         tSpeak.join()
-        self.setIsRandom(0)
+        self.isSpeaking(0)
     # LISTEN_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def listenCommand(self):
@@ -414,6 +415,7 @@ class haraya_v3:
     # WAIT_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def waitCommand(self):
+        self.isWaiting(True)
         command = self.getCommand()
         try:
             with sr.Microphone() as source:
@@ -433,6 +435,7 @@ class haraya_v3:
             print(f"An error occured while waiting a command: {e}")
             pass
         finally:
+            self.isWaiting(False)
             return command
     # ADD_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py

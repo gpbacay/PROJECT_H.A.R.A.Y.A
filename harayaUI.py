@@ -12,16 +12,22 @@ class harayaUI():
     # Initialize Pygame
     pygame.init()
 
-    global is_random, gif_path, running
+    global is_random, gif_path, running, is_waiting
     is_random = 0
     gif_path = "Resources\\listen.gif"
     running = True
+    is_waiting = False
     
-    def setIsRandom(num=0):
+    def isSpeaking(num:int):
         global is_random
         is_random = num
+        
+    def isWaiting(truthValue:bool):
+        global is_waiting
+        is_waiting = truthValue
+        return is_waiting
     
-    def setGIF(new_gif_path = ""):
+    def setGIF(new_gif_path:str):
         global gif_path
         gif_path = new_gif_path
 
@@ -74,9 +80,12 @@ class harayaUI():
 
                         speaking = random.randint(0,is_random)
                         if speaking == 0:
-                            gif_path = "Resources\\speak.gif"
+                            if is_waiting == False:
+                                gif_path = "Resources\\listen.gif"
+                            else:
+                                gif_path = "Resources\\waiting.gif"
                         elif speaking == 1:
-                            gif_path = "Resources\\listen.gif"
+                            gif_path = "Resources\\speak.gif"
                         gif_reader = imageio.get_reader(gif_path)
                         current_frame += 1
                         playback_speed = random.randint(14, 15)
@@ -95,7 +104,8 @@ class harayaUI():
 
 if __name__ == '__main__':
     runUI = harayaUI.runUI
-    setIsRandom = harayaUI.setIsRandom
+    isSpeaking = harayaUI.isSpeaking
+    isWaiting = harayaUI.isWaiting
     runUI()
     pygame.quit()
     sys.exit()
