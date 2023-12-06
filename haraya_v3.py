@@ -379,11 +379,11 @@ class haraya_v3:
         if "`" in text_input:
             text_input = text_input.replace("`", "")
         if "*" in text_input:
-            text_input = text_input.replace("*", "")
+            text_input = text_input.replace("*", ",")
         
         tSpeak = Thread(target=self.hveSpeak, args=(text_input,),daemon=True)
         tSpeak.start()
-        time.sleep(1)
+        time.sleep(1.5)
         tSpeaking = Thread(target=self.isSpeaking, args=(1,))
         tSpeaking.start()
         tSpeak.join()
