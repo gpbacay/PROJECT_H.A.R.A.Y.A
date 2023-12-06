@@ -380,7 +380,6 @@ class haraya_v3:
             text_input = text_input.replace("`", "")
         if "*" in text_input:
             text_input = text_input.replace("*", ",")
-        
         tSpeak = Thread(target=self.hveSpeak, args=(text_input,),daemon=True)
         tSpeak.start()
         time.sleep(1.5)
