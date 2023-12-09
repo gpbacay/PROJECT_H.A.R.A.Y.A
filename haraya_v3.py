@@ -93,7 +93,7 @@ class haraya_v3:
         self.tGUI = Thread(target=self.runUI, daemon=True)
         self.tGUI.start()
         self.initHeader()
-        self.DataScraper = DataScraper()
+        self.DataScraper = DataScraper
         self.PaLM2_LLM = PaLM2_LLM()
         self.tHeader.join()
         self.initMyName()
@@ -645,9 +645,9 @@ class haraya_v3:
     # takes command, returns reponse
     def commandNeuralNetwork(self, command_input: str, response_input: str):
         try:
-            tSetCurrentTime = Thread(target=self.DataScraper.initCurrentTime)
+            tSetCurrentTime = Thread(target=self.DataScraper.initCurrentTime, args=(self,))
             tSetCurrentTime.start()
-            tSetCurrentDate = Thread(target=self.DataScraper.initCurrentDate)
+            tSetCurrentDate = Thread(target=self.DataScraper.initCurrentDate, args=(self,))
             tSetCurrentDate.start()
             self.initMyName()
             self.initHonorificAddress()
@@ -678,7 +678,7 @@ class haraya_v3:
                     print(response)
                     self.speak(response)
                 elif "web data scraping system" in command:
-                    self.DataScraper.start_threads()
+                    self.DataScraper()
                     response = "Haraya's web data scraping system was initialized."
                     print(response)
                     self.speak(response)
