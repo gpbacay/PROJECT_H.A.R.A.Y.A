@@ -248,7 +248,8 @@ class haraya_v3:
                                     "search in chrome", 
                                     "go to chrome",
                                     "go in chrome", 
-                                    "go on chrome"]
+                                    "go on chrome",
+                                    "google"]
         self.YouTubeSearch_HotWords = ["in youtube search", 
                                     "search in youtube", 
                                     "in youtube play", 
@@ -258,8 +259,11 @@ class haraya_v3:
                                     "in youtube", 
                                     "youtube search",
                                     "go on youtube",
-                                    "go in youtube", 
-                                    "on youtube"]
+                                    "go in youtube",
+                                    "go to youtube", 
+                                    "on youtube",
+                                    "youtube please",
+                                    "youtube"]
         self.WikipediaSearch_HotWords = ["in wikipedia search",
                                         "search in wikipedia", 
                                         "in wikipedia find", 
@@ -267,7 +271,8 @@ class haraya_v3:
                                         "in wikipedia",
                                         "wikipedia search",
                                         "go on wikipedia", 
-                                        "on wikipedia"]
+                                        "on wikipedia",
+                                        "wikipedia"]
         self.Open_HotWords = ["open", 
                             "access", 
                             "go to", 
