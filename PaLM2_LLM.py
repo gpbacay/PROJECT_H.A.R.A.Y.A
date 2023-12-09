@@ -9,7 +9,7 @@ class PaLM2_LLM:
         load_dotenv(find_dotenv())
         self.GOOGLEAI_API_KEY = palm.configure(api_key=os.environ['GOOGLEAI_API_KEY'])
         
-        self.Scraper = DataScraper
+        self.Scraper = DataScraper()
         self.current_time = "."
         self.current_date = "."
         self.current_location = "."
@@ -27,11 +27,6 @@ class PaLM2_LLM:
         self.conversation = "."
         
         self.chat_history = []
-        
-        self.current_time = self.Scraper.getCurrentTime(self=self)
-        self.current_date = self.Scraper.getCurrentDate(self=self)
-        self.current_location = self.Scraper.getCurrentLocation(self=self)
-        self.current_weather = self.Scraper.getCurrentWeather(self=self)
         
         self.messages = f"""."""
 
@@ -51,16 +46,18 @@ class PaLM2_LLM:
         return embedding
 
     def getChatResponse(self, reply: str, prev_response: str, user_name_input: str):
+        self.reply = reply
         self.prev_response = prev_response
         self.user_name = user_name_input
         
-        self.Scraper.initCurrentTime(self=self)
-        self.Scraper.initCurrentDate(self=self)
+        self.Scraper.initCurrentTime()
+        self.Scraper.initCurrentDate()
         
-        self.current_time = self.Scraper.getCurrentTime(self=self)
-        self.current_date = self.Scraper.getCurrentDate(self=self)
-        self.current_location = self.Scraper.getCurrentLocation(self=self)
-        self.current_weather = self.Scraper.getCurrentWeather(self=self)
+        
+        self.current_time = self.Scraper.getCurrentTime()
+        self.current_date = self.Scraper.getCurrentDate()
+        self.current_location = self.Scraper.getCurrentLocation()
+        self.current_weather = self.Scraper.getCurrentWeather()
         
         messages = f"""
         Remember: 
@@ -126,15 +123,15 @@ class PaLM2_LLM:
         self.messages = messages
         self.context = context
         
-        self.response = palm.chat(
+        response = palm.chat(
             model="models/chat-bison-001",
             context=self.context,
             messages=self.messages,
             temperature=0.5
         )
-        self.reply = str(self.reply) + "."
+        chatReply = str(self.reply) + "."
         
-        self.response = self.response.reply(reply)
+        self.response = response.reply(chatReply)
         
         self.message_input = f"{self.user_name}: " + str(self.reply) + "."
         self.message_output = f" {self.ai_name}: " + str(self.response.last) + "."

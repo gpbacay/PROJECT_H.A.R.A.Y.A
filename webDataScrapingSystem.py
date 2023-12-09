@@ -1,7 +1,9 @@
-import sys
-import time
-import datetime
 import calendar
+import logging
+import requests
+import os
+from dotenv import load_dotenv, find_dotenv
+import datetime as dt
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
@@ -9,14 +11,16 @@ from selenium.webdriver.common.by import By
 from threading import Thread
 from loadingBar import LoadingBar
 import colorama
+import sys
 
-class DataScraper:  
+class DataScraper:
+    global current_time, current_date, current_location, current_weather
     # python webDataScrapingSystem.py  
     def __init__(self):
         colorama.init(autoreset=True)
         self.service = Service(ChromeDriverManager(driver_version="120.0.6099.71").install())
         self.runLoadingBar = LoadingBar.RunLoadingBar
-        
+
         self.current_time = "."
         self.current_date = "."
         self.current_location = "."
@@ -32,23 +36,58 @@ class DataScraper:
         self.getCurrentLocation
         self.getCurrentWeather
         
+        global initCurrentTime, initCurrentDate, initCurrentLocation, initCurrentWeather
+        self.initCurrentTime
+        self.initCurrentDate
+        self.initCurrentLocation
+        self.initCurrentWeather
+
         self.start_threads()
         
         # LoadingBars
         # tLoadBar = Thread(target=self.runLoadingBar, args=(10, "SCRAPING WEB DATA", "COMPLETED!"),)
         # tLoadBar.start()
         # tLoadBar.join()
+        
+    
+    #_________________________________________________________Setters
+    # Run Command: python webDataScrapingSystem.py
+    def setCurrentTime(self, currentTime_input: str):
+        self.current_time = currentTime_input
+        
+    def setCurrentDate(self, currentDate_input: str):
+        self.current_date = currentDate_input
+        
+    def setCurrentLocation(self, currentLocation_input: str):
+        self.current_location = currentLocation_input
+        
+    def setCurrentWeather(self, currentWeather_input: str):
+        self.current_weather = currentWeather_input
+        
+    #_________________________________________________________Getters
+    # Run Command: python webDataScrapingSystem.py
+    def getCurrentTime(self):
+        return self.current_time
+    
+    def getCurrentDate(self):
+        return self.current_date
+    
+    def getCurrentLocation(self):
+        return self.current_location
+    
+    def getCurrentWeather(self):
+        return self.current_weather
     
     #_______________________________________________Loading Bar Threads
     # Run Command: python webDataScrapingSystem.py
     def start_threads(self):
         t1 = Thread(target=self.initCurrentTime)
         t1.start()
-        
+
         tLoadBar1 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING TIME DATA", "TIME ACQUIRED!"),)
         tLoadBar1.start()
         tLoadBar1.join()
-        
+
         # Acquire Date
         t2 = Thread(target=self.initCurrentDate)
         t2.start()
@@ -56,25 +95,26 @@ class DataScraper:
         tLoadBar2 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING DATE DATA", "DATE ACQUIRED!"),)
         tLoadBar2.start()
         tLoadBar2.join()
-        
+
         # Acquire Location
         tSetLocation = Thread(target=self.initCurrentLocation)
         tSetLocation.start()
-        
+
         tLoadBar3 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING LOCATION DATA", "LOCATION ACQUIRED"),)
         tLoadBar3.start()
         tLoadBar3.join()
-        
+        tSetLocation.join()
+
         # Acquire Weather
         tSetWeather = Thread(target=self.initCurrentWeather)
         tSetWeather.start()
-        
+
         tLoadBar4 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING WEATHER DATA", "WEATHER ACQUIRED!"),)
         tLoadBar4.start()
         tLoadBar4.join()
         
     def initCurrentTime(self):
-        currentTime = datetime.datetime.now().time()
+        currentTime = dt.datetime.now().time()
         Hours = currentTime.hour
         Minutes = currentTime.minute
         if Hours == 0:
@@ -117,7 +157,7 @@ class DataScraper:
         self.current_time = result
     
     def initCurrentDate(self):
-        current_date = datetime.datetime.now()
+        current_date = dt.datetime.now()
         Year_number = current_date.year
         Month_number = current_date.month
         Day_number = current_date.day
@@ -142,79 +182,62 @@ class DataScraper:
         try:
             self.driver = webdriver.Chrome(service=self.service)
             self.driver.get("https://www.google.com/search?q=my+current+location")
-            
+
             city_element = self.driver.find_element(By.CLASS_NAME, "aiAXrc")
             province_element = self.driver.find_element(By.CLASS_NAME, "fMYBhe")
             city = city_element.text
             province = province_element.text
-            
-            result = "You are currently located at: " + city + ", " + province
-            
+
+            result = f"You are currently located at: {city}, {province}"
+
             self.current_location = result
         except Exception as e:
             self.current_location = "[Current location information is not available.]"
-            print(f"\nCurrent location information is not available: {e}\n")
+            logging.error(f"Error while fetching location data: {e}")
         finally:
             self.driver.quit()
-    
+
     def initCurrentWeather(self):
         try:
-            self.driver = webdriver.Chrome(service=self.service)
-            self.driver.get("https://www.google.com/search?q=current+weather")
-            
-            dayAndTime_element = self.driver.find_element("id", "wob_dts")
-            condition_element = self.driver.find_element("id", "wob_dc")
-            temperature_element = self.driver.find_element("id", "wob_tm")
-            precipitation_element = self.driver.find_element("id", "wob_pp")
-            humidity_element = self.driver.find_element("id", "wob_hm")
-            wind_element = self.driver.find_element("id", "wob_ws")
-            
-            weather_dayAndTime = dayAndTime_element.text
-            weather_condition = condition_element.text
-            weather_temperature = temperature_element.text
-            weather_precipitation = precipitation_element.text
-            weather_humidity = humidity_element.text
-            weather_wind = wind_element.text
-            
-            result = f"""
-            As of {weather_dayAndTime}, the current weather condition at your current location is {weather_condition}, 
-            with a temperature of {weather_temperature}°C, {weather_precipitation} of precipitation, {weather_humidity} of humidity, 
-            and a wind blowing {weather_wind}.
-            """
-            self.current_weather = result
+            load_dotenv(find_dotenv())
+            # Weather scraping functionality
+            BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
+            API_KEY = os.environ['WEATHER_API_KEY']
+
+            # Extract the last two parts of the location (city and province)
+            location_parts = self.current_location.split(", ")
+            if len(location_parts) >= 2:
+                CITY = f"{location_parts[-2]}, {location_parts[-1]}"
+            else:
+                # Provide a default city if the location format is unexpected
+                CITY = "Santa Cruz, Davao del Sur, PH"
+
+            params = {
+                'q': CITY,
+                'appid': API_KEY,
+                'units': 'metric',  # Use 'imperial' for Fahrenheit
+            }
+
+            response = requests.get(BASE_URL, params=params)
+
+            if response.status_code == 200:
+                weather_data = response.json()
+
+                temperature_celsius = round(weather_data['main']['temp'], 2)
+                condition = weather_data['weather'][0]['description']
+
+                formatted_time = dt.datetime.now().strftime('%I:%M %p')
+                formatted_date = dt.datetime.now().strftime('%dth of %B %Y')
+
+                result = f"""As of {formatted_date}, exactly {formatted_time}, the current weather condition at {self.getCurrentLocation()} is {condition}, with a temperature of {temperature_celsius}°C."""
+                self.current_weather = result
+            else:
+                self.current_weather = "[Current weather information is not available.]"
+                logging.error(f"Error: {response.status_code} - {response.text}")
         except Exception as e:
             self.current_weather = "[Current weather information is not available.]"
-            print(f"\nCurrent weather information is not available: {e}\n")
-        finally:
-            self.driver.quit()
-    
-    #_________________________________________________________Setters
-    # Run Command: python webDataScrapingSystem.py
-    def setCurrentTime(self, currentTime_input: str):
-        self.current_time = currentTime_input
-        
-    def setCurrentDate(self, currentDate_input: str):
-        self.current_date = currentDate_input
-        
-    def setCurrentLocation(self, currentLocation_input: str):
-        self.current_location = currentLocation_input
-        
-    def setCurrentWeather(self, currentWeather_input: str):
-        self.current_weather = currentWeather_input
-        
-    #_________________________________________________________Getters
-    # Run Command: python webDataScrapingSystem.py
-    def getCurrentTime(self):
-        return self.current_time
-    
-    def getCurrentDate(self):
-        return self.current_date
-    
-    def getCurrentLocation(self):
-        return self.current_location
-    
-    def getCurrentWeather(self):
-        return self.current_weather
+            logging.error(f"Error while fetching weather data: {e}")
+
 
 if __name__ == '__main__':
     Scraper = DataScraper()
