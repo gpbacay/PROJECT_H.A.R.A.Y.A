@@ -1,13 +1,13 @@
+import os
 import sys
 import imageio
 import pygame
 from pygame.locals import *
 from PIL import Image
 import random
-from threading import Thread
 
 class harayaUI():
-    #os.environ['SDL_VIDEO_WINDOW_POS'] = '1140,420'
+    os.environ['SDL_VIDEO_WINDOW_POS'] = '1400,400'
     
     # Initialize Pygame
     pygame.init()

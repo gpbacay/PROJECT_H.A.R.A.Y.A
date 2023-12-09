@@ -356,7 +356,6 @@ class haraya_v3:
                 MyDatalist = attendance.readlines()
                 NameList.append(MyDatalist[-1])
         except Exception as e:
-            self.playErrorSound()
             print(f"An error occured while initializing MyName: {e}")
             pass
         finally:
@@ -433,7 +432,6 @@ class haraya_v3:
                 self.setCommand(command_input=command)
                 self.setCommand1(command1_input=command1)
         except:
-            self.playErrorSound()
             print(f"\nAn error occured while listening a command: {e}")
             pass
         finally:
@@ -459,7 +457,6 @@ class haraya_v3:
                 self.setCommand(command_input=command)
                 self.setCommand1(command1_input=command1)
         except Exception as e:
-            self.playErrorSound()
             print(f"An error occured while waiting a command: {e}")
             pass
         finally:
@@ -501,7 +498,6 @@ class haraya_v3:
                 self.setCommand(command_input=command)
                 self.setCommand1(command1_input=command1)
         except Exception as e:
-            self.playErrorSound()
             print(f"An error occured while adding a command: {e}")
             pass
         finally:
@@ -935,9 +931,8 @@ class haraya_v3:
                             self.setCommand(command_input=command)
                             response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand1(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
                         except Exception as e:
-                            self.playErrorSound()
                             print(f"Error occured while running PaLM2_LLM: {e}")
-                            response = "I beg your pardon—I'm afraid I didn't catch that."
+                            response = "I beg your pardon, I'm afraid I didn't catch that."
                             pass
                         finally:
                             self.setResponse(response_input=response)
@@ -1069,15 +1064,14 @@ class haraya_v3:
                 response = self.getResponse()
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
-                    self.setCommand(command_input=command)
                     response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand1(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
                     self.setResponse(response_input=response)
                 except Exception as e:
-                    self.playErrorSound()
                     print(f"\nError occured while running PaLM2_LLM: {e}")
                     response = "I beg your pardon, I'm afraid I didn't catch that."
                     pass
                 finally:
+                    self.setCommand(command_input=command)
                     self.setResponse(response_input=str(response))
                     print(colorama.Fore.YELLOW + str(response))
                     self.speak(str(response))
@@ -1101,7 +1095,6 @@ if __name__ == '__main__':
                 continue
             haraya_v3_instance.commandNeuralNetwork(command_input=haraya_v3_instance.getCommand(), response_input=haraya_v3_instance.getResponse())
         except Exception as e:
-            haraya_v3_instance.playErrorSound()
             print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred while running H.A.R.A.Y.A: \n{e}")
             continue
     #______________________________________________________________________________________________Terminate_Haraya
@@ -1115,11 +1108,9 @@ if __name__ == '__main__':
                     response = f"\r{program_name} has been closed."
                     print(colorama.Fore.GREEN + response, end="\r")
                 except psutil.AccessDenied:
-                    haraya_v3_instance.playErrorSound()
                     response = f"\rPermission denied. Unable to close " + program_name + "."
                     print(colorama.Fore.LIGHTRED_EX + response, end="\r")
                 except psutil.NoSuchProcess:
-                    haraya_v3_instance.playErrorSound()
                     response = f"\r{program_name} is not running."
                     print(colorama.Fore.LIGHTRED_EX + response, end="\r")
                 break
@@ -1127,7 +1118,6 @@ if __name__ == '__main__':
                 print(colorama.Fore.LIGHTRED_EX + f"\r {program_name} is not running.", end="\r")
                 pass
     except Exception as e:
-        haraya_v3_instance.playErrorSound()
         print(f"\nAn error occurred while closing H.A.R.A.Y.A: {e}")
         pass
     finally:
