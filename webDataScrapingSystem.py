@@ -229,7 +229,7 @@ class DataScraper:
                 formatted_time = dt.datetime.now().strftime('%I:%M %p')
                 formatted_date = dt.datetime.now().strftime('%dth of %B %Y')
 
-                result = f"""As of {formatted_date}, exactly {formatted_time}, the current weather condition at {self.getCurrentLocation()} is {condition}, with a temperature of {temperature_celsius}°C."""
+                result = f"""As of {formatted_date}, exactly {formatted_time}, the current weather condition at {CITY} is {condition}, with a temperature of {temperature_celsius}°C."""
                 self.current_weather = result
             else:
                 self.current_weather = "[Current weather information is not available.]"
