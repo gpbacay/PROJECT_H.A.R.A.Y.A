@@ -56,6 +56,12 @@ class haraya_v3:
         self.getMyName
         self.getHonorificAddress
         
+        self.palyStartUpSound
+        self.playPromptSound
+        self.playListeningSound
+        self.playShutdownSound
+        self.playSearchSound
+        
         self.initMyName
         self.initHonorificAddress
         
@@ -63,12 +69,6 @@ class haraya_v3:
         self.listenCommand
         self.waitCommand
         self.addCommand
-        
-        self.palyStartUpSound
-        self.playPromptSound
-        self.playListeningSound
-        self.playShutdownSound
-        self.playSearchSound
         
         self.initFaceRecognitionSystem
         self.initPoseRecognitionSystem
