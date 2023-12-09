@@ -64,6 +64,7 @@ class haraya_v3:
         self.waitCommand
         self.addCommand
         
+        self.palyStartUpSound
         self.playPromptSound
         self.playListeningSound
         self.playShutdownSound
@@ -280,9 +281,27 @@ class haraya_v3:
                             "return",
                             "close"]
         
+    # AUDIO_EFFECTS_BLOCK/FUNCTION
+    # Run Command: python haraya_v3.py
+    def playStartUpSound(self):
+        mp3_path = u"audioFiles\\startup2.mp3"
+        playsound(mp3_path)
+    def playPromptSound(self):
+        mp3_path = u"audioFiles\\prompt1.mp3"
+        playsound(mp3_path)
+    def playListeningSound(self):
+        mp3_path = u"audioFiles\\listening2.mp3"
+        playsound(mp3_path)
+    def playShutdownSound(self):
+        mp3_path = u"audioFiles\\shutdown.mp3"
+        playsound(mp3_path)
+    def playSearchSound(self):
+        mp3_path = u"audioFiles\\searching.mp3"
+        playsound(mp3_path)
     # Initialize Header
+    # Run Command: python haraya_v3.py
     def initHeader(self):
-        self.tStartUp = Thread(target=playsound, args=(u"audioFiles\\prompt1.mp3",))
+        self.tStartUp = Thread(target=self.playStartUpSound)
         self.tStartUp.start()
         self.HeaderStr = "\t\t\t\tH.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\t\t\t\t\n"
         self.Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + self.HeaderStr
@@ -477,20 +496,6 @@ class haraya_v3:
             pass
         finally:
             return command
-    # AUDIO_EFFECTS_BLOCK/FUNCTION
-    # Run Command: python haraya_v3.py
-    def playPromptSound(self):
-        mp3_path = u"audioFiles\\prompt1.mp3"
-        playsound(mp3_path)
-    def playListeningSound(self):
-        mp3_path = u"audioFiles\\listening2.mp3"
-        playsound(mp3_path)
-    def playShutdownSound(self):
-        mp3_path = u"audioFiles\\shutdown.mp3"
-        playsound(mp3_path)
-    def playSearchSound(self):
-        mp3_path = u"audioFiles\\searching.mp3"
-        playsound(mp3_path)
     # initFaceRecognitionSystem_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def initFaceRecognitionSystem(self):
@@ -1032,7 +1037,7 @@ class haraya_v3:
             #Run Command: python haraya_v3.py
             elif any(hotword in command for hotword in self.Standby_HotWords):
                 print(colorama.Fore.LIGHTGREEN_EX + command)
-                response = "Sure, take your time. I'll wait."
+                response = "As you wish " + self.getHonorificAddress() + "!"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
                 self.Standby()
@@ -1051,7 +1056,7 @@ class haraya_v3:
                     response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand1(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
                 except Exception as e:
                     print(f"Error occured while running PaLM2_LLM: {e}")
-                    response = "I beg your pardon—I'm afraid I didn't catch that."
+                    response = "I beg your pardon, I'm afraid I didn't catch that."
                     pass
                 finally:
                     self.setResponse(response_input=response)
