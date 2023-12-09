@@ -14,7 +14,7 @@ class DataScraper:
     # python webDataScrapingSystem.py  
     def __init__(self):
         colorama.init(autoreset=True)
-        self.service = Service(ChromeDriverManager(driver_version="118.0.5993.89").install())
+        self.service = Service(ChromeDriverManager(driver_version="120.0.6099.71").install())
         self.runLoadingBar = LoadingBar.RunLoadingBar
         
         self.current_time = "."

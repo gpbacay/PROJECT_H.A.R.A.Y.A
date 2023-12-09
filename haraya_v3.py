@@ -421,6 +421,7 @@ class haraya_v3:
                 response = "Waiting..."
                 print(colorama.Fore.CYAN + response)
                 print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
+                self.playListeningSound()
                 self.recognizer.energy_threshold = 1.0
                 self.recognizer.pause_threshold = 0.8
                 voice = self.recognizer.listen(source, timeout=20, phrase_time_limit=20)
@@ -482,7 +483,7 @@ class haraya_v3:
         mp3_path = u"audioFiles\\prompt1.mp3"
         playsound(mp3_path)
     def playListeningSound(self):
-        mp3_path = u"audioFiles\\Listening.mp3"
+        mp3_path = u"audioFiles\\listening2.mp3"
         playsound(mp3_path)
     def playShutdownSound(self):
         mp3_path = u"audioFiles\\shutdown.mp3"
@@ -531,11 +532,10 @@ class haraya_v3:
     # Run Command: python haraya_v3.py
     def Standby(self):
         response = self.response
-        self.playListeningSound()
         while True:
             command = self.waitCommand()
             print(colorama.Fore.LIGHTGREEN_EX + command)
-            if "yes" in command or any(hotword in command for hotword in self.Haraya_HotWords):
+            if "hey" in command or any(hotword in command for hotword in self.Haraya_HotWords):
                 response = "How can I help you?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
