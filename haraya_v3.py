@@ -81,6 +81,8 @@ class haraya_v3:
         self.closeProgram
         
         self.harayaNeuralNetwork
+        self.harayaRecursion
+        self.main
         
         #Initialization
         # Attributes Declaration Block
@@ -1097,8 +1099,8 @@ class haraya_v3:
                 self.harayaNeuralNetwork(command_input=self.getCommand(), response_input=self.getResponse())
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred while running H.A.R.A.Y.A: \n{e}")
-            
-        self.harayaRecursion()
+        finally:
+            self.harayaRecursion()
             
     def main(self):
         #____________________________________________________________________________________________Run_Haraya
@@ -1135,7 +1137,6 @@ class haraya_v3:
         finally:
             pygame.quit()
             sys.exit()
-        
         
 if __name__ == '__main__':
     haraya_v3 = haraya_v3()
