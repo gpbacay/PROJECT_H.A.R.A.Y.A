@@ -80,7 +80,7 @@ class haraya_v3:
         self.Confirmation
         self.closeProgram
         
-        self.commandNeuralNetwork
+        self.harayaNeuralNetwork
         
         #Initialization
         # Attributes Declaration Block
@@ -436,7 +436,7 @@ class haraya_v3:
                 command1 = command1.lower()
                 self.setCommand(command_input=command)
                 self.setCommand1(command1_input=command1)
-        except:
+        except Exception as e:
             print(f"\nAn error occured while listening a command: {e}")
             pass
         finally:
@@ -591,9 +591,8 @@ class haraya_v3:
         except Exception as e:
             self.playErrorSound()
             print(f"An error occurred while confirming command:", str(e))
-            pass
         finally:
-            return
+            pass
     #____________________________________________________________________closeProgram_FUNCTION
     #Run Command: python haraya_v3.py
     def closeProgram(self, program_name: str):
@@ -627,9 +626,8 @@ class haraya_v3:
         except Exception as e:
             self.playErrorSound()
             print(f"An error occurred while closing {program_name}:", str(e))
-            pass
         finally:
-            return self.getResponse()
+            pass
             
             
             
@@ -643,7 +641,7 @@ class haraya_v3:
 #_______________________________________________________________________________haraya_NEURAL_NETWORK_FUNCTION
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
-    def commandNeuralNetwork(self, command_input: str, response_input: str):
+    def harayaNeuralNetwork(self, command_input: str, response_input: str):
         try:
             tSetCurrentTime = Thread(target=self.DataScraper.initCurrentTime, args=(self,))
             tSetCurrentTime.start()
@@ -738,7 +736,7 @@ class haraya_v3:
                     response = f"An error occured while searching in Chrome: {e}"
                     print(response)
                     pass
-                finally:
+                else:
                     self.setResponse(response_input=response)
                     self.Confirmation()
             elif any(hotword == command for hotword in self.YouTubeSearch_HotWords):
@@ -774,7 +772,7 @@ class haraya_v3:
                     response = f"An error occured while playing in Youtube: {e}"
                     print(response)
                     pass
-                finally:
+                else:
                     self.setResponse(response_input=response)
                     self.Confirmation()
             elif any(hotword == command for hotword in self.WikipediaSearch_HotWords):
@@ -800,7 +798,7 @@ class haraya_v3:
                     response = f"An error occured while searching in Wikipedia: {e}"
                     print(response)
                     pass
-                finally:
+                else:
                     self.setResponse(response_input=response)
                     self.Confirmation()
             #____________________________________________________________________________________________________________OPEN/ACCESS_BLOCK
@@ -938,8 +936,9 @@ class haraya_v3:
                         except Exception as e:
                             print(f"Error occured while running PaLM2_LLM: {e}")
                             response = "I beg your pardon, I'm afraid I didn't catch that."
+                            self.speak(response)
                             pass
-                        finally:
+                        else:
                             self.setResponse(response_input=response)
                             print(colorama.Fore.YELLOW + str(response))
                             self.speak(response)
@@ -1075,7 +1074,7 @@ class haraya_v3:
                     print(f"\nError occured while running PaLM2_LLM: {e}")
                     response = "I beg your pardon, I'm afraid I didn't catch that."
                     pass
-                finally:
+                else:
                     self.setCommand(command_input=command)
                     self.setResponse(response_input=str(response))
                     print(colorama.Fore.YELLOW + str(response))
@@ -1084,50 +1083,63 @@ class haraya_v3:
             self.playErrorSound()
             print(colorama.Fore.LIGHTRED_EX + f"\nError occured while running Haraya's Neural Network: {e}")
             pass
-            
-if __name__ == '__main__':
-    #____________________________________________________________Instantiate_Haraya
-    #Run Command: python haraya_v3.py
-    haraya_v3_instance = haraya_v3()
-    #____________________________________________________________________________________________Run_Haraya
-    #Run Command: python haraya_v3.py
-    pygame.init()
-    haraya_v3_instance.startUp()
-    while haraya_v3_instance.getRunning() == True:
+        else:
+            self.setCommand(command_input=command)
+            self.setResponse(response_input=str(response))
+    
+    def harayaRecursion(self):
+        if not self.getRunning():
+            return
         try:
-            if haraya_v3_instance.getCommand() == haraya_v3_instance.listenCommand():
+            if self.getCommand() == self.listenCommand():
                 time.sleep(3)
-                continue
-            haraya_v3_instance.commandNeuralNetwork(command_input=haraya_v3_instance.getCommand(), response_input=haraya_v3_instance.getResponse())
+            else:
+                self.harayaNeuralNetwork(command_input=self.getCommand(), response_input=self.getResponse())
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred while running H.A.R.A.Y.A: \n{e}")
-            continue
-    #______________________________________________________________________________________________Terminate_Haraya
-    #Run Command: python haraya_v3.py
-    try:
-        program_name="WindowsTerminal.exe"
-        for process in psutil.process_iter(['pid', 'name']):
-            if process.info['name'] == program_name:
-                try:
-                    process.terminate()
-                    response = f"\r{program_name} has been closed."
-                    print(colorama.Fore.GREEN + response, end="\r")
-                except psutil.AccessDenied:
-                    response = f"\rPermission denied. Unable to close " + program_name + "."
-                    print(colorama.Fore.LIGHTRED_EX + response, end="\r")
-                except psutil.NoSuchProcess:
-                    response = f"\r{program_name} is not running."
-                    print(colorama.Fore.LIGHTRED_EX + response, end="\r")
-                break
-            else:
-                print(colorama.Fore.LIGHTRED_EX + f"\r {program_name} is not running.", end="\r")
-                pass
-    except Exception as e:
-        print(f"\nAn error occurred while closing H.A.R.A.Y.A: {e}")
-        pass
-    finally:
-        print("\n")
-        pygame.quit()
-        sys.exit()
+            
+        self.harayaRecursion()
+            
+    def main(self):
+        #____________________________________________________________________________________________Run_Haraya
+        #Run Command: python haraya_v3.py
+        pygame.init()
+        self.startUp()
+        
+        #_________________________Run Haraya Recursively
+        self.harayaRecursion()
+        #______________________________________________________________________________________________Terminate_Haraya
+        #Run Command: python haraya_v3.py
+        try:
+            program_name="WindowsTerminal.exe"
+            for process in psutil.process_iter(['pid', 'name']):
+                if process.info['name'] == program_name:
+                    try:
+                        process.terminate()
+                        response = f"\r{program_name} has been closed."
+                        print(colorama.Fore.GREEN + response, end="\r")
+                    except psutil.AccessDenied:
+                        response = f"\rPermission denied. Unable to close " + program_name + "."
+                        print(colorama.Fore.LIGHTRED_EX + response, end="\r")
+                    except psutil.NoSuchProcess:
+                        response = f"\r{program_name} is not running."
+                        print(colorama.Fore.LIGHTRED_EX + response, end="\r")
+                    break
+                else:
+                    print(colorama.Fore.LIGHTRED_EX + f"\r {program_name} is not running.", end="\r")
+                    pass
+        except Exception as e:
+            self.playErrorSound()
+            print(f"\nAn error occurred while closing H.A.R.A.Y.A: {e}")
+            pass
+        finally:
+            pygame.quit()
+            sys.exit()
+        
+        
+if __name__ == '__main__':
+    haraya_v3 = haraya_v3()
+    haraya_v3.main()
+    
         
 #Run Command: python haraya_v3.py
