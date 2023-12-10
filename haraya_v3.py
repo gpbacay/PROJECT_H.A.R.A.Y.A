@@ -640,7 +640,6 @@ class haraya_v3:
             
             
             
-            
 #_______________________________________________________________________________haraya_NEURAL_NETWORK_FUNCTION
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
