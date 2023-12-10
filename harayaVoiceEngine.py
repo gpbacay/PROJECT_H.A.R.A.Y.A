@@ -17,8 +17,8 @@ def Speak(input_text: str):
     # voice gender ("neutral")
     #___________________python harayaVoiceEngine.py
     voice = texttospeech.VoiceSelectionParams(
-        language_code="en-AU", #fil-PH, en-AU, en-GB
-        name="en-AU-Neural2-C",#fil-PH-Neural2-A, en-AU-Polyglot-1, en-AU-Neural2-A, en-AU-Neural2-B(Male), en-GB-Neural2-F(female),en-GB-News-K(male)
+        language_code="en-US", #fil-PH, en-AU, en-GB
+        name="en-US-Neural2-H",#fil-PH-Neural2-A, en-AU-Polyglot-1, en-AU-Neural2-A, en-AU-Neural2-B(Male), en-GB-Neural2-F(female),en-GB-News-K(male)
     )
 
     # Select the type of audio file you want returned
