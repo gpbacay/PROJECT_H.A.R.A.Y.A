@@ -538,7 +538,7 @@ class haraya_v3:
     def startUp(self):
         self.initFaceRecognitionSystem()
         try:
-            response = f"Hi {self.getHonorificAddress()} {self.getMyName()}! I am {self.getAiName()}, your personal AI assistant! How can I help you?"
+            response = f"Hi {self.getHonorificAddress()} {self.getMyName()}, I am {self.getAiName()}, your personal AI assistant! How can I help you?"
             response1 = colorama.Fore.GREEN + "Hi " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
         except:
             response = "Hi! How can I help you?"

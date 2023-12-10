@@ -74,7 +74,7 @@ def Speak(input_text: str):
     os.remove(temp_wav)
 
 if __name__ == '__main__':
-    Speak("The quick brown fox jumps over the lazy dog near the bank of the river.")
+    Speak("Hi Sir Gianne Bacay! I am Haraya! How can I help you?")
 
 #___________________pip install --upgrade google-cloud-texttospeech
 #___________________python harayaVoiceEngine.py
