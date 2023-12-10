@@ -17,8 +17,8 @@ def Speak(input_text: str):
     # voice gender ("neutral")
     #___________________python harayaVoiceEngine.py
     voice = texttospeech.VoiceSelectionParams(
-        language_code="fil-PH", #fil-PH, en-AU, en-GB
-        name="fil-PH-Neural2-A",#fil-PH-Neural2-A, en-AU-Polyglot-1, en-GB-Neural2-F(female),en-GB-News-K(male)
+        language_code="en-AU", #fil-PH, en-AU, en-GB
+        name="en-AU-Neural2-C",#fil-PH-Neural2-A, en-AU-Polyglot-1, en-AU-Neural2-A, en-AU-Neural2-B(Male), en-GB-Neural2-F(female),en-GB-News-K(male)
     )
 
     # Select the type of audio file you want returned
@@ -74,7 +74,7 @@ def Speak(input_text: str):
     os.remove(temp_wav)
 
 if __name__ == '__main__':
-    Speak("Mabuhay GDSC UIC! Maraming salamat sa opportunidad, Ako ay may lobo lumipad sa langit di ko na nakita pumutok na pala sayang ang pera ko pambili ng lobo sa pagkain sana nabusog pa ako.")
+    Speak("The quick brown fox jumps over the lazy dog near the bank of the river.")
 
 #___________________pip install --upgrade google-cloud-texttospeech
 #___________________python harayaVoiceEngine.py

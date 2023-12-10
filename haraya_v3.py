@@ -363,7 +363,7 @@ class haraya_v3:
                 MyDatalist = attendance.readlines()
                 NameList.append(MyDatalist[-1])
         except Exception as e:
-            print(f"An error occured while initializing MyName: {e}")
+            print(colorama.Fore.LIGHTRED_EX + f"An error occured while initializing MyName: {e}")
             pass
         finally:
             self.setMyName(NameList[-1].replace("'", '').split(",")[0])
@@ -439,7 +439,7 @@ class haraya_v3:
                 self.setCommand(command_input=command)
                 self.setCommand1(command1_input=command1)
         except Exception as e:
-            print(f"\nAn error occured while listening a command: {e}")
+            print(colorama.Fore.LIGHTRED_EX + f"\nAn error occured while listening a command: {e}")
             pass
         finally:
             return command
@@ -464,7 +464,7 @@ class haraya_v3:
                 self.setCommand(command_input=command)
                 self.setCommand1(command1_input=command1)
         except Exception as e:
-            print(f"An error occured while waiting a command: {e}")
+            print(colorama.Fore.LIGHTRED_EX + f"An error occured while waiting a command: {e}")
             pass
         finally:
             self.isWaiting(False)
@@ -472,6 +472,7 @@ class haraya_v3:
     # ADD_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def addCommand(self, command_input: str):
+        command = command_input
         response = self.getResponse()
         Interrogative_HotWords = ['what', ' what ', 'what ', ' what',
                                 'who', ' who ', 'who ', ' who',
@@ -480,11 +481,11 @@ class haraya_v3:
                                 'why', ' why ', 'why ', ' why',
                                 'how', ' how ', 'how ', ' how']
         try:
-            if any(hotword in command_input for hotword in Interrogative_HotWords):
+            if any(hotword in command for hotword in Interrogative_HotWords):
                 response = "Is there anything specific you would like to know or ask?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
-            elif any(hotword not in command_input for hotword in Interrogative_HotWords):
+            elif any(hotword not in command for hotword in Interrogative_HotWords):
                 response = "Is there anything else I could do for you?"
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
@@ -498,14 +499,14 @@ class haraya_v3:
                 self.recognizer.energy_threshold = 1.0
                 self.recognizer.pause_threshold = 0.8
                 voice = self.recognizer.listen(source, timeout=20, phrase_time_limit=20)
-                command = self.recognizer.recognize_google(audio_data=voice)
+                command = str(self.recognizer.recognize_google(audio_data=voice))
                 command1 = str(self.recognizer.recognize_google(audio_data=voice, show_all=True))
                 command = command.lower()
                 command1 = command1.lower()
                 self.setCommand(command_input=command)
                 self.setCommand1(command1_input=command1)
         except Exception as e:
-            print(f"An error occured while adding a command: {e}")
+            print(colorama.Fore.LIGHTRED_EX + f"An error occured while adding a command: {e}")
             pass
         finally:
             return command
@@ -569,7 +570,6 @@ class haraya_v3:
         try:
             if any(hotword == command for hotword in self.Yes_HotWords):
                 print(colorama.Fore.LIGHTGREEN_EX + command)
-                command = command.replace(command, '')
                 response = "Then, please do tell."
                 print(colorama.Fore.GREEN + response)
                 self.speak(response)
@@ -592,9 +592,10 @@ class haraya_v3:
                 self.speak(response)
         except Exception as e:
             self.playErrorSound()
-            print(f"An error occurred while confirming command:", str(e))
+            print(colorama.Fore.LIGHTRED_EX + f"An error occurred while confirming command:", str(e))
         finally:
-            pass
+            self.setCommand(command_input=command)
+            return command
     #____________________________________________________________________closeProgram_FUNCTION
     #Run Command: python haraya_v3.py
     def closeProgram(self, program_name: str):
@@ -627,7 +628,7 @@ class haraya_v3:
                     pass
         except Exception as e:
             self.playErrorSound()
-            print(f"An error occurred while closing {program_name}:", str(e))
+            print(colorama.Fore.LIGHTRED_EX + f"An error occurred while closing {program_name}:", str(e))
         finally:
             pass
             
@@ -936,7 +937,7 @@ class haraya_v3:
                             self.setCommand(command_input=command)
                             response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand1(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
                         except Exception as e:
-                            print(f"Error occured while running PaLM2_LLM: {e}")
+                            print(colorama.Fore.LIGHTRED_EX + f"Error occured while running PaLM2_LLM: {e}")
                             response = "I beg your pardon, I'm afraid I didn't catch that."
                             self.speak(response)
                             pass
@@ -1073,7 +1074,7 @@ class haraya_v3:
                     response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand1(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
                     self.setResponse(response_input=response)
                 except Exception as e:
-                    print(f"\nError occured while running PaLM2_LLM: {e}")
+                    print(colorama.Fore.LIGHTRED_EX + f"\nError occured while running PaLM2_LLM: {e}")
                     response = "I beg your pardon, I'm afraid I didn't catch that."
                     pass
                 else:
@@ -1085,7 +1086,7 @@ class haraya_v3:
             self.playErrorSound()
             print(colorama.Fore.LIGHTRED_EX + f"\nError occured while running Haraya's Neural Network: {e}")
             pass
-        else:
+        finally:
             self.setCommand(command_input=command)
             self.setResponse(response_input=str(response))
     
@@ -1132,7 +1133,7 @@ class haraya_v3:
                     pass
         except Exception as e:
             self.playErrorSound()
-            print(f"\nAn error occurred while closing H.A.R.A.Y.A: {e}")
+            print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred while closing H.A.R.A.Y.A: {e}")
             pass
         finally:
             pygame.quit()
