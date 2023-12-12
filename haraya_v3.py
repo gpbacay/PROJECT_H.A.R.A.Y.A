@@ -1,10 +1,10 @@
 # Import Necessary Libraries/Modules
 # Run Command: python haraya_v3.py
-import re
 import sys
 from threading import Thread
 import time
 from playsound import playsound
+import requests
 import speech_recognition as sr
 import pywhatkit
 import pyttsx3
@@ -1097,9 +1097,11 @@ class haraya_v3:
                 time.sleep(3)
             else:
                 self.harayaNeuralNetwork(command_input=self.getCommand(), response_input=self.getResponse())
+        except requests.exceptions.ConnectionError as ce:
+            print(colorama.Fore.LIGHTRED_EX + f"\nA connection error occurred while running H.A.R.A.Y.A: \n{ce}")
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred while running H.A.R.A.Y.A: \n{e}")
-        finally:
+        else:
             self.harayaRecursion()
             
     def main(self):

@@ -1,6 +1,7 @@
 import sys
 import os
 import google.generativeai as palm
+import requests
 from webDataScrapingSystem import DataScraper
 from dotenv import load_dotenv, find_dotenv
     
@@ -149,6 +150,10 @@ if __name__ == '__main__':
             if "quit" == command:
                 break
             print("\nHaraya: " + str(runLLM.getChatResponse(reply=command, prev_response=runLLM.message_output, user_name_input="Gianne",)))
+        except requests.exceptions.ConnectionError as ce:
+            print(f"ConnectionError: {ce}")
+            print("No internet connection. Please check your network.")
+            continue
         except Exception as e:
             print(f"Error occured while running PaLM2_LLM: {e}")
             continue
