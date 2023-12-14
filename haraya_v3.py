@@ -1081,9 +1081,11 @@ class haraya_v3:
                     self.setResponse(response_input=str(response))
                     print(colorama.Fore.YELLOW + str(response))
                     self.speak(str(response))
+        except requests.exceptions.ConnectionError as ce:
+            print(colorama.Fore.LIGHTRED_EX + f"\nA connection error occurred while running Haraya's Neural Network: \n{ce}")
         except Exception as e:
             self.playErrorSound()
-            print(colorama.Fore.LIGHTRED_EX + f"\nError occured while running Haraya's Neural Network: {e}")
+            print(colorama.Fore.LIGHTRED_EX + f"\nError occured while running Haraya's Neural Network: \n{e}")
             pass
         finally:
             self.setCommand(command_input=command)
