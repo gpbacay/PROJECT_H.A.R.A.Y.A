@@ -513,10 +513,10 @@ class haraya_v3:
     # initFaceRecognitionSystem_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def initFaceRecognitionSystem(self):
-        tFRS = Thread(target=Face_Recognition_System)
-        tFRS.start()
         response = "Initializing Face Recognition System"
         self.speak(response)
+        tFRS = Thread(target=Face_Recognition_System)
+        tFRS.start()
         tFRS.join()
         self.runLoadingBar(0.5, "RECOGNIZING FACE", "FACE RECOGNIZED!")
         self.initMyName()
@@ -538,7 +538,7 @@ class haraya_v3:
     def startUp(self):
         self.initFaceRecognitionSystem()
         try:
-            command = "Hello Haraya!"
+            command = f"Hi! my name is {self.getMyName()}"
             response = "Haraya's face recognition system was initialized."
             self.setCommand(command_input=command)
             response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
@@ -682,7 +682,7 @@ class haraya_v3:
                 if "face recognition system" in command:
                     self.initFaceRecognitionSystem()
                     try:
-                        command = "Hello Haraya!"
+                        command = f"Hi! my name is {self.getMyName()}"
                         response = "Haraya's face recognition system was initialized."
                         self.setCommand(command_input=command)
                         response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
@@ -1126,7 +1126,7 @@ class haraya_v3:
             print(colorama.Fore.LIGHTRED_EX + f"\nA connection error occurred while running H.A.R.A.Y.A: \n{ce}")
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred while running H.A.R.A.Y.A: \n{e}")
-        else:
+        finally:
             self.harayaRecursion()
             
     def main(self):

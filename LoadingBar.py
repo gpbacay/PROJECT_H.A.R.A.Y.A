@@ -6,14 +6,14 @@ import colorama
 colorama.init(autoreset=True)
 
 class LoadingBar():
-    def RunLoadingBar(seconds=15, loading_tag="LOADING", end_tag="COMPLETE!", finishedLoading=False):
+    def RunLoadingBar(seconds=15, loading_tag="LOADING", end_tag="LOADING COMPLETE!", finishedLoading=False):
         t1 = Thread(target=playsound, args=(u"audioFiles\\loadingbar2.mp3",), daemon=True)
         t1.start()
         time.sleep(0.5)
         def progressBar(progress, total):
             percent = 100 * (progress / float(total))
             bar = '█' * int(percent) + '░' * (100 - int(percent))
-            if percent <= 50:
+            if percent < 100:
                 print(colorama.Fore.LIGHTRED_EX + f"\r [{loading_tag}...]│{bar}│{percent:.2f}%              ", end="\r")
             elif percent == 100:
                 print(colorama.Fore.LIGHTGREEN_EX + f"\r [{end_tag}]│{bar}│{percent:.2f}%              ", end="\r")
