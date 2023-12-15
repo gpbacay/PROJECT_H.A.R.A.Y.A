@@ -80,8 +80,8 @@ class PaLM2_LLM:
             *Chat history/Previous conversation: 
                 {self.chat_history}.
         Note: 
-            *Assimilate and summarize our chat history before responding.
-            *Keep your responses short and relevant with the context of the conversation.
+            *Always assimilate and summarize our chat history before responding.
+            *Always eep your responses short and relevant with the context of the conversation.
             *Always base your responses on the chat history, previous conversation, context, and the information already provided to you.
         Remember: 
             *This is your previous response to the user: 
