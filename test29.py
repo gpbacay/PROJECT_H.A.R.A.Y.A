@@ -7,7 +7,7 @@ load_dotenv(find_dotenv())
 
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 API_KEY = os.environ['WEATHER_API_KEY']
-CITY = "Santa Cruz, Davao del Sur, PH"
+CITY = "Tampakan, South Cotabato, PH"
 
 def get_weather(api_key, city):
     params = {

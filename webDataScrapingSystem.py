@@ -81,36 +81,28 @@ class DataScraper:
     #_______________________________________________Loading Bar Threads
     # Run Command: python webDataScrapingSystem.py
     def start_threads(self):
+        tLoadBar4 = Thread(target=self.runLoadingBar, args=(10, "SCRAPING ONLINE DATA...", "DATA ACQUIRED!"),)
+        tLoadBar4.start()
+        
         t1 = Thread(target=self.initCurrentTime)
         t1.start()
-
-        tLoadBar1 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING TIME DATA", "TIME ACQUIRED!"),)
-        tLoadBar1.start()
-        tLoadBar1.join()
+        t1.join()
 
         # Acquire Date
         t2 = Thread(target=self.initCurrentDate)
         t2.start()
-        
-        tLoadBar2 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING DATE DATA", "DATE ACQUIRED!"),)
-        tLoadBar2.start()
-        tLoadBar2.join()
+        t2.join()
 
         # Acquire Location
-        tSetLocation = Thread(target=self.initCurrentLocation)
-        tSetLocation.start()
-
-        tLoadBar3 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING LOCATION DATA", "LOCATION ACQUIRED"),)
-        tLoadBar3.start()
-        tLoadBar3.join()
-        tSetLocation.join()
+        t3 = Thread(target=self.initCurrentLocation)
+        t3.start()
+        t3.join()
 
         # Acquire Weather
-        tSetWeather = Thread(target=self.initCurrentWeather)
-        tSetWeather.start()
-
-        tLoadBar4 = Thread(target=self.runLoadingBar, args=(0.1, "ACQUIRING WEATHER DATA", "WEATHER ACQUIRED!"),)
-        tLoadBar4.start()
+        t4 = Thread(target=self.initCurrentWeather)
+        t4.start()
+        t4.join()
+        
         tLoadBar4.join()
         
     def initCurrentTime(self):
@@ -207,11 +199,11 @@ class DataScraper:
             # Extract the last two parts of the location (city and province)
             location_parts = self.current_location.split(", ")
             if len(location_parts) >= 2:
-                CITY = f"{location_parts[-2]}, {location_parts[-1]}"
+                CITY = f"{location_parts[-2]}, {location_parts[-1]}, PH"
             else:
                 # Provide a default city if the location format is unexpected
                 CITY = "Santa Cruz, Davao del Sur, PH"
-
+            
             params = {
                 'q': CITY,
                 'appid': API_KEY,
@@ -231,12 +223,33 @@ class DataScraper:
 
                 result = f"""As of {formatted_date}, exactly {formatted_time}, the current weather condition at {CITY} is {condition}, with a temperature of {temperature_celsius}°C."""
                 self.current_weather = result
+            elif response.status_code == 404:
+                # City not found, use default city
+                CITY = "Santa Cruz, Davao del Sur, PH"
+                params['q'] = CITY  # Update the parameters with the default city
+                response_default = requests.get(BASE_URL, params=params)
+                
+                if response_default.status_code == 200:
+                    weather_data_default = response_default.json()
+                    
+                    temperature_celsius_default = round(weather_data_default['main']['temp'], 2)
+                    condition_default = weather_data_default['weather'][0]['description']
+
+                    formatted_time_default = dt.datetime.now().strftime('%I:%M %p')
+                    formatted_date_default = dt.datetime.now().strftime('%dth of %B %Y')
+
+                    result_default = f"""As of {formatted_date_default}, exactly {formatted_time_default}, the current weather condition at {CITY} is {condition_default}, with a temperature of {temperature_celsius_default}°C."""
+                    self.current_weather = result_default
+                else:
+                    self.current_weather = "[Default weather information not available.]"
+                    logging.error(f"Error for default city: {response_default.status_code} - {response_default.text}")
             else:
                 self.current_weather = "[Current weather information is not available.]"
                 logging.error(f"Error: {response.status_code} - {response.text}")
         except Exception as e:
             self.current_weather = "[Current weather information is not available.]"
             logging.error(f"Error while fetching weather data: {e}")
+
 
 
 if __name__ == '__main__':
