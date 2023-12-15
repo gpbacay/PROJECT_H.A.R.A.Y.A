@@ -538,16 +538,30 @@ class haraya_v3:
     def startUp(self):
         self.initFaceRecognitionSystem()
         try:
-            response = f"Hi {self.getHonorificAddress()} {self.getMyName()}, I am {self.getAiName()}, your personal AI assistant! How can I help you?"
-            response1 = colorama.Fore.GREEN + "Hi " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
-        except:
-            response = "Hi! How can I help you?"
-            pass
-        finally:
-            print(response1)
-            self.setResponse(response)
+            command = "Hello Haraya!"
+            response = "Haraya's face recognition system was initialized."
+            self.setCommand(command_input=command)
+            response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
+        except Exception as e:
+            print(colorama.Fore.LIGHTRED_EX + f"Error occured while running PaLM2_LLM: {e}")
+            response = "I beg your pardon, I'm afraid I didn't catch that."
             self.speak(response)
-            return 
+            pass
+        else:
+            self.setResponse(response_input=response)
+            print(colorama.Fore.YELLOW + str(response))
+            self.speak(response)
+        # try:
+        #     response = f"Hi {self.getHonorificAddress()} {self.getMyName()}, I am {self.getAiName()}, your personal AI assistant! How can I help you?"
+        #     response1 = colorama.Fore.GREEN + "Hi " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
+        # except:
+        #     response = "Hi! How can I help you?"
+        #     pass
+        # finally:
+        #     print(response1)
+        #     self.setResponse(response)
+        #     self.speak(response)
+        #     return 
     # Standby
     # Run Command: python haraya_v3.py
     def Standby(self):
@@ -667,11 +681,20 @@ class haraya_v3:
             if "run" in command or "activate" in command or "initialize" in command:
                 if "face recognition system" in command:
                     self.initFaceRecognitionSystem()
-                    response = "Hello " + self.getHonorificAddress() + " " + self.getMyName() + "!"
-                    response1 = colorama.Fore.GREEN + "Hello " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "!"
-                    print(response1)
-                    self.speak(response)
-                    response = "Haraya's face recognition system was initialized."
+                    try:
+                        command = "Hello Haraya!"
+                        response = "Haraya's face recognition system was initialized."
+                        self.setCommand(command_input=command)
+                        response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
+                    except Exception as e:
+                        print(colorama.Fore.LIGHTRED_EX + f"Error occured while running PaLM2_LLM: {e}")
+                        response = "I beg your pardon, I'm afraid I didn't catch that."
+                        self.speak(response)
+                        pass
+                    else:
+                        self.setResponse(response_input=response)
+                        print(colorama.Fore.YELLOW + str(response))
+                        self.speak(response)
                 elif "pose recognition system" in command:
                     self.initPoseRecognitionSystem()
                     response = "Haraya's pose recognition system was initialized."
