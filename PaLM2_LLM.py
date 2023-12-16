@@ -123,7 +123,7 @@ class PaLM2_LLM:
             -Before you reply, attend, think and remember all the instructions set here.
         """
         
-        self.messages = messages
+        self.messages = "Always use emojis to express your emotions." + messages
         self.context = context
         
         response = palm.chat(
