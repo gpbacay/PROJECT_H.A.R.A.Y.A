@@ -517,10 +517,10 @@ class haraya_v3:
         self.speak(response)
         tFRS = Thread(target=Face_Recognition_System)
         tFRS.start()
-        tFRS.join()
         self.runLoadingBar(0.5, "RECOGNIZING FACE", "FACE RECOGNIZED!")
         self.initMyName()
         self.initHonorificAddress()
+        tFRS.join()
     # initPoseRecognitionSystem_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def initPoseRecognitionSystem(self):
@@ -706,7 +706,6 @@ class haraya_v3:
                     print(response)
                     self.speak(response)
                 self.setResponse(response_input=response)
-                self.Confirmation()
             #__________________________________________________________________________________TERMINATION_BLOCK
             #Run Command: python haraya_v3.py
             elif any(hotword == command for hotword in self.Stop_HotWords):
