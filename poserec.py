@@ -38,23 +38,30 @@ def Pose_Recognition_System():
             results = holistic.process(frame)
 
             # Print Nose Coordinates
+            coordinates = "."
             image_height, image_width, _ = frame.shape
             if results.pose_landmarks:
                 nose_x = results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].x * image_width
                 nose_y = results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].y * image_height
-            
+
+                coordinates = f'Nose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}'
+                
                 if round(nose_x) < 300 and round(nose_y) < 300:
                     setPosition(input_position="Upper Left")
-                    print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
+                    cv2.putText(frame, coordinates, (20, 60), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 255, 0), 1)
+                    # print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
                 elif round(nose_x) > 300 and round(nose_y) < 300:
                     setPosition(input_position="Upper Right")
-                    print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
+                    cv2.putText(frame, coordinates, (20, 60), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 255, 0), 1)
+                    # print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
                 elif round(nose_x) < 300 and round(nose_y) > 300:
                     setPosition(input_position="Lower Left")
-                    print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
+                    cv2.putText(frame, coordinates, (20, 60), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 255, 0), 1)
+                    # print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
                 elif round(nose_x) > 300 and round(nose_y) > 300:
                     setPosition(input_position="Lower Right")
-                    print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
+                    cv2.putText(frame, coordinates, (20, 60), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 255, 0), 1)
+                    # print(f'\rNose Coordinates: ({round(nose_x)}, {round(nose_y)}), {getPosition()}', end="\r")
 
             #Run command: python poserec.py
             # Draw Landmarks
