@@ -126,7 +126,7 @@ class PaLM2_LLM:
             Gianne Bacay is dedicated to advancing technology, aspiring to achieve Artificial General Intelligence and redefine human-computer interactions through Haraya.
         """
         
-        self.messages = "Always put emojis on your reply to: " + messages
+        self.messages = "Always put emojis on your reply: " + messages
         self.context = context
         
         response = palm.chat(
