@@ -528,9 +528,9 @@ class haraya_v3:
         print(colorama.Fore.GREEN + response)
         tPRS = Thread(target=Pose_Recognition_System)
         tPRS.start()
-        tLoadBar2 = Thread(target=self.runLoadingBar, args=(10, "INITIALIZING PRS...", "PRS INITIALIZED!"),)
+        tLoadBar2 = Thread(target=self.runLoadingBar, args=(10, "INITIALIZING P.R.A.I SYSTEM...", "P.R.A.I SYSTEM INITIALIZED!"),)
         tLoadBar2.start()
-        response = "INITIALIZING PRS..."
+        response = "INITIALIZING P.R.A.I SYSTEM..."
         self.speak(response)
     # START_UP_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
