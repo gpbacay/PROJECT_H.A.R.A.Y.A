@@ -517,10 +517,10 @@ class haraya_v3:
         self.speak(response)
         tFRS = Thread(target=Face_Recognition_System)
         tFRS.start()
-        self.runLoadingBar(0.5, "RECOGNIZING FACE", "FACE RECOGNIZED!")
+        tFRS.join()
+        self.runLoadingBar(0.5, "RECOGNIZING FACE...", "FACE RECOGNIZED!")
         self.initMyName()
         self.initHonorificAddress()
-        tFRS.join()
     # initPoseRecognitionSystem_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def initPoseRecognitionSystem(self):
