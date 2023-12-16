@@ -48,3 +48,4 @@ pydub
 gtts
 pyglet
 python-dotenv
+pathlib

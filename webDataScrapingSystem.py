@@ -81,7 +81,7 @@ class DataScraper:
     #_______________________________________________Loading Bar Threads
     # Run Command: python webDataScrapingSystem.py
     def start_threads(self):
-        tLoadBar4 = Thread(target=self.runLoadingBar, args=(17, "SCRAPING ONLINE DATA...", "DATA ACQUIRED!"),)
+        tLoadBar4 = Thread(target=self.runLoadingBar, args=(10, "SCRAPING ONLINE DATA...", "DATA ACQUIRED!"),)
         tLoadBar4.start()
         
         t1 = Thread(target=self.initCurrentTime)

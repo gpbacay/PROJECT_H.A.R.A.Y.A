@@ -1,12 +1,11 @@
 import requests
 import os
-from dotenv import load_dotenv, find_dotenv
 from datetime import datetime
+from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
-
-BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 API_KEY = os.environ['WEATHER_API_KEY']
+BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 CITY = "Tampakan, South Cotabato, PH"
 
 def get_weather(api_key, city):
