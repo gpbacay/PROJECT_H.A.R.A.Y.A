@@ -695,7 +695,7 @@ class haraya_v3:
                         self.setResponse(response_input=response)
                         print(colorama.Fore.YELLOW + str(response))
                         self.speak(response)
-                elif "pose recognition system" in command or "gods eyes" in command or "pose recognition system" in command or "godseyes" in command:
+                elif "pose recognition system" in command or "gods eyes" in command or "post recognition system" in command or "godseyes" in command:
                     print(colorama.Fore.LIGHTGREEN_EX + command)
                     self.initPoseRecognitionSystem()
                     response = "Haraya's pose recognition system was initialized."
