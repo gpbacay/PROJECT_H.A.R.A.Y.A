@@ -524,13 +524,13 @@ class haraya_v3:
     # initPoseRecognitionSystem_BLOCK/FUNCTION
     # Run Command: python haraya_v3.py
     def initPoseRecognitionSystem(self):
-        response = "Recognizing pose..."
+        response = "RECOGNIZING POSE..."
         print(colorama.Fore.GREEN + response)
         tPRS = Thread(target=Pose_Recognition_System)
         tPRS.start()
-        tLoadBar2 = Thread(target=self.runLoadingBar, args=(10, "INITIALIZING PRS", "PRS INITIALIZED!"),)
+        tLoadBar2 = Thread(target=self.runLoadingBar, args=(10, "INITIALIZING PRS...", "PRS INITIALIZED!"),)
         tLoadBar2.start()
-        response = "Initializing Pose Recognition System"
+        response = "INITIALIZING PRS..."
         self.speak(response)
         tPRS.join()
     # START_UP_MAIN_FUNCTION
