@@ -678,8 +678,8 @@ class haraya_v3:
             #___________________________________________________VALID COMMANDS CATCHING BLOCKS:
             #Run Command: python haraya_v3.py
             if "run" in command or "activate" in command or "initialize" in command:
+                print(colorama.Fore.LIGHTGREEN_EX + command)
                 if "face recognition system" in command:
-                    print(colorama.Fore.LIGHTGREEN_EX + command)
                     self.initFaceRecognitionSystem()
                     try:
                         command = f"Hi! my name is {self.getMyName()}"
@@ -696,13 +696,11 @@ class haraya_v3:
                         print(colorama.Fore.YELLOW + str(response))
                         self.speak(response)
                 elif "pose recognition system" in command or "gods eyes" in command or "post recognition system" in command or "godseyes" in command:
-                    print(colorama.Fore.LIGHTGREEN_EX + command)
                     self.initPoseRecognitionSystem()
                     response = "Haraya's pose recognition system was initialized."
                     print(response)
                     self.speak(response)
                 elif "web data scraping system" in command:
-                    print(colorama.Fore.LIGHTGREEN_EX + command)
                     self.DataScraper()
                     response = "Haraya's web data scraping system was initialized."
                     print(response)
