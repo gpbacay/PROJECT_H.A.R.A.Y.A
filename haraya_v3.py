@@ -532,7 +532,6 @@ class haraya_v3:
         tLoadBar2.start()
         response = "INITIALIZING PRS..."
         self.speak(response)
-        tPRS.join()
     # START_UP_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def startUp(self):
@@ -695,7 +694,7 @@ class haraya_v3:
                         self.setResponse(response_input=response)
                         print(colorama.Fore.YELLOW + str(response))
                         self.speak(response)
-                elif "pose recognition system" in command:
+                elif "pose recognition system" in command or "gods eyes" in command:
                     self.initPoseRecognitionSystem()
                     response = "Haraya's pose recognition system was initialized."
                     print(response)
