@@ -66,7 +66,7 @@ def Face_Recognition_System():
             face_names = []
             for face_encoding in unknown_face_encodings:
                 matches = fr.compare_faces(faces_encoded, face_encoding)
-                name = "Unknown"
+                name = "Unidentified"
                 face_distances = fr.face_distance(faces_encoded, face_encoding)
                 best_match_index = np.argmin(face_distances)
                 if matches[best_match_index]:

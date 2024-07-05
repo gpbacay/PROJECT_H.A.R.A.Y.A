@@ -146,6 +146,7 @@ if __name__ == '__main__':
     while True:
         try:
             print("\n")
+            print(runLLM.chat_history)
             command = input("User: ")
             if "quit" == command:
                 break
@@ -156,6 +157,7 @@ if __name__ == '__main__':
             continue
         except Exception as e:
             print(f"Error occured while running PaLM2_LLM: {e}")
+            runLLM.chat_history.clear()
             continue
     sys.exit()
 
