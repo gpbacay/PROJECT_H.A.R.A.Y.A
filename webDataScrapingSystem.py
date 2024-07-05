@@ -14,11 +14,9 @@ import colorama
 import sys
 
 class DataScraper:
-    global current_time, current_date, current_location, current_weather
-    # python webDataScrapingSystem.py  
     def __init__(self):
         colorama.init(autoreset=True)
-        self.service = Service(ChromeDriverManager(driver_version="120.0.6099.71").install())
+        self.service = Service(ChromeDriverManager().install())
         self.runLoadingBar = LoadingBar.RunLoadingBar
 
         self.current_time = "."
@@ -26,84 +24,29 @@ class DataScraper:
         self.current_location = "."
         self.current_weather = "."
         
-        self.setCurrentTime
-        self.setCurrentDate
-        self.setCurrentLocation
-        self.setCurrentWeather
-        
-        self.getCurrentTime
-        self.getCurrentDate
-        self.getCurrentLocation
-        self.getCurrentWeather
-        
-        global initCurrentTime, initCurrentDate, initCurrentLocation, initCurrentWeather
-        self.initCurrentTime
-        self.initCurrentDate
-        self.initCurrentLocation
-        self.initCurrentWeather
-
         self.start_threads()
-        
-        # LoadingBars
-        # tLoadBar = Thread(target=self.runLoadingBar, args=(10, "SCRAPING WEB DATA", "COMPLETED!"),)
-        # tLoadBar.start()
-        # tLoadBar.join()
-        
     
-    #_________________________________________________________Setters
-    # Run Command: python webDataScrapingSystem.py
-    def setCurrentTime(self, currentTime_input: str):
-        self.current_time = currentTime_input
-        
-    def setCurrentDate(self, currentDate_input: str):
-        self.current_date = currentDate_input
-        
-    def setCurrentLocation(self, currentLocation_input: str):
-        self.current_location = currentLocation_input
-        
-    def setCurrentWeather(self, currentWeather_input: str):
-        self.current_weather = currentWeather_input
-        
-    #_________________________________________________________Getters
-    # Run Command: python webDataScrapingSystem.py
-    def getCurrentTime(self):
-        return self.current_time
-    
-    def getCurrentDate(self):
-        return self.current_date
-    
-    def getCurrentLocation(self):
-        return self.current_location
-    
-    def getCurrentWeather(self):
-        return self.current_weather
-    
-    #_______________________________________________Loading Bar Threads
-    # Run Command: python webDataScrapingSystem.py
     def start_threads(self):
         tLoadBar4 = Thread(target=self.runLoadingBar, args=(10, "SCRAPING ONLINE DATA...", "DATA ACQUIRED!"),)
         tLoadBar4.start()
         
         t1 = Thread(target=self.initCurrentTime)
         t1.start()
-        t1.join()
 
-        # Acquire Date
         t2 = Thread(target=self.initCurrentDate)
         t2.start()
-        t2.join()
 
-        # Acquire Location
         t3 = Thread(target=self.initCurrentLocation)
         t3.start()
-        t3.join()
 
-        # Acquire Weather
         t4 = Thread(target=self.initCurrentWeather)
         t4.start()
-        t4.join()
         
         tLoadBar4.join()
+        t1.join()
+        t2.join()
+        t3.join()
+        t4.join()
         
     def initCurrentTime(self):
         currentTime = dt.datetime.now().time()
@@ -187,27 +130,25 @@ class DataScraper:
             self.current_location = "[Current location information is not available.]"
             logging.error(f"Error while fetching location data: {e}")
         finally:
-            self.driver.quit()
+            if hasattr(self, 'driver') and self.driver:
+                self.driver.quit()
 
     def initCurrentWeather(self):
         try:
             load_dotenv(find_dotenv())
-            # Weather scraping functionality
             BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
             API_KEY = os.environ['WEATHER_API_KEY']
 
-            # Extract the last two parts of the location (city and province)
             location_parts = self.current_location.split(", ")
             if len(location_parts) >= 2:
                 CITY = f"{location_parts[-2]}, {location_parts[-1]}, PH"
             else:
-                # Provide a default city if the location format is unexpected
                 CITY = "Santa Cruz, Davao del Sur, PH"
             
             params = {
                 'q': CITY,
                 'appid': API_KEY,
-                'units': 'metric',  # Use 'imperial' for Fahrenheit
+                'units': 'metric',
             }
 
             response = requests.get(BASE_URL, params=params)
@@ -224,9 +165,8 @@ class DataScraper:
                 result = f"""As of {formatted_date}, exactly {formatted_time}, the current weather condition at {CITY} is {condition}, with a temperature of {temperature_celsius}°C."""
                 self.current_weather = result
             elif response.status_code == 404:
-                # City not found, use default city
                 CITY = "Santa Cruz, Davao del Sur, PH"
-                params['q'] = CITY  # Update the parameters with the default city
+                params['q'] = CITY
                 response_default = requests.get(BASE_URL, params=params)
                 
                 if response_default.status_code == 200:
@@ -249,8 +189,21 @@ class DataScraper:
         except Exception as e:
             self.current_weather = "[Current weather information is not available.]"
             logging.error(f"Error while fetching weather data: {e}")
+        finally:
+            if hasattr(self, 'driver') and self.driver:
+                self.driver.quit()
 
-
+    def getCurrentTime(self):
+        return self.current_time
+    
+    def getCurrentDate(self):
+        return self.current_date
+    
+    def getCurrentLocation(self):
+        return self.current_location
+    
+    def getCurrentWeather(self):
+        return self.current_weather
 
 if __name__ == '__main__':
     Scraper = DataScraper()
@@ -263,5 +216,6 @@ if __name__ == '__main__':
     weather = Scraper.getCurrentWeather()
     print(weather)
     sys.exit()
+
 
 # python webDataScrapingSystem.py

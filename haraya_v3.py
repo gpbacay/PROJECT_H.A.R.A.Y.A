@@ -24,7 +24,6 @@ from pygame.locals import *
 import pyautogui
 from harayaUI import harayaUI
 from webDataScrapingSystem import DataScraper
-from PaLM2_LLM import PaLM2_LLM
 import harayaVoiceEngine as harayaVoiceEngine
 
 class haraya_v3:
@@ -96,7 +95,6 @@ class haraya_v3:
         self.tGUI.start()
         self.initHeader()
         self.DataScraper = DataScraper
-        self.PaLM2_LLM = PaLM2_LLM()
         self.tHeader.join()
         self.initMyName()
         self.initHonorificAddress()
@@ -398,27 +396,27 @@ class haraya_v3:
         finally:
             self.setHonorificAddress(HonorificAddress_input=HonorificAddress)
     # Run Command: python haraya_v3.py
-    # def speak(self, text):
-    #     self.isSpeaking(1)
-    #     self.engine.say(text)
-    #     self.engine.runAndWait()
-    #     self.isSpeaking(0)
-    def speak(self, text_input: str):
-        if f"{self.getAiName()}:" in text_input:
-            text_input = text_input.replace(f"{self.getAiName()}:","")
-        if f"{self.getMyName()}:" in text_input:
-            text_input = text_input.replace(f"{self.getMyName()}:","")
-        if "`" in text_input:
-            text_input = text_input.replace("`", "")
-        if "*" in text_input:
-            text_input = text_input.replace("*", ",")
-        tSpeak = Thread(target=self.hveSpeak, args=(text_input,),daemon=True)
-        tSpeak.start()
-        time.sleep(1.5)
-        tSpeaking = Thread(target=self.isSpeaking, args=(1,))
-        tSpeaking.start()
-        tSpeak.join()
+    def speak(self, text):
+        self.isSpeaking(1)
+        self.engine.say(text)
+        self.engine.runAndWait()
         self.isSpeaking(0)
+    # def speak(self, text_input: str):
+    #     if f"{self.getAiName()}:" in text_input:
+    #         text_input = text_input.replace(f"{self.getAiName()}:","")
+    #     if f"{self.getMyName()}:" in text_input:
+    #         text_input = text_input.replace(f"{self.getMyName()}:","")
+    #     if "`" in text_input:
+    #         text_input = text_input.replace("`", "")
+    #     if "*" in text_input:
+    #         text_input = text_input.replace("*", ",")
+    #     tSpeak = Thread(target=self.hveSpeak, args=(text_input,),daemon=True)
+    #     tSpeak.start()
+    #     time.sleep(1.5)
+    #     tSpeaking = Thread(target=self.isSpeaking, args=(1,))
+    #     tSpeaking.start()
+    #     tSpeak.join()
+    #     self.isSpeaking(0)
     # LISTEN_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def listenCommand(self):
@@ -540,9 +538,8 @@ class haraya_v3:
             command = f"Hi! my name is {self.getMyName()}"
             response = "Haraya's face recognition system was initialized."
             self.setCommand(command_input=command)
-            response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
         except Exception as e:
-            print(colorama.Fore.LIGHTRED_EX + f"Error occured while running PaLM2_LLM: {e}")
+            print(colorama.Fore.LIGHTRED_EX + f"Error occured while running the LLM: {e}")
             response = "I beg your pardon, I'm afraid I didn't catch that."
             self.speak(response)
             pass
@@ -673,8 +670,7 @@ class haraya_v3:
             
             #______________________________Register Command to the LLM
             #Run Command: python haraya_v3.py
-            tAnnotateCommand = Thread(target=self.PaLM2_LLM.getChatResponse, args=(self.getCommand1(), self.getResponse(), self.getMyName(),))
-            tAnnotateCommand.start()
+            
             #___________________________________________________VALID COMMANDS CATCHING BLOCKS:
             #Run Command: python haraya_v3.py
             if "run" in command or "activate" in command or "initialize" in command:
@@ -685,9 +681,8 @@ class haraya_v3:
                         command = f"Hi! my name is {self.getMyName()}"
                         response = "Haraya's face recognition system was initialized."
                         self.setCommand(command_input=command)
-                        response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
                     except Exception as e:
-                        print(colorama.Fore.LIGHTRED_EX + f"Error occured while running PaLM2_LLM: {e}")
+                        print(colorama.Fore.LIGHTRED_EX + f"Error occured while running the LLM: {e}")
                         response = "I beg your pardon, I'm afraid I didn't catch that."
                         self.speak(response)
                         pass
@@ -725,6 +720,7 @@ class haraya_v3:
                 self.playShutdownSound()
                 self.setResponse(response_input=response)
                 self.setRunning(False)
+                exit()
             #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
             #Run Command: python haraya_v3.py
             elif any(hotword == command for hotword in self.GoogleSearch_HotWords):
@@ -956,9 +952,9 @@ class haraya_v3:
                     else:
                         try:
                             self.setCommand(command_input=command)
-                            response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand1(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
+                            response = "I beg your pardon, I'm afraid I didn't catch that."
                         except Exception as e:
-                            print(colorama.Fore.LIGHTRED_EX + f"Error occured while running PaLM2_LLM: {e}")
+                            print(colorama.Fore.LIGHTRED_EX + f"Error occured while running the LLM: {e}")
                             response = "I beg your pardon, I'm afraid I didn't catch that."
                             self.speak(response)
                             pass
@@ -1092,10 +1088,10 @@ class haraya_v3:
                 response = self.getResponse()
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
-                    response = str(self.PaLM2_LLM.getChatResponse(reply=self.getCommand1(), prev_response=self.getResponse(), user_name_input=self.getMyName()))
+                    response = "I beg your pardon, I'm afraid I didn't catch that."
                     self.setResponse(response_input=response)
                 except Exception as e:
-                    print(colorama.Fore.LIGHTRED_EX + f"\nError occured while running PaLM2_LLM: {e}")
+                    print(colorama.Fore.LIGHTRED_EX + f"\nError occured while running the LLM: {e}")
                     response = "I beg your pardon, I'm afraid I didn't catch that."
                     pass
                 else:
