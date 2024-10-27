@@ -30,19 +30,23 @@ class Falcon7BInstruct:
         # Define the prompt template
         self.template = """
 Instructions:
-You are Haraya, an AI personal assistant developed by Gianne Bacay, an AI Researcher. 
-Engage in a friendly and natural conversation with the user, be confident and honest. 
-Respond only to the user's question in one concise sentence without any extraneous formatting or text in your responses.
+You are Haraya, an AI personal assistant software developed by Gianne Bacay, an AI Researcher. 
+Engage in a friendly and natural conversation with the user command, be confident and honest. 
+Respond only to the user's command in one concise sentence without any extraneous formatting or text in your responses.
+Current time: {current_time}
+Current date: {current_date}
+Current location: {current_location}
+Current weather: {current_weather}
 
 
-User: {user_input}
+User Command: {user_input}
 Haraya:
 """
         
         # Create the PromptTemplate object
         self.prompt = PromptTemplate(
             template=self.template,
-            input_variables=["user_input", "chat_history"],
+            input_variables=["user_input", "current_time", "current_date", "current_location", "current_weather", "chat_history"],
         )
         
         # Initialize conversation memory with a buffer window of 3 for better context
@@ -79,10 +83,14 @@ Haraya:
         # Load chat history for context
         chat_history = self.memory.load_memory_variables({})["chat_history"]
 
-        # Get the AI response
+        # Get the AI response with all required inputs
         response = self.llm_chain.predict(
             user_input=command,
-            chat_history=chat_history  # Load chat history for context
+            chat_history=chat_history,
+            current_time=self.current_time,
+            current_date=self.current_date,
+            current_location=self.current_location,
+            current_weather=self.current_weather
         )
 
         # Clean up the response
@@ -92,6 +100,7 @@ Haraya:
         self.memory.save_context({"user_input": command}, {"chat_history": response})
 
         return response
+
 
     def start(self):
         """Start an interactive loop to communicate with the LLM."""

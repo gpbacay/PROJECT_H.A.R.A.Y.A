@@ -79,7 +79,7 @@ class haraya_v3:
         self.Confirmation
         self.closeProgram
         
-        self.harayaNeuralNetwork
+        self.harayaDecisionLogic
         self.harayaRecursion
         self.main
         
@@ -650,10 +650,10 @@ class haraya_v3:
             
             
             
-#_______________________________________________________________________________haraya_NEURAL_NETWORK_FUNCTION
+#_______________________________________________________________________________haraya_DECISION LOGIC BLOCK
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
-    def harayaNeuralNetwork(self, command_input: str, response_input: str):
+    def harayaDecisionLogic(self, command_input: str, response_input: str):
         try:
             tSetCurrentTime = Thread(target=self.DataScraper.initCurrentTime, args=(self,))
             tSetCurrentTime.start()
@@ -1116,7 +1116,7 @@ class haraya_v3:
             if self.getCommand() == self.listenCommand():
                 time.sleep(3)
             else:
-                self.harayaNeuralNetwork(command_input=self.getCommand(), response_input=self.getResponse())
+                self.harayaDecisionLogic(command_input=self.getCommand(), response_input=self.getResponse())
         except requests.exceptions.ConnectionError as ce:
             print(colorama.Fore.LIGHTRED_EX + f"\nA connection error occurred while running H.A.R.A.Y.A: \n{ce}")
         except Exception as e:
