@@ -21,7 +21,7 @@ class Falcon7BInstruct:
         # Initialize the LLM with specified parameters
         self.llm = HuggingFaceHub(
             repo_id=self.repo_id,
-            model_kwargs={"temperature": 0.5, "max_new_tokens": 150},  # Adjusted temperature for more controlled responses
+            model_kwargs={"temperature": 0.3, "max_new_tokens": 512},  # Adjusted temperature for more controlled responses
         )
         
         # Initialize current time, date, location, and weather
@@ -29,18 +29,19 @@ class Falcon7BInstruct:
         
         # Define the prompt template
         self.template = """
-        You are Haraya, an AI virtual assistant created by Gianne Bacay. 
-        Engage in a friendly and natural conversation with the user. 
-        Provide helpful responses that directly address the user's questions.
+You are Haraya, an AI personal assistant developed by Gianne Bacay, an AI Researcher. 
+Engage in a friendly and natural conversation with the user, be confident and honest. 
+Respond only to the user's question in one concise sentence without any extraneous formatting or text in your responses.
 
-        User: {user_input}
-        Haraya:
-        """
+
+User: {user_input}
+Haraya:
+"""
         
         # Create the PromptTemplate object
         self.prompt = PromptTemplate(
             template=self.template,
-            input_variables=["user_input"],
+            input_variables=["user_input", "chat_history"],
         )
         
         # Initialize conversation memory with a buffer window of 3 for better context
@@ -50,7 +51,7 @@ class Falcon7BInstruct:
             k=3,
         )
         
-        # Create the LLMChain object
+        # Create the LLMChain object after initializing llm, prompt, and memory
         self.llm_chain = LLMChain(
             llm=self.llm,
             prompt=self.prompt,
@@ -73,13 +74,22 @@ class Falcon7BInstruct:
         """Execute a command using the LLM and return the formatted response."""
         self.update_contextual_info()
         command += "."
+        
+        # Load chat history for context
+        chat_history = self.memory.load_memory_variables({})["chat_history"]
+
+        # Get the AI response
         response = self.llm_chain.predict(
             user_input=command,
-            chat_history=self.memory.chat_memory,  # Load chat history for context
+            chat_history=chat_history  # Load chat history for context
         )
-        
+
         # Clean up the response
         response = self.clean_response(response)
+
+        # Save the user input and AI response to memory
+        self.memory.save_context({"user_input": command}, {"chat_history": response})
+
         return response
 
     def start(self):
@@ -95,6 +105,7 @@ class Falcon7BInstruct:
 if __name__ == '__main__':
     llm = Falcon7BInstruct()
     llm.start()
+
 
 
 
