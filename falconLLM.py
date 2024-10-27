@@ -21,7 +21,7 @@ class Falcon7BInstruct:
         # Initialize the LLM with specified parameters
         self.llm = HuggingFaceHub(
             repo_id=self.repo_id,
-            model_kwargs={"temperature": 0.9, "max_new_tokens": 1512},
+            model_kwargs={"temperature": 0.5, "max_new_tokens": 150},  # Adjusted temperature for more controlled responses
         )
         
         # Initialize current time, date, location, and weather
@@ -29,16 +29,9 @@ class Falcon7BInstruct:
         
         # Define the prompt template
         self.template = """
-        You are Haraya, an AI virtual assistant created by Gianne Bacay, a BSIT college student majoring in Business Technology Management. 
-        Your goal is to provide accurate, concise, and helpful responses to user's queries.
-
-        Current time: {current_time}
-        Current date: {current_date}
-        Current location: {current_location}
-        Current weather: {current_weather}
-
-        Previous conversation history:
-        {chat_history}
+        You are Haraya, an AI virtual assistant created by Gianne Bacay. 
+        Engage in a friendly and natural conversation with the user. 
+        Provide helpful responses that directly address the user's questions.
 
         User: {user_input}
         Haraya:
@@ -47,14 +40,14 @@ class Falcon7BInstruct:
         # Create the PromptTemplate object
         self.prompt = PromptTemplate(
             template=self.template,
-            input_variables=["user_input", "current_time", "current_date", "current_location", "current_weather", "chat_history"],
+            input_variables=["user_input"],
         )
         
-        # Initialize conversation memory with a buffer window of 1
+        # Initialize conversation memory with a buffer window of 3 for better context
         self.memory = ConversationBufferWindowMemory(
             memory_key="chat_history",
             input_key="user_input",
-            k=1,
+            k=3,
         )
         
         # Create the LLMChain object
@@ -71,21 +64,22 @@ class Falcon7BInstruct:
         self.current_location = self.scraper.getCurrentLocation()
         self.current_weather = self.scraper.getCurrentWeather()
 
+    def clean_response(self, response):
+        """Clean up the response to ensure relevance and clarity."""
+        response = response.strip().split("Haraya:")[-1].strip()
+        return response if response else "Could you please rephrase that?"
+
     def run_LLM(self, command):
         """Execute a command using the LLM and return the formatted response."""
         self.update_contextual_info()
         command += "."
         response = self.llm_chain.predict(
             user_input=command,
-            current_time=self.current_time,
-            current_date=self.current_date,
-            current_location=self.current_location,
-            current_weather=self.current_weather,
             chat_history=self.memory.chat_memory,  # Load chat history for context
         )
         
-        # Clean up the response by removing unwanted text
-        response = response.split("Haraya:")[1].strip() if "Haraya:" in response else response.strip()
+        # Clean up the response
+        response = self.clean_response(response)
         return response
 
     def start(self):
@@ -101,6 +95,7 @@ class Falcon7BInstruct:
 if __name__ == '__main__':
     llm = Falcon7BInstruct()
     llm.start()
+
 
 
 #__________________________python falconLLM.py
