@@ -24,7 +24,7 @@ from pygame.locals import *
 import pyautogui
 from harayaUI import harayaUI
 from webDataScrapingSystem import DataScraper
-import harayaVoiceEngine as harayaVoiceEngine
+# import harayaVoiceEngine as harayaVoiceEngine
 
 class haraya_v3:
     # Constructor Definition Block
@@ -103,7 +103,7 @@ class haraya_v3:
         self.engine = pyttsx3.init()
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[2].id)
-        self.hveSpeak = harayaVoiceEngine.Speak
+        # self.hveSpeak = harayaVoiceEngine.Speak
         # Lists of Command Keywords
         # Run Command: python haraya_v3.py
         self.Standby_HotWords = ["standby",
@@ -1163,6 +1163,6 @@ class haraya_v3:
 if __name__ == '__main__':
     haraya_v3 = haraya_v3()
     haraya_v3.main()
-    
-        
+
+
 #Run Command: python haraya_v3.py

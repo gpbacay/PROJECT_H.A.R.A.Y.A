@@ -30,7 +30,6 @@ def Locate_NameHA(name):
                 "Earl Jay Tagud",
                 "Gemmuel Balceda",
                 "Mark Anthony Lagrosa",
-                "Klausmieir Villegas",
                 "CK Zoe Villegas", 
                 "Pio Bustamante",
                 "Rolyn Morales",
@@ -42,7 +41,6 @@ def Locate_NameHA(name):
                     "Princess Viznar",
                     "Nichi Bacay",
                     "Roz Waeschet Bacay",
-                    "Killy Obligation",
                     "Jane Rose Bandoy"]
 
     if name in Male_Names:
@@ -187,4 +185,6 @@ def Face_Pose_Recognition_System():
 if __name__ == '__main__':
     Face_Pose_Recognition_System()
     Play_Prompt_Sound()
+    
+    
 #______________________________python godseyes.py

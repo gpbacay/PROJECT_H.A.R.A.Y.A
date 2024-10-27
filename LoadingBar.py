@@ -14,9 +14,9 @@ class LoadingBar():
             percent = 100 * (progress / float(total))
             bar = '█' * int(percent) + '░' * (100 - int(percent))
             if percent < 100:
-                print(colorama.Fore.LIGHTRED_EX + f"\r [{loading_tag}...]│{bar}│{percent:.2f}%              ", end="\r")
+                print(colorama.Fore.LIGHTRED_EX + f"\r {loading_tag} │{bar}│{percent:.2f}%              ", end="\r")
             elif percent == 100:
-                print(colorama.Fore.LIGHTGREEN_EX + f"\r [{end_tag}]│{bar}│{percent:.2f}%              ", end="\r")
+                print(colorama.Fore.LIGHTGREEN_EX + f"\r {end_tag} │{bar}│{percent:.2f}%              ", end="\r")
                 print("\n")
                 playsound(u"audioFiles\\loadcomplete.mp3")
 

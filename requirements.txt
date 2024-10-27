@@ -1,4 +1,12 @@
-re
+torch==2.0.1
+transformers>=4.38.2
+timm>=0.9.16
+accelerate
+sentencepiece
+attrdict
+einops
+flash_attn==2.3.4
+#re
 ez_setup
 wheel
 setuptools
