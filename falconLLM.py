@@ -21,7 +21,7 @@ class Falcon7BInstruct:
         # Initialize the LLM with specified parameters
         self.llm = HuggingFaceHub(
             repo_id=self.repo_id,
-            model_kwargs={"temperature": 0.3, "max_new_tokens": 512},  # Adjusted temperature for more controlled responses
+            model_kwargs={"temperature": 0.5, "max_new_tokens": 512},  # Adjusted temperature for more controlled responses
         )
         
         # Initialize current time, date, location, and weather

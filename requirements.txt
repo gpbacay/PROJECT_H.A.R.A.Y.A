@@ -57,3 +57,10 @@ gtts
 pyglet
 python-dotenv
 pathlib
+# RAG
+langchain-community
+faiss-cpu
+huggingface_hub
+sentence-transformers
+unstructured
+docx2txt
