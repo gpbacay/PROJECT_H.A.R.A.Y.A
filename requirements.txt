@@ -47,7 +47,6 @@ InstructorEmbedding
 google-generativeai
 einops
 accelerate
-langchain
 bitsandbytes
 colorama
 pygame
@@ -64,3 +63,7 @@ huggingface_hub
 sentence-transformers
 unstructured
 docx2txt
+
+langchain
+langchain-ollama
+ollama
