@@ -9,7 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from threading import Thread
-from loadingBar import LoadingBar
+from LoadingBar import LoadingBar
 import colorama
 import sys
 

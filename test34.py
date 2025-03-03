@@ -23,6 +23,7 @@ from langchain.memory import ConversationBufferWindowMemory
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from webDataScrapingSystem import DataScraper
 
+
 class Falcon7BInstructRAG:
     def __init__(self):
         colorama.init(autoreset=True)
@@ -52,31 +53,33 @@ class Falcon7BInstructRAG:
         print(colorama.Fore.LIGHTGREEN_EX + "Processing and embedding documents...")
         self.vector_store = self.initialize_knowledge_base()
         
-        # Initialize contextual info
+        # Update contextual info (time, date, location, weather)
         self.update_contextual_info()
         
         # Define prompt template
+        # The internal context is provided only for the model's use; it must not be output in the final response.
         self.template = """
-Intructions:
-System: Your name is Haraya, An AI personal assistant. 
-Engage in a friendly and natural conversation with the user command. Be confident and honest.
-Respond directly to the user's command with one concise sentence without any extraneous formatting or conversation.
-Read and understand the context first before responding;
-Context: {context}, {current_time}, {current_date}, {current_location}, {current_weather}
+System Instructions:
+You are Haraya, an AI personal assistant. You have been given internal contextual information, which you must use to inform your answer but not repeat in your final output:
+- Additional Context: {context}
+- Current Time: {current_time}
+- Current Date: {current_date}
+- Current Location: {current_location}
+- Current Weather: {current_weather}
 
+When responding, answer directly and concisely to the user's command in one sentence without including any of the above context.
 
 User: {user_input}
-Haraya: 
-"""
+Haraya:"""
         
-        # Create the PromptTemplate
+        # Create the PromptTemplate without exposing context in the final answer
         self.prompt = PromptTemplate(
             input_variables=["context", "user_input", "current_time", "current_date", 
-                           "current_location", "current_weather", "chat_history"],
+                             "current_location", "current_weather"],
             template=self.template,
         )
         
-        # Initialize memory
+        # Initialize conversation memory (hidden from the prompt template)
         self.memory = ConversationBufferWindowMemory(
             memory_key="chat_history",
             input_key="user_input",
@@ -84,7 +87,7 @@ Haraya:
             return_messages=True,
         )
         
-        # Create LLM chain instead of RetrievalQA
+        # Create LLM chain using the prompt and memory
         self.chain = LLMChain(
             llm=self.llm,
             prompt=self.prompt,
@@ -177,7 +180,7 @@ Haraya:
             # Get relevant context
             context = self.get_relevant_context(command)
             
-            # Prepare inputs
+            # Prepare inputs for the prompt
             inputs = {
                 "user_input": command,
                 "context": context,
@@ -187,7 +190,7 @@ Haraya:
                 "current_weather": self.current_weather,
             }
             
-            # Get response from chain
+            # Get response from the LLM chain
             response = self.chain.run(**inputs)
             
             return response.strip()
@@ -217,5 +220,6 @@ if __name__ == '__main__':
         llm.start()
     except Exception as e:
         print(colorama.Fore.LIGHTRED_EX + f"Fatal error: {str(e)}")
+
 
 #____________________python test34.py

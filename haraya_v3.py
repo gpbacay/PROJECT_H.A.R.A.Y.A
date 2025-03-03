@@ -17,7 +17,7 @@ import wikipedia
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from loadingBar import LoadingBar
+from LoadingBar import LoadingBar
 import colorama
 import pygame
 from pygame.locals import *
@@ -25,6 +25,7 @@ import pyautogui
 from harayaUI import harayaUI
 from webDataScrapingSystem import DataScraper
 # import harayaVoiceEngine as harayaVoiceEngine
+from AI_Agents.haraya_agent import HarayaAgent
 
 class haraya_v3:
     # Constructor Definition Block
@@ -102,7 +103,7 @@ class haraya_v3:
         self.recognizer = sr.Recognizer()
         self.engine = pyttsx3.init()
         self.voices = self.engine.getProperty('voices')
-        self.engine.setProperty('voice', self.voices[2].id)
+        self.engine.setProperty('voice', self.voices[1].id)
         # self.hveSpeak = harayaVoiceEngine.Speak
         # Lists of Command Keywords
         # Run Command: python haraya_v3.py
@@ -314,7 +315,7 @@ class haraya_v3:
         
         self.tStartUp = Thread(target=self.playStartUpSound)
         self.tStartUp.start()
-        self.HeaderStr = "\t\t\t\tH.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\t\t\t\t\n"
+        self.HeaderStr = "\t\t\t\t\t\tH.A.R.A.Y.A (Heuristic Agentic Resource At Your Aid)\t\t\t\t\n"
         self.Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + self.HeaderStr
         self.tHeader = Thread(target=print, args=(self.Header,))
         self.tHeader.start()
@@ -670,6 +671,10 @@ class haraya_v3:
             
             #______________________________Register Command to the LLM
             #Run Command: python haraya_v3.py
+            # Instantiate the agent.
+            agent = HarayaAgent()
+            # Generate the assistant's response by passing the command into the agent's chain.
+            response = agent.chain.invoke({"context": agent.context, "question": self.getCommand()})
             
             #___________________________________________________VALID COMMANDS CATCHING BLOCKS:
             #Run Command: python haraya_v3.py
@@ -720,7 +725,6 @@ class haraya_v3:
                 self.playShutdownSound()
                 self.setResponse(response_input=response)
                 self.setRunning(False)
-                exit()
             #_______________________________________________________________________________________INTERNET_SEARCH_BLOCK
             #Run Command: python haraya_v3.py
             elif any(hotword == command for hotword in self.GoogleSearch_HotWords):
@@ -1085,11 +1089,10 @@ class haraya_v3:
                 self.Standby()
             else:
                 command = self.getCommand()
-                response = self.getResponse()
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
-                    response = "I beg your pardon, I'm afraid I didn't catch that."
-                    self.setResponse(response_input=response)
+                    # Generate the assistant's response by passing the command into the agent's chain.
+                    response = agent.chain.invoke({"context": agent.context, "question": command})
                 except Exception as e:
                     print(colorama.Fore.LIGHTRED_EX + f"\nError occured while running the LLM: {e}")
                     response = "I beg your pardon, I'm afraid I didn't catch that."
@@ -1125,16 +1128,17 @@ class haraya_v3:
             self.harayaRecursion()
             
     def main(self):
-        #____________________________________________________________________________________________Run_Haraya
-        #Run Command: python haraya_v3.py
-        pygame.init()
-        self.startUp()
-        
-        #_________________________Run Haraya Recursively
-        self.harayaRecursion()
-        #______________________________________________________________________________________________Terminate_Haraya
-        #Run Command: python haraya_v3.py
         try:
+            #____________________________________________________________________________________________Run_Haraya
+            #Run Command: python haraya_v3.py
+            pygame.init()
+            self.startUp()
+            
+            #_________________________Run Haraya Recursively
+            self.harayaRecursion()
+            #______________________________________________________________________________________________Terminate_Haraya
+            #Run Command: python haraya_v3.py
+        
             program_name="WindowsTerminal.exe"
             for process in psutil.process_iter(['pid', 'name']):
                 if process.info['name'] == program_name:

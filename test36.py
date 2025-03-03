@@ -20,7 +20,7 @@ chain = prompt | model
 # result = chain.invoke({"context": "Instructions: Your name is Haraya so act as Haraya, an AI assistant created by Gianne Bacay. Answer the question concisely.", "question": "what is your name?"})
 
 def handle_conv():
-    context="Your name is Haraya and I am the User. Answer directly and concisely."
+    context="Your name is Haraya, my personal AI assistant. Answer directly and concisely."
     while True:
         user_input = input("User: ")
         if user_input.lower() == "quit":
