@@ -749,7 +749,7 @@ class haraya_v3:
                     self.speak(response)
                     self.tStartUp = Thread(target=self.playSearchSound)
                     self.tStartUp.start()
-                    for i in range(1):
+                    for i in range(3):
                         search = information.replace(' ', '+')
                         browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
                         browser.get("https://www.google.com/search?q=" + search + "&start" + str(i))
