@@ -315,7 +315,7 @@ class haraya_v3:
         
         self.tStartUp = Thread(target=self.playStartUpSound)
         self.tStartUp.start()
-        self.HeaderStr = "\t\t\t\t\t\tH.A.R.A.Y.A (Heuristic Agentic Resource At Your Aid)\t\t\t\t\n"
+        self.HeaderStr = "\t\t\t\tH.A.R.A.Y.A (High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\t\t\t\t\n"
         self.Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + self.HeaderStr
         self.tHeader = Thread(target=print, args=(self.Header,))
         self.tHeader.start()
