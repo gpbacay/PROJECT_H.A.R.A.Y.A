@@ -84,6 +84,9 @@ class haraya_v3:
         self.harayaRecursion
         self.main
         
+        # Instantiate the agent.
+        self.agent = HarayaAgent()
+        
         #Initialization
         # Attributes Declaration Block
         # Run Command: python haraya_v3.py
@@ -536,29 +539,16 @@ class haraya_v3:
     def startUp(self):
         self.initFaceRecognitionSystem()
         try:
-            command = f"Hi! my name is {self.getMyName()}"
-            response = "Haraya's face recognition system was initialized."
-            self.setCommand(command_input=command)
-        except Exception as e:
-            print(colorama.Fore.LIGHTRED_EX + f"Error occured while running the LLM: {e}")
-            response = "I beg your pardon, I'm afraid I didn't catch that."
-            self.speak(response)
+            response = f"Hi {self.getHonorificAddress()} {self.getMyName()}, I am {self.getAiName()}, your personal AI assistant! How can I help you?"
+            response1 = colorama.Fore.GREEN + "Hi " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
+        except:
+            response = "Hi! How can I help you?"
             pass
-        else:
-            self.setResponse(response_input=response)
-            print(colorama.Fore.YELLOW + str(response))
+        finally:
+            print(response1)
+            self.setResponse(response)
             self.speak(response)
-        # try:
-        #     response = f"Hi {self.getHonorificAddress()} {self.getMyName()}, I am {self.getAiName()}, your personal AI assistant! How can I help you?"
-        #     response1 = colorama.Fore.GREEN + "Hi " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
-        # except:
-        #     response = "Hi! How can I help you?"
-        #     pass
-        # finally:
-        #     print(response1)
-        #     self.setResponse(response)
-        #     self.speak(response)
-        #     return 
+            return 
     # Standby
     # Run Command: python haraya_v3.py
     def Standby(self):
@@ -671,10 +661,19 @@ class haraya_v3:
             
             #______________________________Register Command to the LLM
             #Run Command: python haraya_v3.py
-            # Instantiate the agent.
-            agent = HarayaAgent()
-            # Generate the assistant's response by passing the command into the agent's chain.
-            response = agent.chain.invoke({"context": agent.context, "question": self.getCommand()})
+            
+            def run_agent_command():
+                # Generate the assistant's response by passing the command into the agent's chain.
+                response = self.agent.chain.invoke({
+                    "context": self.agent.context,
+                    "question": self.getCommand()
+                })
+                # Optionally, handle the response (for example, saving it or printing it)
+                self.setResponse(response)
+
+            # Start the agent command in its own thread.
+            tAgent = Thread(target=run_agent_command)
+            tAgent.start()
             
             #___________________________________________________VALID COMMANDS CATCHING BLOCKS:
             #Run Command: python haraya_v3.py
@@ -1092,7 +1091,7 @@ class haraya_v3:
                 print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
                     # Generate the assistant's response by passing the command into the agent's chain.
-                    response = agent.chain.invoke({"context": agent.context, "question": command})
+                    response = self.agent.chain.invoke({"context": self.agent.context, "question": command})
                 except Exception as e:
                     print(colorama.Fore.LIGHTRED_EX + f"\nError occured while running the LLM: {e}")
                     response = "I beg your pardon, I'm afraid I didn't catch that."
