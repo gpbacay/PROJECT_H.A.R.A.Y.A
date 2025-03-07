@@ -188,3 +188,4 @@ if __name__ == '__main__':
     
     
 #______________________________python godseyes.py
+# G.O.D.S.E.Y.E.S (Guided Object Detection and Surveillance for Enhanced Yield Evaluation System)
