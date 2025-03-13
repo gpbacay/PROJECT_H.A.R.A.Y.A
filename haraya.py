@@ -6,8 +6,8 @@ import speech_recognition as sr
 import pyttsx3
 import pywhatkit
 
-from facerec import Face_Recognition_System
-from poserec import Pose_Recognition_System
+from face_recognition_system import Face_Recognition_System
+from pose_recognition_system import Pose_Recognition_System
 import os
 import subprocess
 
@@ -19,7 +19,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pyautogui
 
 import textwrap
-from LoadingBar import LoadingBar 
+from loading_bar import LoadingBar 
 runLoadingBar = LoadingBar.RunLoadingBar
 tStartUp = Thread(target=playsound, args=(U"startUp.mp3",))
 tStartUp.start()

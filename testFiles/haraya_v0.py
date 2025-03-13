@@ -9,8 +9,8 @@ import pywhatkit
 import pyttsx3
 #from harayaVoiceEngine import Speak as hveSpeak
 
-from facerec import Face_Recognition_System
-from poserec import Pose_Recognition_System
+from face_recognition_system import Face_Recognition_System
+from pose_recognition_system import Pose_Recognition_System
 
 import os
 import subprocess
@@ -21,12 +21,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-from LoadingBar import LoadingBar
+from loading_bar import LoadingBar
 runLoadingBar = LoadingBar.RunLoadingBar
 import pyautogui
 import colorama
 
-from harayaUI import harayaUI
+from haraya_gui import harayaUI
 runUI = harayaUI.runUI
 setIsRandom = harayaUI.setIsRandom
 tGUI = Thread(target=runUI, daemon=True)

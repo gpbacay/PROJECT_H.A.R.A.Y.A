@@ -5,8 +5,8 @@ from playsound import playsound
 import speech_recognition as sr
 import pywhatkit
 import pyttsx3
-from facerec import Face_Recognition_System
-from poserec import Pose_Recognition_System
+from face_recognition_system import Face_Recognition_System
+from pose_recognition_system import Pose_Recognition_System
 import os
 import subprocess
 import psutil
@@ -39,7 +39,7 @@ class haraya_v4:
     Header = colorama.Style.BRIGHT + colorama.Fore.GREEN + HeaderStr
     tHeader = Thread(target=print, args=(Header,))
     tHeader.start()
-    from harayaUI import harayaUI
+    from haraya_gui import harayaUI
     from PaLM2_LLM import getChatResponse
     #___________________________________________Attributes_Initialization_BLOCK 
     #Run Command: python haraya_v3.py

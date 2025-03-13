@@ -4,8 +4,8 @@ import pyttsx3
 import pywhatkit
 import datetime
 
-from facerec import Face_Recognition_System
-from poserec import Pose_Recognition_System
+from face_recognition_system import Face_Recognition_System
+from pose_recognition_system import Pose_Recognition_System
 import time
 import os
 import calendar

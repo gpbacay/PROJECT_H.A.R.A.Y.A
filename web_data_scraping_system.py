@@ -9,7 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from threading import Thread
-from LoadingBar import LoadingBar
+from loading_bar import LoadingBar
 import colorama
 import sys
 
@@ -17,7 +17,7 @@ class DataScraper:
     def __init__(self):
         colorama.init(autoreset=True)
         self.service = Service(ChromeDriverManager().install())
-        self.runLoadingBar = LoadingBar.RunLoadingBar
+        self.loading_bar = LoadingBar()
 
         self.current_time = "."
         self.current_date = "."
@@ -27,7 +27,7 @@ class DataScraper:
         self.start_threads()
     
     def start_threads(self):
-        tLoadBar4 = Thread(target=self.runLoadingBar, args=(10, "SCRAPING ONLINE DATA...", "DATA ACQUIRED!"),)
+        tLoadBar4 = Thread(target=self.loading_bar.run_loadingbar, kwargs={"seconds": 10, "loading_tag": "SCRAPING ONLINE DATA...", "end_tag": "DATA ACQUIRED!",},)
         tLoadBar4.start()
         
         t1 = Thread(target=self.initCurrentTime)
@@ -218,4 +218,4 @@ if __name__ == '__main__':
     sys.exit()
 
 
-# python webDataScrapingSystem.py
+# python web_data_scraping_system.py

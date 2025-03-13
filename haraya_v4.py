@@ -20,11 +20,11 @@ import pyautogui
 
 # Custom System Modules
 from AI_Agents.haraya_agent import HarayaAgent
-from facerec import Face_Recognition_System
-from poserec import Pose_Recognition_System
+from face_recognition_system import Face_Recognition_System
+from pose_recognition_system import Pose_Recognition_System
 from web_data_scraping_system import DataScraper
-from LoadingBar import LoadingBar
-from harayaUI import harayaUI
+from loading_bar import LoadingBar
+from haraya_gui import harayaUI
 
 
 class haraya_v4:

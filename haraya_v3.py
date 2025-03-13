@@ -8,8 +8,8 @@ import requests
 import speech_recognition as sr
 import pywhatkit
 import pyttsx3
-from facerec import Face_Recognition_System
-from poserec import Pose_Recognition_System
+from face_recognition_system import Face_Recognition_System
+from pose_recognition_system import Pose_Recognition_System
 import os
 import subprocess
 import psutil
@@ -17,12 +17,12 @@ import wikipedia
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from LoadingBar import LoadingBar
+from loading_bar import LoadingBar
 import colorama
 import pygame
 from pygame.locals import *
 import pyautogui
-from harayaUI import harayaUI
+from haraya_gui import harayaUI
 from web_data_scraping_system import DataScraper
 # import harayaVoiceEngine as harayaVoiceEngine
 from AI_Agents.haraya_agent import HarayaAgent
@@ -102,7 +102,8 @@ class haraya_v3:
         self.tHeader.join()
         self.initMyName()
         self.initHonorificAddress()
-        self.runLoadingBar = LoadingBar.RunLoadingBar
+        self.loading_bar = LoadingBar()
+        self.runLoadingBar = self.loading_bar.run_loadingbar
         self.recognizer = sr.Recognizer()
         self.engine = pyttsx3.init()
         self.voices = self.engine.getProperty('voices')
@@ -520,7 +521,7 @@ class haraya_v3:
         tFRS = Thread(target=Face_Recognition_System)
         tFRS.start()
         tFRS.join()
-        self.runLoadingBar(0.5, "RECOGNIZING FACE...", "FACE RECOGNIZED!")
+        self.runLoadingBar(seconds=0.5, loading_tag="RECOGNIZING FACE...", end_tag="FACE RECOGNIZED!")
         self.initMyName()
         self.initHonorificAddress()
     # initPoseRecognitionSystem_BLOCK/FUNCTION
@@ -530,7 +531,7 @@ class haraya_v3:
         print(colorama.Fore.GREEN + response)
         tPRS = Thread(target=Pose_Recognition_System)
         tPRS.start()
-        tLoadBar2 = Thread(target=self.runLoadingBar, args=(10, "INITIALIZING P.R.A.I SYSTEM...", "P.R.A.I SYSTEM INITIALIZED!"),)
+        tLoadBar2 = Thread(target=self.runLoadingBar, kwargs={"seconds": 10, "loading_tag": "INITIALIZING P.R.A.I SYSTEM...", "end_tag": "P.R.A.I SYSTEM INITIALIZED!",},)
         tLoadBar2.start()
         response = "INITIALIZING P.R.A.I SYSTEM..."
         self.speak(response)

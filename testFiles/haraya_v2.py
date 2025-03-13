@@ -8,8 +8,8 @@ import pywhatkit
 import harayaVoiceEngine as harayaVoiceEngine
 hveSpeak = harayaVoiceEngine.Speak
 
-from facerec import Face_Recognition_System
-from poserec import Pose_Recognition_System
+from face_recognition_system import Face_Recognition_System
+from pose_recognition_system import Pose_Recognition_System
 import os
 import subprocess
 
@@ -36,7 +36,7 @@ tStartUp = Thread(target=playsound, args=(U"startUp.mp3",))
 tStartUp.start()
 time.sleep(1)
 
-from harayaUI import harayaHUD
+from haraya_gui import harayaHUD
 runHUD = harayaHUD.runHUD
 setIsRandom = harayaHUD.setIsRandom
 exitHUD = harayaHUD.exitHUD
