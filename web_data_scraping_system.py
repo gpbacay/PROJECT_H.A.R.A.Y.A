@@ -4,10 +4,7 @@ import requests
 import os
 from dotenv import load_dotenv, find_dotenv
 import datetime as dt
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
+import geocoder
 from threading import Thread
 from loading_bar import LoadingBar
 import colorama
@@ -16,7 +13,6 @@ import sys
 class DataScraper:
     def __init__(self):
         colorama.init(autoreset=True)
-        self.service = Service(ChromeDriverManager().install())
         self.loading_bar = LoadingBar()
 
         self.current_time = "."
@@ -27,7 +23,11 @@ class DataScraper:
         self.start_threads()
     
     def start_threads(self):
-        tLoadBar4 = Thread(target=self.loading_bar.run_loadingbar, kwargs={"seconds": 10, "loading_tag": "SCRAPING ONLINE DATA...", "end_tag": "DATA ACQUIRED!",},)
+        # Start a loading bar thread for visual feedback
+        tLoadBar4 = Thread(
+            target=self.loading_bar.run_loadingbar,
+            kwargs={"seconds": 10, "loading_tag": "SCRAPING ONLINE DATA...", "end_tag": "DATA ACQUIRED!"}
+        )
         tLoadBar4.start()
         
         t1 = Thread(target=self.initCurrentTime)
@@ -67,9 +67,9 @@ class DataScraper:
         exact_time = f"The current time is {Hours}:{Minutes} {time_of_day}"
         
         time_format = ""
-        if int(Minutes) == 00:
+        if int(Minutes) == 0:
             time_format = f"It's {Hours} o'clock."
-        elif int(Minutes) < 15 and int(Minutes) != 00:
+        elif int(Minutes) < 15 and int(Minutes) != 0:
             time_format = f"It's {Minutes} past {Hours}."
         elif int(Minutes) == 15:
             time_format = f"It's quarter past {Hours}."
@@ -79,14 +79,12 @@ class DataScraper:
             time_format = f"It's half past {Hours}."
         elif int(Minutes) > 30 and int(Minutes) < 45:
             time_difference = 60 - int(Minutes)
-            Minutes = str(time_difference)
-            time_format = f"It's {Minutes} to {Hours}."
+            time_format = f"It's {time_difference} to {Hours}."
         elif int(Minutes) == 45:
             time_format = f"It's quarter to {Hours}."
         elif int(Minutes) > 45:
             time_difference = 60 - int(Minutes)
-            Minutes = str(time_difference)
-            time_format = f"It's {Minutes} to {Hours}."
+            time_format = f"It's {time_difference} to {Hours}."
             
         result = exact_time + " or " + time_format
         self.current_time = result
@@ -115,23 +113,20 @@ class DataScraper:
 
     def initCurrentLocation(self):
         try:
-            self.driver = webdriver.Chrome(service=self.service)
-            self.driver.get("https://www.google.com/search?q=my+current+location")
-
-            city_element = self.driver.find_element(By.CLASS_NAME, "aiAXrc")
-            province_element = self.driver.find_element(By.CLASS_NAME, "fMYBhe")
-            city = city_element.text
-            province = province_element.text
-
-            result = f"You are currently located at: {city}, {province}"
-
-            self.current_location = result
+            # Use geocoder to fetch current location via IP address
+            g = geocoder.ip('me')
+            if g.ok:
+                if g.city and g.country:
+                    # Store the location as "City, Country" for easier parsing later
+                    result = f"{g.city}, {g.country}"
+                else:
+                    result = "Unknown Location"
+                self.current_location = result
+            else:
+                self.current_location = "Unknown Location"
         except Exception as e:
-            self.current_location = "[Current location information is not available.]"
+            self.current_location = "Unknown Location"
             logging.error(f"Error while fetching location data: {e}")
-        finally:
-            if hasattr(self, 'driver') and self.driver:
-                self.driver.quit()
 
     def initCurrentWeather(self):
         try:
@@ -141,9 +136,9 @@ class DataScraper:
 
             location_parts = self.current_location.split(", ")
             if len(location_parts) >= 2:
-                CITY = f"{location_parts[-2]}, {location_parts[-1]}, PH"
+                CITY = f"{location_parts[0]}, {location_parts[1]}"
             else:
-                CITY = "Santa Cruz, Davao del Sur, PH"
+                CITY = "Santa Cruz, Davao del Sur"
             
             params = {
                 'q': CITY,
@@ -162,10 +157,10 @@ class DataScraper:
                 formatted_time = dt.datetime.now().strftime('%I:%M %p')
                 formatted_date = dt.datetime.now().strftime('%dth of %B %Y')
 
-                result = f"""As of {formatted_date}, exactly {formatted_time}, the current weather condition at {CITY} is {condition}, with a temperature of {temperature_celsius}°C."""
+                result = f"As of {formatted_date}, exactly {formatted_time}, the current weather in {CITY} is {condition}, with a temperature of {temperature_celsius}°C."
                 self.current_weather = result
             elif response.status_code == 404:
-                CITY = "Santa Cruz, Davao del Sur, PH"
+                CITY = "Santa Cruz, Davao del Sur"
                 params['q'] = CITY
                 response_default = requests.get(BASE_URL, params=params)
                 
@@ -178,7 +173,7 @@ class DataScraper:
                     formatted_time_default = dt.datetime.now().strftime('%I:%M %p')
                     formatted_date_default = dt.datetime.now().strftime('%dth of %B %Y')
 
-                    result_default = f"""As of {formatted_date_default}, exactly {formatted_time_default}, the current weather condition at {CITY} is {condition_default}, with a temperature of {temperature_celsius_default}°C."""
+                    result_default = f"As of {formatted_date_default}, exactly {formatted_time_default}, the current weather in {CITY} is {condition_default}, with a temperature of {temperature_celsius_default}°C."
                     self.current_weather = result_default
                 else:
                     self.current_weather = "[Default weather information not available.]"
@@ -189,9 +184,6 @@ class DataScraper:
         except Exception as e:
             self.current_weather = "[Current weather information is not available.]"
             logging.error(f"Error while fetching weather data: {e}")
-        finally:
-            if hasattr(self, 'driver') and self.driver:
-                self.driver.quit()
 
     def getCurrentTime(self):
         return self.current_time

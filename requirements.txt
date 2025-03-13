@@ -71,3 +71,5 @@ ollama
 # TTS
 edge_tts
 asyncio
+
+geocoder
