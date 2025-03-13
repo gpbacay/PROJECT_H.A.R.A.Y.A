@@ -23,7 +23,7 @@ import pygame
 from pygame.locals import *
 import pyautogui
 from harayaUI import harayaUI
-from webDataScrapingSystem import DataScraper
+from web_data_scraping_system import DataScraper
 # import harayaVoiceEngine as harayaVoiceEngine
 from AI_Agents.haraya_agent import HarayaAgent
 

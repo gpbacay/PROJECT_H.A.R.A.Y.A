@@ -21,7 +21,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferWindowMemory
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from webDataScrapingSystem import DataScraper
+from web_data_scraping_system import DataScraper
 
 
 class Falcon7BInstructRAG:

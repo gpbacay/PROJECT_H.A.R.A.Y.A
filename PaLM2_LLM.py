@@ -2,7 +2,7 @@ import sys
 import os
 import google.generativeai as palm
 import requests
-from webDataScrapingSystem import DataScraper
+from web_data_scraping_system import DataScraper
 from dotenv import load_dotenv, find_dotenv
     
 class PaLM2_LLM:

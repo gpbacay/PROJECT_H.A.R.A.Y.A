@@ -4,7 +4,7 @@ from dotenv import load_dotenv, find_dotenv
 from langchain.llms import HuggingFaceHub
 from langchain import PromptTemplate, LLMChain
 from langchain.memory import ConversationBufferWindowMemory
-from webDataScrapingSystem import DataScraper
+from web_data_scraping_system import DataScraper
 
 class Falcon7BInstruct:
     def __init__(self):
