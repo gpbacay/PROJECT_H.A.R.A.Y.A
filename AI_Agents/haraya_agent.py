@@ -20,11 +20,11 @@ class HarayaAgent:
         self.data_scraper = DataScraper()
         self.update_realtime_data()
         
-        # Define the prompt template with placeholders for conversation context, user question, and timestamp.
+        # Define the prompt template with placeholders for conversation context, and user question.
         self.template = f"""
 Chat history/Previous conversation: {{context}}
 
-{self.user_name}: {{question}} [Timestamp: {{timestamp}}].
+{self.user_name}: {{question}}.
 
 {self.ai_name}:"""
         
@@ -52,7 +52,7 @@ Chat history/Previous conversation: {{context}}
     
     def get_response(self, question: str) -> str:
         """
-        Generates the assistant's response for a given question, including a timestamp for the user's input.
+        Generates the assistant's response for a given question.
         Fetches updated real-time data before responding.
 
         :param question: The user's question.
@@ -61,12 +61,9 @@ Chat history/Previous conversation: {{context}}
         # Refresh real-time data before generating a response
         self.update_realtime_data()
         
-        timestamp = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
-        
         result = self.chain.invoke({
             "context": self.context,
             "question": question,
-            "timestamp": timestamp
         })
         
         return result
