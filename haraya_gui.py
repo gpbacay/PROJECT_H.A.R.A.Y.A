@@ -6,7 +6,7 @@ from pygame.locals import *
 from PIL import Image
 import random
 
-class harayaUI():
+class HarayaUI():
     os.environ['SDL_VIDEO_WINDOW_POS'] = '1400,400'
     
     # Initialize Pygame
@@ -103,11 +103,11 @@ class harayaUI():
         sys.exit()
 
 if __name__ == '__main__':
-    runUI = harayaUI.runUI
-    isSpeaking = harayaUI.isSpeaking
-    isWaiting = harayaUI.isWaiting
+    runUI = HarayaUI.runUI
+    isSpeaking = HarayaUI.isSpeaking
+    isWaiting = HarayaUI.isWaiting
     runUI()
     pygame.quit()
     sys.exit()
     
-#_____________________python harayaUI.py
+#_____________________python haraya_gui.py

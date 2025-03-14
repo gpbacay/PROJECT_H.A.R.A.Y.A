@@ -6,14 +6,14 @@ from dotenv import load_dotenv, find_dotenv
 import datetime as dt
 import geocoder
 from threading import Thread
-from loading_bar import LoadingBar
+from loading_bar import LoadingBar as loading_bar
 import colorama
 import sys
 
 class DataScraper:
-    def __init__(self):
+    def __init__(self) -> None:
         colorama.init(autoreset=True)
-        self.loading_bar = LoadingBar()
+        self.loading_bar = loading_bar()
 
         self.current_time = "."
         self.current_date = "."
@@ -197,7 +197,7 @@ class DataScraper:
     def getCurrentWeather(self):
         return self.current_weather
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     Scraper = DataScraper()
     curTime = Scraper.getCurrentTime()
     print(curTime)

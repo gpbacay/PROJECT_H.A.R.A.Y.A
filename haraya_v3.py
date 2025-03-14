@@ -22,7 +22,7 @@ import colorama
 import pygame
 from pygame.locals import *
 import pyautogui
-from haraya_gui import harayaUI
+from haraya_gui import HarayaUI
 from web_data_scraping_system import DataScraper
 # import harayaVoiceEngine as harayaVoiceEngine
 from AI_Agents.haraya_agent import HarayaAgent
@@ -33,7 +33,6 @@ class haraya_v3:
     def __init__(self):
         self.running = True
         self.ai_name = "Haraya"
-        # Declaration of private member variables
         self.command = "."
         self.command1 = "."
         self.response = "."
@@ -93,11 +92,12 @@ class haraya_v3:
         # Run Command: python haraya_v3.py
         colorama.init(autoreset=True)
         pygame.init()
-        self.isSpeaking = harayaUI.isSpeaking
-        self.isWaiting = harayaUI.isWaiting
-        self.runUI = harayaUI.runUI
+        self.isSpeaking = HarayaUI.isSpeaking
+        self.isWaiting = HarayaUI.isWaiting
+        self.runUI = HarayaUI.runUI
         self.tGUI = Thread(target=self.runUI, daemon=True)
         self.tGUI.start()
+        
         self.initHeader()
         self.DataScraper = DataScraper
         self.tHeader.join()
@@ -113,8 +113,8 @@ class haraya_v3:
         # Lists of Command Keywords
         # Run Command: python haraya_v3.py
         self.Standby_HotWords = ["standby",
-                                "stand by", 
-                                "haraya stand by", 
+                                "stand by",
+                                "haraya stand by",
                                 "just stand by", "wait", 
                                 "wait a sec", 
                                 "give me a sec", 
@@ -380,7 +380,6 @@ class haraya_v3:
                     "Mark Anthony Lagrosa",
                     "Klausmieir Villegas",
                     "CK Zoe Villegas",
-                    "Pio Bustamante",
                     "Rolyn Morales",
                     "Alexander Villasis",
                     "Bryan Sarpamones"]
