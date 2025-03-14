@@ -751,7 +751,8 @@ class haraya_v3:
                     self.tStartUp.start()
                     for i in range(3):
                         search = information.replace(' ', '+')
-                        browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+                        chrome_service = Service(ChromeDriverManager().install())
+                        browser = webdriver.Chrome(service=chrome_service)
                         browser.get("https://www.google.com/search?q=" + search + "&start" + str(i))
                     response = "Here's what I've found."
                     self.speak(response)

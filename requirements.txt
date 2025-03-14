@@ -29,6 +29,7 @@ browser
 python-time
 requests
 selenium
+webdriver-manager
 bs4
 click
 random2
