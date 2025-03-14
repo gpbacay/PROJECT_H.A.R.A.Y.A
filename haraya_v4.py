@@ -44,7 +44,7 @@ class haraya_v4:
         self.honorific_address = "."
         
         # Thread 1: AI Agent System
-        self.tAIAgent = Thread(target=self.init_agent, daemon=True)
+        self.tAIAgent = Thread(target=self.initialize_ai_agent, daemon=True)
         self.tAIAgent.start()
         
         # Thread 2: GUI System
@@ -71,7 +71,7 @@ class haraya_v4:
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[1].id)
         
-        self.StartUpSequence()
+        self.start_up_sequence()
         
      #_________________________________________________________Setters
     # Run Command: python haraya_v4.py
@@ -108,24 +108,18 @@ class haraya_v4:
     
     #_________________________________________________________Methods
     # Run Command: python haraya_v4.py
-    def init_agent(self) -> None: 
+    def initialize_ai_agent(self) -> None: # Initialize the AI Agent System
         self.agent = HarayaAgent(ai_name=self.getAIName(), user_name=self.getUserName())
+        
+    def register_ai_agent_command(self) -> None: # Register the AI Agent Command
+        ai_command = self.getCommand()
+        response = self.agent.get_response(ai_command)
+        self.setResponse(response)
     
     def initHonorificAddress(self) -> None: # Initialize Honorific Address based on the User's Name
-        Male_Names = ["Gianne Bacay", 
-                    "Earl Jay Tagud",
-                    "Gemmuel Balceda",
-                    "Mark Anthony Lagrosa",
-                    "Klausmieir Villegas",
-                    "CK Zoe Villegas",
-                    "Rolyn Morales",
-                    "Alexander Villasis",
-                    "Bryan Sarpamones"]
-        Female_Names = ["Kleinieir Pearl Kandis Bacay", 
-                        "Princess Viznar", 
-                        "Nichi Bacay",
-                        "Roz Waeschet Bacay", 
-                        "Jane Rose Bandoy"]
+        Male_Names = ["Gianne Bacay", "Earl Jay Tagud", "Gemmuel Balceda", "Mark Anthony Lagrosa", "Klausmieir Villegas",
+                    "CK Zoe Villegas", "Alexander Villasis", "Bryan Sarpamones"]
+        Female_Names = ["Kleinieir Pearl Kandis Bacay", "Princess Viznar", "Nichi Bacay", "Roz Waeschet Bacay"]
         try:
             Gender_Name = self.getUserName()
             if Gender_Name in Male_Names:
@@ -157,7 +151,17 @@ class haraya_v4:
         self.setUserName(user_name_input=self.user_profile.get_user_name())
         self.initHonorificAddress()
     
-    def StartUpSequence(self) -> None:
+    def initialize_pose_recognition_system(self): # Initialize the Pose Recognition System
+        response = "RECOGNIZING POSE..."
+        self.setResponse(response_input=response)
+        self.speak(response)
+        print(colorama.Fore.GREEN + response)
+        tPRS = Thread(target=Pose_Recognition_System)
+        tPRS.start()
+        tLoadBar2 = Thread(target=self.runLoadingBar, kwargs={"seconds": 10, "loading_tag": "INITIALIZING P.R.A.I SYSTEM...", "end_tag": "P.R.A.I SYSTEM INITIALIZED!",},)
+        tLoadBar2.start()
+        
+    def start_up_sequence(self) -> None: # Start-up Sequence
         self.initialize_face_recognition_system()
         try:
             response = self.agent.get_response(question=f"Hi {self.getAIName()}, I am {self.getUserName()}.")
@@ -174,6 +178,65 @@ class haraya_v4:
             self.speak(response)
             return
     
+    def listenCommand(self):
+        command = self.getCommand()
+        try:
+            with sr.Microphone() as source:
+                response = "Listening..."
+                print(colorama.Fore.CYAN + response)
+                print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
+                self.playListeningSound()
+                self.recognizer.energy_threshold = 1.0
+                self.recognizer.pause_threshold = 0.8
+                voice = self.recognizer.listen(source, timeout=20, phrase_time_limit=20)
+                command = str(self.recognizer.recognize_google(audio_data=voice))
+                ai_command = str(self.recognizer.recognize_google(audio_data=voice, show_all=True))
+                command = command.lower()
+                ai_command = ai_command.lower()
+                self.setCommand(command_input=command)
+                self.setAICommand(ai_command_input=ai_command)
+        except Exception as e:
+            print(colorama.Fore.LIGHTRED_EX + f"\nAn error occured while listening a command: {e}")
+            pass
+        finally:
+            return command
+    
+    def wait_command(self) -> str: # Wait for a command
+        self.isWaiting(True)
+        command = self.getCommand()
+        try:
+            with sr.Microphone() as source:
+                response = "Waiting..."
+                print(colorama.Fore.CYAN + response)
+                print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
+                self.playListeningSound()
+                self.recognizer.energy_threshold = 1.0
+                self.recognizer.pause_threshold = 0.8
+                voice = self.recognizer.listen(source, timeout=20, phrase_time_limit=20)
+                command = str(self.recognizer.recognize_google(audio_data=voice))
+                ai_command = str(self.recognizer.recognize_google(audio_data=voice, show_all=True))
+                command = command.lower()
+                ai_command = ai_command.lower()
+                self.setCommand(command_input=command)
+                self.setAICommand(ai_command_input=ai_command)
+        except Exception as e:
+            print(colorama.Fore.LIGHTRED_EX + f"An error occured while waiting a command: {e}")
+            pass
+        finally:
+            self.isWaiting(False)
+            return command
+    
+    def standby(self): # Standby Mode
+        while True:
+            command = self.wait_command()
+            response = self.getResponse()
+            print(colorama.Fore.LIGHTGREEN_EX + command)
+            if "hey" in command or any(hotword in command for hotword in self.Haraya_HotWords):
+                response = "How can I help you?"
+                print(colorama.Fore.GREEN + response)
+                self.speak(response)
+                break
+        return
     
     def main(self):
         print("Initializing G.O.D.S.E.Y.E.S")
