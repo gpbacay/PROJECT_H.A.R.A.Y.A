@@ -71,8 +71,6 @@ class haraya_v4:
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[1].id)
         
-        self.start_up_sequence()
-        
      #_________________________________________________________Setters
     # Run Command: python haraya_v4.py
     def setRunning(self, running_input: bool):
@@ -178,7 +176,7 @@ class haraya_v4:
             self.speak(response)
             return
     
-    def listenCommand(self):
+    def listen_command(self):
         command = self.getCommand()
         try:
             with sr.Microphone() as source:
@@ -346,11 +344,21 @@ class haraya_v4:
         finally:
             pass
     
-    
-    
-    
-    
-    
+    def recursive_execution(self):
+        if not self.getRunning():
+            return
+        try:
+            if self.getCommand() == self.listen_command():
+                time.sleep(3)
+            else:
+                # self.harayaDecisionLogic(command_input=self.getCommand(), response_input=self.getResponse())
+                pass
+        except requests.exceptions.ConnectionError as ce:
+            print(colorama.Fore.LIGHTRED_EX + f"\nA connection error occurred while running H.A.R.A.Y.A: \n{ce}")
+        except Exception as e:
+            print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred while running H.A.R.A.Y.A: \n{e}")
+        finally:
+            self.recursive_execution()
     
     
     
@@ -358,7 +366,23 @@ class haraya_v4:
     
     
     def main(self):
-        print("Initializing G.O.D.S.E.Y.E.S")
+        try:
+            #____________________________________________________________________________________________Run_Haraya
+            #Run Command: python haraya_v3.py
+            self.start_up_sequence()
+            
+            #_________________________Run Haraya Recursively
+            self.recursive_execution()
+            #______________________________________________________________________________________________Terminate_Haraya
+            #Run Command: python haraya_v3.py
+            self.close_program(program_name="WindowsTerminal.exe")
+        except Exception as e:
+            self.playErrorSound()
+            print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred while closing H.A.R.A.Y.A: {e}")
+            pass
+        finally:
+            pygame.quit()
+            sys.exit()
 
 
 

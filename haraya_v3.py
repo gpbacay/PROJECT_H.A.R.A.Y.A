@@ -1132,31 +1132,13 @@ class haraya_v3:
         try:
             #____________________________________________________________________________________________Run_Haraya
             #Run Command: python haraya_v3.py
-            pygame.init()
             self.startUp()
             
             #_________________________Run Haraya Recursively
             self.harayaRecursion()
             #______________________________________________________________________________________________Terminate_Haraya
             #Run Command: python haraya_v3.py
-        
-            program_name="WindowsTerminal.exe"
-            for process in psutil.process_iter(['pid', 'name']):
-                if process.info['name'] == program_name:
-                    try:
-                        process.terminate()
-                        response = f"\r{program_name} has been closed."
-                        print(colorama.Fore.GREEN + response, end="\r")
-                    except psutil.AccessDenied:
-                        response = f"\rPermission denied. Unable to close " + program_name + "."
-                        print(colorama.Fore.LIGHTRED_EX + response, end="\r")
-                    except psutil.NoSuchProcess:
-                        response = f"\r{program_name} is not running."
-                        print(colorama.Fore.LIGHTRED_EX + response, end="\r")
-                    break
-                else:
-                    print(colorama.Fore.LIGHTRED_EX + f"\r {program_name} is not running.", end="\r")
-                    pass
+            self.closeProgram(program_name="WindowsTerminal.exe")
         except Exception as e:
             self.playErrorSound()
             print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred while closing H.A.R.A.Y.A: {e}")
