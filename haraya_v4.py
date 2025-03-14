@@ -19,6 +19,7 @@ from pygame.locals import *
 import pyautogui
 
 # Custom System Modules
+from haraya_heading import HarayaHeading
 from AI_Agents.haraya_agent import HarayaAgent
 from face_recognition_system import Face_Recognition_System
 from pose_recognition_system import Pose_Recognition_System
@@ -29,6 +30,7 @@ from haraya_gui import harayaUI
 
 class haraya_v4:
     def __init__(self):
+        HarayaHeading()
         pass
 
     def main(self):
