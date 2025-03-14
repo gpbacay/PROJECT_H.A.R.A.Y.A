@@ -32,7 +32,7 @@ class haraya_v3:
     #Run Command: python haraya_v3.py
     def __init__(self):
         self.running = True
-        self.AiName = "Haraya"
+        self.ai_name = "Haraya"
         # Declaration of private member variables
         self.command = "."
         self.command1 = "."
@@ -50,7 +50,7 @@ class haraya_v3:
         self.setHonorificAddress
         
         self.getRunning
-        self.getAiName
+        self.getAIName
         self.getCommand
         self.getCommand1
         self.getResponse
@@ -85,7 +85,8 @@ class haraya_v3:
         self.main
         
         # Instantiate the agent.
-        self.agent = HarayaAgent()
+        self.agent = HarayaAgent(ai_name=self.getAIName(), user_name=self.getMyName())
+        self.run_agent_command
         
         #Initialization
         # Attributes Declaration Block
@@ -328,7 +329,7 @@ class haraya_v3:
     def setRunning(self, Running_input: bool):
         self.running = Running_input
     def setAiName(self, AiName_input: str):
-        self.AiName = AiName_input
+        self.ai_name = AiName_input
     def setCommand(self, command_input: str):
         self.command = command_input
     def setCommand1(self, command1_input: str):
@@ -343,8 +344,8 @@ class haraya_v3:
     # Run Command: python haraya_v3.py
     def getRunning(self):
         return self.running
-    def getAiName(self):
-        return self.AiName
+    def getAIName(self):
+        return self.ai_name
     def getCommand(self):
         return self.command
     def getCommand1(self):
@@ -400,15 +401,22 @@ class haraya_v3:
             HonorificAddress = "Master"
         finally:
             self.setHonorificAddress(HonorificAddress_input=HonorificAddress)
-    # Run Command: python haraya_v3.py
+    
+    #______________________________Register Command to the LLM
+    #Run Command: python haraya_v3.py
+    def run_agent_command(self):
+                command = self.getCommand()
+                response = self.agent.get_response(command)
+                self.setResponse(response)
+    
     def speak(self, text):
         self.isSpeaking(1)
         self.engine.say(text)
         self.engine.runAndWait()
         self.isSpeaking(0)
     # def speak(self, text_input: str):
-    #     if f"{self.getAiName()}:" in text_input:
-    #         text_input = text_input.replace(f"{self.getAiName()}:","")
+    #     if f"{self.getAIName()}:" in text_input:
+    #         text_input = text_input.replace(f"{self.getAIName()}:","")
     #     if f"{self.getMyName()}:" in text_input:
     #         text_input = text_input.replace(f"{self.getMyName()}:","")
     #     if "`" in text_input:
@@ -446,6 +454,7 @@ class haraya_v3:
             pass
         finally:
             return command
+    
     # WAIT_COMMAND_MAIN_FUNCTION
     # Run Command: python haraya_v3.py
     def waitCommand(self):
@@ -540,7 +549,7 @@ class haraya_v3:
     def startUp(self):
         self.initFaceRecognitionSystem()
         try:
-            response = f"Hi {self.getHonorificAddress()} {self.getMyName()}, I am {self.getAiName()}, your personal AI assistant! How can I help you?"
+            response = f"Hi {self.getHonorificAddress()} {self.getMyName()}, I am {self.getAIName()}, your personal AI assistant! How can I help you?"
             response1 = colorama.Fore.GREEN + "Hi " + self.getHonorificAddress() + " " + colorama.Fore.CYAN + self.getMyName() + colorama.Fore.GREEN + "! I am Haraya, your personal AI assistant! How can I help you?"
         except:
             response = "Hi! How can I help you?"
@@ -663,17 +672,8 @@ class haraya_v3:
             #______________________________Register Command to the LLM
             #Run Command: python haraya_v3.py
             
-            def run_agent_command():
-                # Generate the assistant's response by passing the command into the agent's chain.
-                response = self.agent.chain.invoke({
-                    "context": self.agent.context,
-                    "question": self.getCommand()
-                })
-                # Optionally, handle the response (for example, saving it or printing it)
-                self.setResponse(response)
-
             # Start the agent command in its own thread.
-            tAgent = Thread(target=run_agent_command)
+            tAgent = Thread(target=self.run_agent_command)
             tAgent.start()
             
             #___________________________________________________VALID COMMANDS CATCHING BLOCKS:
@@ -1088,14 +1088,15 @@ class haraya_v3:
                 self.speak(response)
                 self.Standby()
             else:
-                command = self.getCommand()
-                print(colorama.Fore.LIGHTGREEN_EX + command)
                 try:
-                    # Generate the assistant's response by passing the command into the agent's chain.
-                    response = self.agent.chain.invoke({"context": self.agent.context, "question": command})
+                    command = self.getCommand()
+                    print(colorama.Fore.LIGHTGREEN_EX + command)
+                    response = self.agent.get_response(command)
+                    self.setResponse(response)
                 except Exception as e:
                     print(colorama.Fore.LIGHTRED_EX + f"\nError occured while running the LLM: {e}")
                     response = "I beg your pardon, I'm afraid I didn't catch that."
+                    self.setResponse(response)
                     pass
                 else:
                     self.setCommand(command_input=command)

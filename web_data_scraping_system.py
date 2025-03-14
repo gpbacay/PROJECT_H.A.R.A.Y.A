@@ -134,7 +134,7 @@ class DataScraper:
             BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
             API_KEY = os.environ['WEATHER_API_KEY']
 
-            location_parts = self.current_location.split(", ")
+            location_parts = self.getCurrentLocation.split(", ")
             if len(location_parts) >= 2:
                 CITY = f"{location_parts[0]}, {location_parts[1]}"
             else:
