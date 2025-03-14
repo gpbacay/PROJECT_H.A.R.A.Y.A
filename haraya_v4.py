@@ -226,6 +226,46 @@ class haraya_v4:
             self.isWaiting(False)
             return command
     
+    def register_command(self, command_input: str): # Add a command
+        command = command_input
+        response = self.getResponse()
+        Interrogative_HotWords = ['what', ' what ', 'what ', ' what',
+                                'who', ' who ', 'who ', ' who',
+                                'where', ' where ', 'where ', ' where',
+                                'when', ' when ', 'when ', ' when',
+                                'why', ' why ', 'why ', ' why',
+                                'how', ' how ', 'how ', ' how']
+        try:
+            if any(hotword in command for hotword in Interrogative_HotWords):
+                response = "Is there anything specific you would like to know or ask?"
+                print(colorama.Fore.GREEN + response)
+                self.speak(response)
+            elif any(hotword not in command for hotword in Interrogative_HotWords):
+                response = "Is there anything else I could do for you?"
+                print(colorama.Fore.GREEN + response)
+                self.speak(response)
+            else:
+                print(response)
+                self.speak(response)
+            with sr.Microphone() as source:
+                print(colorama.Fore.CYAN + "Listening...")
+                print(colorama.Fore.RED + "\nNote: Toggle [F9] to stop/start listening.\n")
+                self.playListeningSound()
+                self.recognizer.energy_threshold = 1.0
+                self.recognizer.pause_threshold = 0.8
+                voice = self.recognizer.listen(source, timeout=20, phrase_time_limit=20)
+                command = str(self.recognizer.recognize_google(audio_data=voice))
+                ai_command = str(self.recognizer.recognize_google(audio_data=voice, show_all=True))
+                command = command.lower()
+                ai_command = ai_command.lower()
+                self.setCommand(command_input=command)
+                self.setai_command(ai_command_input=ai_command)
+        except Exception as e:
+            print(colorama.Fore.LIGHTRED_EX + f"An error occured while adding a command: {e}")
+            pass
+        finally:
+            return command
+    
     def standby(self): # Standby Mode
         while True:
             command = self.wait_command()
@@ -237,6 +277,85 @@ class haraya_v4:
                 self.speak(response)
                 break
         return
+
+    def confirm_command(self): # Confirm the command
+        command = self.addCommand(self.getCommand())
+        response = self.getResponse()
+        
+        try:
+            if any(hotword == command for hotword in self.Yes_HotWords):
+                print(colorama.Fore.LIGHTGREEN_EX + command)
+                response = "Then, please do tell."
+                print(colorama.Fore.GREEN + response)
+                self.speak(response)
+            elif any(hotword == command for hotword in self.No_HotWords):
+                print(colorama.Fore.LIGHTGREEN_EX + command)
+                response = "Alright then, signing off!"
+                print(colorama.Fore.GREEN + response)
+                self.speak(response)
+                self.playShutdownSound()
+                return self.setRunning(False)
+            elif "." == command:
+                print(colorama.Fore.LIGHTGREEN_EX + command)
+                response = "Hello? Are you still there?"
+                print(colorama.Fore.GREEN + response)
+                self.speak(response)
+                self.Standby()
+            else:
+                response = "Come again?"
+                print(colorama.Fore.GREEN + response)
+                self.speak(response)
+        except Exception as e:
+            self.playErrorSound()
+            print(colorama.Fore.LIGHTRED_EX + f"An error occurred while confirming command:", str(e))
+        finally:
+            self.setCommand(command_input=command)
+            return command
+    
+    def close_program(self, program_name: str): # Close a program
+        response = self.response
+        try:
+            response = "Closing " + program_name + "..."
+            response1 = colorama.Fore.GREEN + "Closing " + colorama.Fore.LIGHTRED_EX + program_name + colorama.Fore.GREEN + "..."
+            print(response1)
+            self.speak(response)
+            for process in psutil.process_iter(['pid', 'name']):
+                if process.info['name'] == program_name:
+                    try:
+                        process.terminate()
+                        response = program_name + f"\r has been closed."
+                        print(colorama.Fore.GREEN + response, end="\r")
+                        self.speak(response)
+                    except psutil.AccessDenied:
+                        self.playErrorSound()
+                        response = f"\r Permission denied. Unable to close " + program_name + "."
+                        print(colorama.Fore.LIGHTRED_EX + response, end="\r")
+                        self.speak(response)
+                    except psutil.NoSuchProcess:
+                        self.playErrorSound()
+                        response = f"\r {program_name} is not running."
+                        print(colorama.Fore.LIGHTRED_EX + response, end="\r")
+                        self.speak(response)
+                    break
+                else:
+                    print(f"\r {program_name} is not running.", end="\r")
+                    pass
+        except Exception as e:
+            self.playErrorSound()
+            print(colorama.Fore.LIGHTRED_EX + f"An error occurred while closing {program_name}:", str(e))
+        finally:
+            pass
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     def main(self):
         print("Initializing G.O.D.S.E.Y.E.S")
