@@ -186,12 +186,15 @@ class DataScraper:
             logging.error(f"Error while fetching weather data: {e}")
 
     def getCurrentTime(self):
+        self.initCurrentTime()
         return self.current_time
     
     def getCurrentDate(self):
+        self.initCurrentDate()
         return self.current_date
     
     def getCurrentLocation(self):
+        self.initCurrentLocation()
         return self.current_location
     
     def getCurrentWeather(self):

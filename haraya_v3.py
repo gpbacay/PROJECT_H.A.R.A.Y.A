@@ -8,8 +8,8 @@ import requests
 import speech_recognition as sr
 import pywhatkit
 import pyttsx3
-from face_recognition_system import Face_Recognition_System
-from pose_recognition_system import Pose_Recognition_System
+from face_recognition_system import FaceRecognitionSystem
+from pose_recognition_system import PoseRecognitionSystem
 import os
 import subprocess
 import psutil
@@ -526,7 +526,7 @@ class haraya_v3:
     def initFaceRecognitionSystem(self):
         response = "Initializing Face Recognition System"
         self.speak(response)
-        tFRS = Thread(target=Face_Recognition_System)
+        tFRS = Thread(target=FaceRecognitionSystem)
         tFRS.start()
         tFRS.join()
         self.runLoadingBar(seconds=0.5, loading_tag="RECOGNIZING FACE...", end_tag="FACE RECOGNIZED!")
@@ -537,7 +537,7 @@ class haraya_v3:
     def initPoseRecognitionSystem(self):
         response = "RECOGNIZING POSE..."
         print(colorama.Fore.GREEN + response)
-        tPRS = Thread(target=Pose_Recognition_System)
+        tPRS = Thread(target=PoseRecognitionSystem)
         tPRS.start()
         tLoadBar2 = Thread(target=self.runLoadingBar, kwargs={"seconds": 10, "loading_tag": "INITIALIZING P.R.A.I SYSTEM...", "end_tag": "P.R.A.I SYSTEM INITIALIZED!",},)
         tLoadBar2.start()

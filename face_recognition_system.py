@@ -5,7 +5,7 @@ import face_recognition as fr
 from datetime import  datetime
 import mediapipe as mp
 
-def Face_Recognition_System():
+def FaceRecognitionSystem():
     def ClearCSV():
         import csv
         file = open("attendance.csv", "r")
@@ -92,6 +92,6 @@ def Face_Recognition_System():
                 return face_names
 
 if __name__ == '__main__':
-    Face_Recognition_System()
+    FaceRecognitionSystem()
     
 #Run Command: python facerec.py
