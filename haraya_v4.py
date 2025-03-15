@@ -546,8 +546,9 @@ class HarayaV4:
                 self.set_response(f"An error occurred while searching in Wikipedia: {e}")
                 print(colorama.Fore.LIGHTRED_EX + self.get_response())
                 self.speak(self.get_response())
-        elif any(hotword == cmd for hotword in self.OPEN_HOTWORDS):
+        elif any(hotword in cmd for hotword in self.OPEN_HOTWORDS):
             program = "program file path"
+            print(colorama.Fore.GREEN + "Opening " + colorama.Fore.LIGHTRED_EX + program + colorama.Fore.GREEN + "...")
             Thread(target=self.sound_system.playSearchSound).start()
             try:
                 if "chrome" in cmd or "google" in cmd:
@@ -658,7 +659,7 @@ class HarayaV4:
                 self.set_response(f"An error occurred while trying to open the program: {e}")
                 print(colorama.Fore.LIGHTRED_EX + self.get_response())
                 self.speak(self.get_response())
-        elif any(hotword == cmd for hotword in self.CLOSE_HOTWORDS):
+        elif any(hotword in cmd for hotword in self.CLOSE_HOTWORDS):
             try:
                 if "chrome" in cmd or "tab" in cmd:
                     self.set_response(self.close_program("chrome.exe"))
@@ -747,7 +748,7 @@ class HarayaV4:
             self.set_response(f"The current battery percentage is {percentage}%")
             print(colorama.Fore.YELLOW + self.get_response())
             self.speak(self.get_response())
-        elif any(hotword == cmd for hotword in self.STANDBY_HOTWORDS):
+        elif any(hotword in cmd for hotword in self.STANDBY_HOTWORDS):
             self.set_response("As you wish " + self.get_honorific_address() + "!")
             print(colorama.Fore.YELLOW + self.get_response())
             self.speak(self.get_response())
