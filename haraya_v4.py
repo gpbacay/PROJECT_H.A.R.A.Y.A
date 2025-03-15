@@ -265,7 +265,7 @@ class HarayaV4:
                 response = f"Hi {self.get_honorific_address()} {self.get_user_name()}, I am {self.get_ai_name()}, your personal AI assistant! How can I help you?"
                 print(colorama.Fore.YELLOW + response)
         except Exception as e:
-            print(colorama.Fore.RED + f"An error occurred during start-up sequence: {e}")
+            print(colorama.Fore.LIGHTRED_EX + f"An error occurred during start-up sequence: {e}")
             response = f"Hi {self.get_honorific_address()} {self.get_user_name()}, I am {self.get_ai_name()}, your personal AI assistant! How can I help you?"
             print(colorama.Fore.YELLOW + response)
         finally:
@@ -388,34 +388,33 @@ class HarayaV4:
 
     def close_program(self, program_name: str) -> None:
         try:
-            response = "Closing " + program_name + "..."
             print(colorama.Fore.GREEN + "Closing " + colorama.Fore.LIGHTRED_EX + program_name + colorama.Fore.GREEN + "...")
-            self.speak(response)
+            self.set_response("Closing " + program_name + "...")
             closed = False
             for process in psutil.process_iter(['pid', 'name']):
                 if process.info['name'] == program_name:
                     try:
                         process.terminate()
-                        response = program_name + " has been closed."
-                        print(colorama.Fore.GREEN + response)
-                        self.speak(response)
+                        self.set_response(program_name + " has been closed.")
+                        print(colorama.Fore.GREEN + self.get_response())
                         closed = True
                     except psutil.AccessDenied:
                         self.sound_system.playErrorSound()
-                        response = "Permission denied. Unable to close " + program_name + "."
-                        print(colorama.Fore.LIGHTRED_EX + response)
-                        self.speak(response)
+                        self.set_response("Permission denied. Unable to close " + program_name + ".")
+                        print(colorama.Fore.RED + self.get_response())
                     except psutil.NoSuchProcess:
                         self.sound_system.playErrorSound()
-                        response = program_name + " is not running."
-                        print(colorama.Fore.LIGHTRED_EX + response)
-                        self.speak(response)
+                        self.set_response(program_name + " is not running.")
+                        print(colorama.Fore.RED + self.get_response())
                     break
             if not closed:
-                print(colorama.Fore.GREEN + f"{program_name} is not running.")
+                self.set_response(f"{program_name} is not running.")
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
         except Exception as e:
             self.sound_system.playErrorSound()
-            print(colorama.Fore.LIGHTRED_EX + f"An error occurred while closing {program_name}: {e}")
+            self.set_response(f"An error occurred while closing {program_name}: {e}")
+            print(colorama.Fore.LIGHTRED_EX + self.get_response())
 
     # ------------------ Decision Logic Method ------------------
     def process_command(self, command_input: str, response_input: str) -> None:
@@ -444,26 +443,40 @@ class HarayaV4:
                 try:
                     self.set_command(f"Hi! my name is {self.get_user_name()}")
                     self.set_response("Haraya's face recognition system was initialized.")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 except Exception as e:
                     self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
-            elif "pose recognition system" in cmd or "gods eyes" in cmd or "post recognition system" in cmd or "godseyes" in cmd:
+                    print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                    self.speak(self.get_response())
+            elif "pose recognition system" in cmd or "gods eyes" in cmd or "post recognition system" in cmd or "godseyes" in cmd or "god's eyes" in cmd:
                 self.set_response("Haraya's pose recognition system was initialized.")
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
             elif "web data scraping system" in cmd:
                 self.data_scraper.__init__()  # Reinitialize the data scraper.
                 self.set_response("Haraya's web data scraping system was initialized.")
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
 
         elif any(hotword == cmd for hotword in self.STOP_HOTWORDS):
             self.initialize_honorific_address()
             self.set_response("As you wish " + self.get_honorific_address() + ". Signing off...")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             self.sound_system.playShutdownSound()
             self.set_running(False)
         elif any(hotword == cmd for hotword in self.GOODBYE_HOTWORDS):
             self.set_response("Goodbye " + self.get_honorific_address() + "! Have a great day!")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             self.sound_system.playShutdownSound()
             self.set_running(False)
 
         elif any(hotword == cmd for hotword in self.GOOGLE_SEARCH_HOTWORDS):
             self.set_response("What would you like to search in Google?")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             self.set_command(self.listen_command())
             try:
                 info = (self.get_command()
@@ -475,6 +488,8 @@ class HarayaV4:
                         .replace("can you", "")
                         .replace("help me", "")).strip()
                 self.set_response("Searching " + info)
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
                 Thread(target=self.sound_system.playListeningSound).start()
                 for i in range(3):
                     search = info.replace(' ', '+')
@@ -482,15 +497,24 @@ class HarayaV4:
                     browser = webdriver.Chrome(service=chrome_service)
                     browser.get("https://www.google.com/search?q=" + search + "&start" + str(i))
                 self.set_response("Here's what I've found.")
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
             except Exception as e:
                 self.sound_system.playErrorSound()
                 self.set_response(f"An error occurred while searching in Chrome: {e}")
+                print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                self.speak(self.get_response())
 
         elif any(hotword == cmd for hotword in self.YOUTUBE_SEARCH_HOTWORDS):
-            self.set_response("What would you like to search or play in YouTube?")
+            response = "What would you like to search or play in YouTube?"
+            self.set_response(response)
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             self.set_command(self.listen_command())
             try:
                 self.set_response("Searching...")
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
                 Thread(target=self.sound_system.playListeningSound).start()
                 song_title = (self.get_command()
                             .replace("haraya", "")
@@ -504,15 +528,23 @@ class HarayaV4:
                 import pywhatkit
                 pywhatkit.playonyt(song_title)
                 self.set_response("Now Playing " + song_title)
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
             except Exception as e:
                 self.sound_system.playErrorSound()
                 self.set_response(f"An error occurred while playing in YouTube: {e}")
+                print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                self.speak(self.get_response())
 
         elif any(hotword == cmd for hotword in self.WIKIPEDIA_SEARCH_HOTWORDS):
             self.set_response("What would you like to search in Wikipedia?")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             self.set_command(self.listen_command())
             try:
                 self.set_response("Searching...")
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
                 Thread(target=self.sound_system.playListeningSound).start()
                 person = (self.get_command()
                         .replace("search in wikipedia", "")
@@ -521,9 +553,13 @@ class HarayaV4:
                         .replace("who is", "")).strip()
                 info = wikipedia.summary(person, sentences=1)
                 self.set_response(info)
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
             except Exception as e:
                 self.sound_system.playErrorSound()
                 self.set_response(f"An error occurred while searching in Wikipedia: {e}")
+                print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                self.speak(self.get_response())
 
         elif any(hotword == cmd for hotword in self.OPEN_HOTWORDS):
             program = "program file path"
@@ -531,124 +567,212 @@ class HarayaV4:
             try:
                 if "chrome" in cmd or "google" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
                     subprocess.Popen([program])
                     self.set_response("Opening Chrome...")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "aqw game launcher" in cmd or "aqw" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = r"C:\Program Files\Artix Game Launcher\Artix Game Launcher.exe"
                     subprocess.Popen([program])
                     self.set_response("Opening Artix game launcher...")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "obsidian" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = r"C:\Users\Gianne Bacay\AppData\Local\Obsidian\Obsidian.exe"
                     subprocess.Popen([program])
                     self.set_response("Opening Obsidian...")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "command prompt" in cmd or "cmd" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = "cmd.exe"
                     subprocess.Popen([program])
                     self.set_response("Opening Command Prompt...")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "notepad" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = "notepad.exe"
                     subprocess.Popen([program])
                     self.set_response("Opening Notepad...")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "calculator" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = "calc.exe"
                     subprocess.Popen([program])
                     self.set_response("Opening Calculator...")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "vlc" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = r"C:\Program Files\VideoLAN\VLC\vlc.exe"
                     subprocess.Popen([program])
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     self.set_response("Opening VLC Media Player...")
                 elif "visual studio code" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = r"C:\Users\Gianne Bacay\AppData\Local\Programs\Microsoft VS Code\Code.exe"
                     subprocess.Popen([program])
                     self.set_response("Opening Visual Studio Code...")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "messenger" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = r"C:\Users\Gianne Bacay\Desktop\Messenger.exe.lnk"
                     subprocess.Popen(f'start /b /wait /min /high "Running Messenger as Administrator" "{program}"', shell=True)
                     self.set_response("Opening Messenger...")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "downloads" in cmd or "download" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = r"C:\Users\Gianne Bacay\Desktop\Downloads.lnk"
                     subprocess.Popen(f'start /b /wait /min /high "Running Downloads as Administrator" "{program}"', shell=True)
                     self.set_response("Opening Downloads...")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "videos" in cmd or "video" in cmd:
                     self.set_response("As you wish!")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                     program = r"C:\Users\Gianne Bacay\Desktop\Videos.lnk"
                     subprocess.Popen(f'start /b /wait /min /high "Running Videos as Administrator" "{program}"', shell=True)
                     self.set_response("Opening Videos...")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 else:
                     self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
             except Exception as e:
                 self.sound_system.playErrorSound()
                 self.set_response(f"An error occurred while trying to open the program: {e}")
+                print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                self.speak(self.get_response())
 
         elif any(hotword == cmd for hotword in self.CLOSE_HOTWORDS):
             try:
                 if "chrome" in cmd or "tab" in cmd:
                     self.set_response(self.close_program("chrome.exe"))
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "command prompt" in cmd or "windows terminal" in cmd:
                     self.set_response(self.close_program("WindowsTerminal.exe"))
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "messenger" in cmd:
                     self.set_response(self.close_program("Messenger.exe"))
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
                 elif "file explorer" in cmd or "windows explorer" in cmd:
                     self.set_response(self.close_program("explorer.exe"))
+                    print(colorama.Fore.YELLOW + self.get_response())
+                    self.speak(self.get_response())
             except Exception as e:
                 self.sound_system.playErrorSound()
                 self.set_response(f"An error occurred while trying to close the program: {e}")
+                print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                self.speak(self.get_response())
 
         elif "turn off my computer" in cmd or "shutdown my computer" in cmd:
             self.set_response("As you wish! Shutting down your computer...")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             os.system("shutdown /s /t 0")
             self.sound_system.playShutdownSound()
             self.set_running(False)
         elif "restart my computer" in cmd:
             self.set_response("As you wish! Restarting your computer...")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             os.system("shutdown /r")
             self.sound_system.playShutdownSound()
             self.set_running(False)
         elif "sign off my computer" in cmd or "signoff my computer" in cmd:
             self.set_response("As you wish! Signing off your computer...")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             os.system("shutdown /l")
             self.sound_system.playShutdownSound()
             self.set_response(f"Successfully signed off {self.get_user_name()}'s computer.")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             self.set_running(False)
         elif "logout my computer" in cmd or "log out my computer" in cmd:
             self.set_response("As you wish! Logging out your computer...")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             os.system("shutdown /l")
             self.sound_system.playShutdownSound()
             self.set_response(f"Successfully logged off {self.get_user_name()}'s computer.")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             self.set_running(False)
         elif "sign out my computer" in cmd or "signout my computer" in cmd:
             self.set_response("As you wish! Signing out your computer...")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             os.system("shutdown /l")
             self.sound_system.playShutdownSound()
             self.set_response(f"Successfully signed out {self.get_user_name()}'s computer.")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             self.set_running(False)
         elif ("increase" in cmd and "volume" in cmd) or "volume up" in cmd:
             self.set_response("Increasing volume...")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             pyautogui.press("volumeup", presses=10)
             self.set_response(f"Successfully increased the volume of {self.get_user_name()}'s computer.")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
         elif ("volume" in cmd and "decrease" in cmd) or "lower" in cmd:
             self.set_response("Decreasing volume...")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             pyautogui.press("volumedown", presses=10)
             self.set_response(f"Successfully lowered the volume of {self.get_user_name()}'s computer.")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
         elif ("battery" in cmd and "status" in cmd) or "level" in cmd or "percentage" in cmd:
             battery = psutil.sensors_battery()
             percentage = battery.percent
             self.set_response(f"The current battery percentage is {percentage}%")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
         elif any(hotword == cmd for hotword in self.STANDBY_HOTWORDS):
             self.set_response("As you wish " + self.get_honorific_address() + "!")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             self.standby()
         elif cmd in [".", " ", "", "[]", None]:
             self.set_response("Hello? Are you still there?")
+            print(colorama.Fore.YELLOW + self.get_response())
+            self.speak(self.get_response())
             self.standby()
         else:
             try:
@@ -657,8 +781,12 @@ class HarayaV4:
                 response = self.agent.get_response(command)
                 self.set_command(command)
                 self.set_response(response)
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
             except Exception as e:
                 self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
+                print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                self.speak(self.get_response())
 
     # ------------------ Recursive Pipeline ------------------
     def recursive_pipeline(self) -> None:
@@ -678,19 +806,12 @@ class HarayaV4:
                 else:
                     self.set_command(current_command)
                     print(colorama.Fore.LIGHTGREEN_EX + self.get_command())
-                    print(colorama.Fore.YELLOW + self.get_response())
-                    self.speak(self.get_response())
         except requests.exceptions.ConnectionError as ce:
             print(colorama.Fore.LIGHTRED_EX + f"\nA connection error occurred: {ce}")
         except Exception as e:
             print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred: {e}")
         finally:
             self.recursive_pipeline()
-
-
-
-
-
 
     def main(self) -> None:
         try:
