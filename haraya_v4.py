@@ -446,8 +446,7 @@ class HarayaV4:
                     self.set_response("Haraya's face recognition system was initialized.")
                 except Exception as e:
                     self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
-            elif "pose recognition system" in cmd or "gods eyes" in cmd or \
-                "post recognition system" in cmd or "godseyes" in cmd:
+            elif "pose recognition system" in cmd or "gods eyes" in cmd or "post recognition system" in cmd or "godseyes" in cmd:
                 self.set_response("Haraya's pose recognition system was initialized.")
             elif "web data scraping system" in cmd:
                 self.data_scraper.__init__()  # Reinitialize the data scraper.
