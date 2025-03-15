@@ -534,6 +534,56 @@ class HarayaV4:
                     program = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
                     subprocess.Popen([program])
                     self.set_response("Opening Chrome...")
+                elif "aqw game launcher" in cmd or "aqw" in cmd:
+                    self.set_response("As you wish!")
+                    program = r"C:\Program Files\Artix Game Launcher\Artix Game Launcher.exe"
+                    subprocess.Popen([program])
+                    self.set_response("Opening Artix game launcher...")
+                elif "obsidian" in cmd:
+                    self.set_response("As you wish!")
+                    program = r"C:\Users\Gianne Bacay\AppData\Local\Obsidian\Obsidian.exe"
+                    subprocess.Popen("Opening Obsidian...")
+                    self.set_response("Opening Genshin Impact...")
+                elif "command prompt" in cmd or "cmd" in cmd:
+                    self.set_response("As you wish!")
+                    program = "cmd.exe"
+                    subprocess.Popen([program])
+                    self.set_response("Opening Command Prompt...")
+                elif "notepad" in cmd:
+                    self.set_response("As you wish!")
+                    program = "notepad.exe"
+                    subprocess.Popen([program])
+                    self.set_response("Opening Notepad...")
+                elif "calculator" in cmd:
+                    self.set_response("As you wish!")
+                    program = "calc.exe"
+                    subprocess.Popen([program])
+                    self.set_response("Opening Calculator...")
+                elif "vlc" in cmd:
+                    self.set_response("As you wish!")
+                    program = r"C:\Program Files\VideoLAN\VLC\vlc.exe"
+                    subprocess.Popen([program])
+                    self.set_response("Opening VLC Media Player...")
+                elif "visual studio code" in cmd:
+                    self.set_response("As you wish!")
+                    program = r"C:\Users\Gianne Bacay\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+                    subprocess.Popen([program])
+                    self.set_response("Opening Visual Studio Code...")
+                elif "messenger" in cmd:
+                    self.set_response("As you wish!")
+                    program = r"C:\Users\Gianne Bacay\Desktop\Messenger.exe.lnk"
+                    subprocess.Popen(f'start /b /wait /min /high "Running Messenger as Administrator" "{program}"', shell=True)
+                    self.set_response("Opening Messenger...")
+                elif "downloads" in cmd or "download" in cmd:
+                    self.set_response("As you wish!")
+                    program = r"C:\Users\Gianne Bacay\Desktop\Downloads.lnk"
+                    subprocess.Popen(f'start /b /wait /min /high "Running Downloads as Administrator" "{program}"', shell=True)
+                    self.set_response("Opening Downloads...")
+                elif "videos" in cmd or "video" in cmd:
+                    self.set_response("As you wish!")
+                    program = r"C:\Users\Gianne Bacay\Desktop\Videos.lnk"
+                    subprocess.Popen(f'start /b /wait /min /high "Running Videos as Administrator" "{program}"', shell=True)
+                    self.set_response("Opening Videos...")
                 else:
                     self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
             except Exception as e:
