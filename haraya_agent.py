@@ -2,14 +2,13 @@ from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
 from web_data_scraping_system import DataScraper
 
-# python haraya_agent.py
 # ollama run gemma3:1b
 # ollama run deepseek-r1:1.5b
 # ollama run deepseek-r1:7b
 # ollama run qwen2:0.5b
 
 class HarayaAgent:
-    def __init__(self, ai_name: str = "Haraya", user_name: str = "User", model_id: str = "gemma3:1b") -> None:
+    def __init__(self, ai_name: str = "Haraya", user_name: str = "User", model_id: str = "qwen2:0.5b") -> None:
         """
         Initializes the HarayaAgent with customizable parameters.
         

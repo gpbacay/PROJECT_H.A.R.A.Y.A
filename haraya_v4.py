@@ -30,9 +30,10 @@ from haraya_gui import HarayaUI
 from user_profile import UserProfile
 
 class haraya_v4:
+    # python haraya_v4.py
     #________________________ Constructor _________________________
     def __init__(self, running: bool = True, ai_name: str = "Haraya", command: str = ".",
-                 response: str = ".", user_name: str = ".") -> None:
+                response: str = ".", user_name: str = ".") -> None:
         self.running = running
         self.ai_name = ai_name
         self.user_name = user_name
@@ -63,6 +64,7 @@ class haraya_v4:
         
         # Thread 3: Initialize Face Recognition System in a separate thread
         self.thread_3 = Thread(target=FaceRecognitionSystem)
+        self.thread_3.start()
         
         # Thread 4: Initialize Pose Recognition System in a separate thread
         self.thread_4 = Thread(target=PoseRecognitionSystem)
@@ -180,8 +182,7 @@ class haraya_v4:
         self.isSpeaking(0)
 
     def initialize_face_recognition_system(self) -> None: # Initialize Face Recognition System
-        self.thread_3.start()
-        response = "Initializing Face Recognition System"
+        response = "Recognizing Face"
         self.set_response(response)
         self.speak(response)
         self.thread_3.join()
@@ -202,7 +203,7 @@ class haraya_v4:
         self.initialize_face_recognition_system()
         try:
             if self.agent is not None:
-                response = self.agent.get_response(question=f"Hi {self.get_ai_name()}, I am {self.get_user_name()}.")
+                response = self.agent.get_response(question=f"Hi {self.get_ai_name()}, My name is {self.get_user_name()}.")
                 print(colorama.Fore.GREEN + response)
             else:
                 response = f"Hi {self.get_honorific_address()} {self.get_user_name()}, I am {self.get_ai_name()}, your personal AI assistant! How can I help you?"
