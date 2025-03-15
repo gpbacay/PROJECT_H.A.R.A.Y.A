@@ -421,9 +421,10 @@ class HarayaV4:
         # Update command and response.
         self.set_command(command_input)
         self.set_response(response_input)
-        # Update user identity.
+        # Update real-time data
         self.user_profile.init_user_name()
         self.initialize_honorific_address()
+        self.agent.update_realtime_data()
         # Lowercase version for matching.
         cmd = self.get_command().lower()
 
