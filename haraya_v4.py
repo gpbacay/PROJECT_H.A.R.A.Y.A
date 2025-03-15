@@ -418,22 +418,12 @@ class HarayaV4:
 
     # ------------------ Decision Logic Method ------------------
     def process_command(self, command_input: str, response_input: str) -> None:
-        """
-        Processes the given command (and initial response) by evaluating a series
-        of if/elif statements to determine which action to perform.
-        All actions are delegated to methods of this HarayaV4 instance.
-        """
         # Update command and response.
         self.set_command(command_input)
         self.set_response(response_input)
-        # Update real-time data.
-        self.agent.update_realtime_data()
         # Update user identity.
         self.user_profile.init_user_name()
         self.initialize_honorific_address()
-        # Optionally update agent asynchronously.
-        # Thread(target=self.register_new_command_to_ai_agent, args=(self.get_command(),)).start()
-
         # Lowercase version for matching.
         cmd = self.get_command().lower()
 
@@ -458,7 +448,6 @@ class HarayaV4:
                 self.set_response("Haraya's web data scraping system was initialized.")
                 print(colorama.Fore.YELLOW + self.get_response())
                 self.speak(self.get_response())
-
         elif any(hotword == cmd for hotword in self.STOP_HOTWORDS):
             self.initialize_honorific_address()
             self.set_response("As you wish " + self.get_honorific_address() + ". Signing off...")
@@ -472,7 +461,6 @@ class HarayaV4:
             self.speak(self.get_response())
             self.sound_system.playShutdownSound()
             self.set_running(False)
-
         elif any(hotword == cmd for hotword in self.GOOGLE_SEARCH_HOTWORDS):
             self.set_response("What would you like to search in Google?")
             print(colorama.Fore.YELLOW + self.get_response())
@@ -504,7 +492,6 @@ class HarayaV4:
                 self.set_response(f"An error occurred while searching in Chrome: {e}")
                 print(colorama.Fore.LIGHTRED_EX + self.get_response())
                 self.speak(self.get_response())
-
         elif any(hotword == cmd for hotword in self.YOUTUBE_SEARCH_HOTWORDS):
             response = "What would you like to search or play in YouTube?"
             self.set_response(response)
@@ -535,7 +522,6 @@ class HarayaV4:
                 self.set_response(f"An error occurred while playing in YouTube: {e}")
                 print(colorama.Fore.LIGHTRED_EX + self.get_response())
                 self.speak(self.get_response())
-
         elif any(hotword == cmd for hotword in self.WIKIPEDIA_SEARCH_HOTWORDS):
             self.set_response("What would you like to search in Wikipedia?")
             print(colorama.Fore.YELLOW + self.get_response())
@@ -560,7 +546,6 @@ class HarayaV4:
                 self.set_response(f"An error occurred while searching in Wikipedia: {e}")
                 print(colorama.Fore.LIGHTRED_EX + self.get_response())
                 self.speak(self.get_response())
-
         elif any(hotword == cmd for hotword in self.OPEN_HOTWORDS):
             program = "program file path"
             Thread(target=self.sound_system.playSearchSound).start()
@@ -673,7 +658,6 @@ class HarayaV4:
                 self.set_response(f"An error occurred while trying to open the program: {e}")
                 print(colorama.Fore.LIGHTRED_EX + self.get_response())
                 self.speak(self.get_response())
-
         elif any(hotword == cmd for hotword in self.CLOSE_HOTWORDS):
             try:
                 if "chrome" in cmd or "tab" in cmd:
@@ -697,7 +681,6 @@ class HarayaV4:
                 self.set_response(f"An error occurred while trying to close the program: {e}")
                 print(colorama.Fore.LIGHTRED_EX + self.get_response())
                 self.speak(self.get_response())
-
         elif "turn off my computer" in cmd or "shutdown my computer" in cmd:
             self.set_response("As you wish! Shutting down your computer...")
             print(colorama.Fore.YELLOW + self.get_response())
@@ -799,10 +782,11 @@ class HarayaV4:
                 time.sleep(3)
             else:
                 try:
-                    self.process_command(current_command, self.get_response())
+                    self.process_command(command_input=current_command, response_input=self.get_response())
                 except Exception as e:
                     print(colorama.Fore.LIGHTRED_EX + f"\nError occurred while processing the command: {e}")
                     self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
+                    self.speak(self.get_response())
                 else:
                     self.set_command(current_command)
                     print(colorama.Fore.LIGHTGREEN_EX + self.get_command())
