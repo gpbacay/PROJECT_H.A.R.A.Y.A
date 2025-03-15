@@ -433,7 +433,7 @@ class HarayaV4:
         self.user_profile.init_user_name()
         self.initialize_honorific_address()
         # Optionally update agent asynchronously.
-        Thread(target=self.register_new_command_to_ai_agent, args=(self.get_command(),)).start()
+        # Thread(target=self.register_new_command_to_ai_agent, args=(self.get_command(),)).start()
 
         # Lowercase version for matching.
         cmd = self.get_command().lower()
@@ -527,7 +527,8 @@ class HarayaV4:
                 self.set_response(f"An error occurred while searching in Wikipedia: {e}")
 
         elif any(hotword == cmd for hotword in self.OPEN_HOTWORDS):
-            Thread(target=self.sound_system.playListeningSound).start()
+            program = "program file path"
+            Thread(target=self.sound_system.playSearchSound).start()
             try:
                 if "chrome" in cmd or "google" in cmd:
                     self.set_response("As you wish!")
@@ -542,8 +543,8 @@ class HarayaV4:
                 elif "obsidian" in cmd:
                     self.set_response("As you wish!")
                     program = r"C:\Users\Gianne Bacay\AppData\Local\Obsidian\Obsidian.exe"
-                    subprocess.Popen("Opening Obsidian...")
-                    self.set_response("Opening Genshin Impact...")
+                    subprocess.Popen([program])
+                    self.set_response("Opening Obsidian...")
                 elif "command prompt" in cmd or "cmd" in cmd:
                     self.set_response("As you wish!")
                     program = "cmd.exe"
