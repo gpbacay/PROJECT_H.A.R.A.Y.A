@@ -260,14 +260,14 @@ class HarayaV4:
         try:
             if self.agent is not None:
                 response = self.agent.get_response(question=f"Hi {self.get_ai_name()}, My name is {self.get_user_name()}.")
-                print(colorama.Fore.GREEN + response)
+                print(colorama.Fore.YELLOW + response)
             else:
                 response = f"Hi {self.get_honorific_address()} {self.get_user_name()}, I am {self.get_ai_name()}, your personal AI assistant! How can I help you?"
-                print(colorama.Fore.GREEN + response)
+                print(colorama.Fore.YELLOW + response)
         except Exception as e:
             print(colorama.Fore.RED + f"An error occurred during start-up sequence: {e}")
             response = f"Hi {self.get_honorific_address()} {self.get_user_name()}, I am {self.get_ai_name()}, your personal AI assistant! How can I help you?"
-            print(colorama.Fore.GREEN + response)
+            print(colorama.Fore.YELLOW + response)
         finally:
             self.set_response(response)
             self.speak(response)
@@ -416,18 +416,6 @@ class HarayaV4:
         except Exception as e:
             self.sound_system.playErrorSound()
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while closing {program_name}: {e}")
-
-
-
-
-
-
-
-
-
-
-
-
 
     # ------------------ Decision Logic Method ------------------
     def process_command(self, command_input: str, response_input: str) -> None:
@@ -622,16 +610,6 @@ class HarayaV4:
             except Exception as e:
                 self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
 
-
-
-
-
-
-
-
-
-
-
     # ------------------ Recursive Pipeline ------------------
     def recursive_pipeline(self) -> None:
         if not self.get_running():
@@ -649,7 +627,7 @@ class HarayaV4:
                     self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
                 else:
                     self.set_command(current_command)
-                    print(colorama.Fore.CYAN + self.get_command())
+                    print(colorama.Fore.LIGHTGREEN_EX + self.get_command())
                     print(colorama.Fore.YELLOW + self.get_response())
                     self.speak(self.get_response())
         except requests.exceptions.ConnectionError as ce:
