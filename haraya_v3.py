@@ -653,7 +653,7 @@ class haraya_v3:
 #_______________________________________________________________________________haraya_DECISION LOGIC BLOCK
     #Run Command: python haraya_v3.py
     # takes command, returns reponse
-    def harayaDecisionLogic(self, command_input: str, response_input: str):
+    def harayaDecisionLogic(self, command_input: str, response_input: str) -> None:
         try:
             tSetCurrentTime = Thread(target=self.DataScraper.initCurrentTime, args=(self,))
             tSetCurrentTime.start()
