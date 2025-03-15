@@ -417,6 +417,18 @@ class HarayaV4:
             self.sound_system.playErrorSound()
             print(colorama.Fore.LIGHTRED_EX + f"An error occurred while closing {program_name}: {e}")
 
+
+
+
+
+
+
+
+
+
+
+
+
     # ------------------ Decision Logic Method ------------------
     def process_command(self, command_input: str, response_input: str) -> None:
         """
@@ -610,6 +622,16 @@ class HarayaV4:
             except Exception as e:
                 self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
 
+
+
+
+
+
+
+
+
+
+
     # ------------------ Recursive Pipeline ------------------
     def recursive_pipeline(self) -> None:
         if not self.get_running():
@@ -636,6 +658,11 @@ class HarayaV4:
             print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred: {e}")
         finally:
             self.recursive_pipeline()
+
+
+
+
+
 
     def main(self) -> None:
         try:
