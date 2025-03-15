@@ -764,7 +764,8 @@ class HarayaV4:
                 response = self.agent.get_response(command)
                 self.set_command(command)
                 self.set_response(response)
-                print(colorama.Fore.YELLOW + self.get_response())
+                print(colorama.Fore.LIGHTGREEN_EX + self.get_command())
+                print(colorama.Fore.LIGHTMAGENTA_EX + self.get_response())
                 self.speak(self.get_response())
             except Exception as e:
                 self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
@@ -787,9 +788,6 @@ class HarayaV4:
                     print(colorama.Fore.LIGHTRED_EX + f"\nError occurred while processing the command: {e}")
                     self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
                     self.speak(self.get_response())
-                else:
-                    self.set_command(current_command)
-                    print(colorama.Fore.LIGHTGREEN_EX + self.get_command())
         except requests.exceptions.ConnectionError as ce:
             print(colorama.Fore.LIGHTRED_EX + f"\nA connection error occurred: {ce}")
         except Exception as e:
