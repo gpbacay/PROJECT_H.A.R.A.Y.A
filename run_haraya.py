@@ -2,7 +2,7 @@ import subprocess
 
 def run_haraya():
     # Run the Python interpreter in an integrated terminal
-    result = subprocess.run(['python', 'haraya_v3.py'], shell=True)
+    result = subprocess.run(['python', 'haraya_v4.py'], shell=True)
 
     # Print the output of the command
     print(result.stdout)
