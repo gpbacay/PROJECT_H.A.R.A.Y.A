@@ -27,7 +27,7 @@ from web_data_scraping_system import DataScraper
 # import harayaVoiceEngine as harayaVoiceEngine
 from AI_Agents.haraya_agent import HarayaAgent
 
-class haraya_v3:
+class HarayaV3:
     # Constructor Definition Block
     #Run Command: python haraya_v3.py
     def __init__(self):
@@ -1148,7 +1148,7 @@ class haraya_v3:
             sys.exit()
         
 if __name__ == '__main__':
-    haraya_v3 = haraya_v3()
+    haraya_v3 = HarayaV3()
     haraya_v3.main()
 
 
