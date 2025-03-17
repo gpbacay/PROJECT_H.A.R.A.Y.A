@@ -47,7 +47,7 @@ class HarayaV4:
         colorama.init(autoreset=True)
         pygame.init()
         self.loading_bar = LoadingBar()
-        self.runLoadingBar = self.loading_bar.run_loadingbar
+        self.run_loading_bar = self.loading_bar.run_loadingbar
         self.user_profile = UserProfile()
 
         # Thread 1: Initialize AI Agent System in a separate thread
@@ -69,7 +69,7 @@ class HarayaV4:
         self.thread_4 = Thread(target=PoseRecognitionSystem)
         
         # Thread 5: Run Loading Bar for Pose Recognition System
-        self.thread_5 = Thread(target=self.runLoadingBar, kwargs={
+        self.thread_5 = Thread(target=self.run_loading_bar, kwargs={
             "seconds": 10,
             "loading_tag": "INITIALIZING P.R.A.I SYSTEM...",
             "end_tag": "P.R.A.I SYSTEM INITIALIZED!"
@@ -242,7 +242,7 @@ class HarayaV4:
         self.set_response(response)
         self.speak(response)
         self.thread_3.join()
-        self.runLoadingBar(seconds=0.5, loading_tag="RECOGNIZING FACE...", end_tag="FACE RECOGNIZED!")
+        self.run_loading_bar(seconds=0.5, loading_tag="RECOGNIZING FACE...", end_tag="FACE RECOGNIZED!")
         self.user_profile.init_user_name()
         self.set_user_ame(self.user_profile.get_user_name())
         self.initialize_honorific_address()
