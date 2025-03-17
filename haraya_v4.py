@@ -209,6 +209,7 @@ class HarayaV4:
         try:
             if self.agent is not None:
                 self.set_command(new_command)
+                self.agent.update_realtime_data()
                 response = self.agent.get_response(self.get_command())
                 self.set_response(response)
             else:
@@ -423,8 +424,9 @@ class HarayaV4:
         self.set_response(response_input)
         # Update real-time data
         self.user_profile.init_user_name()
-        self.initialize_honorific_address()
         self.agent.update_realtime_data()
+        # Update honorific address
+        self.initialize_honorific_address()
         # Lowercase version for matching.
         cmd = self.get_command().lower()
 
@@ -785,6 +787,7 @@ class HarayaV4:
                     time.sleep(3)
                 else:
                     try:
+                        self.register_new_command_to_ai_agent(current_command)
                         self.process_command(command_input=current_command, response_input=self.get_response())
                     except Exception as e:
                         print(colorama.Fore.LIGHTRED_EX + f"\nError occurred while processing the command: {e}")
