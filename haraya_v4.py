@@ -31,9 +31,9 @@ from user_profile import UserProfile
 
 class HarayaV4:
     # ------------------------- Constructor -------------------------
-    def __init__(self, running: bool = True, ai_name: str = "Haraya", command: str = ".",
+    def __init__(self, is_running: bool = True, ai_name: str = "Haraya", command: str = ".",
                  response: str = ".", user_name: str = ".") -> None:
-        self.running = running
+        self.is_running = is_running
         self.ai_name = ai_name
         self.user_name = user_name
         self.command = command
@@ -153,8 +153,8 @@ class HarayaV4:
         ]
 
     # ------------------------- Setters -------------------------
-    def set_running(self, running_input: bool) -> None:
-        self.running = running_input
+    def set_running(self, is_running_input: bool) -> None:
+        self.is_running = is_running_input
 
     def set_ai_name(self, ai_name_input: str) -> None:
         self.ai_name = ai_name_input
@@ -175,8 +175,8 @@ class HarayaV4:
         self.honorific_address = honorific_address_input
 
     # ------------------------- Getters -------------------------
-    def get_running(self):
-        return self.running
+    def get_is_running(self):
+        return self.is_running
 
     def get_ai_name(self):
         return self.ai_name
@@ -776,7 +776,7 @@ class HarayaV4:
 
     # ------------------ Iterative Pipeline ------------------
     def iterative_pipeline(self) -> None:
-        while self.get_running():
+        while self.get_is_running():
             try:
                 previous_command = self.get_command()
                 current_command = self.listen_command()
