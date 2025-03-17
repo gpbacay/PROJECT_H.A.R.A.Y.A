@@ -774,33 +774,32 @@ class HarayaV4:
                 print(colorama.Fore.LIGHTRED_EX + self.get_response())
                 self.speak(self.get_response())
 
-    # ------------------ Recursive Pipeline ------------------
-    def recursive_pipeline(self) -> None:
-        if not self.get_running():
-            return
-        try:
-            previous_command = self.get_command()
-            current_command = self.listen_command()
-            if previous_command == current_command:
-                time.sleep(3)
-            else:
-                try:
-                    self.process_command(command_input=current_command, response_input=self.get_response())
-                except Exception as e:
-                    print(colorama.Fore.LIGHTRED_EX + f"\nError occurred while processing the command: {e}")
-                    self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
-                    self.speak(self.get_response())
-        except requests.exceptions.ConnectionError as ce:
-            print(colorama.Fore.LIGHTRED_EX + f"\nA connection error occurred: {ce}")
-        except Exception as e:
-            print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred: {e}")
-        finally:
-            self.recursive_pipeline()
+    # ------------------ Iterative Pipeline ------------------
+    def iterative_pipeline(self) -> None:
+        while self.get_running():
+            try:
+                previous_command = self.get_command()
+                current_command = self.listen_command()
+                
+                if previous_command == current_command:
+                    time.sleep(3)
+                else:
+                    try:
+                        self.process_command(command_input=current_command, response_input=self.get_response())
+                    except Exception as e:
+                        print(colorama.Fore.LIGHTRED_EX + f"\nError occurred while processing the command: {e}")
+                        self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
+                        self.speak(self.get_response())
+            
+            except requests.exceptions.ConnectionError as ce:
+                print(colorama.Fore.LIGHTRED_EX + f"\nA connection error occurred: {ce}")
+            except Exception as e:
+                print(colorama.Fore.LIGHTRED_EX + f"\nAn error occurred: {e}")
 
     def main(self) -> None:
         try:
             self.start_up_sequence()
-            self.recursive_pipeline()
+            self.iterative_pipeline()
             self.close_program(program_name="WindowsTerminal.exe")
         except Exception as e:
             self.sound_system.playErrorSound()
