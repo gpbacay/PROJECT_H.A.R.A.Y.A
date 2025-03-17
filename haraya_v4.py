@@ -418,7 +418,7 @@ class HarayaV4:
             print(colorama.Fore.LIGHTRED_EX + self.get_response())
 
     # ------------------ Decision Logic Method ------------------
-    def process_command(self, command_input: str, response_input: str) -> None:
+    def process_command_to_decision_logic_layers(self, command_input: str, response_input: str) -> None:
         # Update command and response.
         self.set_command(command_input)
         self.set_response(response_input)
@@ -788,7 +788,7 @@ class HarayaV4:
                 else:
                     try:
                         self.register_new_command_to_ai_agent(current_command)
-                        self.process_command(command_input=current_command, response_input=self.get_response())
+                        self.process_command_to_decision_logic_layers(command_input=current_command, response_input=self.get_response())
                     except Exception as e:
                         print(colorama.Fore.LIGHTRED_EX + f"\nError occurred while processing the command: {e}")
                         self.set_response("I beg your pardon, I'm afraid I didn't catch that.")
