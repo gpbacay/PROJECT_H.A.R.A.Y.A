@@ -14,7 +14,7 @@
 
 - **Computer Automation**: HARAYA can automate various computer tasks, streamlining workflows and enhancing productivity.
 
-- **Natural Language Processing**: HARAYA utilizes Google AI's PaLM2 Large Language Model (LLM), renowned for its exceptional language understanding, generation, and conversational skills. Haraya can process human-like text, translate multiple languages, summarize, solve arithmetic problems, determine sentiment, answer a diverse range of questions, code, remember or memorize, follow instructions, comprehend context in conversation, and more.
+- **Natural Language Processing**: HARAYA utilizes the Qwen2 0.5B Model from Alibaba Cloud, renowned for its robust language understanding, generation, conversational skills, and reasoning abilities. Haraya can process human-like text, translate multiple languages, summarize content, solve arithmetic problems, determine sentiment, answer a diverse range of questions, code, remember or memorize, follow instructions, comprehend context in conversation, and more.
 
 - **Web Search**: HARAYA can perform searches on the internet, providing relevant information and assisting users in finding desired content.
 
