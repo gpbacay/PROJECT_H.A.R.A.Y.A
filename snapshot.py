@@ -1,4 +1,5 @@
 import cv2
+import os
 from sound_system import SoundSystem
 
 def take_snapshot():
@@ -17,7 +18,7 @@ def take_snapshot():
         return
 
     # Define the path where the snapshot will be saved
-    save_path = r".\\snapshots\\snapshot.jpg"
+    save_path = r".\snapshots\snapshot.jpg"
     # Save the captured frame as an image file
     cv2.imwrite(save_path, frame)
     sound_system.playCameraShutterSound()
@@ -25,6 +26,12 @@ def take_snapshot():
 
     # Release the camera resource
     cap.release()
+
+    # Open the saved snapshot using the default image viewer (Windows)
+    try:
+        os.startfile(save_path)
+    except Exception as e:
+        print(f"Error displaying the image: {e}")
 
 if __name__ == "__main__":
     take_snapshot()

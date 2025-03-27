@@ -757,8 +757,9 @@ class HarayaV4:
             try:
                 snapshot = ImageGrab.grab()
                 self.sound_system.playCameraShutterSound()
-                save_path = r".\\screenshots\\screenshot.jpg"
+                save_path = r".\screenshots\screenshot.jpg"
                 snapshot.save(save_path, "JPEG")
+                os.startfile(save_path)
                 self.set_response(f"Screenshot taken and saved to {save_path}.")
                 print(colorama.Fore.YELLOW + self.get_response())
                 self.speak(self.get_response())
@@ -783,6 +784,7 @@ class HarayaV4:
                         save_path = r".\snapshots\snapshot.jpg"
                         cv2.imwrite(save_path, frame)
                         self.sound_system.playCameraShutterSound()
+                        os.startfile(save_path)
                         self.set_response(f"Snapshot taken and saved to {save_path}.")
                         print(colorama.Fore.YELLOW + self.get_response())
                         self.speak(self.get_response())
