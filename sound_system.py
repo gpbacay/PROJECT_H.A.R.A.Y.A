@@ -9,7 +9,7 @@ class SoundSystem:
         """
         Plays the startup sound.
         """
-        mp3_path = u"audioFiles\\startup2.mp3"
+        mp3_path = u"audioFiles\\startup.mp3"
         playsound(mp3_path)
 
     def playPromptSound(self) -> None:
@@ -61,13 +61,20 @@ class SoundSystem:
         """
         mp3_path = u"audioFiles\\loadcomplete.mp3"
         playsound(mp3_path)
+        
+    def playCameraShutterSound(self) -> None:
+        """
+        Plays the camera shutter sound.
+        """
+        mp3_path = u"audioFiles\\camera_shutter.mp3"
+        playsound(mp3_path)
 
 
 if __name__ == "__main__":
     # Test the SoundSystem class.
     sound_system = SoundSystem()
     print("Playing startup sound...")
-    sound_system.playStartUpSound()
+    sound_system.playCameraShutterSound()
 
 
 # Run Command: python sound_system.py

@@ -12,15 +12,15 @@ class HarayaHeading:
         colorama.init(autoreset=True)  # Ensure colors reset after usage
         self.sound_system = SoundSystem()  # Create an instance of SoundSystem
 
+        # Start the startup sound in a separate thread
+        self.t_startup = threading.Thread(target=self.sound_system.playStartUpSound)
+        self.t_startup.start()
+        
         self.header_str = (
             "\t\t\t\tH.A.R.A.Y.A "
             "(High-functioning Autonomous Responsive Anthropomorphic Yielding Assistant)\t\t\t\t\n"
         )
         self.header = colorama.Style.BRIGHT + colorama.Fore.GREEN + self.header_str
-
-        # Start the startup sound in a separate thread
-        self.t_startup = threading.Thread(target=self.sound_system.playStartUpSound)
-        self.t_startup.start()
 
         # Start the header display in a separate thread
         self.t_header = threading.Thread(target=self.display_header)

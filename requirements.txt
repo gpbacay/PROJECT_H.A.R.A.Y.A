@@ -74,3 +74,4 @@ edge_tts
 asyncio
 
 geocoder
+Pillow

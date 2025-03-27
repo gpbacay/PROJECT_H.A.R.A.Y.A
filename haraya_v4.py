@@ -17,6 +17,8 @@ import colorama
 import pygame
 from pygame.locals import *
 import pyautogui
+from PIL import ImageGrab
+import cv2
 
 # Custom System Modules
 from haraya_heading import HarayaHeading
@@ -751,6 +753,44 @@ class HarayaV4:
             self.set_response(f"The current battery percentage is {percentage}%")
             print(colorama.Fore.YELLOW + self.get_response())
             self.speak(self.get_response())
+        elif "take a screenshot" in cmd or "screenshot that" in cmd:
+            try:
+                snapshot = ImageGrab.grab()
+                self.sound_system.playCameraShutterSound()
+                save_path = r".\\screenshots\\screenshot.jpg"
+                snapshot.save(save_path, "JPEG")
+                self.set_response(f"Screenshot taken and saved to {save_path}.")
+                print(colorama.Fore.YELLOW + self.get_response())
+                self.speak(self.get_response())
+            except Exception as e:
+                self.set_response(f"An error occurred while taking a screenshot: {e}")
+                print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                self.speak(self.get_response())
+        elif "take a snapshot" in cmd or "take a photo" in cmd:
+            try:
+                cap = cv2.VideoCapture(0)
+                if not cap.isOpened():
+                    self.set_response("Error: Could not access the camera.")
+                    print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                    self.speak(self.get_response())
+                else:
+                    ret, frame = cap.read()
+                    if not ret:
+                        self.set_response("Error: Could not capture a frame from the camera.")
+                        print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                        self.speak(self.get_response())
+                    else:
+                        save_path = r".\snapshots\snapshot.jpg"
+                        cv2.imwrite(save_path, frame)
+                        self.sound_system.playCameraShutterSound()
+                        self.set_response(f"Snapshot taken and saved to {save_path}.")
+                        print(colorama.Fore.YELLOW + self.get_response())
+                        self.speak(self.get_response())
+                cap.release()
+            except Exception as e:
+                self.set_response(f"An error occurred while taking a snapshot: {e}")
+                print(colorama.Fore.LIGHTRED_EX + self.get_response())
+                self.speak(self.get_response())
         elif any(hotword in cmd for hotword in self.STANDBY_HOTWORDS):
             self.set_response("As you wish " + self.get_honorific_address() + "!")
             print(colorama.Fore.YELLOW + self.get_response())
