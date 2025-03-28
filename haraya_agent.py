@@ -4,7 +4,6 @@ from web_data_scraping_system import DataScraper
 
 # ollama run gemma3:1b
 # ollama run deepseek-r1:1.5b
-# ollama run deepseek-r1:7b
 # ollama run qwen2:0.5b
 # python haraya_agent.py
 
