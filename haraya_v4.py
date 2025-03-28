@@ -421,7 +421,7 @@ class HarayaV4:
 
     # ------------------ Decision Logic Method ------------------
     def process_command_to_decision_logic_layers(self, command_input: str, response_input: str) -> None:
-        # Update command and response.
+        # Update command and response
         self.set_command(command_input)
         self.set_response(response_input)
         # Update real-time data
@@ -429,7 +429,7 @@ class HarayaV4:
         self.agent.update_realtime_data()
         # Update honorific address
         self.initialize_honorific_address()
-        # Lowercase version for matching.
+        # Lowercase command for matching
         cmd = self.get_command().lower()
 
         # --- Decision Logic Blocks ---
