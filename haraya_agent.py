@@ -3,8 +3,10 @@ from langchain_core.prompts import ChatPromptTemplate
 from web_data_scraping_system import DataScraper
 
 # ollama run gemma3:1b
+# ollama run deepseek-r1:1.5b
 # ollama run deepseek-r1:7b
 # ollama run qwen2:0.5b
+# python haraya_agent.py
 
 class HarayaAgent:
     def __init__(self, ai_name: str = "Haraya", user_name: str = "User", model_id: str = "qwen2:0.5b") -> None:
@@ -73,7 +75,7 @@ Chat history/Previous conversation: {{context}}
         return result
 
 if __name__ == "__main__":
-    agent = HarayaAgent(ai_name="Haraya", user_name="Gianne", model_id="qwen2:0.5b")
+    agent = HarayaAgent(ai_name="Haraya", user_name="Gianne")
     print("Haraya AI Initialized. Type 'quit' to exit.")
     while True:
         user_input = input("User: ")
@@ -86,3 +88,4 @@ if __name__ == "__main__":
 
 
 #____________________python haraya_agent.py
+# how many letter "r" in the word "strawberry"?
