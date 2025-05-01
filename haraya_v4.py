@@ -436,6 +436,7 @@ class HarayaV4:
         if "run" in cmd or "activate" in cmd or "initialize" in cmd:
             if "face recognition system" in cmd:
                 try:
+                    self.initialize_face_recognition_system()
                     self.set_command(f"Hi! my name is {self.get_user_name()}")
                     self.set_response("Haraya's face recognition system was initialized.")
                     print(colorama.Fore.YELLOW + self.get_response())
@@ -445,6 +446,7 @@ class HarayaV4:
                     print(colorama.Fore.LIGHTRED_EX + self.get_response())
                     self.speak(self.get_response())
             elif "pose recognition system" in cmd or "gods eyes" in cmd or "post recognition system" in cmd or "godseyes" in cmd or "god's eyes" in cmd:
+                self.initialize_pose_recognition_system()
                 self.set_response("Haraya's pose recognition system was initialized.")
                 print(colorama.Fore.YELLOW + self.get_response())
                 self.speak(self.get_response())

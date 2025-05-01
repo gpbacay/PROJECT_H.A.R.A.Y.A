@@ -5,10 +5,12 @@ from web_data_scraping_system import DataScraper
 # ollama run gemma3:1b
 # ollama run deepseek-r1:1.5b
 # ollama run qwen2:0.5b
+# ollama run qwen3:0.6b
+
 # python haraya_agent.py
 
 class HarayaAgent:
-    def __init__(self, ai_name: str = "Haraya", user_name: str = "User", model_id: str = "qwen2:0.5b") -> None:
+    def __init__(self, ai_name: str = "Haraya", user_name: str = "User", model_id: str = "deepseek-r1:1.5b") -> None:
         """
         Initializes the HarayaAgent with customizable parameters.
         
@@ -45,7 +47,7 @@ Chat history/Previous conversation: {{context}}
         self.current_weather = self.data_scraper.getCurrentWeather()
         
         self.context = (
-            f"Your name is {self.ai_name}, an AI OS assistant made by Gianne Bacay.\n"
+            f"Your name is {self.ai_name}, an AI OS assistant created by Gianne Bacay.\n"
             f"Updated Real-time Info:\n"
             f"- Time: {self.current_time}\n"
             f"- Date: {self.current_date}\n"
@@ -87,4 +89,5 @@ if __name__ == "__main__":
 
 
 #____________________python haraya_agent.py
-# how many letter "r" in the word "strawberry"?
+# How many letter "r" in the word "strawberry"?
+
